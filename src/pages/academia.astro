@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AcademiaHero from '../components/academia/AcademiaHero.astro';
+import AcademiaIntro from '../components/academia/AcademiaIntro.astro';
+import AcademiaCursos from '../components/academia/AcademiaCursos.astro';
+import AcademiaVideo from '../components/academia/AcademiaVideo.astro';
+import AcademiaInicio from '../components/academia/AcademiaInicio.astro';
+import AcademiaInstructor from '../components/academia/AcademiaInstructor.astro';
+import AcademiaCTA from '../components/academia/AcademiaCTA.astro';
+
+const title = "Academia Ewaffle | Cursos multimedia apoyados por IA";
+const description = "Potencia tus recursos educativos con el poder de la IA. Aprende a crear cursos, ebooks y experiencias interactivas que destaquen.";
+---
+
+<BaseLayout {title} {description}>
+	<AcademiaHero />
+	<AcademiaIntro />
+	<AcademiaCursos />
+	<AcademiaVideo />
+	<!--<AcademiaInicio />-->
+	<AcademiaInstructor />
+	<AcademiaCTA />
+</BaseLayout> 
