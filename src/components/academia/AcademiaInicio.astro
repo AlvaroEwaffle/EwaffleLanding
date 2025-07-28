@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import S4Image from '../../assets/S4.png';
+
 // Start date section for Academia Ewaffle
 ---
 
@@ -18,16 +21,17 @@
       <div class="text-white">
         <div class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
           <i class="ri-calendar-line mr-2"></i>
-          Próximo inicio
+          Inicia ahora!
         </div>
         
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          Inicio de clases: <span class="text-yellow">2 de julio</span>
+        <h2 class="text-4xl md:text-4xl font-bold mb-6">
+          ¡No te quedes atrás en la revolución del aprendizaje digital!
         </h2>
         
         <p class="text-xl text-white/90 mb-8 leading-relaxed">
-          Formato 100% online, a tu ritmo. Incluye videos, recursos descargables, 
-          acceso a herramientas IA y soporte personalizado.
+          Únete ahora y transforma tu forma de crear contenido educativo. <br>
+          Formato 100% online, a tu ritmo. <br>
+          Incluye videos, recursos descargables, acceso a herramientas IA y soporte personalizado.
         </p>
 
         <div class="space-y-4 mb-8">
@@ -38,12 +42,6 @@
             <span class="text-white/90">Modalidad: 100% en vivo (con acceso a grabaciones)</span>
           </div>
           
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-primary text-sm"></i>
-            </div>
-            <span class="text-white/90">Duración: 5 clases intensivas</span>
-          </div>
           
           <div class="flex items-center space-x-3">
             <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
@@ -53,29 +51,12 @@
           </div>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8">
-          <div class="text-center">
-            <p class="text-2xl font-bold text-yellow mb-2">
-              Nuevo costo: 50.000 CLP / 50 USD
-            </p>
-            <p class="text-white/80 text-sm">
-              Acceso completo + materiales descargables + comunidad exclusiva
-            </p>
-          </div>
-        </div>
-
+    
         <div class="flex flex-col sm:flex-row gap-4">
           <a 
-            href="#inscripcion"
-            class="inline-flex items-center justify-center px-8 py-4 bg-yellow text-primary rounded-full font-bold text-lg hover:bg-yellow/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            <i class="ri-rocket-line mr-2"></i>
-            Reserva tu cupo
-          </a>
-          
-          <a 
             href="#cursos"
-            class="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300"
+            class="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300 scroll-smooth scroll-to-section"
+            onclick="document.getElementById('cursos').scrollIntoView({behavior: 'smooth', block: 'start'})"
           >
             <i class="ri-information-line mr-2"></i>
             Más información
@@ -86,10 +67,12 @@
       <!-- Calendar Image -->
       <div class="relative">
         <div class="relative z-10">
-          <img 
-            src="/src/assets/S4.png" 
+          <Image 
+            src={S4Image}
             alt="Inicio de clases - 2 de julio" 
             class="w-full mx-auto object-contain"
+            width={800}
+            height={800}
           />
         </div>
         

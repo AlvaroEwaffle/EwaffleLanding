@@ -1,21 +1,40 @@
 ---
+import { Image } from 'astro:assets';
+import HeroElement from '../../assets/HeroElement.png';
+
 // Hero section for Academia Ewaffle
 ---
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- Background Image -->
-  <div class="absolute inset-0">
-    <img 
-      src="/src/assets/HeroBackground.png" 
-      alt="Academia Ewaffle Background" 
-      class="w-full h-full object-cover"
-    />
-    <!-- Overlay for better text readability -->
-    
+  <!-- Purple Background with Stars -->
+  <div class="absolute inset-0 bg-gradient-to-b from-purple-800 via-purple-900 to-purple-950">
+
   </div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  <!-- Spinning Banner at Top -->
+  <div class="fixed top-0 left-0 w-full bg-yellow/90 backdrop-blur-sm z-50">
+    <div class="overflow-hidden">
+      <div class="flex animate-scroll-banner whitespace-nowrap">
+        <div class="flex items-center space-x-8 px-4 py-3 text-primary font-semibold">
+          <span>🚀 ¡Inscripciones abiertas! </span>
+          <span>💡 Aprende a crear contenido que destaque</span>
+          <span>⚡ Sin complicaciones técnicas</span>
+          <span>🎯 Monetiza tu conocimiento</span>
+          <span>🌟 Soporte experto incluido</span>
+          <span>📚 Herramientas IA incluidas</span>
+          <span>🚀 ¡Inscripciones abiertas! </span>
+          <span>💡 Aprende a crear contenido que destaque</span>
+          <span>⚡ Sin complicaciones técnicas</span>
+          <span>🎯 Monetiza tu conocimiento</span>
+          <span>🌟 Soporte experto incluido</span>
+          <span>📚 Herramientas IA incluidas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
       <!-- Text Content - Left Side -->
       <div class="text-left">
         <!-- Logo -->
@@ -27,65 +46,127 @@
           />
         </div>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Potencia tus recursos educativos con el poder de la <span class="text-yellow">IA</span>
+        <h1 class="text-3xl md:text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+          ¿Tienes ganas de crear productos digitales que realmente 
+          <span class="text-yellow typewriter" id="typewriter"></span>
+          <span class="text-yellow animate-pulse">|</span>
+          ?
         </h1>
         
         <p class="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl">
-          Aprende a crear cursos, ebooks y experiencias interactivas que destaquen. 
-          Diseña y lanza contenido educativo moderno con herramientas accesibles y soporte paso a paso.
+          Descubre cómo nuestros cursos te ayudan a diseñar cursos y recursos interactivos en una fracción del tiempo, sin complicaciones técnicas.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 mb-10">
           <a 
             href="#cursos"
-            class="inline-flex items-center justify-center px-8 py-4 bg-yellow text-primary rounded-full font-bold text-lg hover:bg-yellow/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            class="inline-flex items-center justify-center px-8 py-4 bg-yellow text-primary rounded-full font-bold text-lg hover:bg-yellow/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 scroll-smooth scroll-to-section"
+            onclick="document.getElementById('cursos').scrollIntoView({behavior: 'smooth', block: 'start'})"
           >
-            Inscribirme ahora
+            Revisar ofertas
           </a>
           
-          <a 
+          <!-- <a 
             href="#video"
             class="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300"
           >
             <i class="ri-play-circle-line mr-2"></i>
             Ver video
-          </a>
-        </div>
-
-        <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="text-left">
-            <div class="text-3xl font-bold text-yellow mb-1">500+</div>
-            <div class="text-white/80">Estudiantes formados</div>
-          </div>
-          <div class="text-left">
-            <div class="text-3xl font-bold text-yellow mb-1">15+</div>
-            <div class="text-white/80">Herramientas dominadas</div>
-          </div>
-          <div class="text-left">
-            <div class="text-3xl font-bold text-yellow mb-1">100%</div>
-            <div class="text-white/80">Práctico y aplicable</div>
-          </div>
+          </a>-->
         </div>
       </div>
 
-      <!-- Right Side - Space for visual elements -->
-      <div class="relative">
-        <!-- This space can be used for additional visual elements if needed -->
-        <div class="w-full h-full flex items-center justify-center">
-          <!-- Optional: Add floating educational icons here -->
-          <div class="absolute top-10 right-10 w-16 h-16 bg-yellow/20 rounded-full flex items-center justify-center">
-            
-          </div>
-          <div class="absolute bottom-20 right-20 w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
-            
-          </div>
-          <div class="absolute top-1/2 right-1/3 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-            
-          </div>
-        </div>
+      <!-- Right Side - Hero Element Image -->
+      <div class="relative flex items-center justify-center hidden md:flex">
+        <Image 
+          src={HeroElement}
+          alt="Educational Hero Elements" 
+          class="w-full max-w-lg h-auto object-contain"
+          width={600}
+          height={600}
+        />
       </div>
     </div>
   </div>
-</section> 
+</section>
+
+<style>
+  @keyframes scroll-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-scroll-banner {
+    animation: scroll-banner 10s linear infinite;
+  }
+
+  /* Smooth scrolling for all elements */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced scroll effect for yellow buttons */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scroll animation for buttons */
+  .scroll-to-section {
+    transition: all 0.3s ease;
+  }
+
+  .scroll-to-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+</style>
+
+<script>
+  // Typewriter effect
+  const words = ['destaquen', 'impacten', 'conecten', 'inspiren', 'transformen'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 100;
+
+  function typeWriter() {
+    const currentWord = words[wordIndex];
+    const typewriterElement = document.getElementById('typewriter');
+    
+    if (!typewriterElement) return;
+    
+    if (isDeleting) {
+      // Deleting
+      typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 25;
+    } else {
+      // Typing
+      typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 100;
+    }
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      // Word is complete, wait before deleting
+      typeSpeed = 1000;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      // Word is deleted, move to next word
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typeSpeed = 250;
+    }
+
+    setTimeout(typeWriter, typeSpeed);
+  }
+
+  // Start the typewriter effect when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeWriter, 500);
+  });
+</script> 

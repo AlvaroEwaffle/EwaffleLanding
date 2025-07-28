@@ -1,11 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import AlvaroImage from "../../assets/Alvaro.png";
+import JohanaImage from "../../assets/Johana.png";
+import AaronImage from "../../assets/Aaron.png";
+
 // Instructor section for Academia Ewaffle
 ---
 
 <section class="py-20 bg-white relative overflow-hidden">
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-5">
-    <img src="/assets/patronblancobajaopacidad.png" alt="" class="w-full h-full object-cover" />
+    <img
+      src="/assets/patronblancobajaopacidad.png"
+      alt=""
+      class="w-full h-full object-cover"
+    />
   </div>
 
   <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,269 +26,348 @@
       <div class="w-24 h-1 bg-accent mx-auto"></div>
     </div>
 
-    <!-- Álvaro Villena Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Text Content -->
-      <div>
-        <div class="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-          <i class="ri-user-star-line mr-2"></i>
-          CEO & Fundador
-        </div>
-        
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          Álvaro Villena
-        </h3>
-        
-        <p class="text-xl text-accent font-semibold mb-6">
-          Creador de Ewaffle, experto en innovación digital y diseño instruccional
-        </p>
-        
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Más de 10 años creando experiencias de aprendizaje digital. Especialista en transformación 
-          digital y educación, con experiencia en metodologías innovadoras y herramientas de última generación.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Más de 15 años liderando proyectos de innovación educativa</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Especialista en diseño instruccional y desarrollo de contenidos</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Experto en tecnologías de aprendizaje y herramientas IA</span>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-4">
-          <div class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
-            <i class="ri-award-line text-primary"></i>
-            <span class="text-primary font-medium">Certificado</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full">
-            <i class="ri-time-line text-yellow"></i>
-            <span class="text-yellow font-medium">10+ años</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full">
-            <i class="ri-group-line text-accent"></i>
-            <span class="text-accent font-medium">500+ estudiantes</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Instructor Photo -->
-      <div class="relative">
-        <div class="relative z-10">
-          <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl p-2">
-            <div class="w-full h-full bg-white rounded-full overflow-hidden">
-              <img 
-                src="/team/Alvaro.jpeg" 
-                alt="Álvaro Villena" 
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-accent/20 rounded-full blur-lg"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-yellow/20 rounded-full blur-lg"></div>
-        
-        <!-- Credentials -->
-        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
-          <div class="text-center">
-            <div class="text-sm text-gray-600 mb-1">Fundador & CEO</div>
-            <div class="font-bold text-primary">Ewaffle</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Johana Tapia Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
       <!-- Text Content -->
       <div>
-        <div class="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-          <i class="ri-user-star-line mr-2"></i>
-          Directora de Contenidos
-        </div>
-        
         <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
           Johana Tapia
         </h3>
-        
+
         <p class="text-xl text-accent font-semibold mb-6">
-          Especialista en diseño instruccional y desarrollo de contenidos educativos
+          Fundadora de Ewaffle - Especialista en estrategias de aprendizaje digital
         </p>
-        
+
         <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Con una vasta experiencia en la creación y gestión de contenidos educativos, Johana se especializa 
-          en metodologías innovadoras para el aprendizaje digital. Su enfoque garantiza que cada curso sea 
-          atractivo y efectivo.
+          Especializada en metodologías innovadoras para el aprendizaje digital,
+          su enfoque garantiza que cada curso sea atractivo y efectivo.
+        </p>
+
+        <p class="text-lg text-text-dark mb-8 leading-relaxed">
+          Acompaño a diferentes organizaciones a desarrollar estrategias y
+          modelos de aprendizaje en línea basados en procesos ágiles y
+          customizados a las necesidades y realidades de cada organización.
         </p>
 
         <div class="space-y-4 mb-8">
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
               <i class="ri-check-line text-white text-sm"></i>
             </div>
-            <span class="text-text-dark">Experta en diseño de experiencias de aprendizaje</span>
+            <span class="text-text-dark"
+              >Experta en diseño de experiencias de aprendizaje</span
+            >
           </div>
-          
+
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
               <i class="ri-check-line text-white text-sm"></i>
             </div>
-            <span class="text-text-dark">Desarrollo de currículos y materiales didácticos</span>
+            <span class="text-text-dark"
+              >Desarrollo de currículos y materiales didácticos</span
+            >
           </div>
-          
+
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
               <i class="ri-check-line text-white text-sm"></i>
             </div>
-            <span class="text-text-dark">Innovación en formatos multimedia para educación</span>
+            <span class="text-text-dark"
+              >Innovación en formatos multimedia para educación</span
+            >
           </div>
         </div>
 
         <div class="flex flex-wrap gap-4">
-          <div class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
+          <div
+            class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full"
+          >
             <i class="ri-award-line text-primary"></i>
-            <span class="text-primary font-medium">Certificado</span>
+            <span class="text-primary font-medium">Fundadora</span>
           </div>
-          <div class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full">
-            <i class="ri-time-line text-yellow"></i>
-            <span class="text-yellow font-medium">8+ años</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full">
-            <i class="ri-group-line text-accent"></i>
-            <span class="text-accent font-medium">300+ proyectos</span>
+
+          <div
+            class="flex items-center space-x-2 bg-green-100 px-4 py-2 rounded-full"
+          >
+            <i class="ri-graduation-cap-line text-green-600"></i>
+            <span class="text-green-600 font-medium"
+              >Máster Educación y TIC</span
+            >
           </div>
         </div>
       </div>
 
-      <!-- Instructor Photo -->
-      <div class="relative">
-        <div class="relative z-10">
-          <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl p-2">
-            <div class="w-full h-full bg-white rounded-full overflow-hidden">
-              <img 
-                src="/team/Johana.jpeg" 
-                alt="Johana Tapia" 
-                class="w-full h-full object-cover"
+      <!-- Instructor Photo - Improved Rendering -->
+      <div class="relative flex justify-center lg:justify-end">
+        <div class="relative group">
+          <!-- Main Image Container with Enhanced Quality -->
+          <div
+            class="relative w-80 h-80 bg-gradient-to-br from-secondary to-secondary flex items-center justify-center shadow-2xl p-2 transform transition-all duration-500 group-hover:scale-105"
+          >
+            <div class="w-full h-full bg-white overflow-hidden relative">
+              <Image
+                src={JohanaImage}
+                alt="Johana Tapia - Fundadora y Directora de Contenidos de Ewaffle"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                width={320}
+                height={320}
+                quality={90}
+                format="webp"
+                loading="eager"
               />
+              <!-- Subtle overlay for better contrast -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+              </div>
             </div>
           </div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-accent/20 rounded-full blur-lg"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-yellow/20 rounded-full blur-lg"></div>
-        
-        <!-- Credentials -->
-        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
-          <div class="text-center">
-            <div class="text-sm text-gray-600 mb-1">Directora de Contenidos</div>
-            <div class="font-bold text-primary">Ewaffle</div>
+
+          <!-- Enhanced Floating Elements -->
+          <div
+            class="absolute -top-4 -right-4 w-16 h-16 bg-accent/20 rounded-full blur-lg animate-pulse"
+          >
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-20 h-20 bg-yellow/20 rounded-full blur-lg animate-pulse"
+            style="animation-delay: 1s;"
+          >
           </div>
         </div>
       </div>
     </div>
 
     <!-- Aaron Flores Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
       <!-- Text Content -->
       <div>
-        <div class="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-          <i class="ri-user-star-line mr-2"></i>
-          Desarrollador Senior
-        </div>
-        
+
+
         <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
           Aaron Flores
         </h3>
-        
+
         <p class="text-xl text-accent font-semibold mb-6">
-          Experto en desarrollo de plataformas educativas y tecnologías de aprendizaje
+          Experto en tecnologías de aprendizaje
         </p>
-        
+
         <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Aaron es nuestro experto en tecnología, encargado de integrar las últimas herramientas de IA 
-          y asegurar que nuestras plataformas de aprendizaje sean robustas, intuitivas y de vanguardia.
+          Especializado en diseño instruccional multimedia, desarrollo de cursos
+          virtuales y gestión de proyectos educativos.
+        </p>
+          <p class="text-lg text-text-dark mb-8 leading-relaxed">
+          Trabajo creando soluciones para educación superior y formación corporativa,
+          siempre buscando innovar y aprovechar las herramientas digitales para mejorar
+          la experiencia de aprendizaje.
         </p>
 
         <div class="space-y-4 mb-8">
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
               <i class="ri-check-line text-white text-sm"></i>
             </div>
-            <span class="text-text-dark">Desarrollo de plataformas e-learning con IA</span>
+            <span class="text-text-dark"
+              >Diseño instruccional y desarrollo de cursos virtuales</span
+            >
           </div>
-          
+
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
               <i class="ri-check-line text-white text-sm"></i>
             </div>
-            <span class="text-text-dark">Integración de herramientas de última generación</span>
+            <span class="text-text-dark"
+              >Integración de herramientas de última generación</span
+            >
           </div>
-          
+
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
               <i class="ri-check-line text-white text-sm"></i>
             </div>
-            <span class="text-text-dark">Optimización de la experiencia de usuario</span>
+            <span class="text-text-dark"
+              >Optimización de la experiencia de usuario</span
+            >
           </div>
         </div>
 
         <div class="flex flex-wrap gap-4">
-          <div class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
-            <i class="ri-award-line text-primary"></i>
-            <span class="text-primary font-medium">Certificado</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full">
+          <div
+            class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full"
+          >
             <i class="ri-time-line text-yellow"></i>
-            <span class="text-yellow font-medium">12+ años</span>
+            <span class="text-yellow font-medium">Experto eLearning</span>
           </div>
-          <div class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full">
+          <div
+            class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full"
+          >
             <i class="ri-group-line text-accent"></i>
-            <span class="text-accent font-medium">Experto en IA</span>
+            <span class="text-accent font-medium">Diseñador Multimedia</span>
           </div>
         </div>
       </div>
 
-      <!-- Instructor Photo -->
-      <div class="relative">
-        <div class="relative z-10">
-          <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl p-2">
-            <div class="w-full h-full bg-white rounded-full overflow-hidden">
-              <img 
-                src="/team/Aaron.jpeg" 
-                alt="Aaron Flores" 
-                class="w-full h-full object-cover"
+      <!-- Instructor Photo - Improved Rendering -->
+      <div class="relative flex justify-center lg:justify-end">
+        <div class="relative group">
+          <!-- Main Image Container with Enhanced Quality -->
+          <div
+            class="relative w-80 h-80 bg-gradient-to-br from-accent to-accent flex items-center justify-center shadow-2xl p-2 transform transition-all duration-500 group-hover:scale-105"
+          >
+            <div class="w-full h-full bg-white overflow-hidden relative">
+              <Image
+                src={AaronImage}
+                alt="Aaron Flores - Líder de proyectos eLearning de Ewaffle"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                width={320}
+                height={320}
+                quality={90}
+                format="webp"
+                loading="eager"
               />
+              <!-- Subtle overlay for better contrast -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+              </div>
             </div>
           </div>
+
+          <!-- Enhanced Floating Elements -->
+          <div
+            class="absolute -top-4 -right-4 w-16 h-16 bg-accent/20 rounded-full blur-lg animate-pulse"
+          >
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-20 h-20 bg-yellow/20 rounded-full blur-lg animate-pulse"
+            style="animation-delay: 1s;"
+          >
+          </div>
         </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-accent/20 rounded-full blur-lg"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-yellow/20 rounded-full blur-lg"></div>
-        
-        <!-- Credentials -->
-        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
-          <div class="text-center">
-            <div class="text-sm text-gray-600 mb-1">Desarrollador Senior</div>
-            <div class="font-bold text-primary">Ewaffle</div>
+      </div>
+    </div>
+
+    <!-- Álvaro Villena Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+      <!-- Text Content -->
+      <div>
+        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+          Álvaro Villena
+        </h3>
+
+        <p class="text-xl text-accent font-semibold mb-6">
+          Creador de Ewaffle, experto en innovación digital
+        </p>
+
+        <p class="text-lg text-text-dark mb-8 leading-relaxed">
+          Especialista en transformación digital, con experiencia en
+          metodologías innovadoras y tecnologías de última generación.
+        </p>
+
+        <p class="text-lg text-text-dark mb-8 leading-relaxed">
+          Trabajo creando soluciones para educación superior y formación corporativa,
+          siempre buscando innovar y aprovechar las herramientas digitales para mejorar
+          la experiencia de aprendizaje.
+        </p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
+              <i class="ri-check-line text-white text-sm"></i>
+            </div>
+            <span class="text-text-dark"
+              >Más de 15 años liderando proyectos de innovación digital</span
+            >
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
+              <i class="ri-check-line text-white text-sm"></i>
+            </div>
+            <span class="text-text-dark"
+              >Especialista en diseño instruccional y desarrollo de contenidos</span
+            >
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
+            >
+              <i class="ri-check-line text-white text-sm"></i>
+            </div>
+            <span class="text-text-dark"
+              >Experto en tecnologías de aprendizaje y herramientas IA</span
+            >
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <div
+            class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full"
+          >
+            <i class="ri-award-line text-primary"></i>
+            <span class="text-primary font-medium">Fundador</span>
+          </div>
+          
+          <div
+            class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full"
+          >
+            <i class="ri-group-line text-accent"></i>
+            <span class="text-accent font-medium">Máster en Innovación y Emprendimiento</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructor Photo - Improved Rendering -->
+      <div class="relative flex justify-center lg:justify-end">
+        <div class="relative group">
+          <!-- Main Image Container with Enhanced Quality -->
+          <div
+            class="relative w-90 h-80 bg-gradient-to-br from-primary to-primary flex items-center justify-center shadow-2xl p-2 transform transition-all duration-500 group-hover:scale-105"
+          >
+            <div class="w-full h-full bg-white overflow-hidden relative">
+              <Image
+                src={AlvaroImage}
+                alt="Álvaro Villena - CEO & Fundador de Ewaffle"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                width={320}
+                height={320}
+                quality={90}
+                format="webp"
+                loading="eager"
+              />
+              <!-- Subtle overlay for better contrast -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Floating Elements -->
+          <div
+            class="absolute -top-4 -right-4 w-16 h-16 bg-accent/20 rounded-full blur-lg animate-pulse"
+          >
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-20 h-20 bg-yellow/20 rounded-full blur-lg animate-pulse"
+            style="animation-delay: 1s;"
+          >
           </div>
         </div>
       </div>
@@ -290,11 +378,13 @@
       <h3 class="text-2xl font-bold text-primary mb-8 text-center">
         Lo que dicen nuestros estudiantes
       </h3>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-gray-light rounded-2xl p-6">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-3">
+            <div
+              class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-3"
+            >
               M
             </div>
             <div>
@@ -303,30 +393,37 @@
             </div>
           </div>
           <p class="text-text-dark">
-            "Álvaro tiene una forma única de explicar conceptos complejos de manera simple. 
-            Sus cursos son prácticos y aplicables desde el primer día."
+            "Álvaro tiene una forma única de explicar conceptos complejos de
+            manera simple. Sus cursos son prácticos y aplicables desde el primer
+            día."
           </p>
         </div>
-        
+
         <div class="bg-gray-light rounded-2xl p-6">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold mr-3">
+            <div
+              class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold mr-3"
+            >
               C
             </div>
             <div>
               <div class="font-semibold text-primary">Carlos Ruiz</div>
-              <div class="text-sm text-gray-600">Coordinador de Capacitación</div>
+              <div class="text-sm text-gray-600">
+                Coordinador de Capacitación
+              </div>
             </div>
           </div>
           <p class="text-text-dark">
-            "La metodología de Ewaffle transformó completamente mi forma de crear contenido educativo. 
-            Altamente recomendado."
+            "La metodología de Ewaffle transformó completamente mi forma de
+            crear contenido educativo. Altamente recomendado."
           </p>
         </div>
-        
+
         <div class="bg-gray-light rounded-2xl p-6">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-yellow rounded-full flex items-center justify-center text-primary font-bold mr-3">
+            <div
+              class="w-12 h-12 bg-yellow rounded-full flex items-center justify-center text-primary font-bold mr-3"
+            >
               A
             </div>
             <div>
@@ -335,11 +432,12 @@
             </div>
           </div>
           <p class="text-text-dark">
-            "Excelente combinación de teoría y práctica. Las herramientas que aprendí 
-            las uso diariamente en mis clases."
+            "Excelente combinación de teoría y práctica. Las herramientas que
+            aprendí las uso diariamente en mis clases."
           </p>
         </div>
       </div>
     </div>
   </div>
-</section> 
+</section>
+

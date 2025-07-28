@@ -7,6 +7,7 @@ import AcademiaVideo from '../components/academia/AcademiaVideo.astro';
 import AcademiaInicio from '../components/academia/AcademiaInicio.astro';
 import AcademiaInstructor from '../components/academia/AcademiaInstructor.astro';
 import AcademiaCTA from '../components/academia/AcademiaCTA.astro';
+import AcademiaStats from '../components/academia/AcademiaStats.astro';
 
 const title = "Academia Ewaffle | Cursos multimedia apoyados por IA";
 const description = "Potencia tus recursos educativos con el poder de la IA. Aprende a crear cursos, ebooks y experiencias interactivas que destaquen.";
@@ -15,9 +16,10 @@ const description = "Potencia tus recursos educativos con el poder de la IA. Apr
 <BaseLayout {title} {description}>
 	<AcademiaHero />
 	<AcademiaIntro />
+	<AcademiaStats />
 	<AcademiaCursos />
-	<AcademiaVideo />
-	<!--<AcademiaInicio />-->
+	<!--<AcademiaVideo />-->
+     <AcademiaInicio /> 
 	<AcademiaInstructor />
 	<AcademiaCTA />
 </BaseLayout> 

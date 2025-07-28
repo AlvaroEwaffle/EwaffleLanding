@@ -6,7 +6,9 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   output: "static",
-  build: {
-    outDir: "dist"
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
   }
 });
