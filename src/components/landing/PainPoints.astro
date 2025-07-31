@@ -1,0 +1,56 @@
+---
+const painPoints = [
+  {
+    icon: "🔥",
+    title: "¿Cómo me diferencio cuando todos ofrecemos lo mismo?",
+    description: "Te frustra ver que tu competencia ofrece exactamente los mismos cursos que tú. Los clientes comparan precios porque no ven diferencia. Con más de 5.000 instituciones educativas activas, ¿cómo haces que te elijan a ti?",
+  },
+  {
+    icon: "🧠",
+    title: "No tengo el equipo ni el tiempo para digitalizar",
+    description: "Sabes que necesitas cursos digitales, pero ¿dónde encuentras un diseñador instruccional que entienda SCORM? ¿Y cómo pagas su sueldo? Tu equipo ya está al máximo y no puedes permitirte más personal.",
+  },
+  {
+    icon: "📋",
+    title: "Tengo miedo de que SENCE rechace mis cursos online",
+    description: "Tus clientes piden modalidad online, pero te preocupa que SENCE no apruebe el curso o que los estudiantes se aburran. La demanda por e-learning explotó post pandemia, pero ¿cómo garantizas calidad?",
+  }
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+        ¿Te sientes identificado con estas frustraciones?
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+        Si eres dueño o gerente de una institución educativa, probablemente te enfrentas a estos mismos desafíos día a día. No estás solo.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {painPoints.map((point, index) => (
+        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-accent">
+          <div class="text-4xl mb-4">{point.icon}</div>
+          <h3 class="text-xl font-bold text-primary mb-4">{point.title}</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">{point.description}</p>
+          
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-lg text-gray-700 mb-6">
+        <strong>¿Te suena familiar?</strong> <br> 
+        Estas frustraciones son reales y están afectando tu negocio. Pero hay una solución.
+      </p>
+      <a 
+        href="https://www.fidelidapp.cl/agendas/680291e8d368134c0d855343"
+        class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-secondary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
+      >
+        Descubre cómo solucionarlo en una asesoría gratuita
+      </a>
+    </div>
+  </div>
+</section> 

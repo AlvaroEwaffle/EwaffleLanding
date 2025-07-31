@@ -1,5 +1,105 @@
 ---
 // Courses section for Academia Ewaffle
+
+// Header data
+const headerData = {
+  title: "Crea contenidos de calidad profesional que cautiven a tu audiencia",
+  description: "A través de clases en vivo y prácticas, dominarás herramientas concretas que puedes aplicar desde el primer día para crear materiales que realmente destaquen:"
+};
+
+// Courses data
+const courses = [
+  {
+    id: 1,
+    badge: {
+      text: "Curso 1",
+      icon: "ri-book-open-line",
+      bgColor: "bg-primary/10",
+      textColor: "text-primary"
+    },
+    title: "Crea la Estructura de tu Curso e-learning",
+    description: "Aprende a diseñar la estructura completa de tu curso online, desde la propuesta de valor hasta la implementación de recursos multimedia y herramientas de IA.",
+    features: [
+      "Mapa visual del curso",
+      "Módulos y recursos sugeridos",
+      "Prompts de IA para enriquecer tu enseñanza"
+    ],
+    details: [
+      { icon: "ri-time-line", text: "4 semanas", bgColor: "bg-primary/10", textColor: "text-primary" },
+      { icon: "ri-video-line", text: "Clases en vivo", bgColor: "bg-accent/10", textColor: "text-accent" },
+      { icon: "ri-download-line", text: "Materiales incluidos", bgColor: "bg-yellow/10", textColor: "text-yellow" }
+    ],
+    price: "$29.000 CLP",
+    priceDescription: "Acceso completo + certificado",
+    link: "/curso-estructura-elearning",
+    visual: {
+      icon: "ri-book-open-line",
+      title: "Estructura de Curso",
+      subtitle: "Diseño instruccional completo",
+      gradient: "from-primary to-secondary"
+    }
+  },
+  {
+    id: 2,
+    badge: {
+      text: "Curso 2",
+      icon: "ri-file-text-line",
+      bgColor: "bg-accent/10",
+      textColor: "text-accent"
+    },
+    title: "eBooks con Canva",
+    description: "Domina la creación de eBooks profesionales usando Canva. Aprende a diseñar contenido atractivo y funcional que capte la atención de tus estudiantes.",
+    features: [
+      "Estructura de un ebook profesional",
+      "Diseño paso a paso con Canva Doc",
+      "Cómo integrar videos y audios"
+    ],
+    details: [
+      { icon: "ri-time-line", text: "3 semanas", bgColor: "bg-primary/10", textColor: "text-primary" },
+      { icon: "ri-video-line", text: "Clases en vivo", bgColor: "bg-accent/10", textColor: "text-accent" },
+      { icon: "ri-download-line", text: "Plantillas incluidas", bgColor: "bg-yellow/10", textColor: "text-yellow" }
+    ],
+    price: "$25.000 CLP",
+    priceDescription: "Acceso completo + certificado",
+    link: "https://pay.hotmart.com/N101065818H",
+    visual: {
+      icon: "ri-file-text-line",
+      title: "eBooks Profesionales",
+      subtitle: "Diseño con Canva",
+      gradient: "from-accent to-pink-600"
+    }
+  },
+  {
+    id: 3,
+    badge: {
+      text: "Curso 3",
+      icon: "ri-presentation-line",
+      bgColor: "bg-yellow/10",
+      textColor: "text-yellow"
+    },
+    title: "Presentaciones Interactivas con H5P",
+    description: "Crea experiencias de aprendizaje interactivas y envolventes usando H5P. Aprende a integrar contenido multimedia avanzado en tus cursos.",
+    features: [
+      "Qué es H5P y cómo usarlo",
+      "Cómo crear experiencias interactivas",
+      "Cómo integrarlas en tu LMS"
+    ],
+    details: [
+      { icon: "ri-time-line", text: "3 semanas", bgColor: "bg-primary/10", textColor: "text-primary" },
+      { icon: "ri-video-line", text: "Clases en vivo", bgColor: "bg-accent/10", textColor: "text-accent" },
+      { icon: "ri-download-line", text: "Ejemplos prácticos", bgColor: "bg-yellow/10", textColor: "text-yellow" }
+    ],
+    price: "$25.000 CLP",
+    priceDescription: "Acceso completo + certificado",
+    link: "https://pay.hotmart.com/A101062359V?bid=1753715522923",
+    visual: {
+      icon: "ri-presentation-line",
+      title: "Contenido Interactivo",
+      subtitle: "H5P y multimedia",
+      gradient: "from-yellow to-orange-500"
+    }
+  }
+];
 ---
 
 <section id="cursos" class="py-20 bg-white relative overflow-hidden">
@@ -10,290 +110,76 @@
 
   <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 bg-purple-50 rounded-2xl p-8">
       <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-        Crea contenidos de calidad profesional que cautiven a tu audiencia
+        {headerData.title}
       </h2>
       <p class="text-xl text-text-dark max-w-3xl mx-auto">
-        A través de clases en vivo y prácticas, dominarás herramientas concretas que puedes aplicar desde el primer día para crear materiales que realmente destaquen:
+        {headerData.description}
       </p>
     </div>
 
-    <!-- Curso 1: Crea la Estructura de tu Curso e-learning -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Text Content -->
-      <div>
-        <div class="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-          <i class="ri-book-open-line mr-2"></i>
-          Curso 1
-        </div>
-        
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          Crea la Estructura de tu Curso e-learning
-        </h3>
-        
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Aprende a diseñar la estructura completa de tu curso online, desde la propuesta de valor hasta 
-          la implementación de recursos multimedia y herramientas de IA.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
+    <!-- Courses -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {courses.map((course) => (
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group">
+          <!-- Card Header with Badge -->
+          <div class="p-6 pb-4">
+            <div class={`inline-flex items-center px-3 py-1 ${course.badge.bgColor} ${course.badge.textColor} rounded-full text-xs font-medium mb-4`}>
+              <i class={`${course.badge.icon} mr-2`}></i>
+              {course.badge.text}
             </div>
-            <span class="text-text-dark">Tu propuesta de valor</span>
+            
+            <h3 class="text-xl font-bold text-primary mb-4 line-clamp-2">
+              {course.title}
+            </h3>
+            
+            <p class="text-sm text-text-dark mb-6 leading-relaxed line-clamp-3">
+              {course.description}
+            </p>
           </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Mapa visual del curso</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Módulos y recursos sugeridos</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Prompts de IA para enriquecer tu enseñanza</span>
-          </div>
-        </div>
 
-        <div class="flex flex-wrap gap-4 mb-8">
-          <div class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
-            <i class="ri-time-line text-primary"></i>
-            <span class="text-primary font-medium">4 semanas</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full">
-            <i class="ri-video-line text-accent"></i>
-            <span class="text-accent font-medium">Clases en vivo</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full">
-            <i class="ri-download-line text-yellow"></i>
-            <span class="text-yellow font-medium">Materiales incluidos</span>
-          </div>
-        </div>
+          <!-- Features Section -->
+          <div class="px-6 pb-4">
+            <div class="space-y-3 mb-6">
+              {course.features.map(feature => (
+                <div class="flex items-start space-x-3">
+                  <div class="w-6 h-6 bg-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <i class="ri-check-line text-white text-xs"></i>
+                  </div>
+                  <span class="text-sm text-text-dark leading-relaxed">{feature}</span>
+                </div>
+              ))}
+            </div>
 
-        <div class="flex flex-col sm:flex-row gap-4">
-          <div class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl p-4 text-center">
-            <div class="text-2xl font-bold text-white mb-1">$29.000 CLP</div>
-            <div class="text-white/80 text-sm">Acceso completo + certificado</div>
-          </div>
-          
-          <a 
-            href="#inscripcion"
-            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-bold text-lg hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            <i class="ri-lock-line mr-2"></i>
-            Inscribirme ahora
-          </a>
-        </div>
-      </div>
-
-      <!-- Course Visual -->
-      <div class="relative">
-        <div class="relative z-10">
-          <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center shadow-2xl p-8">
-            <div class="text-center text-white">
-              <i class="ri-book-open-line text-6xl mb-4"></i>
-              <div class="text-xl font-bold mb-2">Estructura de Curso</div>
-              <div class="text-white/80">Diseño instruccional completo</div>
+            <!-- Course Details -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              {course.details.map(detail => (
+                <div class={`flex items-center space-x-1 ${detail.bgColor} px-3 py-1 rounded-full`}>
+                  <i class={`${detail.icon} ${detail.textColor} text-xs`}></i>
+                  <span class={`${detail.textColor} font-medium text-xs`}>{detail.text}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-accent/20 rounded-full blur-lg"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-yellow/20 rounded-full blur-lg"></div>
-      </div>
-    </div>
 
-    <!-- Curso 2: eBooks con Canva -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Text Content -->
-      <div>
-        <div class="inline-flex items-center px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-          <i class="ri-file-text-line mr-2"></i>
-          Curso 2
-        </div>
-        
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          eBooks con Canva
-        </h3>
-        
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Domina la creación de eBooks profesionales usando Canva. Aprende a diseñar contenido 
-          atractivo y funcional que capte la atención de tus estudiantes.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
+          <!-- Card Footer -->
+          <div class="p-6 pt-0">
+            <div class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl p-4 text-center mb-4">
+              <div class="text-xl font-bold text-white mb-1">{course.price}</div>
+              <div class="text-white/80 text-xs">{course.priceDescription}</div>
             </div>
-            <span class="text-text-dark">Estructura de un ebook profesional</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Diseño paso a paso con Canva Doc</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Cómo integrar videos y audios</span>
+            
+            <a 
+              href={course.link}
+              class="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-semibold text-sm hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group-hover:scale-105"
+            >
+              <i class="ri-lock-line mr-2"></i>
+              Inscribirme ahora
+            </a>
           </div>
         </div>
-
-        <div class="flex flex-wrap gap-4 mb-8">
-          <div class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
-            <i class="ri-time-line text-primary"></i>
-            <span class="text-primary font-medium">3 semanas</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full">
-            <i class="ri-video-line text-accent"></i>
-            <span class="text-accent font-medium">Clases en vivo</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full">
-            <i class="ri-download-line text-yellow"></i>
-            <span class="text-yellow font-medium">Plantillas incluidas</span>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-4">
-          <div class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl p-4 text-center">
-            <div class="text-2xl font-bold text-white mb-1">$25.000 CLP</div>
-            <div class="text-white/80 text-sm">Acceso completo + certificado</div>
-          </div>
-          
-          <a 
-            href="#inscripcion"
-            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-bold text-lg hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            <i class="ri-lock-line mr-2"></i>
-            Inscribirme ahora
-          </a>
-        </div>
-      </div>
-
-      <!-- Course Visual -->
-      <div class="relative">
-        <div class="relative z-10">
-          <div class="w-80 h-80 mx-auto bg-gradient-to-br from-accent to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl p-8">
-            <div class="text-center text-white">
-              <i class="ri-file-text-line text-6xl mb-4"></i>
-              <div class="text-xl font-bold mb-2">eBooks Profesionales</div>
-              <div class="text-white/80">Diseño con Canva</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-accent/20 rounded-full blur-lg"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-yellow/20 rounded-full blur-lg"></div>
-      </div>
-    </div>
-
-    <!-- Curso 3: Presentaciones Interactivas con H5P -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <!-- Text Content -->
-      <div>
-        <div class="inline-flex items-center px-4 py-2 bg-yellow/10 text-yellow rounded-full text-sm font-medium mb-6">
-          <i class="ri-presentation-line mr-2"></i>
-          Curso 3
-        </div>
-        
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          Presentaciones Interactivas con H5P
-        </h3>
-        
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Crea experiencias de aprendizaje interactivas y envolventes usando H5P. 
-          Aprende a integrar contenido multimedia avanzado en tus cursos.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Qué es H5P y cómo usarlo</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Cómo crear experiencias interactivas</span>
-          </div>
-          
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center">
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark">Cómo integrarlas en tu LMS</span>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-4 mb-8">
-          <div class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
-            <i class="ri-time-line text-primary"></i>
-            <span class="text-primary font-medium">3 semanas</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full">
-            <i class="ri-video-line text-accent"></i>
-            <span class="text-accent font-medium">Clases en vivo</span>
-          </div>
-          <div class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full">
-            <i class="ri-download-line text-yellow"></i>
-            <span class="text-yellow font-medium">Ejemplos prácticos</span>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-4">
-          <div class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl p-4 text-center">
-            <div class="text-2xl font-bold text-white mb-1">$25.000 CLP</div>
-            <div class="text-white/80 text-sm">Acceso completo + certificado</div>
-          </div>
-          
-          <a 
-            href="#inscripcion"
-            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-bold text-lg hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            <i class="ri-lock-line mr-2"></i>
-            Inscribirme ahora
-          </a>
-        </div>
-      </div>
-
-      <!-- Course Visual -->
-      <div class="relative">
-        <div class="relative z-10">
-          <div class="w-80 h-80 mx-auto bg-gradient-to-br from-yellow to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl p-8">
-            <div class="text-center text-white">
-              <i class="ri-presentation-line text-6xl mb-4"></i>
-              <div class="text-xl font-bold mb-2">Contenido Interactivo</div>
-              <div class="text-white/80">H5P y multimedia</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-accent/20 rounded-full blur-lg"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-yellow/20 rounded-full blur-lg"></div>
-      </div>
+      ))}
     </div>
   </div>
 </section> 

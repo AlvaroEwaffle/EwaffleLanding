@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/landing/Hero.astro';
+import PainPoints from '../components/landing/PainPoints.astro';
+import StatsBanner from '../components/landing/StatsBanner.astro';
+import Proposal from '../components/landing/Proposal.astro';
+import FounderSection from '../components/landing/FounderSection.astro';
+import TeamSection from '../components/landing/TeamSection.astro';
+import AcademiaBanner from '../components/landing/AcademiaBanner.astro';
+import DemoSection from '../components/landing/DemoSection.astro';
+import Testimonials from '../components/landing/Testimonials.astro';
 import Benefits from '../components/landing/Benefits.astro';
 import Cases from '../components/landing/Cases.astro';
 import FAQ from '../components/landing/FAQ.astro';
@@ -15,20 +23,26 @@ import Contact from '../components/landing/Contact.astro';
 import Gamification from '../components/landing/Gamification.astro';
 import AsesoriaIntro from '../components/landing/AsesoriaIntro.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// SEO Metadata for main landing page
+const title = "Ewaffle | Transforma tu catálogo de cursos en experiencias digitales gamificadas";
+const description = "Diferenciate de la competencia con cursos SCORM gamificados, sin necesidad de equipo interno. Cumple con SENCE y aumenta el engagement de tus estudiantes. Soluciones llave en mano para OTECs y empresas.";
 ---
 
-<BaseLayout>
+<BaseLayout {title} {description}>
 	<Hero />
-	<Gamification />
-	<AsesoriaIntro />
-	<Process />
-	<BannerCTA />
+	<PainPoints />
+	<Proposal />
+	
 	<Clients />
-	<Portfolio />
+	<DemoSection />
+	<AcademiaBanner />
+	<StatsBanner />
+	<!-- <Testimonials /> -->
+	<Process />
 	<Benefits />
-	<Team />
+	<FounderSection />
+	<TeamSection />
+	
 	<FAQ />
 	<Contact />
 	<CTA />

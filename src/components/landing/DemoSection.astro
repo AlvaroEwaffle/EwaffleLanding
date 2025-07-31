@@ -1,0 +1,124 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "🎥 ¿Cómo se ve?",
+  subtitle = "Mira cómo podría lucir tu próximo curso gamificado (SCORM, IA, totalmente personalizado).",
+} = Astro.props;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+        {title}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <!-- Video Demo -->
+      <div class="space-y-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-semibold text-primary mb-4">🎮 Video Demo</h3>
+          <div
+            class="aspect-video bg-gray-200 rounded-lg flex items-center justify-center"
+          >
+            <div class="text-center">
+              <div class="text-6xl mb-4">🎬</div>
+              <p class="text-gray-600">Video demo embebido</p>
+              <p class="text-sm text-gray-500 mt-2">
+                Aquí iría el video de demostración
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <a
+            href="https://gamification.ewaffle.cl/"
+            class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-secondary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Ver Demo en Vivo
+          </a>
+        </div>
+      </div>
+
+      <!-- Demo Links -->
+      <div class="space-y-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-semibold text-primary mb-4">
+            📋 Ejemplos Prácticos
+          </h3>
+          <div class="space-y-4">
+            <div
+              class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <span class="text-2xl mr-3">📊</span>
+              <div>
+                <h4 class="font-medium text-secondary">Catálogo de Cursos</h4>
+                <p class="text-sm text-gray-600">
+                  Explora nuestra biblioteca de cursos gamificados
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <span class="text-2xl mr-3">📄</span>
+              <div>
+                <h4 class="font-medium text-secondary">PDF de Ejemplo</h4>
+                <p class="text-sm text-gray-600">
+                  Descarga nuestro catálogo completo
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <span class="text-2xl mr-3">🎯</span>
+              <div>
+                <h4 class="font-medium text-secondary">Casos de Éxito</h4>
+                <p class="text-sm text-gray-600">
+                  Ver cómo otras empresas han transformado su oferta
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Highlight -->
+        <div class="bg-accent/10 rounded-lg p-6 border border-accent/20">
+          <h3 class="text-lg font-semibold text-primary mb-4">
+            ✨ Características Destacadas
+          </h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center">
+              <span class="text-accent mr-2">✓</span>
+              <span>SCORM Ready</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-accent mr-2">✓</span>
+              <span>IA Integrada</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-accent mr-2">✓</span>
+              <span>Gamificación</span>
+            </div>
+            <div class="flex items-center">
+              <span class="text-accent mr-2">✓</span>
+              <span>Marca Blanca</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

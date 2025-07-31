@@ -5,8 +5,8 @@ interface Props {
 }
 
 const { 
-  title = "🚀 ¡Potencia el talento de tu organización hoy!", 
-  subtitle = "Ewaffle - Formación que transforma." 
+  title = "🤝 ¿Listo para escalar tu empresa y ofrecer algo realmente diferente?", 
+  subtitle = "🎯 Agenda una reunión gratuita y descubre cómo podrías estar vendiendo cursos gamificados y digitales este mes." 
 } = Astro.props;
 ---
 
@@ -43,20 +43,36 @@ const {
         {subtitle}
       </p>
 
+      <!-- Benefits List -->
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+          <div class="text-2xl mb-2">🚀</div>
+          <div class="text-white font-medium">Escala sin contratar equipo</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+          <div class="text-2xl mb-2">🎮</div>
+          <div class="text-white font-medium">Cursos gamificados SCORM</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+          <div class="text-2xl mb-2">🏷️</div>
+          <div class="text-white font-medium">100% marca blanca</div>
+        </div>
+      </div>
+
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
         <a
           href="https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7"
-          class="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:transform hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto justify-center"
+          class="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:transform hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto justify-center text-lg"
         >
-          <span>Agendar Demo</span>
+          <span>Agendar con Ewaffle</span>
           <i class="ri-arrow-right-line text-xl"></i>
         </a>
         <a
           href="#contact"
           class="bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-accent/50 px-8 py-4 rounded-full font-semibold transition-all duration-300 text-white hover:transform hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto justify-center inline-flex items-center"
         >
-          Contactar Ventas
+          Solicitar Demo
         </a>
       </div>
     </div>

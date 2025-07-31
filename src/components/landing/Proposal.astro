@@ -1,0 +1,97 @@
+---
+interface Service {
+  service: string;
+  whatWeDo: string;
+  whatYouGet: string;
+  icon: string;
+}
+
+const services: Service[] = [
+  {
+    service: "Catálogo de cursos gamificados",
+    whatWeDo: "Cursos SCORM listos, con IA, medallas y quizzes (ej: liderazgo, prevención, inclusión)",
+    whatYouGet: "Más productos para ofrecer, sin partir de cero",
+    icon: "🎮"
+  },
+  {
+    service: "Diseño instruccional personalizado",
+    whatWeDo: "Convertimos tus cursos en experiencias gamificadas y atractivas",
+    whatYouGet: "Te enfocas en vender, nosotros en diseñar",
+    icon: "🎨"
+  },
+  {
+    service: "Soporte LMS y entrega técnica",
+    whatWeDo: "Montamos el curso en tu plataforma o te asesoramos en la entrega",
+    whatYouGet: "Tus cursos lucen profesionales, sin dolores técnicos",
+    icon: "💻"
+  },
+  {
+    service: "Soluciones IA para capacitación",
+    whatWeDo: "Chatbots entrenados, generadores de contenido y análisis automático",
+    whatYouGet: "Te posicionas como referente moderno y eficiente",
+    icon: "🤖"
+  },
+  {
+    service: "Marca blanca y reventa",
+    whatWeDo: "Todo se entrega con TU logo, TU identidad",
+    whatYouGet: "Ewaffle es tu backend, tus clientes ni lo notan",
+    icon: "🏷️"
+  }
+];
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+        🧩 Nuestra Propuesta para Empresas
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+        En Ewaffle, ayudamos a empresas con catálogos de cursos a modernizar su oferta sin necesidad de contratar equipos internos.
+        Creamos cursos digitales impactantes, escalables y con tu marca. Tú vendes. Nosotros lo hacemos posible.
+      </p>
+      <h3 class="text-2xl font-semibold text-secondary mb-8">¿Qué ofrecemos?</h3>
+    </div>
+
+    <!-- Services Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full bg-white rounded-lg shadow-lg border border-gray-200">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th class="px-6 py-4 text-left font-semibold">💡 Servicio</th>
+            <th class="px-6 py-4 text-left font-semibold">🛠️ ¿Qué hacemos?</th>
+            <th class="px-6 py-4 text-left font-semibold">🏆 ¿Qué obtienes?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {services.map((service, index) => (
+            <tr class={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+              <td class="px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">{service.icon}</span>
+                  <span class="font-medium text-primary">{service.service}</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 border-b border-gray-200 text-gray-700">
+                {service.whatWeDo}
+              </td>
+              <td class="px-6 py-4 border-b border-gray-200 text-gray-700">
+                {service.whatYouGet}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="text-center mt-12">
+      <a 
+        href="https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7"
+        class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-secondary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
+      >
+        Quiero agendar una demo
+      </a>
+    </div>
+  </div>
+</section> 

@@ -9,8 +9,8 @@ import AcademiaInstructor from '../components/academia/AcademiaInstructor.astro'
 import AcademiaCTA from '../components/academia/AcademiaCTA.astro';
 import AcademiaStats from '../components/academia/AcademiaStats.astro';
 
-const title = "Academia Ewaffle | Cursos multimedia apoyados por IA";
-const description = "Potencia tus recursos educativos con el poder de la IA. Aprende a crear cursos, ebooks y experiencias interactivas que destaquen.";
+const title = "Academia Ewaffle | Cursos de Diseño Instruccional y Creación de Contenido Digital";
+const description = "Aprende a crear cursos e-learning, eBooks profesionales y contenido interactivo con IA. Cursos en vivo con certificación. Diseño instruccional, Canva, H5P y herramientas multimedia.";
 ---
 
 <BaseLayout {title} {description}>
@@ -22,4 +22,82 @@ const description = "Potencia tus recursos educativos con el poder de la IA. Apr
      <AcademiaInicio /> 
 	<AcademiaInstructor />
 	<AcademiaCTA />
-</BaseLayout> 
+</BaseLayout>
+
+<!-- Structured Data for Academia Page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Academia Ewaffle",
+  "url": "https://www.ewaffle.cl/academia",
+  "description": "Academia especializada en diseño instruccional y creación de contenido digital para e-learning",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Santiago",
+    "addressRegion": "RM",
+    "addressCountry": "CL"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Cursos de Diseño Instruccional",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "Crea la Estructura de tu Curso e-learning",
+          "description": "Aprende a diseñar la estructura completa de tu curso online con IA",
+          "provider": {
+            "@type": "Organization",
+            "name": "Ewaffle"
+          },
+          "courseMode": "online",
+          "educationalLevel": "intermediate",
+          "timeRequired": "P4W",
+          "price": "29000",
+          "priceCurrency": "CLP"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "eBooks con Canva",
+          "description": "Domina la creación de eBooks profesionales usando Canva",
+          "provider": {
+            "@type": "Organization",
+            "name": "Ewaffle"
+          },
+          "courseMode": "online",
+          "educationalLevel": "beginner",
+          "timeRequired": "P3W",
+          "price": "25000",
+          "priceCurrency": "CLP"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "Presentaciones Interactivas con H5P",
+          "description": "Crea experiencias de aprendizaje interactivas usando H5P",
+          "provider": {
+            "@type": "Organization",
+            "name": "Ewaffle"
+          },
+          "courseMode": "online",
+          "educationalLevel": "intermediate",
+          "timeRequired": "P3W",
+          "price": "25000",
+          "priceCurrency": "CLP"
+        }
+      }
+    ]
+  },
+  "sameAs": [
+    "https://www.instagram.com/ewaffle.cl/",
+    "https://linkedin.com/company/ewaffle"
+  ]
+}
+</script> 

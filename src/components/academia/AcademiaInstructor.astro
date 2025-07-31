@@ -4,7 +4,103 @@ import AlvaroImage from "../../assets/Alvaro.png";
 import JohanaImage from "../../assets/Johana.png";
 import AaronImage from "../../assets/Aaron.png";
 
-// Instructor section for Academia Ewaffle
+// Header data
+const headerData = {
+  title: "Nuestros Instructores",
+  subtitle: "Expertos en aprendizaje digital y transformación educativa"
+};
+
+// Instructors data
+const instructors = [
+  {
+    id: 1,
+    name: "Johana Tapia",
+    role: "Fundadora de Ewaffle - Especialista en estrategias de aprendizaje digital",
+    image: JohanaImage,
+    imageAlt: "Johana Tapia - Fundadora y Directora de Contenidos de Ewaffle",
+    description: "Especializada en metodologías innovadoras para el aprendizaje digital, su enfoque garantiza que cada curso sea atractivo y efectivo.",
+    longDescription: "Acompaño a diferentes organizaciones a desarrollar estrategias y modelos de aprendizaje en línea basados en procesos ágiles y customizados a las necesidades y realidades de cada organización.",
+    expertise: [
+      "Experta en diseño de experiencias de aprendizaje",
+      "Desarrollo de currículos y materiales didácticos",
+      "Innovación en formatos multimedia para educación"
+    ],
+    badges: [
+      { icon: "ri-award-line", text: "Fundadora", bgColor: "bg-primary/10", textColor: "text-primary" },
+      { icon: "ri-graduation-cap-line", text: "Máster Educación y TIC", bgColor: "bg-green-100", textColor: "text-green-600" }
+    ],
+    gradient: "from-secondary to-secondary"
+  },
+  {
+    id: 2,
+    name: "Aaron Flores",
+    role: "Experto en tecnologías de aprendizaje",
+    image: AaronImage,
+    imageAlt: "Aaron Flores - Líder de proyectos eLearning de Ewaffle",
+    description: "Especializado en diseño instruccional multimedia, desarrollo de cursos virtuales y gestión de proyectos educativos.",
+    longDescription: "Trabajo creando soluciones para educación superior y formación corporativa, siempre buscando innovar y aprovechar las herramientas digitales para mejorar la experiencia de aprendizaje.",
+    expertise: [
+      "Diseño instruccional y desarrollo de cursos virtuales",
+      "Integración de herramientas de última generación",
+      "Optimización de la experiencia de usuario"
+    ],
+    badges: [
+      { icon: "ri-time-line", text: "Experto eLearning", bgColor: "bg-yellow/10", textColor: "text-yellow" },
+      { icon: "ri-group-line", text: "Diseñador Multimedia", bgColor: "bg-accent/10", textColor: "text-accent" }
+    ],
+    gradient: "from-accent to-accent"
+  },
+  {
+    id: 3,
+    name: "Álvaro Villena",
+    role: "Creador de Ewaffle, experto en innovación digital",
+    image: AlvaroImage,
+    imageAlt: "Álvaro Villena - CEO & Fundador de Ewaffle",
+    description: "Especialista en transformación digital, con experiencia en metodologías innovadoras y tecnologías de última generación.",
+    longDescription: "Trabajo creando soluciones para educación superior y formación corporativa, siempre buscando innovar y aprovechar las herramientas digitales para mejorar la experiencia de aprendizaje.",
+    expertise: [
+      "Más de 15 años liderando proyectos de innovación digital",
+      "Especialista en diseño instruccional y desarrollo de contenidos",
+      "Experto en tecnologías de aprendizaje y herramientas IA"
+    ],
+    badges: [
+      { icon: "ri-award-line", text: "Fundador", bgColor: "bg-primary/10", textColor: "text-primary" },
+      { icon: "ri-group-line", text: "Máster en Innovación y Emprendimiento", bgColor: "bg-accent/10", textColor: "text-accent" }
+    ],
+    gradient: "from-primary to-primary"
+  }
+];
+
+// Testimonials data
+const testimonials = [
+  {
+    id: 1,
+    name: "María González",
+    role: "Diseñadora Instruccional",
+    initial: "M",
+    bgColor: "bg-primary",
+    textColor: "text-white",
+    content: "Álvaro tiene una forma única de explicar conceptos complejos de manera simple. Sus cursos son prácticos y aplicables desde el primer día."
+  },
+  {
+    id: 2,
+    name: "Carlos Ruiz",
+    role: "Coordinador de Capacitación",
+    initial: "C",
+    bgColor: "bg-accent",
+    textColor: "text-white",
+    content: "La metodología de Ewaffle transformó completamente mi forma de crear contenido educativo. Altamente recomendado."
+  },
+  {
+    id: 3,
+    name: "Ana Silva",
+    role: "Docente Universitaria",
+    initial: "A",
+    bgColor: "bg-yellow",
+    textColor: "text-primary",
+    content: "Excelente combinación de teoría y práctica. Las herramientas que aprendí las uso diariamente en mis clases."
+  }
+];
 ---
 
 <section class="py-20 bg-white relative overflow-hidden">
@@ -21,356 +117,77 @@ import AaronImage from "../../assets/Aaron.png";
     <!-- Header -->
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-        Nuestros Instructores
+        {headerData.title}
       </h2>
+      <p class="text-xl text-text-dark max-w-3xl mx-auto mb-6">
+        {headerData.subtitle}
+      </p>
       <div class="w-24 h-1 bg-accent mx-auto"></div>
     </div>
 
-    <!-- Johana Tapia Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Text Content -->
-      <div>
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          Johana Tapia
-        </h3>
-
-        <p class="text-xl text-accent font-semibold mb-6">
-          Fundadora de Ewaffle - Especialista en estrategias de aprendizaje digital
-        </p>
-
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Especializada en metodologías innovadoras para el aprendizaje digital,
-          su enfoque garantiza que cada curso sea atractivo y efectivo.
-        </p>
-
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Acompaño a diferentes organizaciones a desarrollar estrategias y
-          modelos de aprendizaje en línea basados en procesos ágiles y
-          customizados a las necesidades y realidades de cada organización.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Experta en diseño de experiencias de aprendizaje</span
-            >
+    <!-- Instructors Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+      {instructors.map((instructor) => (
+        <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden group">
+          <!-- Image Section -->
+          <div class="relative h-80 overflow-hidden">
+            <div class={`absolute inset-0 bg-gradient-to-br ${instructor.gradient} opacity-20`}></div>
+            <Image
+              src={instructor.image}
+              alt={instructor.imageAlt}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              width={400}
+              height={320}
+              quality={90}
+              format="webp"
+              loading="eager"
+            />
+            <!-- Floating Elements -->
+            <div class="absolute top-4 right-4 w-12 h-12 bg-accent/20 rounded-full blur-lg animate-pulse"></div>
+            <div class="absolute bottom-4 left-4 w-16 h-16 bg-yellow/20 rounded-full blur-lg animate-pulse" style="animation-delay: 1s;"></div>
           </div>
 
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
+          <!-- Content Section -->
+          <div class="p-8">
+            <!-- Name and Role -->
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold text-primary mb-3">
+                {instructor.name}
+              </h3>
+              <p class="text-accent font-semibold text-sm leading-relaxed">
+                {instructor.role}
+              </p>
             </div>
-            <span class="text-text-dark"
-              >Desarrollo de currículos y materiales didácticos</span
-            >
-          </div>
 
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
+            <!-- Description -->
+            <p class="text-text-dark text-sm leading-relaxed mb-6">
+              {instructor.description}
+            </p>
+
+            <!-- Expertise -->
+            <div class="space-y-3 mb-6">
+              {instructor.expertise.map((item) => (
+                <div class="flex items-start space-x-3">
+                  <div class="w-5 h-5 bg-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <i class="ri-check-line text-white text-xs"></i>
+                  </div>
+                  <span class="text-sm text-text-dark leading-relaxed">{item}</span>
+                </div>
+              ))}
             </div>
-            <span class="text-text-dark"
-              >Innovación en formatos multimedia para educación</span
-            >
+
+            <!-- Badges -->
+            <div class="flex flex-wrap gap-2">
+              {instructor.badges.map((badge) => (
+                <div class={`flex items-center space-x-1 ${badge.bgColor} px-3 py-1 rounded-full`}>
+                  <i class={`${badge.icon} ${badge.textColor} text-xs`}></i>
+                  <span class={`${badge.textColor} font-medium text-xs`}>{badge.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-        <div class="flex flex-wrap gap-4">
-          <div
-            class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full"
-          >
-            <i class="ri-award-line text-primary"></i>
-            <span class="text-primary font-medium">Fundadora</span>
-          </div>
-
-          <div
-            class="flex items-center space-x-2 bg-green-100 px-4 py-2 rounded-full"
-          >
-            <i class="ri-graduation-cap-line text-green-600"></i>
-            <span class="text-green-600 font-medium"
-              >Máster Educación y TIC</span
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- Instructor Photo - Improved Rendering -->
-      <div class="relative flex justify-center lg:justify-end">
-        <div class="relative group">
-          <!-- Main Image Container with Enhanced Quality -->
-          <div
-            class="relative w-80 h-80 bg-gradient-to-br from-secondary to-secondary flex items-center justify-center shadow-2xl p-2 transform transition-all duration-500 group-hover:scale-105"
-          >
-            <div class="w-full h-full bg-white overflow-hidden relative">
-              <Image
-                src={JohanaImage}
-                alt="Johana Tapia - Fundadora y Directora de Contenidos de Ewaffle"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                width={320}
-                height={320}
-                quality={90}
-                format="webp"
-                loading="eager"
-              />
-              <!-- Subtle overlay for better contrast -->
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-              </div>
-            </div>
-          </div>
-
-          <!-- Enhanced Floating Elements -->
-          <div
-            class="absolute -top-4 -right-4 w-16 h-16 bg-accent/20 rounded-full blur-lg animate-pulse"
-          >
-          </div>
-          <div
-            class="absolute -bottom-4 -left-4 w-20 h-20 bg-yellow/20 rounded-full blur-lg animate-pulse"
-            style="animation-delay: 1s;"
-          >
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Aaron Flores Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Text Content -->
-      <div>
-
-
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          Aaron Flores
-        </h3>
-
-        <p class="text-xl text-accent font-semibold mb-6">
-          Experto en tecnologías de aprendizaje
-        </p>
-
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Especializado en diseño instruccional multimedia, desarrollo de cursos
-          virtuales y gestión de proyectos educativos.
-        </p>
-          <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Trabajo creando soluciones para educación superior y formación corporativa,
-          siempre buscando innovar y aprovechar las herramientas digitales para mejorar
-          la experiencia de aprendizaje.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Diseño instruccional y desarrollo de cursos virtuales</span
-            >
-          </div>
-
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Integración de herramientas de última generación</span
-            >
-          </div>
-
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Optimización de la experiencia de usuario</span
-            >
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-4">
-          <div
-            class="flex items-center space-x-2 bg-yellow/10 px-4 py-2 rounded-full"
-          >
-            <i class="ri-time-line text-yellow"></i>
-            <span class="text-yellow font-medium">Experto eLearning</span>
-          </div>
-          <div
-            class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full"
-          >
-            <i class="ri-group-line text-accent"></i>
-            <span class="text-accent font-medium">Diseñador Multimedia</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Instructor Photo - Improved Rendering -->
-      <div class="relative flex justify-center lg:justify-end">
-        <div class="relative group">
-          <!-- Main Image Container with Enhanced Quality -->
-          <div
-            class="relative w-80 h-80 bg-gradient-to-br from-accent to-accent flex items-center justify-center shadow-2xl p-2 transform transition-all duration-500 group-hover:scale-105"
-          >
-            <div class="w-full h-full bg-white overflow-hidden relative">
-              <Image
-                src={AaronImage}
-                alt="Aaron Flores - Líder de proyectos eLearning de Ewaffle"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                width={320}
-                height={320}
-                quality={90}
-                format="webp"
-                loading="eager"
-              />
-              <!-- Subtle overlay for better contrast -->
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-              </div>
-            </div>
-          </div>
-
-          <!-- Enhanced Floating Elements -->
-          <div
-            class="absolute -top-4 -right-4 w-16 h-16 bg-accent/20 rounded-full blur-lg animate-pulse"
-          >
-          </div>
-          <div
-            class="absolute -bottom-4 -left-4 w-20 h-20 bg-yellow/20 rounded-full blur-lg animate-pulse"
-            style="animation-delay: 1s;"
-          >
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Álvaro Villena Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Text Content -->
-      <div>
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-          Álvaro Villena
-        </h3>
-
-        <p class="text-xl text-accent font-semibold mb-6">
-          Creador de Ewaffle, experto en innovación digital
-        </p>
-
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Especialista en transformación digital, con experiencia en
-          metodologías innovadoras y tecnologías de última generación.
-        </p>
-
-        <p class="text-lg text-text-dark mb-8 leading-relaxed">
-          Trabajo creando soluciones para educación superior y formación corporativa,
-          siempre buscando innovar y aprovechar las herramientas digitales para mejorar
-          la experiencia de aprendizaje.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Más de 15 años liderando proyectos de innovación digital</span
-            >
-          </div>
-
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Especialista en diseño instruccional y desarrollo de contenidos</span
-            >
-          </div>
-
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-yellow rounded-full flex items-center justify-center"
-            >
-              <i class="ri-check-line text-white text-sm"></i>
-            </div>
-            <span class="text-text-dark"
-              >Experto en tecnologías de aprendizaje y herramientas IA</span
-            >
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-4">
-          <div
-            class="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full"
-          >
-            <i class="ri-award-line text-primary"></i>
-            <span class="text-primary font-medium">Fundador</span>
-          </div>
-          
-          <div
-            class="flex items-center space-x-2 bg-accent/10 px-4 py-2 rounded-full"
-          >
-            <i class="ri-group-line text-accent"></i>
-            <span class="text-accent font-medium">Máster en Innovación y Emprendimiento</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Instructor Photo - Improved Rendering -->
-      <div class="relative flex justify-center lg:justify-end">
-        <div class="relative group">
-          <!-- Main Image Container with Enhanced Quality -->
-          <div
-            class="relative w-90 h-80 bg-gradient-to-br from-primary to-primary flex items-center justify-center shadow-2xl p-2 transform transition-all duration-500 group-hover:scale-105"
-          >
-            <div class="w-full h-full bg-white overflow-hidden relative">
-              <Image
-                src={AlvaroImage}
-                alt="Álvaro Villena - CEO & Fundador de Ewaffle"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                width={320}
-                height={320}
-                quality={90}
-                format="webp"
-                loading="eager"
-              />
-              <!-- Subtle overlay for better contrast -->
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-              </div>
-            </div>
-          </div>
-
-          <!-- Enhanced Floating Elements -->
-          <div
-            class="absolute -top-4 -right-4 w-16 h-16 bg-accent/20 rounded-full blur-lg animate-pulse"
-          >
-          </div>
-          <div
-            class="absolute -bottom-4 -left-4 w-20 h-20 bg-yellow/20 rounded-full blur-lg animate-pulse"
-            style="animation-delay: 1s;"
-          >
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
 
     <!-- Testimonials -->
@@ -380,62 +197,22 @@ import AaronImage from "../../assets/Aaron.png";
       </h3>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-gray-light rounded-2xl p-6">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-3"
-            >
-              M
-            </div>
-            <div>
-              <div class="font-semibold text-primary">María González</div>
-              <div class="text-sm text-gray-600">Diseñadora Instruccional</div>
-            </div>
-          </div>
-          <p class="text-text-dark">
-            "Álvaro tiene una forma única de explicar conceptos complejos de
-            manera simple. Sus cursos son prácticos y aplicables desde el primer
-            día."
-          </p>
-        </div>
-
-        <div class="bg-gray-light rounded-2xl p-6">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold mr-3"
-            >
-              C
-            </div>
-            <div>
-              <div class="font-semibold text-primary">Carlos Ruiz</div>
-              <div class="text-sm text-gray-600">
-                Coordinador de Capacitación
+        {testimonials.map((testimonial) => (
+          <div class="bg-gray-light rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center mb-4">
+              <div class={`w-12 h-12 ${testimonial.bgColor} rounded-full flex items-center justify-center font-bold mr-3 ${testimonial.textColor}`}>
+                {testimonial.initial}
+              </div>
+              <div>
+                <div class="font-semibold text-primary">{testimonial.name}</div>
+                <div class="text-sm text-gray-600">{testimonial.role}</div>
               </div>
             </div>
+            <p class="text-text-dark">
+              "{testimonial.content}"
+            </p>
           </div>
-          <p class="text-text-dark">
-            "La metodología de Ewaffle transformó completamente mi forma de
-            crear contenido educativo. Altamente recomendado."
-          </p>
-        </div>
-
-        <div class="bg-gray-light rounded-2xl p-6">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-12 h-12 bg-yellow rounded-full flex items-center justify-center text-primary font-bold mr-3"
-            >
-              A
-            </div>
-            <div>
-              <div class="font-semibold text-primary">Ana Silva</div>
-              <div class="text-sm text-gray-600">Docente Universitaria</div>
-            </div>
-          </div>
-          <p class="text-text-dark">
-            "Excelente combinación de teoría y práctica. Las herramientas que
-            aprendí las uso diariamente en mis clases."
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   </div>

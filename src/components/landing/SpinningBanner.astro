@@ -1,0 +1,39 @@
+---
+// Spinning banner for main landing page
+---
+
+<div class="fixed top-0 left-0 w-full bg-yellow/90 backdrop-blur-sm z-50">
+  <div class="overflow-hidden">
+    <div class="flex animate-scroll-banner whitespace-nowrap">
+      <div class="flex items-center space-x-8 px-4 py-3 text-primary font-semibold">
+        <span>🚀 ¡Transforma tu catálogo de cursos! </span>
+        <span>💡 Cursos gamificados con IA</span>
+        <span>⚡ Desarrollo rápido y sin complicaciones</span>
+        <span>🎯 Aumenta el engagement de tus estudiantes</span>
+        <span>🌟 Soluciones llave en mano</span>
+        <span>📊 Métricas y seguimiento incluidos</span>
+        <span>🚀 ¡Transforma tu catálogo de cursos! </span>
+        <span>💡 Cursos gamificados con IA</span>
+        <span>⚡ Desarrollo rápido y sin complicaciones</span>
+        <span>🎯 Aumenta el engagement de tus estudiantes</span>
+        <span>🌟 Soluciones llave en mano</span>
+        <span>📊 Métricas y seguimiento incluidos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scroll-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-scroll-banner {
+    animation: scroll-banner 15s linear infinite;
+  }
+</style> 

@@ -3,38 +3,45 @@ interface ProcessStep {
   title: string;
   description: string;
   icon: string;
+  week: string;
 }
 
 const processSteps: ProcessStep[] = [
   {
-    title: "Levantamiento de Necesidades",
-    description: "Analizamos en profundidad los objetivos de aprendizaje, el público objetivo y los recursos disponibles para diseñar una solución personalizada.",
-    icon: "ri-search-line"
+    title: "Evaluación de tu Catálogo",
+    description: "Analizamos tus cursos actuales (PDFs, PowerPoints) y identificamos oportunidades de transformación digital.",
+    icon: "ri-search-line",
+    week: "Semana 1"
   },
   {
-    title: "Diseño Instruccional",
-    description: "Desarrollamos una estrategia pedagógica efectiva, definiendo contenidos, actividades y métodos de evaluación alineados con tus objetivos.",
-    icon: "ri-draft-line"
+    title: "Diseño de Experiencia Digital",
+    description: "Convertimos tu contenido en experiencias gamificadas con IA, medallas y elementos interactivos.",
+    icon: "ri-draft-line",
+    week: "Semana 1-2"
   },
   {
     title: "Producción Multimedia",
-    description: "Creamos contenido interactivo y atractivo utilizando las últimas tecnologías en video, animación y recursos digitales.",
-    icon: "ri-movie-line"
+    description: "Creamos cursos compatibles con todas las plataformas LMS, listos para implementar.",
+    icon: "ri-computer-line",
+    week: "Semana 2-3"
   },
   {
-    title: "Montaje en Plataforma",
-    description: "Implementamos tu programa en nuestra plataforma LMS, asegurando una experiencia de usuario fluida y accesible.",
-    icon: "ri-computer-line"
+    title: "Integración de Marca",
+    description: "Todo se personaliza con tu logo, colores e identidad. Ewaffle es tu backend invisible.",
+    icon: "ri-palette-line",
+    week: "Semana 3 - 4"
   },
   {
-    title: "Evaluación y Mejora Continua",
-    description: "Monitoreamos el desempeño y recopilamos feedback para optimizar constantemente la efectividad del programa.",
-    icon: "ri-line-chart-line"
+    title: "Implementación Rápida",
+    description: "Montamos en tu plataforma o te damos la nuestra. Cursos funcionando en 2 semanas.",
+    icon: "ri-rocket-line",
+    week: "Semana 3-4"
   },
   {
-    title: "Soporte y Capacitación",
-    description: "Brindamos soporte técnico continuo y capacitación al equipo para garantizar el éxito en la implementación y uso de la plataforma.",
-    icon: "ri-customer-service-line"
+    title: "Soporte y Escalamiento",
+    description: "Te acompañamos en el crecimiento. Más productos para vender, sin partir de cero. Garantía de 6 meses de soporte.",
+    icon: "ri-customer-service-line",
+    week: "Semana 4+"
   }
 ];
 ---
@@ -44,22 +51,31 @@ const processSteps: ProcessStep[] = [
     <!-- Title Section -->
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">
-        Nuestro Proceso de Desarrollo
+        🔄 Nuestro Proceso de Transformación
       </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+        Convertimos tu oferta tradicional en experiencias digitales modernas en solo 6 pasos, completos en 4 semanas
+      </p>
       <div class="w-24 h-1 bg-accent mx-auto"></div>
     </div>
 
-    <!-- Steps Grid -->
+    <!-- Steps Grid with Timeline -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {processSteps.map((step, index) => (
-        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-          <!-- Step Number -->
-          <div class="flex items-center mb-4">
-            <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center mr-4">
-              <span class="text-accent font-bold">{index + 1}</span>
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-accent">
+          <!-- Step Number and Icon -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center mr-4">
+                <span class="text-accent font-bold">{index + 1}</span>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                <i class={`${step.icon} text-accent text-xl`}></i>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-              <i class={`${step.icon} text-accent text-xl`}></i>
+            <!-- Timeline Badge -->
+            <div class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-semibold">
+              {step.week}
             </div>
           </div>
 

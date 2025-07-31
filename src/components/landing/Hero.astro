@@ -4,8 +4,33 @@ interface Props {
   subtitle?: string;
 }
 
-const { title = "🌟 Impulsa el talento de tu organización con Ewaffle", subtitle = "🎉 Formación e-learning rápida, de calidad y adaptable a tu realidad" } = Astro.props;
+const { 
+  title = "🎯 ¿Tus cursos siguen siendo en PowerPoints y PDFs?", 
+  subtitle = "Diferenciate de la competencia con cursos de alto engagement, gamificados, en formato SCORM, sin necesidad de equipo interno." 
+} = Astro.props;
 ---
+
+<!-- Spinning Banner -->
+<div class="fixed top-0 left-0 w-full bg-yellow/90 backdrop-blur-sm z-50">
+  <div class="overflow-hidden">
+    <div class="flex animate-scroll-banner whitespace-nowrap">
+      <div class="flex items-center space-x-8 px-4 py-3 text-primary font-semibold">
+        <span>🔥 ¡Diferenciate de 2.900+ competidores! </span>
+        <span>🧠 Sin necesidad de equipo interno</span>
+        <span>📋 Cumple con SENCE y aumenta engagement</span>
+        <span>🎮 Cursos gamificados SCORM listos</span>
+        <span>🏷️ 100% marca blanca</span>
+        <span>⚡ Implementación en 2 semanas</span>
+        <span>🔥 ¡Diferenciate de 2.900+ competidores! </span>
+        <span>🧠 Sin necesidad de equipo interno</span>
+        <span>📋 Cumple con SENCE y aumenta engagement</span>
+        <span>🎮 Cursos gamificados SCORM listos</span>
+        <span>🏷️ 100% marca blanca</span>
+        <span>⚡ Implementación en 2 semanas</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
   <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
@@ -18,45 +43,49 @@ const { title = "🌟 Impulsa el talento de tu organización con Ewaffle", subti
       />
     </div>
 
-    <!-- Webinar Invitation Banner 
-    <div class="mb-8 bg-yellow/10 backdrop-blur-sm rounded-2xl p-6 max-w-3xl mx-auto border border-white/20">
-      <h2 class="text-white text-2xl font-bold mb-3">🚀 Nuevo Curso en Vivo: IA para E-learning</h2>
-      
-      <p class="text-white/90 text-lg mb-4">
-        
-        Aprende a mejorar tus diseños instruccionales con herramientas más creativas en nuestro nuevo curso en vivo.
-      </p>
-      <a 
-        href="/curso-ia" 
-        target="_self"
-        class="inline-flex items-center justify-center px-6 py-3 bg-yellow text-primary rounded-full font-semibold text-base hover:bg-yellow/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
-      >
-        Conoce el curso y reserva tu lugar
-      </a>
-    </div>-->
-
-    <h1 class="text-yellow text-3xl md:text-3xl mb-4 drop-shadow-lg">
-      {subtitle}
+    <h1 class="text-yellow text-3xl md:text-4xl mb-4 drop-shadow-lg">
+      {title}
     </h1>
 
-    <p class="text-white text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
-      En Ewaffle creamos programas de capacitación en modalidad e-learning de alto impacto para universidades, centros educativos y empresas que buscan potenciar las habilidades de sus estudiantes y trabajadores.
+    <p class="text-white text-lg md:text-xl max-w-3xl mx-auto mb-6 leading-relaxed">
+      {subtitle}
     </p>
+
+    
     
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
       <a 
         href="https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7" 
         class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-secondary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
       >
-        Agendar reunión
+        Agendar Reunión
       </a>
       
       <a 
-        href="/#contact"
-      class="inline-flex items-center justify-center px-8 py-4 bg-secondary text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
+        href="https://gamification.ewaffle.cl/"
+        class="inline-flex items-center justify-center px-8 py-4 bg-secondary text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
       >
-        Contáctanos
+        Ver Demo
       </a>
     </div>
+
+    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+      📍 Soluciones a la medida para OTECs, instituciones educativas y empresas que quieren diferenciarse de su competencia, sin equipo interno.
+    </p>
   </div>
-</section> 
+</section>
+
+<style>
+  @keyframes scroll-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-scroll-banner {
+    animation: scroll-banner 15s linear infinite;
+  }
+</style> 
