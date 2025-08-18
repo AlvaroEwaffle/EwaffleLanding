@@ -6,59 +6,62 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "¿Qué modalidades de capacitación ofrecen?",
-    answer: "Ofrecemos tres modalidades: e-learning (100% online), b-learning (combinación de online y presencial) y presencial. Adaptamos la modalidad según las necesidades de tu organización y objetivos de aprendizaje."
+    question: "¿Cuánto cuesta transformar mis cursos?",
+    answer: "El costo varía según la cantidad y complejidad de tus cursos. Ofrecemos planes desde $1500 USD por curso completo. Agenda una reunión gratuita para recibir una cotización personalizada sin compromiso."
   },
   {
-    question: "¿Cuánto tiempo toma implementar un programa?",
-    answer: "El tiempo de implementación varía según la complejidad y alcance del programa. Típicamente, podemos tener un programa básico funcionando en 2-3 semanas, mientras que programas más complejos pueden tomar 4-6 semanas."
+    question: "¿Realmente no necesito equipo técnico interno?",
+    answer: "Correcto. Nosotros manejamos todo el desarrollo técnico, desde la creación de contenido SCORM hasta la implementación en tu plataforma. Solo necesitas enfocarte en vender, nosotros en crear."
   },
   {
-    question: "¿Cómo aseguran la calidad del aprendizaje?",
-    answer: "Implementamos un sistema integral de aseguramiento de calidad que incluye: contenido desarrollado por expertos, evaluaciones continuas, seguimiento personalizado, métricas de engagement y encuestas de satisfacción."
+    question: "¿Los cursos funcionarán en mi LMS actual?",
+    answer: "Sí, todos nuestros cursos son compatibles con estándares SCORM y funcionan en cualquier plataforma LMS del mercado (Moodle, Canvas, Blackboard, etc.). Si no tienes LMS, te damos uno."
   },
   {
-    question: "¿Los programas son personalizables?",
-    answer: "Sí, todos nuestros programas son altamente personalizables. Adaptamos el contenido, la metodología, la imagen corporativa y los objetivos específicos según las necesidades de tu organización."
+    question: "¿Qué pasa si no estoy satisfecho con el resultado?",
+    answer: "Ofrecemos garantía de 6 meses de soporte y ajustes ilimitados. Si no estás 100% satisfecho, trabajamos hasta que lo estés. Tu éxito es nuestro éxito."
   },
   {
-    question: "¿Emiten certificaciones al finalizar los cursos?",
-    answer: "Sí, emitimos certificados digitales verificables al completar los programas. También podemos integrar certificaciones específicas de la industria o personalizar los certificados según los requerimientos de tu organización."
+    question: "¿Puedo cancelar o cambiar el proyecto en cualquier momento?",
+    answer: "Sí, puedes cancelar en cualquier momento sin penalización. Trabajamos por fases, por lo que solo pagas por lo que ya está entregado y aprobado."
   }
 ];
 ---
 
-<section class="py-16 bg-white relative overflow-hidden">
+<section class="py-20 bg-white relative overflow-hidden">
   <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-10 pointer-events-none">
+  <div class="absolute inset-0 opacity-5 pointer-events-none">
     <img src="/assets/patronblancofullopacidad.png" alt="" class="w-full h-full object-cover" />
   </div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
         💬 Preguntas Frecuentes
       </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        Resolvemos las dudas más comunes que podrían estar frenando tu decisión
+      </p>
       <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
     </div>
 
     <div class="max-w-4xl mx-auto">
       <div class="grid gap-6">
         {
-          faqs.map((faq) => (
-            <div class="bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
-              <div class="p-6">
+          faqs.map((faq, index) => (
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+              <div class="p-8">
                 <div class="flex items-start">
                   <div class="flex-shrink-0 mt-1">
-                    <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
-                      <span class="text-secondary text-xl">❓</span>
+                    <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                      <span class="text-accent text-xl font-bold">{index + 1}</span>
                     </div>
                   </div>
-                  <div class="ml-4">
-                    <h3 class="text-xl font-semibold text-primary mb-2">
+                  <div class="ml-6">
+                    <h3 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
                       {faq.question}
                     </h3>
-                    <p class="text-text-dark leading-relaxed">
+                    <p class="text-gray-600 leading-relaxed text-lg">
                       {faq.answer}
                     </p>
                   </div>
@@ -69,5 +72,7 @@ const faqs: FAQItem[] = [
         }
       </div>
     </div>
+    
+
   </div>
 </section> 

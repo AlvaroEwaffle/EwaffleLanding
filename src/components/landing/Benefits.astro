@@ -7,79 +7,69 @@ interface Benefit {
 
 const benefits: Benefit[] = [
   {
-    title: "Transformación Digital",
-    description: "Convertimos tus PDFs y PowerPoints en experiencias digitales interactivas y gamificadas",
+    title: "Vende Más Cursos",
+    description: "Transforma PDFs en experiencias digitales que aumentan ventas un 40%",
     icon: "🚀"
   },
   {
-    title: "Cursos SCORM Ready",
-    description: "Contenido compatible con todas las plataformas LMS del mercado",
+    title: "Sin Equipo Interno",
+    description: "Implementación completa en 2 semanas, sin contratar desarrolladores",
+    icon: "👥"
+  },
+  {
+    title: "Cumple SENCE",
+    description: "Cursos SCORM compatibles con todas las plataformas LMS del mercado",
     icon: "📋"
   },
   {
-    title: "IA Integrada",
-    description: "Chatbots entrenados y análisis automático para mejorar el aprendizaje",
-    icon: "🤖"
-  },
-  {
-    title: "Gamificación Completa",
-    description: "Medallas, puntos, quizzes y elementos lúdicos que aumentan el engagement",
+    title: "Engagement 3x Mayor",
+    description: "Gamificación con IA que mantiene a los estudiantes motivados",
     icon: "🎮"
   },
   {
-    title: "Marca Blanca 100%",
-    description: "Todo se entrega con tu logo e identidad, Ewaffle es tu backend invisible",
+    title: "100% Marca Blanca",
+    description: "Tu logo e identidad, Ewaffle invisible en el backend",
     icon: "🏷️"
-  },
-  {
-    title: "Implementación Rápida",
-    description: "Cursos listos en 2 semanas, sin necesidad de contratar equipos internos",
-    icon: "⚡"
-  },
-  {
-    title: "Escalabilidad Total",
-    description: "Vende más productos sin partir de cero, enfócate en vender, nosotros en crear",
-    icon: "📈"
-  },
-  {
-    title: "Soporte Técnico",
-    description: "Montaje en tu plataforma o te damos la nuestra, sin dolores técnicos",
-    icon: "🛠️"
   }
 ];
 ---
 
-<section class="py-16 bg-white relative overflow-hidden">
+<section class="py-20 bg-white relative overflow-hidden">
   <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-10 pointer-events-none">
+  <div class="absolute inset-0 opacity-5 pointer-events-none">
     <img src="/assets/patronblancobajaopacidad.png" alt="" class="w-full h-full object-cover" />
   </div>
   
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-        🎯 ¿Por qué elegir Ewaffle para tu empresa?
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        🎯 ¿Por qué elegir Ewaffle?
       </h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-        Transformamos tu oferta tradicional en experiencias digitales modernas que te permiten escalar, diferenciarte y vender más.
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        Resultados concretos que transforman tu negocio educativo
       </p>
       <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
       {
-        benefits.map((benefit) => (
-          <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="text-4xl mb-4">{benefit.icon}</div>
-            <h3 class="text-xl font-semibold text-secondary mb-3">
+        benefits.map((benefit, index) => (
+          <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
+            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">{benefit.icon}</div>
+            <h3 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
               {benefit.title}
             </h3>
-            <p class="text-text-dark">
+            <p class="text-gray-600 text-base leading-relaxed">
               {benefit.description}
             </p>
+            
+            <!-- Decorative Element -->
+            <div class="mt-4 w-10 h-1 bg-accent/30 rounded-full group-hover:bg-accent transition-all duration-300"></div>
           </div>
         ))
       }
     </div>
+    
+
   </div>
 </section> 

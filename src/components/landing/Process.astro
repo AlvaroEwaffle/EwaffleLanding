@@ -3,88 +3,73 @@ interface ProcessStep {
   title: string;
   description: string;
   icon: string;
-  week: string;
+  step: string;
 }
 
 const processSteps: ProcessStep[] = [
   {
     title: "Evaluación de tu Catálogo",
     description: "Analizamos tus cursos actuales (PDFs, PowerPoints) y identificamos oportunidades de transformación digital.",
-    icon: "ri-search-line",
-    week: "Semana 1"
+    icon: "📋",
+    step: "Paso 1"
   },
   {
     title: "Diseño de Experiencia Digital",
     description: "Convertimos tu contenido en experiencias gamificadas con IA, medallas y elementos interactivos.",
-    icon: "ri-draft-line",
-    week: "Semana 1-2"
-  },
-  {
-    title: "Producción Multimedia",
-    description: "Creamos cursos compatibles con todas las plataformas LMS, listos para implementar.",
-    icon: "ri-computer-line",
-    week: "Semana 2-3"
-  },
-  {
-    title: "Integración de Marca",
-    description: "Todo se personaliza con tu logo, colores e identidad. Ewaffle es tu backend invisible.",
-    icon: "ri-palette-line",
-    week: "Semana 3 - 4"
+    icon: "🎨",
+    step: "Paso 2"
   },
   {
     title: "Implementación Rápida",
-    description: "Montamos en tu plataforma o te damos la nuestra. Cursos funcionando en 2 semanas.",
-    icon: "ri-rocket-line",
-    week: "Semana 3-4"
-  },
-  {
-    title: "Soporte y Escalamiento",
-    description: "Te acompañamos en el crecimiento. Más productos para vender, sin partir de cero. Garantía de 6 meses de soporte.",
-    icon: "ri-customer-service-line",
-    week: "Semana 4+"
+    description: "Montamos en tu plataforma. Todo se personaliza con tu logo, colores e identidad.",
+    icon: "🚀",
+    step: "Paso 3"
   }
 ];
 ---
 
-<section class="py-20 bg-white">
+<section class="py-20 bg-gradient-to-b from-gray-50 to-white">
   <div class="container mx-auto px-4">
     <!-- Title Section -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">
-        🔄 Nuestro Proceso de Transformación
+      <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        🔄 ¿Cómo Funciona?
       </h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-        Convertimos tu oferta tradicional en experiencias digitales modernas en solo 6 pasos, completos en 4 semanas
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        Transformamos tu catálogo tradicional en experiencias digitales en solo 3 pasos
       </p>
-      <div class="w-24 h-1 bg-accent mx-auto"></div>
+      <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
     </div>
 
-    <!-- Steps Grid with Timeline -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Steps Grid - Simplified to 3 steps -->
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
       {processSteps.map((step, index) => (
-        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-accent">
-          <!-- Step Number and Icon -->
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center mr-4">
-                <span class="text-accent font-bold">{index + 1}</span>
+        <div class="relative">
+          <!-- Connection Line -->
+          {index < processSteps.length - 1 && (
+            <div class="hidden md:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-accent to-secondary transform -translate-y-1/2 z-0"></div>
+          )}
+          
+          <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 relative z-10 border border-gray-100">
+            <!-- Step Number and Icon -->
+            <div class="text-center mb-6">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span class="text-4xl">{step.icon}</span>
               </div>
-              <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                <i class={`${step.icon} text-accent text-xl`}></i>
+              <div class="bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold inline-block">
+                {step.step}
               </div>
             </div>
-            <!-- Timeline Badge -->
-            <div class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-semibold">
-              {step.week}
-            </div>
-          </div>
 
-          <!-- Content -->
-          <h3 class="text-xl font-bold text-primary mb-3">{step.title}</h3>
-          <p class="text-gray-600">{step.description}</p>
+            <!-- Content -->
+            <h3 class="text-2xl font-bold text-primary mb-4 text-center">{step.title}</h3>
+            <p class="text-gray-600 text-center leading-relaxed">{step.description}</p>
+          </div>
         </div>
       ))}
     </div>
+    
+
   </div>
 </section>
 
@@ -93,7 +78,5 @@ const processSteps: ProcessStep[] = [
     max-width: 1200px;
     margin: 0 auto;
   }
-</style>
-
-<!-- Add Remix Icons CSS -->
+</style> 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" /> 

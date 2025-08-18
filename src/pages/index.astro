@@ -1,50 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/landing/Hero.astro';
-import PainPoints from '../components/landing/PainPoints.astro';
-import StatsBanner from '../components/landing/StatsBanner.astro';
-import Proposal from '../components/landing/Proposal.astro';
-import FounderSection from '../components/landing/FounderSection.astro';
-import TeamSection from '../components/landing/TeamSection.astro';
-import AcademiaBanner from '../components/landing/AcademiaBanner.astro';
-import DemoSection from '../components/landing/DemoSection.astro';
-import Testimonials from '../components/landing/Testimonials.astro';
 import Benefits from '../components/landing/Benefits.astro';
-import Cases from '../components/landing/Cases.astro';
-import FAQ from '../components/landing/FAQ.astro';
-import CTA from '../components/landing/CTA.astro';
-import Clients from '../components/landing/Clients.astro';
+import Testimonials from '../components/landing/Testimonials.astro';
 import Process from '../components/landing/Process.astro';
-import Team from '../components/landing/Team.astro';
-import Footer from '../components/landing/Footer.astro';
-import Portfolio from '../components/landing/Portfolio.astro';
-import BannerCTA from '../components/landing/BannerCTA.astro';
+import FAQ from '../components/landing/FAQ.astro';
 import Contact from '../components/landing/Contact.astro';
-import Gamification from '../components/landing/Gamification.astro';
-import AsesoriaIntro from '../components/landing/AsesoriaIntro.astro';
-import Garantia from '../components/landing/Garantia.astro';
+import CTA from '../components/landing/CTA.astro';
+import Footer from '../components/landing/Footer.astro';
 
 // SEO Metadata for main landing page
-const title = "Ewaffle | Transforma tu catálogo de cursos en experiencias digitales gamificadas";
-const description = "Diferenciate de la competencia con cursos SCORM gamificados, sin necesidad de equipo interno. Cumple con SENCE y aumenta el engagement de tus estudiantes. Soluciones llave en mano para OTECs y empresas.";
+const title = "Ewaffle | Transforma tus cursos en experiencias digitales que venden";
+const description = "Convertimos PDFs y PowerPoints en cursos SCORM gamificados con IA. Sin equipo interno, listos en 2 semanas. +50 empresas ya confían en nosotros.";
 ---
 
 <BaseLayout {title} {description}>
+	<!-- 1. Hero Section (Above the fold) -->
 	<Hero />
-	<PainPoints />
-	<Proposal />
-	<Clients />
-	<!-- <DemoSection /> -->
-	<StatsBanner />
-	<!-- <Testimonials /> -->
-	<Process />
+	
+	<!-- 2. Bloque de beneficios clave -->
 	<Benefits />
-	<AcademiaBanner />
-	<FounderSection />
-	<TeamSection />
-	<Garantia />
-	<FAQ />
-	<Contact />
+	
+	<!-- 3. Prueba social -->
+	<Testimonials />
+	
+	<!-- 4. Sección "Cómo funciona" / Demostración -->
+	<Process />
+	
+	<!-- 5. Oferta / Incentivo -->
 	<CTA />
+	
+	<!-- 6. FAQs (Preguntas frecuentes) -->
+	<FAQ />
+	
+	<!-- 7. Contact Section -->
+	<Contact />
+	
+	<!-- 8. CTA final -->
+	<CTA 
+		title="🚀 ¿Aún tienes dudas?"
+		subtitle="Agenda tu consultoría gratuita ahora y descubre cómo transformar tu negocio educativo en solo 2 semanas"
+		buttonText="Agendar Ahora - Es Gratis"
+	/>
+	
+	<!-- 9. Footer minimalista -->
 	<Footer />
 </BaseLayout>

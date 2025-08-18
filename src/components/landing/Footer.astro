@@ -1,138 +1,57 @@
 ---
-const currentYear = new Date().getFullYear();
-
-interface FooterLink {
-  text: string;
-  href: string;
-}
-
-const companyLinks: FooterLink[] = [
-  { text: "Sobre Nosotros", href: "#about" },
-  { text: "Casos de Éxito", href: "#cases" },
-  { text: "Blog", href: "#blog" },
-  { text: "FAQ", href: "#faq" }
-];
-
-const serviceLinks: FooterLink[] = [
-  { text: "E-Learning", href: "#e-learning" },
-  { text: "B-Learning", href: "#b-learning" },
-  { text: "Capacitación Presencial", href: "#presencial" },
-  { text: "Consultoría", href: "#consultoria" },
-  { text: "Conoce nuestro Programa de Integridad", href: "/assets/Programa_de_Integridad_eWaffle_2025pdf.pdf" }
-];
-
-const socialLinks = [
-  { icon: "ri-linkedin-fill", href: "https://www.linkedin.com/company/ewaffle", label: "LinkedIn" },
-  { icon: "ri-instagram-fill", href: "https://www.instagram.com/ewaffle", label: "Instagram" },
-  // { icon: "ri-twitter-x-fill", href: "https://twitter.com/ewaffle", label: "Twitter" },
-  // { icon: "ri-youtube-fill", href: "https://youtube.com/ewaffle", label: "YouTube" }
-];
-
-const clientLogos = [
-  "Duoc UC.svg",
-  "Universidad Gabriela Mistral.svg", 
-  "UniversidadSantoTomas.svg",
-  "AIEP.svg",
-  "UNIACC.svg",
-  "ACHS.svg"
-];
+// Footer minimalista con solo enlaces legales
 ---
 
-<footer class="relative overflow-hidden">
-  <!-- Background Image with Overlay -->
-  <div class="absolute inset-0">
-    <img 
-      src="/assets/FONDO3.jpg" 
-      alt="" 
-      class="w-full h-full object-cover"
-    />
-    <div class="absolute inset-0 bg-primary/90"></div>
-  </div>
-
-  <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay">
-    <img src="/assets/patronblancofullopacidad.png" alt="" class="w-full h-full object-cover" />
-  </div>
-
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-
-    <!-- Main Footer Content -->
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 py-12">
-      <!-- Company Info -->
-      <div class="space-y-4">
-        <img src="/assets/logoprimario.png" alt="Ewaffle Logo" class="h-12" />
-        <p class="text-gray-300 text-sm leading-relaxed">
-          Transformamos el aprendizaje organizacional con soluciones innovadoras y personalizadas de e-learning.
-        </p>
-        <div class="flex space-x-4">
-          {socialLinks.map(({ icon, href, label }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-300 hover:text-accent transition-colors"
-              aria-label={label}
-            >
-              <i class={`${icon} text-xl`}></i>
-            </a>
-          ))}
-        </div>
+<footer class="bg-primary text-white py-12 border-t border-white/10">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Logo y Enlace Home -->
+      <div class="text-center mb-8">
+        <a href="/" class="inline-block opacity-80 hover:opacity-100 transition-opacity duration-300">
+          <img 
+            src="/assets/logoewchico.png" 
+            alt="Ewaffle" 
+            class="h-12 w-auto mx-auto"
+          />
+        </a>
       </div>
 
-      <!-- Services -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4 text-white">Servicios</h3>
-        <ul class="space-y-2">
-          {serviceLinks.map(({ text, href }) => (
-            <li>
-              <a href={href} class="text-gray-300 hover:text-accent transition-colors">
-                {text}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <!-- Enlaces Legales -->
+      <div class="flex flex-wrap justify-center items-center gap-6 mb-6 text-sm">
+        <a 
+          href="/privacidad" 
+          class="text-white/70 hover:text-white transition-colors duration-300"
+        >
+          Política de Privacidad
+        </a>
+        <span class="text-white/30">•</span>
+        <a 
+          href="/terminos" 
+          class="text-white/70 hover:text-white transition-colors duration-300"
+        >
+          Términos y Condiciones
+        </a>
+        <span class="text-white/30">•</span>
+        <a 
+          href="/cookies" 
+          class="text-white/70 hover:text-white transition-colors duration-300"
+        >
+          Política de Cookies
+        </a>
       </div>
 
-      <!-- Contact -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4 text-white">Contacto</h3>
-        <ul class="space-y-2 text-gray-300">
-          <li class="flex items-center space-x-2">
-            <i class="ri-mail-line"></i>
-            <a href="mailto:alvaro@ewaffle.cl" class="hover:text-accent transition-colors">
-              alvaro@ewaffle.cl
-            </a>
-          </li>
-          <li class="flex items-center space-x-2">
-            <i class="ri-phone-line"></i>
-            <a href="tel:+56912345678" class="hover:text-accent transition-colors">
-              +56 9 2011 5198
-            </a>
-          </li>
-          <li class="flex items-center space-x-2">
-            <i class="ri-map-pin-line"></i>
-            <span>Santiago, Chile</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="border-t border-white/10 py-6">
-      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-        <p class="text-sm text-gray-300">
-          © {currentYear} Ewaffle. Todos los derechos reservados.
-        </p>
-        <div class="flex space-x-6 text-sm text-gray-300">
-          <a href="/privacidad" class="hover:text-accent transition-colors">
-            Política de Privacidad
-          </a>
-          <a href="/terminos" class="hover:text-accent transition-colors">
-            Términos y Condiciones
-          </a>
-        </div>
+      <!-- Información de Contacto Mínima -->
+      <div class="text-center text-white/50 text-xs">
+        <p>© 2024 Ewaffle. Todos los derechos reservados.</p>
+        <p class="mt-1">Santiago, Chile</p>
       </div>
     </div>
   </div>
-</footer> 
+</footer>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style> 

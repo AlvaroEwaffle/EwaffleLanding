@@ -1,80 +1,99 @@
 ---
-interface Props {
+interface CTAProps {
   title?: string;
   subtitle?: string;
+  buttonText?: string;
+  buttonUrl?: string;
 }
 
 const { 
-  title = "🤝 ¿Listo para escalar tu empresa y ofrecer algo realmente diferente?", 
-  subtitle = "🎯 Agenda una reunión gratuita y descubre cómo podrías estar vendiendo cursos gamificados y digitales este mes." 
+  title = "🚀 ¿Listo para Transformar tu Negocio Educativo?",
+  subtitle = "Obtén una consultoría gratuita de 30 minutos y descubre cómo podemos ayudarte a vender más cursos",
+  buttonText = "Agendar Consulta Gratuita",
+  buttonUrl = "https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7"
 } = Astro.props;
 ---
 
-<section class="relative py-24 overflow-hidden">
-  <!-- Background Image with Overlay -->
-  <div class="absolute inset-0">
-    <img 
-      src="/assets/FONDO3.jpg" 
-      alt="" 
-      class="w-full h-full object-cover"
-    />
-    <div class="absolute inset-0 bg-primary/90"></div>
-  </div>
-
-  <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay">
-    <img src="/assets/patronblancofullopacidad.png" alt="" class="w-full h-full object-cover" />
+<section class="py-20 bg-gradient-to-br from-primary via-primary to-primary/90 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow/5 rounded-full blur-3xl"></div>
   </div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="max-w-4xl mx-auto text-center space-y-8">
-      <!-- Logo -->
-      <img 
-        src="/assets/logoprimario.png" 
-        alt="Ewaffle Logo" 
-        class="h-16 md:h-20 mx-auto mb-8"
-      />
-
-      <!-- Content -->
-      <h2 class="text-3xl md:text-5xl font-bold text-white drop-shadow-lg">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
         {title}
       </h2>
-      <p class="text-xl md:text-2xl font-medium text-yellow drop-shadow">
+      
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
         {subtitle}
       </p>
 
-      <!-- Benefits List -->
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-          <div class="text-2xl mb-2">🚀</div>
-          <div class="text-white font-medium">Escala sin contratar equipo</div>
-        </div>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-          <div class="text-2xl mb-2">🎮</div>
-          <div class="text-white font-medium">Cursos gamificados SCORM</div>
-        </div>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-          <div class="text-2xl mb-2">🏷️</div>
-          <div class="text-white font-medium">100% marca blanca</div>
+      <!-- Incentivo Principal -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white/20">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+          <div class="text-center md:text-left">
+            <ul class="text-white/90 text-lg space-y-2">
+              <li>✅ Análisis de tu catálogo actual</li>
+              <li>✅ Estrategia de transformación digital</li>
+              <li>✅ Cotización personalizada</li>
+              <li>✅ Plan de implementación en 2 semanas</li>
+            </ul>
+          </div>
+          
+          <div class="flex-shrink-0">
+            <div class="bg-accent rounded-full p-6 shadow-2xl">
+              <span class="text-6xl">🎯</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-        <a
-          href="https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7"
-          class="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:transform hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto justify-center text-lg"
-        >
-          <span>Agendar con Ewaffle</span>
-          <i class="ri-arrow-right-line text-xl"></i>
-        </a>
-        <a
+      <!-- CTA Principal -->
+      <div class="mb-8">
+        <a 
           href="#contact"
-          class="bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-accent/50 px-8 py-4 rounded-full font-semibold transition-all duration-300 text-white hover:transform hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto justify-center inline-flex items-center"
+          class="inline-flex items-center justify-center px-12 py-6 bg-accent text-white rounded-full font-bold text-2xl hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
         >
-          Solicitar Demo
+          {buttonText}
         </a>
+      </div>
+
+      <!-- Frase de Reducción de Fricción -->
+      <div class="text-center">
+        <p class="text-white/80 text-lg mb-4">
+          <span class="font-semibold">✨ Sin compromiso • Sin tarjeta • Sin spam</span>
+        </p>
+        <p class="text-white/70 text-base">
+          Solo 30 minutos de tu tiempo • Cancela cuando quieras • Respuesta en 24 horas
+        </p>
+      </div>
+
+      <!-- Elementos de Confianza -->
+      <div class="mt-12 flex flex-wrap justify-center items-center gap-8 opacity-80">
+        <div class="flex items-center gap-2 text-white/90">
+          <span class="text-2xl">🔒</span>
+          <span class="text-sm">100% Seguro</span>
+        </div>
+        <div class="flex items-center gap-2 text-white/90">
+          <span class="text-2xl">⚡</span>
+          <span class="text-sm">Respuesta en 24h</span>
+        </div>
+        <div class="flex items-center gap-2 text-white/90">
+          <span class="text-2xl">💬</span>
+          <span class="text-sm">Soporte en Español</span>
+        </div>
       </div>
     </div>
   </div>
-</section> 
+</section>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style> 
