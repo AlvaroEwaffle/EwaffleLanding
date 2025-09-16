@@ -12,16 +12,104 @@ export async function getStaticPaths() {
 
 const { course } = Astro.props;
 const { title, description, keywords } = course.seo;
+
+// Enhanced SEO data
+const seoTitle = `${course.title} - Curso Online | Ewaffle`;
+const seoDescription = `${course.subtitle} Aprende con expertos y obtén certificación. ${course.level} • ${course.duration} • Garantía de 7 días.`;
+const canonicalUrl = `https://ewaffle.cl/academia/curso/${course.slug}`;
+const imageUrl = `https://ewaffle.cl/assets/CourseBg.png`;
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout title={seoTitle} description={seoDescription}>
+  <!-- Enhanced SEO Meta Tags -->
+  <Fragment slot="head">
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={seoTitle} />
+    <meta property="twitter:description" content={seoDescription} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Course Specific Meta Tags -->
+    <meta name="course:level" content={course.level} />
+    <meta name="course:duration" content={course.duration} />
+    <meta name="course:instructor" content={course.instructor.name} />
+    <meta name="course:rating" content={course.rating} />
+    <meta name="course:students" content={course.students} />
+    
+    <!-- Schema.org Course Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": course.title,
+      "description": course.subtitle,
+      "url": canonicalUrl,
+      "image": imageUrl,
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "courseMode": "online",
+      "educationalLevel": course.level.toLowerCase(),
+      "timeRequired": `PT${course.duration.replace(/[^\d]/g, '')}H`,
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": course.payLink
+      },
+      "instructor": {
+        "@type": "Person",
+        "name": course.instructor.name,
+        "jobTitle": course.instructor.title,
+        "image": `https://ewaffle.cl${course.instructor.image}`
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": course.rating,
+        "ratingCount": course.students,
+        "bestRating": 5,
+        "worstRating": 1
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "instructor": {
+          "@type": "Person",
+          "name": course.instructor.name
+        }
+      }
+    })} />
+  </Fragment>
+
   <main class="min-h-screen">
     <!-- 1. Hero Section (Above the fold) -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       <!-- Course Background Image -->
       <div class="absolute inset-0 z-0">
         <img 
-          src="/src/assets/CourseBg.png"
+          src="/assets/CourseBg.png"
           alt="Course Background"
           class="w-full h-full object-cover"
         />
@@ -291,37 +379,6 @@ const { title, description, keywords } = course.seo;
   <DiscountPopup courseName={course.title} courseSlug={course.slug} />
 </BaseLayout>
 
-<!-- Structured Data for Course -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Course",
-  "name": "{course.title}",
-  "description": "{course.subtitle}",
-  "provider": {
-    "@type": "Organization",
-    "name": "Ewaffle",
-    "url": "https://www.ewaffle.cl"
-  },
-  "courseMode": "online",
-  "educationalLevel": "{course.level.toLowerCase()}",
-  "timeRequired": "P{course.duration.replace('semanas', 'W').replace('semana', 'W')}",
-  "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock"
-  },
-  "instructor": {
-    "@type": "Person",
-    "name": "{course.instructor.name}",
-    "jobTitle": "{course.instructor.title}"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{course.rating}",
-    "ratingCount": "{course.students}"
-  }
-}
-</script>
 
 <!-- Discount Button Handler -->
 <script>

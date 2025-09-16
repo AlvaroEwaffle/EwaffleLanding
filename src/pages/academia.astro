@@ -13,9 +13,64 @@ import DiscountPopup from '../components/DiscountPopup.astro';
 
 const title = "Academia Ewaffle | Cursos de Diseño Instruccional y Creación de Contenido Digital";
 const description = "Aprende a crear cursos e-learning, eBooks profesionales y contenido interactivo con IA. Cursos en vivo con certificación. Diseño instruccional, Canva, H5P y herramientas multimedia.";
+const canonicalUrl = "https://ewaffle.cl/academia";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
 ---
 
 <BaseLayout {title} {description}>
+  <!-- Enhanced SEO Meta Tags -->
+  <Fragment slot="head">
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content="cursos online, diseño instruccional, e-learning, canva, h5p, contenido digital, cursos en vivo, certificación, IA, inteligencia artificial, educación digital" />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Organization Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Academia Ewaffle",
+      "description": "Academia especializada en diseño instruccional y creación de contenido digital con IA",
+      "url": "https://ewaffle.cl/academia",
+      "logo": "https://ewaffle.cl/assets/logoprimario.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/ewaffle",
+        "https://www.instagram.com/ewaffle"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CL"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+56920115198",
+        "contactType": "customer service",
+        "availableLanguage": "Spanish"
+      }
+    })} />
+  </Fragment>
 	<AcademiaHero />
 	<AcademiaIntro />
 	<AcademiaStats />
