@@ -1,0 +1,448 @@
+{
+  "courses": [
+    {
+      "slug": "diseno-instruccional-ia",
+      "title": "Diseña Cursos Instruccionales con IA",
+      "subtitle": "Crea cursos e-learning profesionales usando inteligencia artificial para maximizar el engagement estudiantil",
+      "heroVideo": "/assets/cortinaewaffle.mp4",
+      "heroImage": "/assets/CoverEwaffle.png",
+      "price": "29000",
+      "currency": "CLP",
+      "originalPrice": "59000",
+      "discount": "50%",
+      "payLink": "https://pay.hotmart.com/V101070950R",
+      "duration": "2 horas de contenidos",
+      "modality": "100% en vivo",
+      "level": "Principiante",
+      "students": "150+",
+      "rating": 4.8,
+      "instructor": {
+        "name": "Johana Tapia",
+        "title": "Diseñadora Instruccional Senior",
+        "image": "/assets/Asesorias.jpeg",
+        "experience": "10+ años",
+        "linkedin": "https://cl.linkedin.com/in/johana-tapia-20556660"
+      },
+      "learningOutcomes": [
+        {
+          "icon": "🎯",
+          "title": "Diseña la estructura completa de tu curso",
+          "description": "Aprende a crear objetivos de aprendizaje claros y una secuencia didáctica efectiva que garantice el éxito estudiantil"
+        },
+        {
+          "icon": "🤖",
+          "title": "Domina herramientas de IA para e-learning",
+          "description": "Usa ChatGPT, Canva y Genially para crear contenido interactivo profesional de manera eficiente y rápida"
+        },
+        {
+          "icon": "📊",
+          "title": "Implementa gamificación efectiva en tus cursos",
+          "description": "Añade elementos de juego que aumenten la retención y motivación de tus estudiantes de forma constante"
+        }
+      ],
+      "courseContent": [
+        {
+          "step": 1,
+          "title": "Introducción Teórica",
+          "description": "Fundamentos del diseño instruccional moderno y herramientas digitales",
+          "icon": "📚",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 2,
+          "title": "Casos Prácticos",
+          "description": "Ejemplos reales de cursos exitosos y análisis de mejores prácticas",
+          "icon": "💼",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 3,
+          "title": "Ebook Descargable",
+          "description": "Guía completa con plantillas y recursos para aplicar inmediatamente",
+          "icon": "📖",
+          "duration": "Descarga inmediata"
+        },
+        {
+          "step": 4,
+          "title": "Video Explicativo",
+          "description": "Tutorial paso a paso para crear tu primer curso con IA",
+          "icon": "🎥",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 5,
+          "title": "Infografías Descargables",
+          "description": "Recursos visuales listos para usar en tus presentaciones",
+          "icon": "📊",
+          "duration": "Kit completo"
+        }
+      ],
+      "guarantee": {
+        "text": "Garantía de 7 días o te devolvemos tu dinero",
+        "description": "Si no estás satisfecho con el curso, te reembolsamos el 100% de tu inversión"
+      },
+      "faqs": [
+        {
+          "question": "¿Necesito experiencia previa en diseño?",
+          "answer": "No es necesario. El curso está diseñado para principiantes y profesionales que quieren actualizar sus conocimientos con IA."
+        },
+        {
+          "question": "¿Las clases quedan grabadas?",
+          "answer": "Sí, todas las clases quedan grabadas y disponibles por 6 meses para que puedas repasarlas cuando quieras."
+        },
+        {
+          "question": "¿Qué herramientas necesito?",
+          "answer": "Solo necesitas un computador con acceso a internet. Te enseñaremos a usar Canva, Genially y ChatGPT durante el curso."
+        },
+        {
+          "question": "¿Recibo certificado al finalizar?",
+          "answer": "Sí, al completar el curso recibirás un certificado digital que puedes agregar a tu LinkedIn y CV."
+        },
+        {
+          "question": "¿Puedo aplicar esto en mi trabajo actual?",
+          "answer": "¡Absolutamente! El curso está diseñado para que puedas aplicar todo lo aprendido inmediatamente en tus proyectos profesionales."
+        }
+      ],
+      "testimonial": {
+        "text": "Este curso transformó completamente mi forma de crear contenido educativo. Ahora puedo crear cursos profesionales en la mitad del tiempo.",
+        "author": "María González",
+        "role": "Coordinadora de Capacitación",
+        "company": "Empresa ABC"
+      },
+      "seo": {
+        "title": "Curso Diseño Instruccional con IA | Ewaffle Academia",
+        "description": "Aprende a crear cursos e-learning profesionales usando inteligencia artificial. Curso en vivo con certificación. ¡Inscríbete ahora!",
+        "keywords": ["diseño instruccional", "IA", "e-learning", "cursos online", "ChatGPT", "Canva", "Genially"]
+      }
+    },
+    {
+      "slug": "ebooks-canva",
+      "title": "Crea eBooks Profesionales con Canva",
+      "subtitle": "Crea eBooks y guías digitales que vendan usando Canva como herramienta principal",
+      "heroVideo": "/assets/cortinaewaffle.mp4",
+      "heroImage": "/assets/CoverEwaffle.png",
+      "price": "25000",
+      "currency": "CLP",
+      "originalPrice": "45000",
+      "discount": "44%",
+      "payLink": "https://pay.hotmart.com/N101065818H",
+      "duration": "2 horas de contenidos",
+      "modality": "100% en vivo",
+      "level": "Principiante",
+      "students": "89+",
+      "rating": 4.9,
+      "instructor": {
+        "name": "Alvaro Villena",
+        "title": "Especialista en Diseño Digital",
+        "image": "/assets/Alvaro.png",
+        "experience": "8+ años",
+        "linkedin": "https://linkedin.com/in/alvaro-villena"
+      },
+      "learningOutcomes": [
+        {
+          "icon": "📚",
+          "title": "Diseña eBooks profesionales desde cero",
+          "description": "Aprende a crear libros digitales atractivos y funcionales que destaquen en el mercado competitivo"
+        },
+        {
+          "icon": "🎨",
+          "title": "Domina Canva para productos digitales",
+          "description": "Usa todas las funciones avanzadas de Canva para diseño editorial profesional y creativo"
+        },
+        {
+          "icon": "💰",
+          "title": "Monetiza tu conocimiento de forma efectiva",
+          "description": "Convierte tu experiencia en productos digitales que generen ingresos sostenibles y constantes"
+        }
+      ],
+      "courseContent": [
+        {
+          "step": 1,
+          "title": "Introducción Teórica",
+          "description": "Fundamentos del diseño editorial y mejores prácticas para eBooks",
+          "icon": "📚",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 2,
+          "title": "Casos Prácticos",
+          "description": "Análisis de eBooks exitosos y estrategias de diseño",
+          "icon": "💼",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 3,
+          "title": "Ebook Descargable",
+          "description": "Plantillas profesionales listas para personalizar",
+          "icon": "📖",
+          "duration": "Kit completo"
+        },
+        {
+          "step": 4,
+          "title": "Video Explicativo",
+          "description": "Tutorial completo de Canva para diseño editorial",
+          "icon": "🎥",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 5,
+          "title": "Infografías Descargables",
+          "description": "Elementos gráficos y recursos para tus eBooks",
+          "icon": "📊",
+          "duration": "Biblioteca completa"
+        }
+      ],
+      "guarantee": {
+        "text": "Garantía de 7 días o te devolvemos tu dinero",
+        "description": "Si no estás satisfecho con el curso, te reembolsamos el 100% de tu inversión"
+      },
+      "faqs": [
+        {
+          "question": "¿Necesito experiencia en diseño?",
+          "answer": "No, el curso está diseñado para principiantes. Te enseñaremos todo desde cero."
+        },
+        {
+          "question": "¿Qué versión de Canva necesito?",
+          "answer": "Trabajaremos con Canva Pro, pero también te mostraremos alternativas con la versión gratuita."
+        },
+        {
+          "question": "¿Puedo vender los eBooks que cree?",
+          "answer": "¡Sí! Te enseñaremos cómo comercializar tus productos digitales y generar ingresos."
+        }
+      ],
+      "testimonial": {
+        "text": "En 2 horas logré crear mi primer eBook y ya generé mis primeros ingresos. El curso es increíble.",
+        "author": "Carlos Mendoza",
+        "role": "Emprendedor",
+        "company": "Independiente"
+      },
+      "seo": {
+        "title": "Curso eBooks con Canva | Ewaffle Academia",
+        "description": "Aprende a crear eBooks profesionales con Canva. Curso en vivo con plantillas descargables. ¡Inscríbete ahora!",
+        "keywords": ["eBooks", "Canva", "diseño editorial", "productos digitales", "monetización"]
+      }
+    },
+    {
+      "slug": "h5p-interactivo",
+      "title": "Desarrolla Presentaciones Interactivas con H5P",
+      "subtitle": "Crea experiencias de aprendizaje interactivas que enganchen a tus estudiantes",
+      "heroVideo": "/assets/cortinaewaffle.mp4",
+      "heroImage": "/assets/CoverEwaffle.png",
+      "price": "25000",
+      "currency": "CLP",
+      "originalPrice": "45000",
+      "discount": "44%",
+      "payLink": "https://pay.hotmart.com/A101062359V",
+      "duration": "2 horas de contenidos",
+      "modality": "100% en vivo",
+      "level": "Principiante",
+      "students": "67+",
+      "rating": 4.7,
+      "instructor": {
+        "name": "Aaron Silva",
+        "title": "Especialista en Interactividad",
+        "image": "/assets/Aaron.png",
+        "experience": "6+ años",
+        "linkedin": "https://linkedin.com/in/aaron-silva"
+      },
+      "learningOutcomes": [
+        {
+          "icon": "🎮",
+          "title": "Crea contenido interactivo avanzado con H5P",
+          "description": "Domina H5P para crear experiencias de aprendizaje inmersivas y atractivas que enganchen"
+        },
+        {
+          "icon": "📱",
+          "title": "Diseña para múltiples dispositivos y plataformas",
+          "description": "Aprende a crear contenido responsive y accesible en todas las plataformas digitales"
+        },
+        {
+          "icon": "📈",
+          "title": "Aumenta el engagement estudiantil de forma",
+          "description": "Implementa elementos interactivos que mejoren la retención y motivación de tus estudiantes"
+        }
+      ],
+      "courseContent": [
+        {
+          "step": 1,
+          "title": "Introducción Teórica",
+          "description": "Fundamentos de la interactividad en e-learning y herramientas H5P",
+          "icon": "📚",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 2,
+          "title": "Casos Prácticos",
+          "description": "Ejemplos reales de contenido interactivo exitoso",
+          "icon": "💼",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 3,
+          "title": "Ebook Descargable",
+          "description": "Guía completa de H5P con plantillas y recursos",
+          "icon": "📖",
+          "duration": "Kit completo"
+        },
+        {
+          "step": 4,
+          "title": "Video Explicativo",
+          "description": "Tutorial paso a paso para crear tu primer H5P",
+          "icon": "🎥",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 5,
+          "title": "Infografías Descargables",
+          "description": "Recursos visuales para implementar interactividad",
+          "icon": "📊",
+          "duration": "Biblioteca completa"
+        }
+      ],
+      "guarantee": {
+        "text": "Garantía de 7 días o te devolvemos tu dinero",
+        "description": "Si no estás satisfecho con el curso, te reembolsamos el 100% de tu inversión"
+      },
+      "faqs": [
+        {
+          "question": "¿Qué es H5P?",
+          "answer": "H5P es una plataforma gratuita que permite crear contenido interactivo para e-learning sin programación."
+        },
+        {
+          "question": "¿Necesito conocimientos técnicos?",
+          "answer": "No, H5P es muy intuitivo. Te enseñaremos todo desde cero con ejemplos prácticos."
+        },
+        {
+          "question": "¿Puedo usar H5P en mi LMS?",
+          "answer": "Sí, H5P es compatible con la mayoría de plataformas LMS como Moodle, Canvas, etc."
+        }
+      ],
+      "testimonial": {
+        "text": "Mis estudiantes ahora están mucho más comprometidos con el contenido. H5P cambió completamente mi forma de enseñar.",
+        "author": "Ana Rodríguez",
+        "role": "Profesora Universitaria",
+        "company": "Universidad XYZ"
+      },
+      "seo": {
+        "title": "Curso H5P Interactivo | Ewaffle Academia",
+        "description": "Aprende a crear contenido interactivo con H5P. Curso en vivo con certificación. ¡Inscríbete ahora!",
+        "keywords": ["H5P", "contenido interactivo", "e-learning", "interactividad", "LMS"]
+      }
+    },
+    {
+      "slug": "landing-page-ia",
+      "title": "Construye Landing Pages de Alto Impacto con IA",
+      "subtitle": "Crea páginas de aterrizaje modernas, estratégicas y efectivas sin necesidad de ser programador usando herramientas de IA",
+      "heroVideo": "/assets/cortinaewaffle.mp4",
+      "heroImage": "/assets/CoverEwaffle.png",
+      "price": "35000",
+      "currency": "CLP",
+      "originalPrice": "70000",
+      "discount": "50%",
+      "payLink": "https://pay.hotmart.com/I101541289S",
+      "duration": "2 horas de contenidos",
+      "modality": "100% en vivo",
+      "level": "Principiante",
+      "students": "234+",
+      "rating": 4.9,
+      "instructor": {
+        "name": "Alvaro Villena",
+        "title": "Especialista en Marketing Digital y IA",
+        "image": "/assets/Alvaro.png",
+        "experience": "8+ años",
+        "linkedin": "https://linkedin.com/in/alvaro-villena"
+      },
+      "learningOutcomes": [
+        {
+          "icon": "🚀",
+          "title": "Crea landing pages que convierten efectivamente",
+          "description": "Aprende a diseñar páginas de aterrizaje estratégicas que aumenten conversiones y capten leads"
+        },
+        {
+          "icon": "🤖",
+          "title": "Domina herramientas de IA para diseño",
+          "description": "Usa ChatGPT, Midjourney y otras herramientas de IA para crear copy y diseño visual profesional"
+        },
+        {
+          "icon": "📈",
+          "title": "Optimiza para conversión de manera profesional",
+          "description": "Implementa técnicas de CRO (Conversion Rate Optimization) para maximizar resultados y conversiones"
+        }
+      ],
+      "courseContent": [
+        {
+          "step": 1,
+          "title": "Introducción Teórica",
+          "description": "Fundamentos del marketing digital y psicología de conversión en landing pages",
+          "icon": "📚",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 2,
+          "title": "Casos Prácticos",
+          "description": "Análisis de landing pages exitosas y estrategias de copywriting con IA",
+          "icon": "💼",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 3,
+          "title": "Ebook Descargable",
+          "description": "Guía completa con plantillas de landing pages y prompts de IA listos para usar",
+          "icon": "📖",
+          "duration": "Kit completo"
+        },
+        {
+          "step": 4,
+          "title": "Video Explicativo",
+          "description": "Tutorial paso a paso para crear tu primera landing page con herramientas de IA",
+          "icon": "🎥",
+          "duration": "2 Horas de Contenido Práctico"
+        },
+        {
+          "step": 5,
+          "title": "Infografías Descargables",
+          "description": "Templates de diseño, checklists de optimización y recursos visuales",
+          "icon": "📊",
+          "duration": "Biblioteca completa"
+        }
+      ],
+      "guarantee": {
+        "text": "Garantía de 7 días o te devolvemos tu dinero",
+        "description": "Si no estás satisfecho con el curso, te reembolsamos el 100% de tu inversión"
+      },
+      "faqs": [
+        {
+          "question": "¿Necesito saber programar?",
+          "answer": "No, este curso está diseñado para emprendedores y profesionales del marketing sin conocimientos técnicos. Te enseñaremos a usar herramientas no-code."
+        },
+        {
+          "question": "¿Qué herramientas de IA usaremos?",
+          "answer": "Trabajaremos con ChatGPT para copywriting, Midjourney/DALL-E para imágenes, y herramientas de diseño como Canva y Figma."
+        },
+        {
+          "question": "¿Puedo aplicar esto a mi negocio actual?",
+          "answer": "¡Absolutamente! El curso está diseñado para que puedas crear landing pages para cualquier tipo de negocio o proyecto."
+        },
+        {
+          "question": "¿Incluye hosting y dominio?",
+          "answer": "Te enseñaremos las mejores opciones gratuitas y de pago para hospedar tu landing page, incluyendo plataformas no-code."
+        },
+        {
+          "question": "¿Recibo certificado al finalizar?",
+          "answer": "Sí, al completar el curso recibirás un certificado digital que puedes agregar a tu LinkedIn y portafolio profesional."
+        }
+      ],
+      "testimonial": {
+        "text": "En solo 2 horas logré crear una landing page que triplicó mis conversiones. Las herramientas de IA cambiaron completamente mi forma de trabajar.",
+        "author": "Patricia Morales",
+        "role": "Emprendedora Digital",
+        "company": "E-commerce Personal"
+      },
+      "seo": {
+        "title": "Curso Landing Page con IA | Ewaffle Academia",
+        "description": "Aprende a crear landing pages de alto impacto usando inteligencia artificial. Sin programación, con certificación. ¡Inscríbete ahora!",
+        "keywords": ["landing page", "IA", "marketing digital", "conversión", "ChatGPT", "diseño web", "CRO"]
+      }
+    }
+  ]
+}

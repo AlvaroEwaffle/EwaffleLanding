@@ -65,16 +65,16 @@
 
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <a 
-          href="#cursos"
-          class="inline-flex items-center justify-center px-8 py-4 bg-yellow text-primary rounded-full font-bold text-lg hover:bg-yellow/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 scroll-smooth scroll-to-section"
+        <button 
+          id="scroll-to-courses-cta"
+          class="inline-flex items-center justify-center px-8 py-4 bg-yellow text-primary rounded-full font-bold text-lg hover:bg-yellow/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
         >
           <i class="ri-rocket-line mr-2"></i>
           Inscribirme ahora
-        </a>
+        </button>
         
         <a 
-          href="https://wa.me/56912345678?text=Hola,%20me%20interesa%20el%20curso%20de%20Academia%20Ewaffle"
+          href="https://wa.me/56920115198?text=Hola,%20me%20interesa%20el%20curso%20de%20Academia%20Ewaffle"
           target="_blank"
           class="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300 scroll-smooth scroll-to-section"
         >
@@ -112,4 +112,19 @@
       </div>
     </div>
   </div>
-</section> 
+</section>
+
+<script>
+  // Handle scroll to courses button
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollToCoursesBtn = document.getElementById('scroll-to-courses-cta');
+    if (scrollToCoursesBtn) {
+      scrollToCoursesBtn.addEventListener('click', () => {
+        const coursesSection = document.querySelector('[data-courses-section]');
+        if (coursesSection) {
+          coursesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  });
+</script> 

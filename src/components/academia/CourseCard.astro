@@ -1,0 +1,77 @@
+---
+import coursesData from '../../data/courses.json';
+
+interface Props {
+  course: typeof coursesData.courses[0];
+}
+
+const { course } = Astro.props;
+---
+
+<div class="relative group">
+  <div class="absolute -inset-0.5 bg-gradient-to-r from-accent to-secondary rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+  <div class="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+    <!-- Course Image/Video Thumbnail -->
+    <div class="mb-6">
+      <img 
+        src={course.heroImage} 
+        alt={course.title}
+        class="w-full h-48 object-cover rounded-xl"
+      />
+    </div>
+
+    <!-- Course Info -->
+    <div class="mb-4">
+      <h3 class="text-2xl font-bold text-primary mb-2">{course.title}</h3>
+      <p class="text-gray-600 mb-4">{course.subtitle}</p>
+      
+      <!-- Course Meta -->
+      <div class="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          {course.students} estudiantes
+        </span>
+      </div>
+
+      <!-- Learning Outcomes Preview -->
+      <div class="mb-6">
+        <h4 class="font-semibold text-primary mb-2">Lo que aprenderás:</h4>
+        <ul class="space-y-1">
+          {course.learningOutcomes.slice(0, 2).map((outcome, index) => (
+            <li key={index} class="flex items-start gap-2 text-sm text-gray-600">
+              <span class="text-accent mt-0.5">{outcome.icon}</span>
+              <span>{outcome.title}</span>
+            </li>
+          ))}
+          {course.learningOutcomes.length > 2 && (
+            <li class="text-sm text-gray-500">+{course.learningOutcomes.length - 2} más...</li>
+          )}
+        </ul>
+      </div>
+
+      <!-- Course Info -->
+      <div class="mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">⏱️</span>
+            <span class="text-sm text-gray-600">{course.duration}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🎓</span>
+            <span class="text-sm text-gray-600">{course.level}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <a 
+        href={`/academia/curso/${course.slug}`}
+        class="block w-full bg-primary text-white text-center py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors duration-300"
+      >
+        Ver Detalles del Curso
+      </a>
+    </div>
+  </div>
+</div>

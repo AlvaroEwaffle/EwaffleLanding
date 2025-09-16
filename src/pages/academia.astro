@@ -2,13 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AcademiaHero from '../components/academia/AcademiaHero.astro';
 import AcademiaIntro from '../components/academia/AcademiaIntro.astro';
-import AcademiaCursos from '../components/academia/AcademiaCursos.astro';
+import CoursesList from '../components/academia/CoursesList.astro';
 import AcademiaVideo from '../components/academia/AcademiaVideo.astro';
 import AcademiaInicio from '../components/academia/AcademiaInicio.astro';
 import AcademiaInstructor from '../components/academia/AcademiaInstructor.astro';
 import AcademiaCTA from '../components/academia/AcademiaCTA.astro';
 import AcademiaStats from '../components/academia/AcademiaStats.astro';
 import AcademiaGarantia from '../components/academia/AcademiaGarantia.astro';
+import DiscountPopup from '../components/DiscountPopup.astro';
 
 const title = "Academia Ewaffle | Cursos de Diseño Instruccional y Creación de Contenido Digital";
 const description = "Aprende a crear cursos e-learning, eBooks profesionales y contenido interactivo con IA. Cursos en vivo con certificación. Diseño instruccional, Canva, H5P y herramientas multimedia.";
@@ -18,13 +19,16 @@ const description = "Aprende a crear cursos e-learning, eBooks profesionales y c
 	<AcademiaHero />
 	<AcademiaIntro />
 	<AcademiaStats />
-	<AcademiaCursos />
+	<CoursesList />
 	
 	<!--<AcademiaVideo />-->
   <AcademiaInicio /> 
 	<AcademiaInstructor />
   <AcademiaGarantia />
 	<AcademiaCTA />
+	
+	<!-- Discount Popup -->
+	<DiscountPopup courseName="nuestros cursos" courseSlug="academia" />
 </BaseLayout>
 
 <!-- Structured Data for Academia Page -->
