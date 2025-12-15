@@ -3,9 +3,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/landing/Footer.astro';
 import CTA from '../components/landing/CTA.astro';
 
+const title = "Asesoría Productos Digitales | Ewaffle - Transforma tu Conocimiento";
+const description = "Asesoría personalizada para profesionales y emprendedores que quieren digitalizar y monetizar su experiencia. Sesión de 90 min con análisis, recomendaciones y plan de acción. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/asesoria";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "asesoría productos digitales, digitalizar conocimiento, monetizar experiencia, productos digitales Chile, cursos online, ebooks, plantillas, asesoría emprendedores, productos digitales Latinoamérica";
 ---
 
-<BaseLayout>
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+  </Fragment>
 	<main class="min-h-screen">
 		<!-- Hero Section -->
 		<section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">

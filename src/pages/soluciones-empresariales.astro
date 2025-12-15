@@ -1,0 +1,360 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import CTA from '../components/landing/CTA.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Soluciones Empresariales E-learning | Ewaffle - Infraestructura Escalable";
+const description = "Soluciones e-learning empresariales escalables: LMS, CRM, gestión de leads, catálogo de recursos, cotizaciones y más. Infraestructura completa para grandes organizaciones. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/soluciones-empresariales";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "soluciones empresariales e-learning, LMS empresarial, CRM e-learning, gestión leads, infraestructura e-learning, soluciones corporativas, e-learning enterprise, soluciones escalables, Chile, Latinoamérica";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Service Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Soluciones Empresariales E-learning",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamérica"
+      },
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
+      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex justify-center">
+          <img 
+            src="/assets/logoprimario.png" 
+            alt="Ewaffle Logo" 
+            class="w-64 h-auto object-contain"
+          />
+        </div>
+
+        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
+          🏢 Soluciones Empresariales E-learning
+        </h1>
+        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
+          Infraestructura completa y escalable para grandes organizaciones. Desde LMS hasta herramientas de gestión empresarial.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a 
+            href="#contact" 
+            class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
+          >
+            Solicitar Consultoría Empresarial
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Overview -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🚀 Suite Empresarial Completa
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Herramientas integradas para gestionar todo tu ecosistema e-learning
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <!-- LMS Platform -->
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-primary/20">
+            <div class="text-5xl mb-4">💻</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Plataforma LMS Escalable</h3>
+            <p class="text-gray-700 mb-4">Sistema de gestión de aprendizaje que escala desde 100 hasta 10,000+ usuarios con:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Multi-tenant para múltiples organizaciones</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Gestión avanzada de usuarios y roles</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>APIs para integraciones empresariales</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>SLA y soporte dedicado</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CRM & Leads -->
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">📊</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">CRM y Gestión de Leads</h3>
+            <p class="text-gray-700 mb-4">Sistema completo de gestión de relaciones con clientes:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Pipeline Kanban para seguimiento de leads</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Dashboard de conversión y métricas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Automatización de seguimiento</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Integración con herramientas de ventas</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Catalog Management -->
+          <div class="bg-gradient-to-br from-secondary/10 to-yellow/10 p-8 rounded-2xl shadow-lg border border-secondary/20">
+            <div class="text-5xl mb-4">📚</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Catálogo de Recursos</h3>
+            <p class="text-gray-700 mb-4">Gestión centralizada de todos tus recursos educativos:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Inventario completo de cursos y recursos</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Precios y paquetes configurables</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Gestión de versiones y actualizaciones</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Búsqueda y filtrado avanzado</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Quote Management -->
+          <div class="bg-gradient-to-br from-yellow/10 to-primary/10 p-8 rounded-2xl shadow-lg border border-yellow/20">
+            <div class="text-5xl mb-4">💰</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Gestor de Cotizaciones</h3>
+            <p class="text-gray-700 mb-4">Sistema completo para crear y gestionar cotizaciones:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Plantillas personalizables</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Cálculo automático de precios</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Seguimiento de estado y aprobaciones</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Generación de PDFs profesionales</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Revenue Tracking -->
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-primary/20">
+            <div class="text-5xl mb-4">📈</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Gestión de Ingresos</h3>
+            <p class="text-gray-700 mb-4">Seguimiento completo de ingresos y finanzas:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Dashboard financiero en tiempo real</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Reportes y análisis de ingresos</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Integración con sistemas contables</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Proyecciones y forecasting</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Admin Tools -->
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">⚙️</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Herramientas de Administración</h3>
+            <p class="text-gray-700 mb-4">Panel de control completo para administradores:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Gestión de usuarios y permisos</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Configuración y personalización</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Logs y auditoría</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Soporte técnico prioritario</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enterprise Benefits -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            💼 Beneficios Empresariales
+          </h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="space-y-6">
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-primary mb-4">📈 Escalabilidad Empresarial</h3>
+              <p class="text-gray-600 text-lg">Infraestructura diseñada para crecer con tu organización. Desde startups hasta grandes corporaciones, nuestro sistema se adapta.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-primary mb-4">🔒 Seguridad y Cumplimiento</h3>
+              <p class="text-gray-600 text-lg">Estándares de seguridad empresarial, cumplimiento normativo y protección de datos. Tu información está segura.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-primary mb-4">🔌 Integraciones Empresariales</h3>
+              <p class="text-gray-600 text-lg">APIs robustas para integrar con tus sistemas existentes: ERP, CRM, sistemas de pago y más.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-primary mb-4">👥 Soporte Dedicado</h3>
+              <p class="text-gray-600 text-lg">Equipo de soporte dedicado con SLA garantizado. Resolución rápida de problemas y asistencia técnica prioritaria.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-primary mb-4">📊 Business Intelligence</h3>
+              <p class="text-gray-600 text-lg">Dashboards y reportes avanzados para tomar decisiones basadas en datos. Métricas de negocio en tiempo real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🎯 Para Empresas que Necesitan
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">🏢 Grandes Organizaciones</h3>
+            <p class="text-gray-700">Empresas con múltiples departamentos, filiales o unidades de negocio que necesitan gestión centralizada.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">📚 Instituciones Educativas</h3>
+            <p class="text-gray-700">Universidades, OTECs y centros de formación que gestionan múltiples programas y miles de estudiantes.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary/10 to-yellow/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">🌐 Empresas Multinacionales</h3>
+            <p class="text-gray-700">Organizaciones con presencia en múltiples países que necesitan soluciones escalables y adaptables.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-yellow/10 to-primary/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">🚀 Empresas en Crecimiento</h3>
+            <p class="text-gray-700">Startups y empresas en expansión que necesitan infraestructura que crezca con ellas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTA 
+      title="🏢 ¿Listo para escalar tu infraestructura e-learning?"
+      subtitle="Descubre cómo nuestras soluciones empresariales pueden transformar tu organización"
+      buttonText="Solicitar Consultoría Empresarial"
+    />
+
+    <!-- Contact Section -->
+    <Contact />
+
+    <!-- Final CTA -->
+    <CTA 
+      title="💬 ¿Quieres saber más sobre soluciones empresariales?"
+      subtitle="Conversemos sobre cómo podemos ayudarte a construir una infraestructura e-learning escalable"
+      buttonText="Agendar Consultoría Gratuita"
+    />
+
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+

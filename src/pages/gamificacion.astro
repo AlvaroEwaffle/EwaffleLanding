@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import CTA from '../components/landing/CTA.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Gamificación E-learning | Ewaffle - Aumenta Engagement 3x";
+const description = "Sistemas de gamificación avanzados: puntos, badges, rankings, contenido desbloqueable. Aumenta el engagement y finalización de cursos hasta 3 veces. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/gamificacion";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "gamificación e-learning, gamificación cursos, puntos badges rankings, contenido desbloqueable, engagement aprendizaje, gamificación Chile, gamificación Latinoamérica, sistemas gamificación, aprendizaje gamificado";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Service Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Gamificación E-learning",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamérica"
+      },
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
+      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex justify-center">
+          <img 
+            src="/assets/logoprimario.png" 
+            alt="Ewaffle Logo" 
+            class="w-64 h-auto object-contain"
+          />
+        </div>
+
+        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
+          🎮 Gamificación que Transforma el Aprendizaje
+        </h1>
+        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
+          Convierte tus cursos en experiencias tipo videojuego. Aumenta engagement hasta 3x con sistemas de puntos, badges, rankings y contenido desbloqueable.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a 
+            href="https://gamification.ewaffle.cl/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
+          >
+            Ver Demo Interactiva
+          </a>
+          <a 
+            href="#contact" 
+            class="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-semibold text-lg hover:bg-white/90 transition-all duration-300 shadow-2xl hover:scale-105 transform"
+          >
+            Conversemos sobre tu Proyecto
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🏆 Elementos de Gamificación
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Sistema completo diseñado para motivar y enganchar a tus estudiantes
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div class="bg-gradient-to-br from-accent/10 to-accent/5 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">⭐</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Sistema de Puntos</h3>
+            <p class="text-gray-600">Los estudiantes ganan puntos al completar contenido, responder quizzes y alcanzar objetivos. Cada acción tiene su recompensa.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-yellow/10 to-yellow/5 p-8 rounded-2xl shadow-lg border border-yellow/20">
+            <div class="text-5xl mb-4">🏅</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Badges y Logros</h3>
+            <p class="text-gray-600">Reconoce el progreso con badges personalizados. Celebra hitos importantes y mantén la motivación alta.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary/10 to-secondary/5 p-8 rounded-2xl shadow-lg border border-secondary/20">
+            <div class="text-5xl mb-4">📊</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Rankings y Leaderboards</h3>
+            <p class="text-gray-600">Fomenta la competencia sana con rankings que muestran los mejores estudiantes. Opción de rankings por equipo o individual.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-primary/10 to-primary/5 p-8 rounded-2xl shadow-lg border border-primary/20">
+            <div class="text-5xl mb-4">🔓</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Contenido Desbloqueable</h3>
+            <p class="text-gray-600">Sistema tipo videojuego donde los estudiantes desbloquean nuevos módulos al alcanzar ciertos niveles o completar objetivos.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-accent/10 to-yellow/10 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">📈</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Progresión por Niveles</h3>
+            <p class="text-gray-600">Sistema de niveles y rangos que los estudiantes pueden alcanzar. Cada nivel desbloquea nuevas oportunidades y reconocimientos.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-secondary/20">
+            <div class="text-5xl mb-4">🎁</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Recompensas y Premios</h3>
+            <p class="text-gray-600">Sistema de inventario con coleccionables y recompensas que los estudiantes ganan al completar desafíos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            📈 Resultados Comprobados
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="bg-white p-8 rounded-2xl shadow-xl text-center">
+            <div class="text-6xl mb-4">3x</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Mayor Engagement</h3>
+            <p class="text-gray-600">Los estudiantes participan 3 veces más cuando hay elementos gamificados.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-xl text-center">
+            <div class="text-6xl mb-4">+40%</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Tasa de Finalización</h3>
+            <p class="text-gray-600">Aumento significativo en la cantidad de estudiantes que completan los cursos.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-xl text-center">
+            <div class="text-6xl mb-4">2.5x</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Tiempo en Plataforma</h3>
+            <p class="text-gray-600">Los estudiantes pasan más tiempo aprendiendo cuando hay gamificación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🎯 ¿Cómo Funciona?
+          </h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="space-y-8">
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">1</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Diseñamos tu Sistema</h3>
+                <p class="text-gray-600 text-lg">Creamos un sistema de gamificación personalizado según tus objetivos y audiencia. Definimos puntos, badges, niveles y recompensas.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">2</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Integración con tus Cursos</h3>
+                <p class="text-gray-600 text-lg">Integramos el sistema de gamificación con tus cursos existentes o nuevos. Funciona con cualquier contenido SCORM o en nuestra plataforma LMS.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">3</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Lanzamiento y Monitoreo</h3>
+                <p class="text-gray-600 text-lg">Lanzamos el sistema y monitoreamos métricas de engagement. Ajustamos según sea necesario para maximizar resultados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTA 
+      title="🎮 ¿Listo para gamificar tus cursos?"
+      subtitle="Transforma el aprendizaje en una experiencia divertida y motivadora. Solicita una demo gratuita."
+      buttonText="Ver Demo Interactiva"
+    />
+
+    <!-- Contact Section -->
+    <Contact />
+
+    <!-- Final CTA -->
+    <CTA 
+      title="💬 ¿Quieres saber más sobre gamificación?"
+      subtitle="Conversemos sobre cómo podemos aumentar el engagement en tus cursos con gamificación"
+      buttonText="Agendar Consultoría Gratuita"
+    />
+
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+

@@ -2,11 +2,60 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const title = "Potencia tus recursos e-learning con IA | Ewaffle";
-const description =
-  "Curso en vivo: Potencia tus recursos e-learning con nuevas herramientas de IA. Aprende a usar Canva, Genially, ChatGPT y más para transformar tus diseños instruccionales.";
+const description = "Curso en vivo: Potencia tus recursos e-learning con nuevas herramientas de IA. Aprende a usar Canva, Genially, ChatGPT y más para transformar tus diseños instruccionales. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/curso-ia";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "curso IA e-learning, herramientas IA educación, Canva diseño instruccional, Genially interactivo, ChatGPT educación, curso diseño instruccional IA, herramientas digitales educación, curso en vivo e-learning, Chile, Latinoamérica";
 ---
 
 <BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Course Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": title,
+      "description": description,
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "courseMode": "online",
+      "educationalLevel": "intermediate",
+      "inLanguage": "es"
+    })} />
+  </Fragment>
   <main
     class="flex flex-col items-center justify-center py-12 px-4 bg-primary min-h-screen"
   >

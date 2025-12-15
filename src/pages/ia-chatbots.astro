@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import CTA from '../components/landing/CTA.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Chatbots IA para Cursos | Ewaffle - Asistentes Inteligentes 24/7";
+const description = "Chatbots IA con tecnología RAG para tus cursos. Asistentes inteligentes que responden preguntas 24/7, reducen carga de soporte 80% y mejoran la experiencia de aprendizaje. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/ia-chatbots";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "chatbots IA, chatbots cursos, RAG chatbot, asistentes inteligentes, chatbots educación, IA e-learning, chatbots Chile, chatbots Latinoamérica, inteligencia artificial educación, tutores virtuales IA";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Service Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Chatbots IA para Educación",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamérica"
+      },
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
+      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex justify-center">
+          <img 
+            src="/assets/logoprimario.png" 
+            alt="Ewaffle Logo" 
+            class="w-64 h-auto object-contain"
+          />
+        </div>
+
+        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
+          🤖 Chatbots IA que Transforman el Aprendizaje
+        </h1>
+        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
+          Asistentes inteligentes 24/7 para tus cursos. Tecnología RAG de última generación que responde preguntas basándose en tu contenido educativo.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a 
+            href="#contact" 
+            class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
+          >
+            Solicitar Demo Gratuita
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is RAG Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+              🧠 Tecnología RAG (Retrieval Augmented Generation)
+            </h2>
+            <p class="text-xl text-gray-600">
+              La tecnología más avanzada para chatbots educativos
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl mb-8">
+            <h3 class="text-2xl font-bold text-primary mb-4">¿Qué es RAG?</h3>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+              RAG (Retrieval Augmented Generation) es una tecnología que combina búsqueda de información con generación de lenguaje natural. Nuestros chatbots:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-accent mr-3">✓</span>
+                <span>Se entrenan específicamente con el contenido de tus cursos</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-3">✓</span>
+                <span>Buscan información relevante en tu base de conocimiento</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-3">✓</span>
+                <span>Generan respuestas precisas y contextualizadas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-3">✓</span>
+                <span>Mejoran con el tiempo al aprender de nuevas preguntas</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            ✨ Características Principales
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-4xl mb-4">⏰</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Disponible 24/7</h3>
+            <p class="text-gray-600">Los estudiantes pueden hacer preguntas en cualquier momento, sin esperar respuestas de instructores o soporte.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-4xl mb-4">📚</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Entrenado con tu Contenido</h3>
+            <p class="text-gray-600">El chatbot aprende específicamente de tus cursos, materiales y documentos. Respuestas precisas basadas en tu contenido.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-4xl mb-4">💬</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Lenguaje Natural</h3>
+            <p class="text-gray-600">Los estudiantes pueden hacer preguntas en lenguaje natural, como si estuvieran hablando con un tutor humano.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-4xl mb-4">📊</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Reducción de Carga de Soporte</h3>
+            <p class="text-gray-600">Reduce hasta 80% la carga de preguntas repetitivas al equipo de soporte. Enfócate en casos complejos.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-4xl mb-4">🔄</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Actualización Continua</h3>
+            <p class="text-gray-600">Puedes actualizar el contenido del chatbot cuando quieras. Aprende automáticamente de nuevos materiales.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Integración Fácil</h3>
+            <p class="text-gray-600">Se integra fácilmente con tu plataforma LMS, sitio web o aplicación. API disponible para desarrolladores.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🎯 Casos de Uso
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">👨‍🏫 Tutor Virtual</h3>
+            <p class="text-gray-700">Los estudiantes pueden hacer preguntas sobre el contenido del curso y recibir explicaciones detalladas en tiempo real.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">❓ FAQ Automatizado</h3>
+            <p class="text-gray-700">Responde automáticamente las preguntas más frecuentes sobre el curso, requisitos, fechas y procedimientos.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary/10 to-yellow/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">📖 Asistente de Estudio</h3>
+            <p class="text-gray-700">Ayuda a los estudiantes a repasar conceptos, resolver dudas y prepararse para exámenes.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-yellow/10 to-primary/10 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold text-primary mb-4">🎓 Soporte Técnico</h3>
+            <p class="text-gray-700">Resuelve problemas técnicos comunes y guía a los estudiantes en el uso de la plataforma.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            💡 Beneficios Clave
+          </h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="text-3xl">📈</div>
+                <div>
+                  <h3 class="text-xl font-bold text-primary mb-2">Mayor Satisfacción del Estudiante</h3>
+                  <p class="text-gray-600">Respuestas instantáneas mejoran la experiencia de aprendizaje y aumentan la satisfacción.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="text-3xl">💰</div>
+                <div>
+                  <h3 class="text-xl font-bold text-primary mb-2">Ahorro de Costos</h3>
+                  <p class="text-gray-600">Reduce la necesidad de personal de soporte dedicado, ahorrando costos operativos.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="text-3xl">⚡</div>
+                <div>
+                  <h3 class="text-xl font-bold text-primary mb-2">Escalabilidad</h3>
+                  <p class="text-gray-600">Atiende a miles de estudiantes simultáneamente sin aumentar costos proporcionalmente.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="text-3xl">🎯</div>
+                <div>
+                  <h3 class="text-xl font-bold text-primary mb-2">Mejor Retención</h3>
+                  <p class="text-gray-600">Los estudiantes que tienen acceso a ayuda inmediata tienen mayor probabilidad de completar los cursos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTA 
+      title="🤖 ¿Listo para implementar chatbots IA en tus cursos?"
+      subtitle="Descubre cómo nuestros asistentes inteligentes pueden transformar la experiencia de aprendizaje"
+      buttonText="Solicitar Demo Gratuita"
+    />
+
+    <!-- Contact Section -->
+    <Contact />
+
+    <!-- Final CTA -->
+    <CTA 
+      title="💬 ¿Quieres saber más sobre chatbots IA?"
+      subtitle="Conversemos sobre cómo podemos implementar asistentes inteligentes para tus cursos"
+      buttonText="Agendar Consultoría Gratuita"
+    />
+
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+

@@ -5,18 +5,71 @@ interface FAQItem {
 }
 
 const faqs: FAQItem[] = [
+  // Cursos Gamificados
   {
     question: "¿Cuánto cuesta transformar mis cursos?",
     answer: "El costo varía según la cantidad y complejidad de tus cursos. Ofrecemos planes desde $1500 USD por curso completo. Agenda una reunión gratuita para recibir una cotización personalizada sin compromiso."
   },
   {
-    question: "¿Realmente no necesito equipo técnico interno?",
-    answer: "Correcto. Nosotros manejamos todo el desarrollo técnico, desde la creación de contenido SCORM hasta la implementación en tu plataforma. Solo necesitas enfocarte en vender, nosotros en crear."
-  },
-  {
     question: "¿Los cursos funcionarán en mi LMS actual?",
     answer: "Sí, todos nuestros cursos son compatibles con estándares SCORM y funcionan en cualquier plataforma LMS del mercado (Moodle, Canvas, Blackboard, etc.). Si no tienes LMS, te damos uno."
   },
+  {
+    question: "¿Realmente no necesito equipo técnico interno?",
+    answer: "Correcto. Nosotros manejamos todo el desarrollo técnico, desde la creación de contenido SCORM hasta la implementación en tu plataforma. Solo necesitas enfocarte en vender, nosotros en crear."
+  },
+  
+  // Plataforma LMS
+  {
+    question: "¿Qué incluye la plataforma LMS de Ewaffle?",
+    answer: "Nuestra plataforma LMS incluye gestión de usuarios, creación de desafíos y etapas, seguimiento de progreso, sistema de gamificación integrado, soporte para múltiples tipos de contenido (video, H5P, Genially, quizzes), programación automática y notificaciones. Todo listo para usar sin desarrollo técnico."
+  },
+  {
+    question: "¿Puedo personalizar la plataforma LMS con mi marca?",
+    answer: "Sí, ofrecemos marca blanca completa. Tu logo, colores e identidad visual se integran en toda la plataforma. Ewaffle queda invisible en el backend, tus usuarios solo ven tu marca."
+  },
+  {
+    question: "¿Cuántos usuarios puede soportar la plataforma LMS?",
+    answer: "Nuestra plataforma es escalable desde 10 hasta 10,000+ usuarios. Se adapta al crecimiento de tu organización sin problemas de rendimiento."
+  },
+  
+  // Chatbots IA
+  {
+    question: "¿Cómo funcionan los chatbots IA para cursos?",
+    answer: "Utilizamos tecnología RAG (Retrieval Augmented Generation) que permite a los chatbots responder preguntas basándose en el contenido de tus cursos. Los chatbots están disponibles 24/7, reducen la carga de soporte en hasta 80% y mejoran la experiencia de aprendizaje."
+  },
+  {
+    question: "¿Puedo entrenar el chatbot con mi propio contenido?",
+    answer: "Sí, el chatbot se entrena específicamente con el contenido de tus cursos y materiales. Puedes actualizar la información cuando quieras y el chatbot aprenderá automáticamente."
+  },
+  
+  // Gamificación
+  {
+    question: "¿Qué incluye el sistema de gamificación?",
+    answer: "Nuestro sistema incluye puntos, badges, rankings, contenido desbloqueable tipo videojuego, progresión por niveles y logros. Esto aumenta el engagement hasta 3x y mejora las tasas de finalización de cursos."
+  },
+  {
+    question: "¿La gamificación funciona con cualquier LMS?",
+    answer: "Sí, nuestro sistema de gamificación puede integrarse con la mayoría de plataformas LMS del mercado, o puedes usar nuestra plataforma LMS que ya incluye gamificación nativa."
+  },
+  
+  // Producción Multimedia
+  {
+    question: "¿Qué tipos de contenido multimedia pueden producir?",
+    answer: "Producimos videos profesionales, contenido interactivo (Genially, H5P), audio de alta calidad con text-to-speech, diseño gráfico, animaciones y más. Todo adaptado a tus necesidades educativas."
+  },
+  {
+    question: "¿Cuánto tiempo toma producir contenido multimedia?",
+    answer: "Depende del tipo y complejidad del contenido. Videos simples pueden estar listos en 1-2 semanas, mientras que proyectos más complejos pueden tomar 3-4 semanas. Siempre trabajamos con plazos acordados previamente."
+  },
+  
+  // Certificaciones
+  {
+    question: "¿Cómo funcionan las certificaciones digitales?",
+    answer: "Ofrecemos un sistema completo de certificaciones digitales verificables, con cumplimiento normativo (SENCE en Chile, y otros estándares según el país). Las certificaciones incluyen códigos QR para verificación y pueden personalizarse con tu marca."
+  },
+  
+  // General
   {
     question: "¿Qué pasa si no estoy satisfecho con el resultado?",
     answer: "Ofrecemos garantía de 6 meses de soporte y ajustes ilimitados. Si no estás 100% satisfecho, trabajamos hasta que lo estés. Tu éxito es nuestro éxito."
@@ -24,11 +77,15 @@ const faqs: FAQItem[] = [
   {
     question: "¿Puedo cancelar o cambiar el proyecto en cualquier momento?",
     answer: "Sí, puedes cancelar en cualquier momento sin penalización. Trabajamos por fases, por lo que solo pagas por lo que ya está entregado y aprobado."
+  },
+  {
+    question: "¿Atienden empresas fuera de Chile?",
+    answer: "Sí, trabajamos con empresas en toda Latinoamérica. Nuestras soluciones están diseñadas para funcionar en cualquier país de la región, adaptándonos a las normativas locales cuando sea necesario."
   }
 ];
 ---
 
-<section class="py-20 bg-white relative overflow-hidden">
+<section class="py-20 bg-gray-50 relative overflow-hidden">
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-5 pointer-events-none">
     <img src="/assets/patronblancofullopacidad.png" alt="" class="w-full h-full object-cover" />
@@ -37,7 +94,7 @@ const faqs: FAQItem[] = [
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-        💬 Preguntas Frecuentes
+        💬 Resolvemos tus dudas
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
         Resolvemos las dudas más comunes que podrían estar frenando tu decisión

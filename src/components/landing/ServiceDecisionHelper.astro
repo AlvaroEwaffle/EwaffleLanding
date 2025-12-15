@@ -1,0 +1,172 @@
+---
+// Interactive guide to help visitors determine which service they need
+---
+
+<section class="py-20 bg-white relative overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        🤔 ¿Qué Servicio Necesitas?
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        Responde estas preguntas y te ayudaremos a encontrar la solución perfecta para tu organización
+      </p>
+      <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <!-- Decision Helper Form -->
+      <div id="decision-helper" class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <!-- Question 1 -->
+        <div id="question-1" class="question-block">
+          <h3 class="text-2xl font-bold text-primary mb-6">1. ¿Cuál es tu principal necesidad?</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button 
+              data-answer="courses" 
+              class="answer-btn p-6 bg-gray-50 rounded-xl hover:bg-accent/10 hover:border-accent border-2 border-transparent transition-all duration-300 text-left"
+            >
+              <div class="text-2xl mb-2">📚</div>
+              <div class="font-semibold text-primary mb-1">Crear cursos digitales</div>
+              <div class="text-sm text-gray-600">Transformar contenido existente en cursos online</div>
+            </button>
+            <button 
+              data-answer="platform" 
+              class="answer-btn p-6 bg-gray-50 rounded-xl hover:bg-accent/10 hover:border-accent border-2 border-transparent transition-all duration-300 text-left"
+            >
+              <div class="text-2xl mb-2">💻</div>
+              <div class="font-semibold text-primary mb-1">Plataforma de aprendizaje</div>
+              <div class="text-sm text-gray-600">Necesito una plataforma LMS completa</div>
+            </button>
+            <button 
+              data-answer="ai" 
+              class="answer-btn p-6 bg-gray-50 rounded-xl hover:bg-accent/10 hover:border-accent border-2 border-transparent transition-all duration-300 text-left"
+            >
+              <div class="text-2xl mb-2">🤖</div>
+              <div class="font-semibold text-primary mb-1">Asistentes IA</div>
+              <div class="text-sm text-gray-600">Chatbots o asistentes inteligentes para cursos</div>
+            </button>
+            <button 
+              data-answer="multimedia" 
+              class="answer-btn p-6 bg-gray-50 rounded-xl hover:bg-accent/10 hover:border-accent border-2 border-transparent transition-all duration-300 text-left"
+            >
+              <div class="text-2xl mb-2">🎬</div>
+              <div class="font-semibold text-primary mb-1">Producción multimedia</div>
+              <div class="text-sm text-gray-600">Videos, interactivos o audio profesional</div>
+            </button>
+            <button 
+              data-answer="certification" 
+              class="answer-btn p-6 bg-gray-50 rounded-xl hover:bg-accent/10 hover:border-accent border-2 border-transparent transition-all duration-300 text-left"
+            >
+              <div class="text-2xl mb-2">📜</div>
+              <div class="font-semibold text-primary mb-1">Certificaciones</div>
+              <div class="text-sm text-gray-600">Sistema de certificaciones digitales</div>
+            </button>
+            <button 
+              data-answer="enterprise" 
+              class="answer-btn p-6 bg-gray-50 rounded-xl hover:bg-accent/10 hover:border-accent border-2 border-transparent transition-all duration-300 text-left"
+            >
+              <div class="text-2xl mb-2">🏢</div>
+              <div class="font-semibold text-primary mb-1">Solución empresarial completa</div>
+              <div class="text-sm text-gray-600">Infraestructura completa para grandes organizaciones</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-8 border border-primary/20">
+            <h3 class="text-2xl font-bold text-primary mb-4">💡 Recomendación:</h3>
+            <div id="recommendation-content" class="text-gray-700 mb-6"></div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="#contact"
+                class="inline-flex items-center justify-center px-6 py-3 bg-accent text-white rounded-full font-semibold hover:bg-accent/90 transition-all duration-300"
+              >
+                Conversar sobre esta Solución
+              </a>
+              <button 
+                id="restart-btn"
+                class="inline-flex items-center justify-center px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 transition-all duration-300"
+              >
+                Volver a Empezar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const recommendations = {
+    courses: {
+      title: "Cursos Gamificados SCORM",
+      description: "Perfecto para ti. Podemos transformar tu contenido (PDFs, PowerPoints) en cursos SCORM gamificados con IA. Ideal si ya tienes contenido y quieres digitalizarlo rápidamente.",
+      link: "#contact"
+    },
+    platform: {
+      title: "Plataforma LMS",
+      description: "Nuestra plataforma LMS completa es ideal para ti. Incluye gestión de usuarios, desafíos, gamificación, seguimiento de progreso y más. Escalable desde 10 hasta 10,000+ usuarios.",
+      link: "/lms"
+    },
+    ai: {
+      title: "Chatbots IA",
+      description: "Nuestros chatbots con tecnología RAG son perfectos para tu necesidad. Asistentes inteligentes 24/7 que responden preguntas basándose en tu contenido educativo.",
+      link: "/ia-chatbots"
+    },
+    multimedia: {
+      title: "Producción Multimedia",
+      description: "Nuestro servicio de producción multimedia es lo que necesitas. Videos profesionales, contenido interactivo (Genially, H5P), audio de alta calidad y diseño gráfico.",
+      link: "/multimedia"
+    },
+    certification: {
+      title: "Certificaciones Digitales",
+      description: "Nuestro sistema de certificaciones digitales es perfecto para ti. Certificados verificables con códigos QR, cumplimiento normativo y credenciales profesionales.",
+      link: "/certificaciones"
+    },
+    enterprise: {
+      title: "Soluciones Empresariales",
+      description: "Nuestra suite empresarial completa es ideal para tu organización. Incluye LMS escalable, CRM, gestión de leads, catálogo de recursos, cotizaciones y más.",
+      link: "/soluciones-empresariales"
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    const resultsDiv = document.getElementById('results');
+    const recommendationContent = document.getElementById('recommendation-content');
+    const restartBtn = document.getElementById('restart-btn');
+
+    answerButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.getAttribute('data-answer');
+        const recommendation = recommendations[answer];
+
+        if (recommendation) {
+          recommendationContent.innerHTML = `
+            <h4 class="text-xl font-bold text-primary mb-3">${recommendation.title}</h4>
+            <p class="text-lg mb-4">${recommendation.description}</p>
+          `;
+          resultsDiv.classList.remove('hidden');
+          resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+
+    if (restartBtn) {
+      restartBtn.addEventListener('click', () => {
+        resultsDiv.classList.add('hidden');
+        document.getElementById('question-1').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  });
+</script>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+

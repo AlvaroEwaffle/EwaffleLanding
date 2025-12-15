@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import CTA from '../components/landing/CTA.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Producción Multimedia E-learning | Ewaffle - Videos, Interactivos y Audio";
+const description = "Producción multimedia profesional para e-learning: videos, contenido interactivo (Genially, H5P), audio de alta calidad, diseño gráfico y animaciones. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/multimedia";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "producción multimedia e-learning, videos educativos, contenido interactivo, Genially, H5P, audio profesional, diseño gráfico educativo, producción multimedia Chile, producción multimedia Latinoamérica, text to speech español";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Service Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Producción Multimedia E-learning",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamérica"
+      },
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
+      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex justify-center">
+          <img 
+            src="/assets/logoprimario.png" 
+            alt="Ewaffle Logo" 
+            class="w-64 h-auto object-contain"
+          />
+        </div>
+
+        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
+          🎬 Producción Multimedia Profesional
+        </h1>
+        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
+          Videos, contenido interactivo, audio de alta calidad y diseño gráfico. Contenido multimedia que engancha y convierte.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a 
+            href="#contact" 
+            class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
+          >
+            Solicitar Cotización
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🎨 Servicios de Producción Multimedia
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Todo lo que necesitas para crear contenido educativo impactante
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <!-- Video Production -->
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-primary/20">
+            <div class="text-5xl mb-4">📹</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Producción de Video</h3>
+            <p class="text-gray-700 mb-4">Videos educativos profesionales con:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Grabación y edición profesional</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Animaciones y gráficos explicativos</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Subtítulos y transcripciones</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Optimización para web y móvil</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Interactive Content -->
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">🎯</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Contenido Interactivo</h3>
+            <p class="text-gray-700 mb-4">Experiencias interactivas con:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Genially - Presentaciones interactivas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>H5P - Actividades interactivas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Quizzes y evaluaciones interactivas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Simulaciones y escenarios</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Audio Production -->
+          <div class="bg-gradient-to-br from-secondary/10 to-yellow/10 p-8 rounded-2xl shadow-lg border border-secondary/20">
+            <div class="text-5xl mb-4">🎤</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Producción de Audio</h3>
+            <p class="text-gray-700 mb-4">Audio profesional con:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Text-to-Speech de alta calidad</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Voces naturales en español</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Edición y post-producción</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Múltiples voces disponibles</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Graphic Design -->
+          <div class="bg-gradient-to-br from-yellow/10 to-primary/10 p-8 rounded-2xl shadow-lg border border-yellow/20">
+            <div class="text-5xl mb-4">🎨</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Diseño Gráfico</h3>
+            <p class="text-gray-700 mb-4">Diseño visual profesional:</p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Infografías y diagramas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Ilustraciones personalizadas</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Branding y identidad visual</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Materiales de apoyo visual</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🔄 Nuestro Proceso
+          </h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="space-y-8">
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">1</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Brief y Planificación</h3>
+                <p class="text-gray-600 text-lg">Analizamos tus necesidades, objetivos y audiencia. Creamos un plan detallado de producción.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">2</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Producción</h3>
+                <p class="text-gray-600 text-lg">Nuestro equipo de profesionales crea el contenido multimedia según las especificaciones acordadas.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">3</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Revisión y Ajustes</h3>
+                <p class="text-gray-600 text-lg">Revisamos el contenido contigo y realizamos los ajustes necesarios hasta que esté perfecto.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">4</div>
+              <div>
+                <h3 class="text-2xl font-bold text-primary mb-3">Entrega Final</h3>
+                <p class="text-gray-600 text-lg">Entregamos el contenido final en los formatos necesarios, listo para usar en tu plataforma LMS.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            💡 ¿Por qué Producción Multimedia Profesional?
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-primary mb-3">🎯 Mayor Engagement</h3>
+            <p class="text-gray-600">El contenido multimedia aumenta significativamente la participación y retención de los estudiantes.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-primary mb-3">⚡ Ahorro de Tiempo</h3>
+            <p class="text-gray-600">Nosotros nos encargamos de toda la producción, tú te enfocas en vender y enseñar.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-primary mb-3">💼 Calidad Profesional</h3>
+            <p class="text-gray-600">Contenido de calidad profesional que refleja la seriedad de tu organización.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-primary mb-3">📈 Mejor Conversión</h3>
+            <p class="text-gray-600">El contenido multimedia profesional aumenta las tasas de conversión y ventas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTA 
+      title="🎬 ¿Listo para crear contenido multimedia profesional?"
+      subtitle="Transforma tus cursos con videos, interactivos y audio de alta calidad"
+      buttonText="Solicitar Cotización"
+    />
+
+    <!-- Contact Section -->
+    <Contact />
+
+    <!-- Final CTA -->
+    <CTA 
+      title="💬 ¿Quieres saber más sobre producción multimedia?"
+      subtitle="Conversemos sobre cómo podemos crear contenido impactante para tus cursos"
+      buttonText="Agendar Consultoría Gratuita"
+    />
+
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+

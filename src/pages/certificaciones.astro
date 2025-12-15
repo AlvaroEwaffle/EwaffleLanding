@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import CTA from '../components/landing/CTA.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Certificaciones Digitales | Ewaffle - Sistema de Credenciales Verificables";
+const description = "Sistema completo de certificaciones digitales verificables con códigos QR, cumplimiento normativo (SENCE y otros), y credenciales profesionales personalizables. Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/certificaciones";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "certificaciones digitales, certificados verificables, credenciales digitales, certificaciones QR, certificaciones SENCE, certificaciones Chile, certificaciones Latinoamérica, certificados profesionales, blockchain certificados";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="CL" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Schema.org Service Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Certificaciones Digitales",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamérica"
+      },
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
+      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex justify-center">
+          <img 
+            src="/assets/logoprimario.png" 
+            alt="Ewaffle Logo" 
+            class="w-64 h-auto object-contain"
+          />
+        </div>
+
+        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
+          📜 Certificaciones Digitales Verificables
+        </h1>
+        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
+          Sistema completo de certificaciones profesionales con verificación instantánea, cumplimiento normativo y credenciales reconocidas.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a 
+            href="#contact" 
+            class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
+          >
+            Solicitar Información
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            ✨ Características del Sistema
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Todo lo que necesitas para gestionar certificaciones profesionales
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-primary/20">
+            <div class="text-5xl mb-4">🔍</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Verificación Instantánea</h3>
+            <p class="text-gray-700">Códigos QR únicos en cada certificado permiten verificación instantánea de autenticidad y validez.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">📋</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Cumplimiento Normativo</h3>
+            <p class="text-gray-700">Cumple con estándares SENCE (Chile) y otras normativas regionales según el país.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary/10 to-yellow/10 p-8 rounded-2xl shadow-lg border border-secondary/20">
+            <div class="text-5xl mb-4">🎨</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Personalización Completa</h3>
+            <p class="text-gray-700">Diseño personalizado con tu logo, colores e identidad visual. Certificados únicos para tu marca.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-yellow/10 to-primary/10 p-8 rounded-2xl shadow-lg border border-yellow/20">
+            <div class="text-5xl mb-4">📊</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Gestión Centralizada</h3>
+            <p class="text-gray-700">Panel de administración para emitir, gestionar y rastrear todas tus certificaciones.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-primary/20">
+            <div class="text-5xl mb-4">🔐</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Seguridad Avanzada</h3>
+            <p class="text-gray-700">Protección contra falsificación con tecnologías de seguridad avanzadas y encriptación.</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">📱</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">Acceso Digital</h3>
+            <p class="text-gray-700">Certificados disponibles en formato digital para compartir fácilmente en LinkedIn, CV y portafolios.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            🎯 Casos de Uso
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-bold text-primary mb-4">🎓 Certificaciones de Cursos</h3>
+            <p class="text-gray-600">Emite certificados de finalización para estudiantes que completan tus cursos online o presenciales.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-bold text-primary mb-4">🏢 Capacitación Corporativa</h3>
+            <p class="text-gray-600">Certifica a empleados que completan programas de capacitación interna, compliance o desarrollo profesional.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-bold text-primary mb-4">📚 Programas de Certificación</h3>
+            <p class="text-gray-600">Gestiona programas completos de certificación profesional con múltiples niveles y requisitos.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-bold text-primary mb-4">🏅 Reconocimientos y Logros</h3>
+            <p class="text-gray-600">Reconoce logros especiales, competencias adquiridas o participación en programas específicos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            💡 Beneficios Clave
+          </h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="space-y-6">
+            <div class="bg-gradient-to-r from-primary/10 to-accent/10 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-primary mb-2">✅ Credibilidad y Reconocimiento</h3>
+              <p class="text-gray-600">Las certificaciones verificables aumentan la credibilidad de tus programas y el reconocimiento profesional de tus estudiantes.</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-accent/10 to-secondary/10 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-primary mb-2">📈 Mayor Valor Percibido</h3>
+              <p class="text-gray-600">Los cursos con certificación tienen mayor valor percibido y pueden justificar precios más altos.</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-secondary/10 to-yellow/10 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-primary mb-2">🎯 Motivación del Estudiante</h3>
+              <p class="text-gray-600">Las certificaciones motivan a los estudiantes a completar los cursos y alcanzar los objetivos de aprendizaje.</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-yellow/10 to-primary/10 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-primary mb-2">🔍 Trazabilidad Completa</h3>
+              <p class="text-gray-600">Sistema completo de trazabilidad que permite verificar quién completó qué y cuándo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTA 
+      title="📜 ¿Listo para implementar certificaciones digitales?"
+      subtitle="Transforma tus programas educativos con un sistema completo de certificaciones verificables"
+      buttonText="Solicitar Información"
+    />
+
+    <!-- Contact Section -->
+    <Contact />
+
+    <!-- Final CTA -->
+    <CTA 
+      title="💬 ¿Quieres saber más sobre certificaciones?"
+      subtitle="Conversemos sobre cómo podemos implementar un sistema de certificaciones para tu organización"
+      buttonText="Agendar Consultoría Gratuita"
+    />
+
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+

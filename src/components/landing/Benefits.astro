@@ -13,8 +13,33 @@ const benefits: Benefit[] = [
   },
   {
     title: "Sin Equipo Interno",
-    description: "Implementación completa en 2 semanas, sin contratar desarrolladores",
+    description: "Implementación completa en 4 semanas, sin contratar desarrolladores",
     icon: "👥"
+  },
+  {
+    title: "Plataforma LMS Completa",
+    description: "Tu propia plataforma de aprendizaje escalable desde 10 hasta 10,000+ usuarios",
+    icon: "💻"
+  },
+  {
+    title: "Chatbots IA 24/7",
+    description: "Asistentes inteligentes que reducen carga de soporte en 80% y mejoran experiencia",
+    icon: "🤖"
+  },
+  {
+    title: "Gamificación Avanzada",
+    description: "Sistemas de puntos, badges y rankings que aumentan engagement 3x",
+    icon: "🎮"
+  },
+  {
+    title: "Producción Multimedia",
+    description: "Videos profesionales, contenido interactivo y audio de alta calidad",
+    icon: "🎬"
+  },
+  {
+    title: "Certificaciones Digitales",
+    description: "Sistema completo de certificaciones verificables y cumplimiento normativo",
+    icon: "📜"
   },
   {
     title: "Cumple SENCE",
@@ -22,14 +47,14 @@ const benefits: Benefit[] = [
     icon: "📋"
   },
   {
-    title: "Engagement 3x Mayor",
-    description: "Gamificación con IA que mantiene a los estudiantes motivados",
-    icon: "🎮"
-  },
-  {
     title: "100% Marca Blanca",
     description: "Tu logo e identidad, Ewaffle invisible en el backend",
     icon: "🏷️"
+  },
+  {
+    title: "Soporte Internacional",
+    description: "Servimos a empresas en Chile y toda Latinoamérica",
+    icon: "🌎"
   }
 ];
 ---
@@ -43,7 +68,7 @@ const benefits: Benefit[] = [
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-        🎯 ¿Por qué elegir Ewaffle?
+        🎯 Por qué trabajar con nosotros
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
         Resultados concretos que transforman tu negocio educativo
@@ -51,22 +76,50 @@ const benefits: Benefit[] = [
       <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+    <!-- Benefits Compact Column Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
       {
-        benefits.map((benefit, index) => (
-          <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
-            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">{benefit.icon}</div>
-            <h3 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
-              {benefit.title}
-            </h3>
-            <p class="text-gray-600 text-base leading-relaxed">
-              {benefit.description}
-            </p>
-            
-            <!-- Decorative Element -->
-            <div class="mt-4 w-10 h-1 bg-accent/30 rounded-full group-hover:bg-accent transition-all duration-300"></div>
-          </div>
-        ))
+        benefits.map((benefit, index) => {
+          const gradientColors = [
+            "from-primary/10 via-accent/5 to-transparent",
+            "from-accent/10 via-secondary/5 to-transparent",
+            "from-secondary/10 via-yellow/5 to-transparent",
+            "from-yellow/10 via-primary/5 to-transparent",
+            "from-primary/10 via-accent/5 to-transparent",
+            "from-accent/10 via-secondary/5 to-transparent",
+            "from-secondary/10 via-yellow/5 to-transparent",
+            "from-yellow/10 via-primary/5 to-transparent",
+            "from-primary/10 via-accent/5 to-transparent",
+            "from-accent/10 via-secondary/5 to-transparent"
+          ];
+          const bgGradient = gradientColors[index % gradientColors.length];
+          
+          return (
+            <div class={`group relative bg-gradient-to-br ${bgGradient} rounded-xl p-5 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-accent/30 hover:-translate-y-1`}>
+              <!-- Icon and Title Row -->
+              <div class="flex items-start gap-4 mb-3">
+                <!-- Icon Circle -->
+                <div class="flex-shrink-0">
+                  <div class="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center text-2xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    {benefit.icon}
+                  </div>
+                </div>
+                
+                <!-- Title -->
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-lg font-bold text-primary mb-1 group-hover:text-accent transition-colors duration-300 leading-tight">
+                    {benefit.title}
+                  </h3>
+                </div>
+              </div>
+              
+              <!-- Description -->
+              <p class="text-gray-700 text-sm leading-relaxed pl-16">
+                {benefit.description}
+              </p>
+            </div>
+          );
+        })
       }
     </div>
     

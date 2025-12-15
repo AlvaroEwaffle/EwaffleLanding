@@ -1,0 +1,155 @@
+---
+import { Image } from "astro:assets";
+import AlvaroImage from "../../assets/Alvaro.png";
+import JohanaImage from "../../assets/Johana.png";
+import AaronImage from "../../assets/Aaron.png";
+
+interface TeamMember {
+  name: string;
+  role: string;
+  image: any;
+  imageAlt: string;
+  description: string;
+  expertise: string[];
+  gradient: string;
+}
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Johana Tapia",
+    role: "Fundadora de Ewaffle - Especialista en estrategias de aprendizaje digital",
+    image: JohanaImage,
+    imageAlt: "Johana Tapia - Fundadora y Directora de Contenidos de Ewaffle",
+    description: "Especializada en metodologías innovadoras para el aprendizaje digital, su enfoque garantiza que cada curso sea atractivo y efectivo.",
+    expertise: [
+      "Experta en diseño de experiencias de aprendizaje",
+      "Desarrollo de currículos y materiales didácticos",
+      "Innovación en formatos multimedia para educación"
+    ],
+    gradient: "from-secondary to-secondary"
+  },
+  {
+    name: "Álvaro Villena",
+    role: "CEO & Fundador - Experto en innovación digital",
+    image: AlvaroImage,
+    imageAlt: "Álvaro Villena - CEO & Fundador de Ewaffle",
+    description: "Especialista en transformación digital, con experiencia en metodologías innovadoras y tecnologías de última generación.",
+    expertise: [
+      "Más de 15 años liderando proyectos de innovación digital",
+      "Especialista en diseño instruccional y desarrollo de contenidos",
+      "Experto en tecnologías de aprendizaje y herramientas IA"
+    ],
+    gradient: "from-primary to-primary"
+  },
+  {
+    name: "Aaron Flores",
+    role: "Experto en tecnologías de aprendizaje",
+    image: AaronImage,
+    imageAlt: "Aaron Flores - Líder de proyectos eLearning de Ewaffle",
+    description: "Especializado en diseño instruccional multimedia, desarrollo de cursos virtuales y gestión de proyectos educativos.",
+    expertise: [
+      "Diseño instruccional y desarrollo de cursos virtuales",
+      "Integración de herramientas de última generación",
+      "Optimización de la experiencia de usuario"
+    ],
+    gradient: "from-accent to-accent"
+  }
+];
+---
+
+<section class="py-20 bg-gray-50 relative overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5 pointer-events-none">
+    <img src="/assets/patronblancobajaopacidad.png" alt="" class="w-full h-full object-cover" />
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        👥 Conoce Nuestro Equipo
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        Expertos en aprendizaje digital y transformación educativa
+      </p>
+      <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Team Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {teamMembers.map((member) => (
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden">
+          <!-- Image Section -->
+          <div class="relative h-80 overflow-hidden">
+            <div class={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-20`}></div>
+            <Image
+              src={member.image}
+              alt={member.imageAlt}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              width={400}
+              height={320}
+              quality={90}
+              format="webp"
+            />
+            <!-- Floating Elements -->
+            <div class="absolute top-4 right-4 w-12 h-12 bg-accent/20 rounded-full blur-lg animate-pulse"></div>
+            <div class="absolute bottom-4 left-4 w-16 h-16 bg-yellow/20 rounded-full blur-lg animate-pulse" style="animation-delay: 1s;"></div>
+          </div>
+
+          <!-- Content Section -->
+          <div class="p-6">
+            <!-- Name and Role -->
+            <div class="mb-4">
+              <h3 class="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors duration-300">
+                {member.name}
+              </h3>
+              <p class="text-accent font-semibold text-sm leading-relaxed">
+                {member.role}
+              </p>
+            </div>
+
+            <!-- Description -->
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              {member.description}
+            </p>
+
+            <!-- Expertise -->
+            <div class="space-y-2">
+              {member.expertise.map((item) => (
+                <div class="flex items-start space-x-2">
+                  <div class="w-4 h-4 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <span class="text-xs text-gray-600 leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-12">
+      <p class="text-gray-600 mb-6 text-lg">
+        ¿Quieres trabajar con nuestro equipo?
+      </p>
+      <a 
+        href="#contact"
+        class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+      >
+        Conversemos sobre tu Proyecto
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+
