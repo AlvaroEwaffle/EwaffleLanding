@@ -106,22 +106,33 @@ const faqs: FAQItem[] = [
       <div class="grid gap-6">
         {
           faqs.map((faq, index) => (
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
-              <div class="p-8">
-                <div class="flex items-start">
+            <div class="faq-item bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
+              <button
+                class="faq-question w-full p-8 text-left flex items-start justify-between group"
+                aria-expanded="false"
+                data-faq-index={index}
+              >
+                <div class="flex items-start flex-1">
                   <div class="flex-shrink-0 mt-1">
                     <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
                       <span class="text-accent text-xl font-bold">{index + 1}</span>
                     </div>
                   </div>
-                  <div class="ml-6">
-                    <h3 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
+                  <div class="ml-6 flex-1">
+                    <h3 class="text-xl font-bold text-primary group-hover:text-accent transition-colors duration-300">
                       {faq.question}
                     </h3>
-                    <p class="text-gray-600 leading-relaxed text-lg">
-                      {faq.answer}
-                    </p>
                   </div>
+                </div>
+                <div class="flex-shrink-0 ml-4">
+                  <i class="ri-arrow-down-s-line faq-icon text-2xl text-gray-400 group-hover:text-accent transition-all duration-300"></i>
+                </div>
+              </button>
+              <div class="faq-answer overflow-hidden">
+                <div class="px-8 pb-8 pl-14 md:pl-20">
+                  <p class="text-gray-600 leading-relaxed text-lg">
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             </div>
@@ -132,4 +143,82 @@ const faqs: FAQItem[] = [
     
 
   </div>
-</section> 
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach((item) => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const icon = item.querySelector('.faq-icon');
+      
+      if (!question || !answer || !icon) return;
+      
+      // Set initial state (closed)
+      answer.style.maxHeight = '0';
+      answer.style.opacity = '0';
+      
+      question.addEventListener('click', () => {
+        const isExpanded = question.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherQuestion = otherItem.querySelector('.faq-question');
+            const otherAnswer = otherItem.querySelector('.faq-answer');
+            const otherIcon = otherItem.querySelector('.faq-icon');
+            
+            if (otherQuestion && otherAnswer && otherIcon) {
+              otherQuestion.setAttribute('aria-expanded', 'false');
+              otherAnswer.style.maxHeight = '0';
+              otherAnswer.style.opacity = '0';
+              otherIcon.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+        
+        // Toggle current item
+        if (isExpanded) {
+          question.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = '0';
+          answer.style.opacity = '0';
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          question.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          answer.style.opacity = '1';
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .faq-question {
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .faq-question:focus {
+    outline: 2px solid var(--accent-color, #FF6B6B);
+    outline-offset: -2px;
+    border-radius: 1rem;
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  }
+  
+  .faq-icon {
+    transition: transform 0.3s ease-out;
+  }
+  
+  .container {
+    max-width: 1200px;
+  }
+</style> 

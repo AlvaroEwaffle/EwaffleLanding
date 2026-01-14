@@ -45,7 +45,7 @@ Servicio extra: desde eWaffle podemos ayudarte en el diseño de tu producto digi
 🔹 Mini guía PDF con pasos siguientes + checklist
 🔹 Soporte por WhatsApp durante 7 días posteriores a la sesión
 
-Valor: 150.000 CLP.
+Valor: 250 USD.
 
 
 

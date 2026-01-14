@@ -166,6 +166,11 @@
             ></textarea>
           </div>
 
+          <!-- reCAPTCHA -->
+          <div class="flex justify-center">
+            <div id="recaptcha-container" class="g-recaptcha" data-sitekey="6LdreEosAAAAAO41BIpcr_nzGac9Bz4vdv3ZoKs4"></div>
+          </div>
+
           <!-- Submit Button -->
           <div class="flex justify-center">
             <button
@@ -183,6 +188,9 @@
   </div>
 </section>
 
+<!-- reCAPTCHA v2 Script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <!-- EmailJS SDK -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
@@ -191,6 +199,25 @@
   (function() {
     emailjs.init("K-nZvIRLeVaUXubMu"); // Replace with your EmailJS public key
   })();
+
+  // Helper function to get reCAPTCHA response
+  function getRecaptchaResponse() {
+    return new Promise((resolve, reject) => {
+      // Wait for reCAPTCHA to be ready
+      if (typeof grecaptcha === 'undefined') {
+        reject(new Error('reCAPTCHA no está cargado'));
+        return;
+      }
+
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        reject(new Error('Por favor, completa el reCAPTCHA'));
+        return;
+      }
+
+      resolve(recaptchaResponse);
+    });
+  }
 
   // Form submission handler
   const form = document.getElementById('contact-form');
@@ -201,6 +228,15 @@
     
     if (!form || !submitButton) return;
 
+    // Validate reCAPTCHA first
+    let recaptchaToken;
+    try {
+      recaptchaToken = await getRecaptchaResponse();
+    } catch (error) {
+      alert(error.message || 'Por favor, completa el reCAPTCHA para continuar.');
+      return;
+    }
+
     // Disable submit button and show loading state
     const buttonText = submitButton.querySelector('span');
     const buttonIcon = submitButton.querySelector('i');
@@ -210,24 +246,55 @@
     buttonIcon.className = 'ri-loader-4-line ml-2 animate-spin';
     
     try {
+      // Get form data
+      const firstName = form.firstName.value;
+      const lastName = form.lastName.value;
+      const email = form.email.value;
+      const phone = form.phone.value || '';
+      const name = `${firstName} ${lastName}`.trim();
+      
       // Get selected services
       const selectedServices = Array.from(form.querySelectorAll('input[name="services[]"]:checked'))
         .map(checkbox => checkbox.value)
         .join(', ');
 
-      // Prepare template parameters
+      // Prepare template parameters for EmailJS
       const templateParams = {
-        firstName: form.firstName.value,
-        lastName: form.lastName.value,
-        email: form.email.value,
-        phone: form.phone.value,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
         company: form.company.value,
         role: form.role.value,
         services: selectedServices,
-        message: form.message.value
+        message: form.message.value,
+        recaptchaToken: recaptchaToken
       };
 
-      // Send email using EmailJS
+      // Send POST request to API
+      const API_ENDPOINT = 'https://api.fidelidapp.cl/api/mcp/clients/add';
+      const apiResponse = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-MCP-API-Key': '1000782937f7872abdc0e4fadc467bbcea6b353420aed09c29f036f3b0fa2056'
+        },
+        body: JSON.stringify({
+          slug: 'ewaffle',
+          clientData: {
+            name: name,
+            email: email,
+            phoneNumber: phone || ''
+          }
+        })
+      });
+
+      // Check if API request was successful
+      if (!apiResponse.ok) {
+        console.warn('API request failed, but continuing with email send');
+      }
+
+      // Send email using EmailJS (in parallel)
       await emailjs.send(
         'service_d08f3xv', // Replace with your EmailJS service ID
         'template_b6dnfrh', // Replace with your EmailJS template ID
@@ -238,9 +305,19 @@
       alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
       form.reset();
       
+      // Reset reCAPTCHA
+      if (typeof grecaptcha !== 'undefined') {
+        grecaptcha.reset();
+      }
+      
     } catch (error) {
       console.error('Error:', error);
       alert('Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
+      
+      // Reset reCAPTCHA on error
+      if (typeof grecaptcha !== 'undefined') {
+        grecaptcha.reset();
+      }
     } finally {
       // Reset button state
       submitButton.disabled = false;
@@ -266,5 +343,21 @@
 
   .animate-spin {
     animation: spin 1s linear infinite;
+  }
+
+  #recaptcha-container {
+    margin: 1rem 0;
+  }
+
+  /* Ensure reCAPTCHA widget is responsive */
+  .g-recaptcha {
+    display: inline-block;
+  }
+
+  @media (max-width: 640px) {
+    .g-recaptcha {
+      transform: scale(0.85);
+      transform-origin: 0 0;
+    }
   }
 </style> 
