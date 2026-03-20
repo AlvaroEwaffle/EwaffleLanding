@@ -13,41 +13,26 @@
 
       <!-- Contact Form -->
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <form 
+        <form
           class="space-y-6"
           id="contact-form"
         >
-          <!-- Name Fields -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
-                Nombre *
-              </label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                required
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
-                placeholder="Tu nombre"
-              />
-            </div>
-            <div>
-              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
-                Apellido *
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                required
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
-                placeholder="Tu apellido"
-              />
-            </div>
+          <!-- Nombre -->
+          <div>
+            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
+              Nombre *
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              required
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
+              placeholder="Tu nombre"
+            />
           </div>
 
-          <!-- Contact Info -->
+          <!-- Email y Teléfono -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
@@ -76,93 +61,41 @@
             </div>
           </div>
 
-          <!-- Company Info -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label for="company" class="block text-sm font-medium text-gray-700 mb-1">
-                Empresa *
-              </label>
-              <input
-                type="text"
-                name="company"
-                id="company"
-                required
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
-                placeholder="Nombre de tu empresa"
-              />
-            </div>
-            <div>
-              <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
-                Cargo *
-              </label>
-              <input
-                type="text"
-                name="role"
-                id="role"
-                required
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
-                placeholder="Tu cargo en la empresa"
-              />
-            </div>
-          </div>
-
-          <!-- Services Interest -->
+          <!-- Servicio de interés (dropdown) -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-              Servicios de interés *
+            <label for="service" class="block text-sm font-medium text-gray-700 mb-1">
+              Servicio de interés
             </label>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="cursos_gamificados" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Cursos Gamificados SCORM</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="plataforma_lms" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Plataforma LMS</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="chatbots_ia" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Chatbots IA / Asistentes IA</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="gamificacion" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Gamificación Avanzada</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="produccion_multimedia" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Producción Multimedia</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="certificaciones" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Certificaciones Digitales</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="diseño_instruccional" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Diseño Instruccional</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="soluciones_empresariales" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Soluciones Empresariales</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" name="services[]" value="curso_ia_elearning" class="text-primary rounded focus:ring-primary" />
-                <span class="text-gray-700">Curso en Vivo: IA para E-learning</span>
-              </label>
-            </div>
+            <select
+              name="service"
+              id="service"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200 bg-white"
+            >
+              <option value="">Selecciona un servicio (opcional)</option>
+              <option value="cursos_gamificados">Cursos Gamificados SCORM</option>
+              <option value="plataforma_lms">Plataforma LMS</option>
+              <option value="chatbots_ia">Chatbots IA / Asistentes IA</option>
+              <option value="gamificacion">Gamificación Avanzada</option>
+              <option value="produccion_multimedia">Producción Multimedia</option>
+              <option value="certificaciones">Certificaciones Digitales</option>
+              <option value="diseño_instruccional">Diseño Instruccional</option>
+              <option value="soluciones_empresariales">Soluciones Empresariales</option>
+              <option value="curso_ia_elearning">Curso en Vivo: IA para E-learning</option>
+            </select>
           </div>
 
-          <!-- Message -->
+          <!-- Mensaje -->
           <div>
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
-              Mensaje *
+            <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">
+              Cuéntanos qué necesitas *
             </label>
             <textarea
-              name="message"
-              id="message"
+              name="mensaje"
+              id="mensaje"
               required
-              rows="4"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
-              placeholder="Cuéntanos sobre tu proyecto o necesidades de capacitación..."
+              rows="5"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200 resize-none"
+              placeholder="Describe brevemente qué necesitas de nosotros..."
             ></textarea>
           </div>
 
@@ -197,13 +130,12 @@
 <script>
   // Initialize EmailJS
   (function() {
-    emailjs.init("K-nZvIRLeVaUXubMu"); // Replace with your EmailJS public key
+    emailjs.init("K-nZvIRLeVaUXubMu");
   })();
 
   // Helper function to get reCAPTCHA response
   function getRecaptchaResponse() {
     return new Promise((resolve, reject) => {
-      // Wait for reCAPTCHA to be ready
       if (typeof grecaptcha === 'undefined') {
         reject(new Error('reCAPTCHA no está cargado'));
         return;
@@ -222,10 +154,10 @@
   // Form submission handler
   const form = document.getElementById('contact-form');
   const submitButton = document.getElementById('submit-button');
-  
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     if (!form || !submitButton) return;
 
     // Validate reCAPTCHA first
@@ -244,34 +176,29 @@
     submitButton.disabled = true;
     buttonText.textContent = 'Enviando...';
     buttonIcon.className = 'ri-loader-4-line ml-2 animate-spin';
-    
+
     try {
       // Get form data
       const firstName = form.firstName.value;
-      const lastName = form.lastName.value;
       const email = form.email.value;
       const phone = form.phone.value || '';
-      const name = `${firstName} ${lastName}`.trim();
-      
-      // Get selected services
-      const selectedServices = Array.from(form.querySelectorAll('input[name="services[]"]:checked'))
-        .map(checkbox => checkbox.value)
-        .join(', ');
+      const selectedService = form.service.value || '';
+      const mensaje = form.mensaje.value;
 
       // Prepare template parameters for EmailJS
       const templateParams = {
         firstName: firstName,
-        lastName: lastName,
+        lastName: '',
         email: email,
         phone: phone,
-        company: form.company.value,
-        role: form.role.value,
-        services: selectedServices,
-        message: form.message.value,
+        company: '',
+        role: '',
+        services: selectedService,
+        message: mensaje,
         recaptchaToken: recaptchaToken
       };
 
-      // Send POST request to API
+      // Send POST request to Fidelidapp API
       const API_ENDPOINT = 'https://api.fidelidapp.cl/api/mcp/clients/add';
       const apiResponse = await fetch(API_ENDPOINT, {
         method: 'POST',
@@ -282,7 +209,7 @@
         body: JSON.stringify({
           slug: 'ewaffle',
           clientData: {
-            name: name,
+            name: firstName,
             email: email,
             phoneNumber: phone || ''
           }
@@ -294,26 +221,34 @@
         console.warn('API request failed, but continuing with email send');
       }
 
-      // Send email using EmailJS (in parallel)
+      // Send email using EmailJS
       await emailjs.send(
-        'service_d08f3xv', // Replace with your EmailJS service ID
-        'template_b6dnfrh', // Replace with your EmailJS template ID
+        'service_d08f3xv',
+        'template_b6dnfrh',
         templateParams
       );
-      
-      // Show success message
-      alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-      form.reset();
-      
-      // Reset reCAPTCHA
-      if (typeof grecaptcha !== 'undefined') {
-        grecaptcha.reset();
+
+      // --- Conversion tracking (after successful submission) ---
+      // Google Ads conversion via GTM dataLayer
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          'event': 'generate_lead',
+          'form_name': 'contact_form'
+        });
       }
-      
+
+      // Meta Pixel Lead event
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+      }
+
+      // Redirect to thank you page
+      window.location.href = '/gracias';
+
     } catch (error) {
       console.error('Error:', error);
       alert('Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
-      
+
       // Reset reCAPTCHA on error
       if (typeof grecaptcha !== 'undefined') {
         grecaptcha.reset();
