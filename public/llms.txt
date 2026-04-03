@@ -1,0 +1,42 @@
+# Ewaffle — Producción de Cursos E-Learning con IA
+
+> Agencia de producción e-learning B2B para empresas de capacitación en Chile y LATAM. Cursos SCORM gamificados con IA, LMS white-label y certificaciones digitales. 200+ cursos entregados, 50+ organizaciones.
+
+Ewaffle es una agencia especializada en producción de contenido e-learning para empresas de capacitación, OTECs y áreas de formación corporativa. Combinamos inteligencia artificial, diseño instruccional y gamificación para producir cursos que las personas realmente completan.
+
+**Sitio:** https://ewaffle.cl
+**Modalidad:** Remoto (Chile y LATAM)
+**Contacto:** Agendamiento de llamada de diagnóstico en el sitio
+
+## Servicios
+
+- [Producción de cursos SCORM/xAPI](/#servicios): Cursos gamificados compatibles con 50+ plataformas LMS (Cornerstone, Absorb, Docebo, Moodle, TalentLMS, etc.).
+- [Diseño instruccional con IA](/#servicios): Estructura pedagógica acelerada por IA. 40% más de engagement promedio vs. cursos tradicionales.
+- [LMS white-label](/#servicios): Tu plataforma, tu marca. Nosotros desaparecemos.
+- [Producción multimedia](/#servicios): Video, animación, locución y diseño gráfico para contenido e-learning.
+- [Certificaciones digitales](/#servicios): Credenciales verificables y compatibles con estándares SENCE/OTEC.
+- [Chatbots IA](/#servicios): Asistentes de aprendizaje integrados en la plataforma.
+
+## Planes y Precios
+
+- **Starter** ($3.000–$5.000 USD): 1–2 cursos, entrega 3–4 semanas. Para empresas que quieren comenzar rápido.
+- **Professional** ($8.000–$15.000 USD): 3–5 cursos, LMS opcional, chatbot IA incluido. El más elegido.
+- **Enterprise** ($20.000+ USD): 10+ cursos, LMS completo, revisiones ilimitadas, 8–12 semanas.
+
+## Métricas
+
+- 200+ cursos entregados
+- 50+ organizaciones atendidas
+- 40% de aumento promedio en engagement
+- Entrega promedio: 4 semanas
+
+## Para Quién
+
+- Empresas de capacitación y OTECs que necesitan escalar producción sin equipo interno
+- Áreas de formación corporativa con presupuesto limitado y plazos ajustados
+- Organizaciones que necesitan cumplir SENCE y buscan diferenciarse de los 2.900+ competidores del mercado
+
+## Optional
+
+- [Llamada de diagnóstico gratuita](/#contacto): Evaluamos tu necesidad y te damos una propuesta en 48 horas.
+- [Sitemap](/sitemap.xml): Mapa XML del sitio.

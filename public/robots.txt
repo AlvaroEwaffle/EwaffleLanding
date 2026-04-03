@@ -2,7 +2,10 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://www.ewaffle.cl/sitemap.xml
+Sitemap: https://ewaffle.cl/sitemap.xml
 
 # Host
-Host: https://ewaffle.cl 
+Host: https://ewaffle.cl
+
+# LLM / AI guidance
+# Structured overview for AI: https://ewaffle.cl/llms.txt
