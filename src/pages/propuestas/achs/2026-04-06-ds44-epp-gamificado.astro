@@ -1,0 +1,514 @@
+---
+// Propuesta ACHS — DS 44 EPP Gamificado — Abril 2026
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta ACHS — DS 44 EPP Gamificado — Ewaffle.cl</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #f0f0f0; font-size: 16px; line-height: 1.7; }
+
+    .doc-wrapper { max-width: 1100px; margin: 0 auto; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+    .cover {
+      background: linear-gradient(135deg, #1a1a5e 60%, #e91e8c 100%);
+      color: white;
+      padding: 60px 60px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cover-logo { font-size: 34px; font-weight: 900; letter-spacing: -1px; }
+    .cover-logo span { color: #f7c948; }
+    .cover-title { margin-top: 40px; }
+    .cover-title h1 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .cover-title h2 { font-size: 18px; font-weight: 400; opacity: 0.85; }
+    .cover-meta { margin-top: 30px; font-size: 14px; opacity: 0.7; }
+
+    .page { padding: 40px 60px; }
+
+    h3 { font-size: 15px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 12px; border-bottom: 2px solid #f0f0f8; padding-bottom: 6px; }
+    h4 { font-size: 16px; font-weight: 700; color: #1a1a5e; margin: 18px 0 8px; }
+    p { margin-bottom: 10px; color: #333; }
+
+    .highlight-box {
+      background: #f5f5ff;
+      border-left: 4px solid #1a1a5e;
+      padding: 14px 18px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .highlight-box p { margin: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th { background: #1a1a5e; color: white; padding: 11px 14px; text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 11px 14px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 15px; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafafe; }
+    .price { font-weight: 700; color: #1a1a5e; white-space: nowrap; }
+    .total-row td { background: #1a1a5e !important; color: white; font-weight: 700; }
+    .total-row .price { color: #f7c948; font-size: 20px; }
+
+    .tag { display: inline-block; background: #e91e8c; color: white; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
+    .tag.blue { background: #1a1a5e; }
+    .tag.green { background: #1a7e4c; }
+
+    .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+    .option-card {
+      border: 2px solid #eee;
+      border-radius: 10px;
+      padding: 24px;
+      position: relative;
+    }
+    .option-card.featured { border-color: #1a1a5e; }
+    .option-card .badge {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      background: #1a1a5e;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .option-card .badge.pink { background: #e91e8c; }
+    .option-card .option-title { font-size: 18px; font-weight: 800; color: #1a1a5e; margin-bottom: 8px; }
+    .option-card .option-subtitle { font-size: 13px; color: #777; margin-bottom: 14px; }
+    .option-card .option-price { font-size: 32px; font-weight: 900; color: #1a1a5e; margin: 12px 0 4px; }
+    .option-card .option-price-label { font-size: 12px; color: #888; margin-bottom: 14px; }
+    .option-card ul { padding-left: 18px; }
+    .option-card ul li { margin-bottom: 5px; color: #444; font-size: 14px; }
+
+    .milestone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .milestone-card { border: 2px solid #eee; border-radius: 8px; padding: 14px; text-align: center; }
+    .milestone-card .pct { font-size: 34px; font-weight: 900; color: #1a1a5e; }
+    .milestone-card .label { font-size: 14px; color: #666; margin-top: 4px; }
+    .milestone-card .amount { font-size: 15px; font-weight: 700; color: #e91e8c; margin-top: 6px; }
+
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    ul li { margin-bottom: 4px; color: #444; }
+
+    .footer { background: #1a1a5e; color: white; padding: 24px 60px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .footer a { color: #f7c948; }
+
+    .flow-diagram {
+      background: #f8f8ff;
+      border: 1px solid #e0e0f0;
+      border-radius: 10px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+    .flow-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 6px 0; }
+    .flow-node {
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      min-width: 160px;
+    }
+    .node-menu { background: #1a1a5e; color: white; }
+    .node-theory { background: #2d3a9e; color: white; }
+    .node-video { background: #e91e8c; color: white; }
+    .node-decision { background: #f7c948; color: #1a1a2e; border: 2px solid #e6b800; }
+    .node-quiz { background: #1a7e4c; color: white; }
+    .flow-arrow { font-size: 20px; color: #aaa; }
+    .flow-unit-label { font-size: 12px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: 0.5px; min-width: 80px; text-align: right; }
+  </style>
+</head>
+<body>
+
+<div class="doc-wrapper">
+
+<div class="cover">
+  <div class="cover-logo"><img src="https://ewaffle.cl/assets/logoprimario.png" alt="Ewaffle" style="height: 52px;"></div>
+  <div class="cover-title">
+    <h1>Rediseño Curso E-learning DS 44<br>Uso y Mantención de EPP</h1>
+    <h2>Propuesta Gamificación Interactiva — 2 Opciones (Storyline / Rise)</h2>
+  </div>
+  <div class="cover-meta">
+    Preparado para: ACHS &nbsp;|&nbsp; Preparado por: Álvaro Villena, Fundador Ewaffle.cl &nbsp;|&nbsp; Abril 2026 &nbsp;|&nbsp; Confidencial
+  </div>
+</div>
+
+<div class="page">
+
+  <h3>1. Entendimiento del Proyecto</h3>
+  <p>Hemos revisado el material del curso y los requerimientos descritos en la solicitud de cotización de ACHS. Entendemos que el proyecto consiste en <strong>actualizar y rediseñar un curso e-learning existente sobre Uso y Mantención de EPP</strong>, conforme al Decreto Supremo N° 44, con los siguientes pilares críticos:</p>
+  <ul>
+    <li><strong>Gamificación real:</strong> el curso debe ser percibido como un producto de alta calidad, moderno e interactivo — no solo una presentación con clics.</li>
+    <li><strong>Árbol de decisión por unidad:</strong> metodología de práctica activa que simula situaciones reales de uso de EPP, con videocasos integrados al inicio y cierre de cada árbol.</li>
+    <li><strong>Videos complementarios:</strong> cápsulas audiovisuales que contextualizan y enriquecen el contenido teórico de cada unidad.</li>
+    <li><strong>Compatibilidad multiplataforma:</strong> diseño responsivo para correcta visualización y funcionamiento en versión web y APP para dispositivos móviles.</li>
+    <li><strong>Locución de calidad:</strong> profesional o con IA de voz natural, fluida y acento neutro.</li>
+    <li><strong>Subtítulos:</strong> incluidos en todos los recursos audiovisuales.</li>
+    <li><strong>Alta demanda del curso:</strong> el producto debe reflejar la relevancia y obligatoriedad del DS 44 en el contexto de seguridad laboral en Chile.</li>
+  </ul>
+
+  <h3>2. Nuestro Enfoque</h3>
+  <div class="highlight-box">
+    <p>Nuestros cursos están diseñados bajo los estándares <strong>Quality Matters (QM)</strong>, el marco de referencia internacional para el diseño instruccional de calidad en educación online. QM garantiza alineación entre objetivos de aprendizaje, evaluaciones y materiales — asegurando que cada curso no solo se vea bien, sino que genere aprendizaje efectivo y duradero.</p>
+  </div>
+  <p>Para este curso, combinamos metodología QM con <strong>gamificación estructural</strong> mediante árboles de decisión y videocasos situacionales. El trabajador no solo "ve" el contenido — lo practica en un entorno seguro, tomando decisiones reales sobre EPP y recibiendo retroalimentación inmediata:</p>
+  <ul>
+    <li><strong>Diseño instruccional QM:</strong> objetivos de aprendizaje claros por unidad, alineados al DS 44. Actividades y evaluaciones calibradas al nivel de desempeño requerido.</li>
+    <li><strong>Árbol de decisión Storyline:</strong> el trabajador enfrenta escenarios reales de uso y mantención de EPP. Cada árbol inicia y cierra con un videocaso que ancla el aprendizaje en situaciones concretas.</li>
+    <li><strong>Videocasos IA o filmación:</strong> producción audiovisual contextualizada a entornos de trabajo ACHS — situaciones reales, no genéricas.</li>
+    <li><strong>Locución IA premium:</strong> voz natural, fluida y de acento neutro. Incluida en todas las cápsulas teóricas y actividades.</li>
+    <li><strong>Subtítulos y accesibilidad:</strong> subtítulos en todos los videos. Diseño responsivo para web y APP.</li>
+    <li><strong>Exportación SCORM:</strong> compatible con cualquier LMS. Tracking de avance y completitud.</li>
+  </ul>
+
+  <h3>3. Estructura del Curso Propuesta</h3>
+  <p>Proponemos una estructura de <strong>4 unidades temáticas</strong> más bienvenida, basada en los módulos del material existente. La navegación sigue un flujo gamificado: el trabajador accede al menú, estudia el contenido teórico y luego practica mediante un árbol de decisión situacional.</p>
+
+  <div class="flow-diagram">
+    <div style="text-align:center; font-size:13px; font-weight:700; color:#1a1a5e; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.5px;">Arquitectura de Navegación del Curso</div>
+
+    <div class="flow-row">
+      <div style="min-width:80px;"></div>
+      <div class="flow-node node-menu">MENÚ PRINCIPAL</div>
+      <div style="min-width:80px;"></div>
+    </div>
+    <div class="flow-row" style="margin: 4px 0;">
+      <div style="min-width:80px;"></div>
+      <div class="flow-arrow">↓</div>
+      <div style="min-width:80px;"></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-unit-label">Bienvenida</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node node-video" style="min-width:200px;">Video de Bienvenida<br><span style="font-size:11px; opacity:0.9;">2:00 min — Locución IA</span></div>
+      <div style="min-width:80px;"></div>
+    </div>
+    <div class="flow-row" style="margin: 4px 0;">
+      <div style="min-width:80px;"></div>
+      <div class="flow-arrow">↓</div>
+      <div style="min-width:80px;"></div>
+    </div>
+
+    <div style="border: 2px dashed #ddd; border-radius: 10px; padding: 14px; margin: 8px 0; background: #fff;">
+      <div style="text-align:center; font-size:11px; font-weight:700; color:#2d3a9e; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Unidades 1, 2, 3 y 4 — Misma estructura por unidad</div>
+      <div class="flow-row">
+        <div class="flow-unit-label">Teoría</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node node-theory" style="min-width:220px;">Cápsula Teórica Storyline<br><span style="font-size:11px; opacity:0.9;">~30 slides — Animada — Locución IA</span></div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row" style="margin: 4px 0;">
+        <div style="min-width:80px;"></div>
+        <div class="flow-arrow">↓</div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-unit-label">Práctica</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node node-video" style="min-width:220px;">Video de Apertura del Árbol<br><span style="font-size:11px; opacity:0.9;">Videocaso situacional EPP — 3:00 min</span></div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row" style="margin: 4px 0;">
+        <div style="min-width:80px;"></div>
+        <div class="flow-arrow">↓</div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row">
+        <div style="min-width:80px;"></div>
+        <div class="flow-node node-decision" style="min-width:220px;">Árbol de Decisión<br><span style="font-size:11px;">¿Qué EPP usarías en esta situación?<br>Ramas correctas e incorrectas con feedback</span></div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row" style="margin: 4px 0;">
+        <div style="min-width:80px;"></div>
+        <div class="flow-arrow">↓</div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-unit-label">Cierre</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node node-video" style="min-width:220px;">Video de Cierre del Árbol<br><span style="font-size:11px; opacity:0.9;">Resolución del caso — 3:00 min</span></div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row" style="margin: 4px 0;">
+        <div style="min-width:80px;"></div>
+        <div class="flow-arrow">↓</div>
+        <div style="min-width:80px;"></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-unit-label">Evaluación</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node node-quiz" style="min-width:220px;">Actividad Interactiva<br><span style="font-size:11px; opacity:0.9;">5 preguntas — Feedback inmediato</span></div>
+        <div style="min-width:80px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Componente</th><th>Detalle</th><th>Cantidad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Video de Bienvenida</strong></td>
+        <td>Presentación del curso, objetivos y contexto DS 44. Locución IA. Subtítulos.</td>
+        <td>1 video · 2:00 min</td>
+      </tr>
+      <tr>
+        <td><strong>Cápsulas Teóricas Storyline</strong></td>
+        <td>Contenido de cada unidad presentado de forma animada, con locución IA y diseño instruccional QM. Compatible web y APP.</td>
+        <td>4 cápsulas · ~30 slides c/u</td>
+      </tr>
+      <tr>
+        <td><strong>Videocasos Situacionales</strong></td>
+        <td>Videos de apertura y cierre del árbol de decisión. Escenarios reales de EPP en entornos laborales. Con subtítulos.</td>
+        <td>8 videos · 3:00 min c/u</td>
+      </tr>
+      <tr>
+        <td><strong>Árbol de Decisión</strong></td>
+        <td>Actividad gamificada en Storyline. El trabajador toma decisiones sobre uso y mantención de EPP. Retroalimentación en cada rama. Exportación SCORM.</td>
+        <td>4 árboles (uno por unidad)</td>
+      </tr>
+      <tr>
+        <td><strong>Actividades de Evaluación</strong></td>
+        <td>Quiz de 5 preguntas al cierre de cada unidad. Feedback inmediato. Tracking LMS.</td>
+        <td>4 actividades · 5 preguntas c/u</td>
+      </tr>
+      <tr style="background:#fff5fb;">
+        <td colspan="3" style="font-size:12px; color:#888; padding: 10px 14px;">Todos los recursos incluyen: subtítulos · diseño responsivo web y APP · exportación SCORM · locución IA acento neutro</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4. Entregables del Proyecto</h3>
+  <table>
+    <thead>
+      <tr><th>Entregable</th><th>Formato</th><th>Detalle</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Curso Completo SCORM</strong></td>
+        <td>SCORM 1.2 / HTML5</td>
+        <td>Paquete completo publicable en LMS. Incluye menú, 4 unidades (teoría + árbol + evaluación) + bienvenida. Tracking de avance y nota.</td>
+      </tr>
+      <tr>
+        <td><strong>Cápsulas de Video</strong></td>
+        <td>MP4 Full HD</td>
+        <td>9 videos (1 bienvenida + 8 videocasos). Con subtítulos incrustados. Optimizados para web y APP móvil.</td>
+      </tr>
+      <tr>
+        <td><strong>Archivos Fuente</strong></td>
+        <td>Editables .story</td>
+        <td>Archivos de proyecto Storyline editables, organizados por unidad. ACHS mantiene control total del contenido para actualizaciones futuras.</td>
+      </tr>
+      <tr>
+        <td><strong>Guía de Estilo</strong></td>
+        <td>PDF</td>
+        <td>Lineamientos visuales del curso: paleta, tipografía, iconografía y componentes reutilizables para futuras actualizaciones.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background: #1a1a5e; border-radius: 10px; padding: 18px 24px; margin: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+    <div>
+      <div style="color: #f7c948; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Ejemplo interactivo</div>
+      <div style="color: white; font-size: 15px; font-weight: 600;">Ver árbol de decisión referencial — así se verá la práctica por unidad</div>
+    </div>
+    <a href="https://360.articulate.com/review/content/a05b651f-82ee-4b02-8acf-c312b0f44fdd/review" target="_blank" style="background: #e91e8c; color: white; font-weight: 700; font-size: 14px; padding: 10px 22px; border-radius: 8px; text-decoration: none; white-space: nowrap;">Ver árbol →</a>
+  </div>
+
+  <h3>5. Propuesta Económica</h3>
+  <p>Presentamos dos opciones según el nivel de interactividad y plataforma de desarrollo. <strong>Ambas opciones incluyen subtítulos, locución IA, compatibilidad web + APP y exportación SCORM.</strong></p>
+
+  <div class="option-grid">
+    <div class="option-card featured">
+      <div class="badge">Recomendada</div>
+      <div class="option-title">Opción A — Storyline Gamificado</div>
+      <div class="option-subtitle">Árbol de decisión + videocasos integrados en Storyline por unidad</div>
+      <div class="option-price">UF 152,33</div>
+      <div class="option-price-label">Valor total del proyecto · Exento de IVA</div>
+      <ul>
+        <li>Video de bienvenida (2:00 min)</li>
+        <li>4 cápsulas teóricas animadas Storyline (~30 slides c/u)</li>
+        <li>8 videocasos integrados en Storyline (3:00 min c/u)</li>
+        <li>4 árboles de decisión gamificados Storyline</li>
+        <li>Subtítulos en todos los videos</li>
+        <li>Diseño responsivo web + APP</li>
+        <li>Locución IA acento neutro</li>
+        <li>Exportación SCORM + archivos fuente</li>
+        <li>Diseño instruccional QM incluido</li>
+      </ul>
+    </div>
+
+    <div class="option-card">
+      <div class="badge pink">Alternativa</div>
+      <div class="option-title">Opción B — Rise Interactivo</div>
+      <div class="option-subtitle">Cápsulas Rise + videocasos + actividad interactiva por unidad</div>
+      <div class="option-price">UF 124,72</div>
+      <div class="option-price-label">Valor total del proyecto · Exento de IVA</div>
+      <ul>
+        <li>Video de bienvenida (2:00 min)</li>
+        <li>4 módulos interactivos Rise 360</li>
+        <li>8 videocasos integrados en Rise (3:00 min c/u)</li>
+        <li>4 actividades interactivas Rise (5 preguntas c/u)</li>
+        <li>Sin árbol de decisión gamificado</li>
+        <li>Subtítulos en todos los videos</li>
+        <li>Diseño responsivo web + APP (nativo Rise)</li>
+        <li>Locución IA acento neutro</li>
+        <li>Exportación SCORM</li>
+        <li>Diseño instruccional QM incluido</li>
+      </ul>
+    </div>
+  </div>
+
+  <table style="margin-top: 12px;">
+    <thead>
+      <tr><th>Opción</th><th>Descripción</th><th style="text-align:right;">Total (UF)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>A — Storyline Gamificado</strong></td>
+        <td>Árbol de decisión + videocasos integrados en Storyline. Máxima gamificación e interactividad.</td>
+        <td class="price" style="text-align:right;">UF 152,33</td>
+      </tr>
+      <tr>
+        <td><strong>B — Rise Interactivo</strong></td>
+        <td>Módulos Rise + videocasos + actividades interactivas. Alternativa profesional sin árbol de decisión.</td>
+        <td class="price" style="text-align:right;">UF 124,72</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px; color:#888; margin-top:8px;">* Valores expresados en UF a la fecha de emisión de la propuesta. Exentos de IVA (servicio educacional). Propuesta válida por 15 días. UF referencial al día de emisión.</p>
+
+  <h3>6. Hitos de Pago</h3>
+  <div class="milestone-grid">
+    <div class="milestone-card">
+      <div class="pct">50%</div>
+      <div class="label">Kick-off del proyecto<br>Firma de contrato + inicio diseño</div>
+      <div class="amount">A: UF 76,17 &nbsp;|&nbsp; B: UF 62,36</div>
+    </div>
+    <div class="milestone-card">
+      <div class="pct">50%</div>
+      <div class="label">Entrega final aprobada<br>SCORM + archivos fuente</div>
+      <div class="amount">A: UF 76,17 &nbsp;|&nbsp; B: UF 62,36</div>
+    </div>
+  </div>
+
+  <h3>7. Planificación Tentativa</h3>
+  <p>Capacidad de producción: <strong>1 curso completo en 4 semanas</strong>, incluyendo revisiones y ajustes.</p>
+  <table>
+    <thead>
+      <tr><th>Etapa</th><th>Semana 1</th><th>Semana 2</th><th>Semana 3</th><th>Semana 4</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Diseño instruccional + storyboard</td>
+        <td style="background:#f7c948; font-weight:700; font-size:11px; color:#1a1a2e;">Sem 1</td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Producción Storyline / Rise (teoría)</td>
+        <td></td>
+        <td style="background:#1a1a5e; color:white; font-size:11px; font-weight:600;">Sem 2</td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td>Producción videos + árbol de decisión</td>
+        <td></td><td></td>
+        <td style="background:#2d3a9e; color:white; font-size:11px; font-weight:600;">Sem 3</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>QA, subtítulos, testing web + APP</td>
+        <td></td><td></td><td></td>
+        <td style="background:#e91e8c; color:white; font-size:11px; font-weight:600;">Sem 4</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px; color:#888;">* Cronograma se confirma al kick-off. Requiere disponibilidad de ACHS para revisión en la semana 3.</p>
+
+  <h3>8. Modelo de Trabajo</h3>
+  <ul>
+    <li><strong>Interlocutores:</strong> Ewaffle asigna un Producer dedicado al proyecto. Comunicación centralizada vía un canal único (email o WhatsApp) para agilizar aprobaciones.</li>
+    <li><strong>Revisión de avance:</strong> entregamos un prototipo navegable de la Unidad 1 para aprobación antes de producir las 3 unidades restantes. Sin costo adicional.</li>
+    <li><strong>Rondas de revisión:</strong> 1 ronda de ajustes por entregable incluida. Cambios estructurales o de contenido fuera de ronda tienen costo adicional.</li>
+    <li><strong>Insumos requeridos al kick-off:</strong> material del curso revisado o guión definitivo + referencia de estilo visual deseado + LMS o plataforma donde se publicará el curso.</li>
+    <li><strong>Locución IA:</strong> presentamos muestra de voz para aprobación antes de producir. Si se prefiere locución humana, puede cotizarse por separado.</li>
+    <li><strong>Política de datos:</strong> todos los insumos del cliente se manejan bajo acuerdo de confidencialidad. No se usan para entrenar modelos de IA ni se comparten con terceros.</li>
+  </ul>
+
+  <h3>9. ¿Por qué Ewaffle?</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0;">
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">🎮</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Gamificación Real, No Decorativa</div>
+      <p style="margin:0; color:#555;">No añadimos estrellitas sobre contenido plano. El árbol de decisión es una estrategia instruccional real: el trabajador toma decisiones, comete errores seguros y aprende de la retroalimentación — igual que en terreno.</p>
+    </div>
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">🎯</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Estándares Quality Matters</div>
+      <p style="margin:0; color:#555;">Diseñamos bajo el marco QM — el referente internacional en calidad instruccional. Cada unidad tiene objetivos claros, actividades alineadas y evaluaciones calibradas. El cumplimiento del DS 44 queda reflejado en el aprendizaje, no solo en el contenido.</p>
+    </div>
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">📱</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Web + APP, Sin Compromisos</div>
+      <p style="margin:0; color:#555;">Diseñamos para que el curso funcione correctamente en desktop y en dispositivos móviles desde el primer día. Testing en múltiples resoluciones antes de la entrega final.</p>
+    </div>
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">🇨🇱</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Equipo Local, Contexto Chileno</div>
+      <p style="margin:0; color:#555;">Somos una empresa chilena con experiencia en e-learning corporativo y capacitación de seguridad laboral. Conocemos el DS 44, los entornos de trabajo chilenos y los requerimientos de la SUSESO y ACHS.</p>
+    </div>
+  </div>
+
+  <h3>10. Portafolio de Referencia</h3>
+  <p>Ejemplos reales de nuestro trabajo. Haz clic para ver el recurso completo:</p>
+  <table>
+    <thead>
+      <tr><th>Tipo de Recurso</th><th>Descripción</th><th>Ver ejemplo</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Árbol de Decisión</strong><br><span style="font-size:12px;color:#888;">Gamificación Storyline</span></td>
+        <td>Recurso gamificado con árbol de decisión situacional. El usuario toma decisiones y recibe retroalimentación inmediata. Inicia y cierra con videocaso. Este es el tipo de recurso que proponemos para cada unidad del curso DS 44.</td>
+        <td><a href="https://360.articulate.com/review/content/a05b651f-82ee-4b02-8acf-c312b0f44fdd/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver árbol →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Ejercicio Interactivo</strong><br><span style="font-size:12px;color:#888;">Storyline Premium</span></td>
+        <td>Actividad práctica con escenario situacional, slides interactivos, retroalimentación inmediata y locución IA incluida.</td>
+        <td><a href="https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Guía de Aprendizaje</strong><br><span style="font-size:12px;color:#888;">Rise 360</span></td>
+        <td>Guía interactiva de contenido teórico, ideal para manuales, marcos conceptuales y material de consulta permanente.</td>
+        <td><a href="https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Video Animado</strong><br><span style="font-size:12px;color:#888;">Motion Graphics</span></td>
+        <td>Video explicativo con animación tipo motion graphics y locución con IA. Ideal para explicar procesos y conceptos técnicos.</td>
+        <td><a href="https://youtu.be/rf5-fAPg9wU" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver video →</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="footer">
+  <div>
+    <strong>PRESTACION DE SERVICIOS EWAFFLE LIMITADA</strong><br>
+    RUT: 77.272.916-2 &nbsp;|&nbsp; <a href="https://ewaffle.cl">ewaffle.cl</a> &nbsp;|&nbsp; Álvaro Villena, Fundador
+  </div>
+  <div style="text-align:right; color:#aaa;">
+    Propuesta ACHS — DS 44 EPP Gamificado — Abril 2026<br>
+    Confidencial
+  </div>
+</div>
+
+</div>
+</body>
+</html>
