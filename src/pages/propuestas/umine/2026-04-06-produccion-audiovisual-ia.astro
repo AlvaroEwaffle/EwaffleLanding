@@ -1,0 +1,437 @@
+---
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Propuesta UMINE — Ewaffle.cl</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #f0f0f0; font-size: 16px; line-height: 1.7; }
+
+    .doc-wrapper { max-width: 1100px; margin: 0 auto; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+    .cover {
+      background: linear-gradient(135deg, #1a1a5e 60%, #e91e8c 100%);
+      color: white;
+      padding: 60px 60px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cover-logo { font-size: 34px; font-weight: 900; letter-spacing: -1px; }
+    .cover-logo span { color: #f7c948; }
+    .cover-title { margin-top: 40px; }
+    .cover-title h1 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .cover-title h2 { font-size: 18px; font-weight: 400; opacity: 0.85; }
+    .cover-meta { margin-top: 30px; font-size: 14px; opacity: 0.7; }
+
+    .page { padding: 40px 60px; }
+
+    h3 { font-size: 15px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 12px; border-bottom: 2px solid #f0f0f8; padding-bottom: 6px; }
+    h4 { font-size: 16px; font-weight: 700; color: #1a1a5e; margin: 18px 0 8px; }
+    p { margin-bottom: 10px; color: #333; }
+
+    .highlight-box {
+      background: #f5f5ff;
+      border-left: 4px solid #1a1a5e;
+      padding: 14px 18px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .highlight-box p { margin: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th { background: #1a1a5e; color: white; padding: 11px 14px; text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 11px 14px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 15px; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafafe; }
+    .price { font-weight: 700; color: #1a1a5e; white-space: nowrap; }
+    .discount { color: #e91e8c; font-weight: 700; }
+    .total-row td { background: #1a1a5e !important; color: white; font-weight: 700; }
+    .total-row .price { color: #f7c948; }
+
+    .tag { display: inline-block; background: #e91e8c; color: white; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
+    .tag.blue { background: #1a1a5e; }
+
+    .milestone-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .milestone-card { border: 2px solid #eee; border-radius: 8px; padding: 14px; text-align: center; }
+    .milestone-card .pct { font-size: 34px; font-weight: 900; color: #1a1a5e; }
+    .milestone-card .label { font-size: 14px; color: #666; margin-top: 4px; }
+    .milestone-card .amount { font-size: 15px; font-weight: 700; color: #e91e8c; margin-top: 6px; }
+
+    .gantt { display: grid; grid-template-columns: 130px 1fr 1fr 1fr 1fr; gap: 4px; margin: 14px 0; align-items: center; font-size: 11px; }
+    .gantt-header { font-weight: 700; color: #1a1a5e; padding: 4px 0; }
+    .gantt-label { padding: 4px 0; color: #555; }
+    .gantt-bar { border-radius: 4px; padding: 5px 8px; color: white; font-weight: 600; font-size: 10px; }
+    .bar-1 { background: #1a1a5e; }
+    .bar-2 { background: #2d3a9e; }
+    .bar-3 { background: #e91e8c; }
+    .bar-setup { background: #f7c948; color: #1a1a5e; }
+    .gantt-empty { }
+
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    ul li { margin-bottom: 4px; color: #444; }
+
+    .questions { background: #fff9f0; border: 1px solid #ffd699; border-radius: 8px; padding: 16px 18px; margin: 14px 0; }
+    .questions p { margin-bottom: 6px; font-weight: 600; color: #b36200; }
+    .questions ol { padding-left: 18px; }
+    .questions ol li { margin-bottom: 4px; color: #555; }
+
+    .footer { background: #1a1a5e; color: white; padding: 24px 60px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .footer a { color: #f7c948; }
+
+    @media print {
+      body { background: #fff; }
+      .doc-wrapper { box-shadow: none; max-width: 100%; }
+      .page { padding: 30px 60px; }
+      body { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="doc-wrapper">
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-logo"><img src="https://ewaffle.cl/assets/logoprimario.png" alt="Ewaffle" style="height: 52px;"></div>
+  <div class="cover-title">
+    <h1>Producción Audiovisual con IA Generativa<br>para Cursos UMINE</h1>
+    <h2>Propuesta Proyecto Trimestral — 15 Cursos</h2>
+  </div>
+  <div class="cover-meta">
+    Preparado por: Álvaro Villena, Fundador Ewaffle.cl &nbsp;|&nbsp; Abril 2026 &nbsp;|&nbsp; Confidencial
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. ENTENDIMIENTO -->
+  <h3>1. Entendimiento del Proyecto</h3>
+  <p>Hemos revisado en detalle los requerimientos descritos en la solicitud de cotización de UMINE. Entendemos que el proyecto consiste en producir <strong>15 cursos e-learning</strong> durante un trimestre (cierre agosto 2026), con los siguientes pilares críticos:</p>
+  <ul>
+    <li><strong>Identidad visual consistente:</strong> una línea gráfica única por categoría (personajes, entornos, estilo artístico) que se mantiene en todos los cursos del bloque.</li>
+    <li><strong>Generación audiovisual con IA:</strong> producción completa del video (21-36 min por curso, entregados en módulos/cápsulas en MP4 Full HD).</li>
+    <li><strong>Lip Sync de alta fidelidad:</strong> sincronización labial precisa sobre locución humana entregada por UMINE.</li>
+  </ul>
+
+  <!-- 2. NUESTRO ENFOQUE -->
+  <h3>2. Nuestro Enfoque</h3>
+  <div class="highlight-box">
+    <p>Nuestros cursos están diseñados bajo los estándares <strong>Quality Matters (QM)</strong>, el marco de referencia internacional para el diseño instruccional de calidad en educación online. QM garantiza alineación entre objetivos de aprendizaje, evaluaciones y materiales instruccionales — asegurando que cada curso no solo se vea bien, sino que efectivamente genere aprendizaje.</p>
+  </div>
+  <p>Combinamos diseño instruccional QM con un pipeline de IA generativa end-to-end para producir experiencias de aprendizaje completas, coherentes y escalables:</p>
+  <ul>
+    <li><strong>Diseño instruccional QM:</strong> cada curso parte desde objetivos de aprendizaje claros, con actividades y evaluaciones alineadas según el estándar Quality Matters.</li>
+    <li><strong>Diseño de personajes e identidad:</strong> generación de character sheets y style guides con IA de imagen (Imagen 3 / FLUX), con revisión y aprobación humana antes de producción.</li>
+    <li><strong>Generación audiovisual:</strong> conversión de escenas estáticas a video (image-to-video), con narración IA o sincronización sobre locución humana.</li>
+    <li><strong>Lip Sync premium:</strong> pipeline de alta fidelidad que mantiene la identidad del personaje en todos los módulos del curso.</li>
+    <li><strong>Interactividad y ejercitación:</strong> cada curso incluye un recurso Storyline (práctica activa) y una Guía Rise (contenido de referencia), complementando el video con aprendizaje activo.</li>
+    <li><strong>Ensamblaje y post:</strong> montaje modular, exportación segmentada por módulo, entrega en Drive organizada por curso y formato.</li>
+  </ul>
+
+  <!-- 2B. ESTRUCTURA DE CURSO SUGERIDA -->
+  <h3>3. Estructura de Curso Sugerida</h3>
+  <p>Proponemos una estructura modular estándar de <strong>~30 minutos por curso</strong> (ajustable entre 21-36 min según el contenido de UMINE), dividida en 6 cápsulas independientes que aseguran fluidez visual y coherencia narrativa entre módulos:</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Cápsula</th><th>Duración</th><th>Contenido</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>0</strong></td>
+        <td>Bienvenida al Curso</td>
+        <td>2–3 min</td>
+        <td>Presentación del personaje, objetivo de aprendizaje del curso, contexto temático.</td>
+      </tr>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Módulo 1 — Introducción al tema</td>
+        <td>5–7 min</td>
+        <td>Conceptos base, marco contextual. Establece el punto de partida del aprendizaje.</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Módulo 2 — Desarrollo A</td>
+        <td>5–7 min</td>
+        <td>Primer bloque de contenido principal. Casos o ejemplos aplicados.</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Módulo 3 — Desarrollo B</td>
+        <td>5–7 min</td>
+        <td>Segundo bloque de contenido. Profundización o habilidad complementaria.</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>Módulo 4 — Aplicación práctica</td>
+        <td>5–7 min</td>
+        <td>Ejercicio situacional, resolución de caso o demostración paso a paso.</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Cierre y síntesis</td>
+        <td>3–4 min</td>
+        <td>Recapitulación de aprendizajes clave, mensaje de cierre del personaje, CTA hacia la actividad de ejercitación.</td>
+      </tr>
+      <tr style="background:#fff5fb;">
+        <td><strong>+</strong></td>
+        <td>Ejercicio Interactivo <span class="tag">Storyline</span></td>
+        <td>Autodirigido</td>
+        <td>Actividad práctica con escenario situacional, hasta 15 slides interactivos de ejercitación. Locución IA incluida. Exportación SCORM.</td>
+      </tr>
+      <tr style="background:#f5f5ff;">
+        <td><strong>+</strong></td>
+        <td>Guía de Aprendizaje <span class="tag blue">Rise</span></td>
+        <td>Autodirigido</td>
+        <td>Guía interactiva de 10-15 páginas con el contenido teórico del curso. Material de consulta y refuerzo. Exportación SCORM.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px; color:#888;">* La estructura cumple con los estándares Quality Matters (QM): alineación objetivos → contenido → actividad → evaluación. Los módulos de video son variables; Storyline y Rise se adaptan al contenido específico de cada curso.</p>
+
+  <!-- 3. ENTREGABLES -->
+  <h3>4. Entregables por Curso</h3>
+  <table>
+    <thead>
+      <tr><th>Entregable</th><th>Formato</th><th>Detalle</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Master Audiovisual Segmentado</strong></td>
+        <td>MP4 Full HD</td>
+        <td>6 cápsulas de video (21-36 min total) organizadas por módulo en carpetas de Drive. Con Lip Sync IA de alta fidelidad sobre locución humana de UMINE.</td>
+      </tr>
+      <tr>
+        <td><strong>Ejercicio Interactivo</strong></td>
+        <td>SCORM / HTML5</td>
+        <td>1 recurso Storyline Premium por curso: actividad práctica situacional, hasta 15 slides interactivos, locución IA incluida. Compatible con cualquier LMS.</td>
+      </tr>
+      <tr>
+        <td><strong>Guía de Aprendizaje</strong></td>
+        <td>SCORM / HTML5</td>
+        <td>1 guía Rise por curso: 10-15 páginas de contenido interactivo para consulta y refuerzo teórico. Compatible con cualquier LMS.</td>
+      </tr>
+      <tr>
+        <td><strong>Paquete de Resguardo Patrimonial</strong></td>
+        <td>Editables</td>
+        <td>Archivos de proyecto maestros en ensamblaje base (sin rotulación, motion graphics externos ni musicalización), según lo especificado en la solicitud.</td>
+      </tr>
+      <tr>
+        <td><strong>Art Direction Deck</strong></td>
+        <td>PDF</td>
+        <td>Documento de dirección de arte: development de personajes, worldbuilding de entornos, lineamientos estéticos y alineación con branding UMINE.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 4. PROPUESTA ECONÓMICA -->
+  <h3>5. Propuesta Económica</h3>
+
+  <h4>Setup Inicial <span class="tag blue">One-time</span></h4>
+  <p>Costo único que cubre el diseño de identidad visual base del proyecto: hasta 3 categorías de personajes, diseño de entornos y guía de estilo unificada para los 15 cursos.</p>
+  <table>
+    <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Diseño de Identidad Visual (personajes + entornos + style guide)</td>
+        <td class="price">$1.500.000 CLP</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Precio por Curso — Experiencia Completa QM</h4>
+  <p>Cada curso incluye los 5 entregables: <strong>Video Animado + Lip Sync IA</strong> (21-36 min, 6 cápsulas) + <strong>Recurso Interactivo Storyline</strong> + <strong>Guía Rise</strong> + Resguardo Patrimonial + Art Direction Deck.</p>
+  <table>
+    <thead>
+      <tr><th>Volumen</th><th>Precio por Curso</th><th>Descuento</th><th>Subtotal Cursos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1 – 5 cursos</td>
+        <td class="price">$3.700.000 CLP</td>
+        <td>—</td>
+        <td class="price">$18.500.000</td>
+      </tr>
+      <tr>
+        <td>6 – 10 cursos</td>
+        <td class="price">$3.330.000 CLP</td>
+        <td class="discount">-10%</td>
+        <td class="price">$16.650.000</td>
+      </tr>
+      <tr>
+        <td>11 – 15 cursos</td>
+        <td class="price">$2.960.000 CLP</td>
+        <td class="discount">-20%</td>
+        <td class="price">$14.800.000</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="3"><strong>TOTAL PROYECTO (Setup + 15 cursos)</strong></td>
+        <td class="price">$51.450.000 CLP</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px; color:#888;">* Valores exentos de IVA. Locución humana entregada por UMINE o generada con IA: precio equivalente (incluido). Propuesta válida por 30 días.</p>
+
+  <!-- 5. HITOS DE PAGO -->
+  <h3>6. Hitos de Pago</h3>
+  <div class="milestone-grid">
+    <div class="milestone-card">
+      <div class="pct">40%</div>
+      <div class="label">Kick-off del proyecto<br>Firma de contrato</div>
+      <div class="amount">$20.580.000 CLP</div>
+    </div>
+    <div class="milestone-card">
+      <div class="pct">30%</div>
+      <div class="label">Entrega y aprobación<br>del curso N° 10</div>
+      <div class="amount">$15.435.000 CLP</div>
+    </div>
+    <div class="milestone-card">
+      <div class="pct">30%</div>
+      <div class="label">Entrega final<br>del curso N° 15</div>
+      <div class="amount">$15.435.000 CLP</div>
+    </div>
+  </div>
+
+  <!-- 6. PLANIFICACIÓN -->
+  <h3>7. Planificación Tentativa</h3>
+  <p>Capacidad de producción: <strong>5 cursos/mes</strong>. Cierre de proyecto: <strong>agosto 2026</strong>.</p>
+  <table>
+    <thead>
+      <tr><th>Etapa</th><th>Mayo</th><th>Junio</th><th>Julio</th><th>Agosto</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Setup Identidad Visual</td>
+        <td style="background:#f7c948; font-weight:700; font-size:11px;">Sem 1-2</td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Cursos 1 – 5</td>
+        <td style="background:#1a1a5e; color:white; font-size:11px; font-weight:600;">Sem 2-4</td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Cursos 6 – 10</td>
+        <td></td>
+        <td style="background:#2d3a9e; color:white; font-size:11px; font-weight:600;">Mes completo</td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td>Cursos 11 – 15</td>
+        <td></td><td></td>
+        <td style="background:#e91e8c; color:white; font-size:11px; font-weight:600;">Mes completo</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Ajustes y cierre</td>
+        <td></td><td></td><td></td>
+        <td style="background:#555; color:white; font-size:11px; font-weight:600;">Buffer</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px; color:#888;">* Cronograma se confirma al inicio del proyecto, una vez definidos los insumos de UMINE (guiones, locuciones, branding).</p>
+
+  <!-- 7. GOBERNANZA -->
+  <h3>8. Modelo de Trabajo</h3>
+  <ul>
+    <li><strong>Interlocutores:</strong> Ewaffle asigna un Producer dedicado al proyecto. Comunicación centralizada vía un canal único (Slack o WhatsApp) para evitar retrocesos.</li>
+    <li><strong>Rondas de revisión:</strong> 1 ronda de ajustes menores incluida por curso. Cambios estructurales o de guion fuera de ronda tienen costo adicional.</li>
+    <li><strong>Insumos requeridos Día 1:</strong> branding guide UMINE + guiones definitivos de cursos 1-5 + locuciones de cursos 1-5 + referencia visual de estilo deseado.</li>
+    <li><strong>Entrega:</strong> carpetas Drive organizadas por curso > módulo. Formatos MP4 Full HD + archivos editables base.</li>
+    <li><strong>Política de datos:</strong> todos los insumos del cliente se manejan bajo acuerdo de confidencialidad. No se usan para entrenar modelos de IA ni se comparten con terceros.</li>
+  </ul>
+
+  <!-- 9. POR QUÉ EWAFFLE -->
+  <h3>9. ¿Por qué Ewaffle?</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0;">
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">🎯</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Estándares Quality Matters</div>
+      <p style="margin:0; color:#555;">Diseñamos bajo el marco QM — el referente internacional en calidad instruccional. Cada curso asegura alineación entre objetivos, actividades y evaluaciones. No solo producimos video, producimos aprendizaje efectivo.</p>
+    </div>
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">🤖</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Pipeline IA Completo y Propio</div>
+      <p style="margin:0; color:#555;">Nuestro pipeline de IA generativa cubre desde el diseño de identidad visual hasta la sincronización labial. No dependemos de plataformas externas para los procesos críticos, lo que nos da control de calidad y tiempos.</p>
+    </div>
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">🇨🇱</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Equipo Local, Contexto Chileno</div>
+      <p style="margin:0; color:#555;">Somos una empresa chilena con experiencia en e-learning corporativo y educación superior en Chile. Entendemos el contexto regulatorio, los formatos de LMS más usados en el país y las necesidades reales de los equipos de formación.</p>
+    </div>
+    <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+      <div style="font-size:28px; margin-bottom:8px;">📦</div>
+      <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Experiencia Completa, No Solo Video</div>
+      <p style="margin:0; color:#555;">Somos el único proveedor que entrega en un solo paquete: video animado IA, lip sync, ejercitación Storyline, guía Rise y documentación de arte. Un proveedor, una propuesta, un proyecto.</p>
+    </div>
+  </div>
+
+  <!-- 10. PORTAFOLIO -->
+  <h3>10. Portafolio de Referencia</h3>
+  <p>Ejemplos reales de nuestro trabajo. Haz clic en el enlace para ver el recurso completo:</p>
+  <table>
+    <thead>
+      <tr><th>Tipo de Recurso</th><th>Descripción</th><th>Ver ejemplo</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Video Animado</strong><br><span style="font-size:12px;color:#888;">Motion Graphics</span></td>
+        <td>Video explicativo con animación tipo motion graphics y locución con IA. Ideal para explicar procesos, conceptos técnicos o storytelling visual.</td>
+        <td><a href="https://youtu.be/rf5-fAPg9wU" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver video →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Video Presentación</strong><br><span style="font-size:12px;color:#888;">Cápsula Introductoria</span></td>
+        <td>Presentación animada de curso con narrativa visual clara, locución IA y diseño de personaje contextualizado al tema.</td>
+        <td><a href="https://youtu.be/eCd5qsJ7hQ4" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver video →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Ejercicio Interactivo</strong><br><span style="font-size:12px;color:#888;">Storyline Premium</span></td>
+        <td>Actividad práctica con escenario situacional, hasta 15 slides interactivos de ejercitación, retroalimentación inmediata y locución IA incluida.</td>
+        <td><a href="https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Guía de Aprendizaje</strong><br><span style="font-size:12px;color:#888;">Rise 360</span></td>
+        <td>Guía interactiva de contenido teórico (10-15 páginas), ideal para manuales, marcos conceptuales y material de consulta permanente.</td>
+        <td><a href="https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+      </tr>
+      <tr>
+        <td><strong>Infografía Interactiva</strong><br><span style="font-size:12px;color:#888;">Genially</span></td>
+        <td>Infografía de aprendizaje con navegación interactiva, ideal para síntesis visuales y contenidos de alto impacto gráfico.</td>
+        <td><a href="https://view.genially.com/63d8372b90e2c20011ce835c" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 11. PREGUNTAS -->
+  <div class="questions">
+    <p>Preguntas para alinear la propuesta final:</p>
+    <ol>
+      <li>¿Cuántas categorías de cursos existen? (para dimensionar las identidades visuales del setup)</li>
+      <li>¿UMINE entrega guiones y locuciones por curso, o requieren que Ewaffle los desarrolle?</li>
+      <li>¿Tienen branding guide disponible (colores, tipografías, logos en alta resolución)?</li>
+      <li>¿Tienen LMS definido? (para confirmar si la entrega es SCORM, MP4 u otro formato)</li>
+      <li>¿Hay referencias visuales de estilo de animación que les gusten como benchmark?</li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <strong>PRESTACION DE SERVICIOS EWAFFLE LIMITADA</strong><br>
+    RUT: 77.272.916-2 &nbsp;|&nbsp; <a href="https://ewaffle.cl">ewaffle.cl</a> &nbsp;|&nbsp; Álvaro Villena, Fundador
+  </div>
+  <div style="text-align:right; color:#aaa;">
+    Propuesta UMINE — Abril 2026<br>
+    Confidencial
+  </div>
+</div>
+
+</div><!-- end doc-wrapper -->
+</body>
+</html>
