@@ -1,0 +1,444 @@
+---
+// Propuesta ANCABE — Tracks de Trabajo para Seguimiento de Becarios + LMS + Curso Piloto
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Propuesta ANCABE — Tracks de Trabajo para Seguimiento de Becarios — Ewaffle.cl</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #f0f0f0; font-size: 16px; line-height: 1.7; }
+
+    .doc-wrapper { max-width: 1100px; margin: 0 auto; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+    .cover {
+      background: linear-gradient(135deg, #1a1a5e 60%, #e91e8c 100%);
+      color: white;
+      padding: 60px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cover-title { margin-top: 34px; }
+    .cover-title h1 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .cover-title h2 { font-size: 18px; font-weight: 400; opacity: 0.86; }
+    .cover-meta { margin-top: 28px; font-size: 14px; opacity: 0.72; }
+
+    .page { padding: 40px 60px; }
+
+    h3 { font-size: 15px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 12px; border-bottom: 2px solid #f0f0f8; padding-bottom: 6px; }
+    h4 { font-size: 16px; font-weight: 700; color: #1a1a5e; margin: 18px 0 8px; }
+    p { margin-bottom: 10px; color: #333; }
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    ul li { margin-bottom: 4px; color: #444; }
+
+    .highlight-box {
+      background: #f5f5ff;
+      border-left: 4px solid #1a1a5e;
+      padding: 14px 18px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .highlight-box p { margin: 0; }
+
+    .warning-box {
+      background: #fff8ed;
+      border-left: 4px solid #f59e0b;
+      padding: 14px 18px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .warning-box p { margin: 0; }
+
+    .tag { display: inline-block; background: #e91e8c; color: white; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
+    .tag.blue { background: #1a1a5e; }
+    .tag.green { background: #1a7e4c; }
+    .tag.orange { background: #c97706; }
+
+    .module-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin: 18px 0; }
+    .module-card {
+      border: 2px solid #eee;
+      border-radius: 12px;
+      padding: 22px 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    .module-card.featured { border-color: #1a1a5e; }
+    .module-card h4 { margin-top: 0; font-size: 18px; }
+    .module-card .module-number {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a5e;
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .module-card .module-subtitle { color: #777; font-size: 13px; margin-bottom: 10px; }
+    .module-card .module-price-wrapper { margin-top: auto; }
+    .module-card .module-price { font-size: 28px; font-weight: 900; color: #1a1a5e; padding-top: 14px; }
+    .module-card .module-note { font-size: 12px; color: #777; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th { background: #1a1a5e; color: white; padding: 11px 14px; text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 11px 14px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 15px; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafafe; }
+    .price { font-weight: 700; color: #1a1a5e; white-space: nowrap; }
+    .total-row td { background: #1a1a5e !important; color: white; font-weight: 700; }
+    .total-row .price { color: #f7c948; font-size: 20px; }
+
+    .step-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0; }
+    .step {
+      border: 2px solid #eee;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .step .n { font-size: 30px; font-weight: 900; color: #1a1a5e; }
+    .step .label { font-size: 13px; font-weight: 700; color: #444; margin-top: 6px; }
+    .step .text { font-size: 12px; color: #777; margin-top: 6px; }
+
+    .footer {
+      background: #1a1a5e;
+      color: white;
+      padding: 24px 60px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer a { color: #f7c948; }
+
+    @media (max-width: 900px) {
+      .module-grid { grid-template-columns: 1fr; }
+      .step-grid { grid-template-columns: 1fr 1fr; }
+      .cover, .page, .footer { padding: 28px 22px; }
+      .cover-title h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="doc-wrapper">
+  <div class="cover">
+    <div><img src="https://ewaffle.cl/assets/logoprimario.png" alt="Ewaffle" style="height: 52px;"></div>
+    <div class="cover-title">
+      <h1>Propuesta ANCABE<br>Tracks de Trabajo para Seguimiento de Becarios + LMS + Curso Piloto</h1>
+      <h2>Automatización operativa, reportería a clientes y capacitación digital escalable</h2>
+    </div>
+    <div class="cover-meta">
+      Preparado para: ANCABE (México), Chantal &nbsp;|&nbsp; Preparado por: Álvaro Villena, Fundador Ewaffle.cl &nbsp;|&nbsp; 07 de abril de 2026 &nbsp;|&nbsp; Confidencial
+    </div>
+  </div>
+
+  <div class="page">
+    <h3>1. Entendimiento del Proyecto</h3>
+    <p>Entendemos que ANCABE cumple un rol clave como puente entre universidades y empleadores, acompañando programas de desarrollo para becarios, talleres de habilidades blandas y seguimiento continuo hacia clientes. Hoy, una parte importante de esta operación se gestiona de manera manual mediante <strong>Google Forms y consolidación en Excel</strong>, lo que consume tiempo operativo, dificulta la trazabilidad y limita la capacidad de reportería ejecutiva.</p>
+    <p>El desafío principal no es solo digitalizar encuestas, sino <strong>ordenar el ciclo completo de seguimiento del becario</strong>: captura de feedback, trazabilidad histórica, visibilidad por cliente y capacidad de escalar la operación sin aumentar proporcionalmente la carga administrativa del equipo.</p>
+
+    <div class="highlight-box">
+      <p>La oportunidad para ANCABE es transformar una operación manual en una experiencia digital más ordenada, medible y profesional, manteniendo cercanía con becarios y mejorando la calidad del reporte hacia clientes.</p>
+    </div>
+
+    <h3>2. Tracks de Trabajo Recomendados</h3>
+    <p>Recomendamos estructurar esta iniciativa en <strong>3 tracks de trabajo complementarios</strong>, que pueden implementarse de manera escalonada según prioridad de negocio:</p>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-number">1</div>
+        <h4>Track 1 — Feedback y Reportería</h4>
+        <div class="module-subtitle">Desarrollo a medida</div>
+        <p>Aplicación web para administrar ejecutivos, clientes y becarios, levantar feedback periódico y generar reportes accionables.</p>
+        <ul>
+          <li>Roles: administrador, ejecutivo, cliente y becario</li>
+          <li>Encuestas periódicas con trazabilidad por persona</li>
+          <li>Dashboard y reportería para clientes</li>
+          <li>Base para escalar operación con menor carga manual</li>
+        </ul>
+        <div class="module-price-wrapper">
+          <div class="module-price">Entre USD 1,800 y 2,400</div>
+          <div class="module-note">Valor final sujeto a sesión de levantamiento con dirección.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">2</div>
+        <h4>Track 2 — Ewaffle LMS</h4>
+        <div class="module-subtitle">Licenciamiento por usuario activo</div>
+        <p>Plataforma LMS para gestionar la capacitación continua de becarios, cobrando solo por usuarios que efectivamente ingresan.</p>
+        <ul>
+          <li>Login y gestión de usuarios</li>
+          <li>Asignación de contenidos por programa</li>
+          <li>Seguimiento de avance por participante</li>
+          <li>Escalable a cohortes mensuales</li>
+        </ul>
+        <div class="module-price-wrapper">
+          <div class="module-price">Desde USD 390/mes</div>
+          <div class="module-note">Modelo por tramo de usuarios activos mensuales.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">3</div>
+        <h4>Track 3 — Curso Piloto E-learning</h4>
+        <div class="module-subtitle">Curso de 3 módulos</div>
+        <p>Diseño y producción de un curso piloto e-learning de 3 módulos, listo para validar estándar de calidad y escalar a futuro.</p>
+        <ul>
+          <li>Curso completo de 3 módulos e-learning</li>
+          <li>Incluye video, interactividad y contenido navegable</li>
+          <li>Listo para LMS y validación con stakeholders</li>
+        </ul>
+        <div class="module-price-wrapper">
+          <div class="module-price">Entre USD 1,200 y 1,800</div>
+          <div class="module-note">Valor final depende de complejidad y duración de cada módulo.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>3. Alcance del Track 1</h3>
+    <p>El primer track resuelve el mayor dolor operativo actual: reemplazar formularios y planillas dispersas por un sistema de seguimiento estructurado. La solución se concibe como una <strong>app web de operación interna y visibilidad externa</strong>.</p>
+
+    <table>
+      <thead>
+        <tr><th>Componente</th><th>Objetivo</th><th>Incluye</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Gestión de usuarios y roles</strong></td>
+          <td>Ordenar la operación por perfil</td>
+          <td>Administradores, ejecutivos ANCABE, clientes y becarios con permisos diferenciados</td>
+        </tr>
+        <tr>
+          <td><strong>Feedback periódico</strong></td>
+          <td>Levantar información de manera recurrente</td>
+          <td>Encuestas programables, trazabilidad histórica, respuestas por becario y por cohorte</td>
+        </tr>
+        <tr>
+          <td><strong>Seguimiento ejecutivo</strong></td>
+          <td>Reducir carga administrativa</td>
+          <td>Vista consolidada de pendientes, hitos y estados de seguimiento por becario</td>
+        </tr>
+        <tr>
+          <td><strong>Reportería a clientes</strong></td>
+          <td>Mejorar visibilidad y profesionalizar entrega</td>
+          <td>Indicadores, histórico de seguimiento y reportes por cliente o programa</td>
+        </tr>
+        <tr>
+          <td><strong>Base escalable</strong></td>
+          <td>Preparar crecimiento operativo</td>
+          <td>Estructura lista para aumentar volumen de becarios sin seguir creciendo en Excel</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Flujo del Sistema</h4>
+    <div style="display:flex; align-items:center; justify-content:center; gap:0; margin:24px 0 20px; flex-wrap:wrap;">
+      <div style="background:#1a1a5e; color:white; padding:14px 18px; border-radius:10px; text-align:center; min-width:130px;">
+        <div style="font-weight:800; font-size:13px;">Admin ANCABE</div>
+        <div style="font-size:11px; opacity:0.8; margin-top:4px;">Configura clientes, becarios y encuestas</div>
+      </div>
+      <div style="color:#1a1a5e; font-size:28px; font-weight:900; padding:0 10px;">&#8594;</div>
+      <div style="background:#f5f5ff; border:2px solid #1a1a5e; padding:14px 18px; border-radius:10px; text-align:center; min-width:130px;">
+        <div style="font-weight:800; font-size:13px; color:#1a1a5e;">Ejecutivo</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Asigna y gestiona seguimiento por becario</div>
+      </div>
+      <div style="color:#1a1a5e; font-size:28px; font-weight:900; padding:0 10px;">&#8594;</div>
+      <div style="background:#f5f5ff; border:2px solid #1a1a5e; padding:14px 18px; border-radius:10px; text-align:center; min-width:130px;">
+        <div style="font-weight:800; font-size:13px; color:#1a1a5e;">Becario</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Responde encuestas de feedback periódico</div>
+      </div>
+      <div style="color:#1a1a5e; font-size:28px; font-weight:900; padding:0 10px;">&#8594;</div>
+      <div style="background:#f5f5ff; border:2px solid #1a1a5e; padding:14px 18px; border-radius:10px; text-align:center; min-width:130px;">
+        <div style="font-weight:800; font-size:13px; color:#1a1a5e;">Dashboard</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Consolida datos, indicadores y trazabilidad</div>
+      </div>
+      <div style="color:#1a1a5e; font-size:28px; font-weight:900; padding:0 10px;">&#8594;</div>
+      <div style="background:#e91e8c; color:white; padding:14px 18px; border-radius:10px; text-align:center; min-width:130px;">
+        <div style="font-weight:800; font-size:13px;">Reporte Cliente</div>
+        <div style="font-size:11px; opacity:0.8; margin-top:4px;">Reportes ejecutivos por programa y empresa</div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <p>Recomendamos cerrar el precio final de este track después de la segunda sesión con dirección, porque el valor dependerá del nivel de reportería esperado, las automatizaciones requeridas y la profundidad del flujo por becario.</p>
+    </div>
+
+    <h3>4. Alcance y Pricing del Track 2</h3>
+    <p>Ewaffle LMS permite complementar el seguimiento con una capa de formación estructurada. Dado que ANCABE puede escalar hasta <strong>2.000 becarios</strong>, recomendamos un modelo de cobro por <strong>usuario activo mensual</strong>, es decir, por participante que efectivamente inicia sesión durante el periodo.</p>
+
+    <table>
+      <thead>
+        <tr><th>Tramo</th><th>Detalle</th><th>Precio</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hasta 250 activos/mes</strong></td>
+          <td>Ideal para arranque y validación de adopción</td>
+          <td class="price">USD 390 / mes</td>
+        </tr>
+        <tr>
+          <td><strong>251 - 500 activos/mes</strong></td>
+          <td>Escala operativa con más cohortes y clientes</td>
+          <td class="price">USD 540 / mes</td>
+        </tr>
+        <tr>
+          <td><strong>501 - 1,000 activos/mes</strong></td>
+          <td>Operación consolidada de programas recurrentes</td>
+          <td class="price">USD 690 / mes</td>
+        </tr>
+        <tr>
+          <td><strong>1,001 - 2,000 activos/mes</strong></td>
+          <td>Tramo enterprise para operación ampliada</td>
+          <td class="price">USD 740 / mes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:11px; color:#888;">Incluye además un fee de onboarding y marca blanca desde <strong>USD 1,200</strong> para configuración inicial, branding, estructura de usuarios y habilitación de contenidos. Si ANCABE maneja 2.000 becarios totales pero con menor volumen de logins mensuales, el cobro se mantiene sobre usuarios activos reales.</p>
+
+    <h3>5. Track 3 — Curso Piloto E-learning</h3>
+    <p>Como tercer frente, proponemos diseñar y producir un <strong>curso piloto e-learning de 3 módulos</strong> que sirva como estándar de calidad para futuras transformaciones de contenido. Cada módulo combina narrativa audiovisual, práctica interactiva y contenido navegable en un entregable integrado listo para LMS.</p>
+
+    <table>
+      <thead>
+        <tr><th>Entregable</th><th>Detalle</th><th>Valor Total</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Curso Piloto E-learning</strong><br><span style="font-size:12px;color:#888;">3 módulos</span></td>
+          <td>Curso completo de 3 módulos incluyendo video animado, recursos interactivos y guías de aprendizaje por módulo. Listo para LMS y validación con stakeholders.</td>
+          <td class="price" style="font-size:20px;">Entre USD 1,200 y 1,800</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:11px; color:#888;">Valores exentos de IVA. El valor final depende de la complejidad y duración de cada módulo. Incluye una ronda de ajustes menores por entregable. Cambios estructurales o de guion pueden requerir recotización.</p>
+
+    <h3>6. Recomendación de Implementación</h3>
+    <p>Nuestra recomendación es avanzar por etapas, priorizando aquello que hoy genera más fricción operativa y valor visible para ANCABE y sus clientes:</p>
+
+    <div class="step-grid">
+      <div class="step">
+        <div class="n">1</div>
+        <div class="label">Sesión con Dirección</div>
+        <div class="text">Validar flujo ideal, reportería esperada y alcance del desarrollo a medida</div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div class="label">Cotización Final</div>
+        <div class="text">Cerrar pricing del Track 1 y confirmar tramo definitivo de LMS</div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div class="label">Curso Piloto</div>
+        <div class="text">Producir un curso base que permita validar experiencia y estándar visual</div>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <div class="label">Escalamiento</div>
+        <div class="text">Expandir a más cohortes, clientes y contenidos con una operación más ordenada</div>
+      </div>
+    </div>
+
+    <h3>7. Modelo de Trabajo</h3>
+    <ul>
+      <li><strong>Interlocutores:</strong> Ewaffle asigna un responsable de proyecto para centralizar avances, decisiones y aprobaciones.</li>
+      <li><strong>Sesión de levantamiento:</strong> proponemos una reunión ejecutiva para aterrizar flujo de seguimiento, reportería y prioridades del primer release.</li>
+      <li><strong>Rondas de revisión:</strong> 1 ronda de ajustes menores por entregable incluida. Cambios estructurales fuera de ronda pueden recotizarse.</li>
+      <li><strong>Política de datos:</strong> los insumos del cliente se manejan bajo confidencialidad y no se usan para entrenar modelos ni se comparten con terceros.</li>
+    </ul>
+
+    <h3>8. ¿Por qué Ewaffle?</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0;">
+      <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+        <div style="font-size:28px; margin-bottom:8px;">🎯</div>
+        <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Aprendizaje + Operación</div>
+        <p style="margin:0; color:#555;">No solo construimos LMS o contenido. Diseñamos soluciones que conectan seguimiento operativo, experiencia del usuario y reportería para clientes.</p>
+      </div>
+      <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+        <div style="font-size:28px; margin-bottom:8px;">🧩</div>
+        <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Stack Flexible</div>
+        <p style="margin:0; color:#555;">Podemos combinar desarrollo a medida, LMS y producción e-learning en una sola propuesta, sin obligar a ANCABE a trabajar con múltiples proveedores.</p>
+      </div>
+      <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+        <div style="font-size:28px; margin-bottom:8px;">🌎</div>
+        <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Escalable para LATAM</div>
+        <p style="margin:0; color:#555;">Ewaffle está pensado para organizaciones que necesitan operar en español, con cohorts dinámicas y audiencias de formación que cambian mes a mes.</p>
+      </div>
+      <div style="border:2px solid #f0f0f8; border-radius:10px; padding:20px;">
+        <div style="font-size:28px; margin-bottom:8px;">🚀</div>
+        <div style="font-weight:700; color:#1a1a5e; font-size:15px; margin-bottom:6px;">Quick Wins Reales</div>
+        <p style="margin:0; color:#555;">Podemos partir por un curso piloto y una primera capa operativa, validando valor antes de escalar a una implementación más grande.</p>
+      </div>
+    </div>
+
+    <h3>9. Demos y Portafolio de Referencia</h3>
+    <p>Ejemplos reales de recursos que muestran el estándar de experiencia que proponemos para ANCABE:</p>
+    <table>
+      <thead>
+        <tr><th>Tipo de Recurso</th><th>Descripción</th><th>Ver demo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Video Animado</strong><br><span style="font-size:12px;color:#888;">Motion Graphics</span></td>
+          <td>Video explicativo con narrativa visual y locución IA, ideal para bienvenida, contexto o storytelling de aprendizaje.</td>
+          <td><a href="https://youtu.be/rf5-fAPg9wU" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver video →</a></td>
+        </tr>
+        <tr>
+          <td><strong>Video Presentación</strong><br><span style="font-size:12px;color:#888;">Cápsula Introductoria</span></td>
+          <td>Cápsula de entrada para cursos o programas, con diseño animado y estructura clara para contextualizar al participante.</td>
+          <td><a href="https://youtu.be/eCd5qsJ7hQ4" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver video →</a></td>
+        </tr>
+        <tr>
+          <td><strong>Recurso Interactivo</strong><br><span style="font-size:12px;color:#888;">Storyline Premium</span></td>
+          <td>Actividad de ejercitación con interacción, feedback y navegación guiada.</td>
+          <td><a href="https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+        </tr>
+        <tr>
+          <td><strong>Guía de Aprendizaje</strong><br><span style="font-size:12px;color:#888;">Rise 360</span></td>
+          <td>Contenido navegable para teoría, refuerzo y consulta permanente dentro del LMS.</td>
+          <td><a href="https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver recurso →</a></td>
+        </tr>
+        <tr>
+          <td><strong>Ewaffle LMS</strong><br><span style="font-size:12px;color:#888;">Plataforma</span></td>
+          <td>Vista general de la solución LMS, escalable para cohorts, cursos y trazabilidad de avance.</td>
+          <td><a href="https://ewaffle.cl/lms" target="_blank" style="color:#e91e8c; font-weight:700; white-space:nowrap;">Ver solución →</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>10. Próximo Paso</h3>
+    <p>Proponemos realizar una segunda sesión durante la próxima semana con la directora de ANCABE para cerrar tres definiciones clave:</p>
+    <ul>
+      <li>Flujo operativo objetivo del seguimiento de becarios</li>
+      <li>Nivel de profundidad esperado en reportes hacia clientes</li>
+      <li>Modelo comercial final del Track 1 y del licenciamiento LMS</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>Con esa sesión, podremos convertir esta propuesta en una cotización final cerrada para implementación, manteniendo ya valorizado el componente de curso piloto e-learning.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      Álvaro Villena · Fundador Ewaffle.cl<br>
+      <a href="https://ewaffle.cl">ewaffle.cl</a>
+    </div>
+    <div>Propuesta confidencial para uso interno de ANCABE</div>
+  </div>
+</div>
+
+</body>
+</html>
