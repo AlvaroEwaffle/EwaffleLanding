@@ -1,0 +1,351 @@
+---
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Catálogo Base de Recursos E-learning y Multimedia — Ewaffle.cl</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #eef1f7; font-size: 16px; line-height: 1.7; }
+
+    .doc-wrapper { max-width: 1120px; margin: 0 auto; background: #fff; box-shadow: 0 16px 60px rgba(18, 24, 40, 0.10); }
+
+    .cover {
+      background: linear-gradient(135deg, #1a1a5e 55%, #e91e8c 100%);
+      color: white;
+      padding: 60px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cover-title { margin-top: 36px; }
+    .cover-title h1 { font-size: 34px; font-weight: 800; line-height: 1.14; margin-bottom: 12px; }
+    .cover-title h2 { font-size: 19px; font-weight: 400; opacity: 0.88; max-width: 760px; }
+    .cover-meta { margin-top: 28px; font-size: 14px; opacity: 0.74; }
+
+    .page { padding: 42px 60px; }
+    h3 { font-size: 15px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 12px; border-bottom: 2px solid #f0f0f8; padding-bottom: 6px; }
+    h4 { font-size: 17px; font-weight: 700; color: #1a1a5e; margin: 18px 0 8px; }
+    p { margin-bottom: 10px; color: #333; }
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    ul li { margin-bottom: 4px; color: #444; }
+
+    .highlight-box {
+      background: #f5f5ff;
+      border-left: 4px solid #1a1a5e;
+      padding: 15px 18px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .highlight-box p { margin: 0; }
+
+    .mix-box {
+      background: #fff5fb;
+      border-left: 4px solid #e91e8c;
+      padding: 15px 18px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .mix-box p { margin: 0; }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .resource-card {
+      border: 1px solid rgba(26,26,94,0.10);
+      border-radius: 14px;
+      padding: 24px 24px 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(247,248,252,0.98) 100%);
+    }
+    .resource-card .eyebrow {
+      color: #e91e8c;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .resource-card h4 { margin-top: 8px; }
+    .resource-card ul { margin-top: 10px; }
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 12px;
+      color: #e91e8c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .resource-link:hover { text-decoration: underline; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th { background: #1a1a5e; color: white; padding: 11px 14px; text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 11px 14px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 15px; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafafe; }
+
+    .combo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .combo-card {
+      border-radius: 14px;
+      padding: 22px 20px;
+      border: 2px solid #eee;
+      background: #fff;
+    }
+    .combo-card h4 { margin-top: 0; }
+    .combo-card.featured { border-color: #1a1a5e; }
+    .combo-card .combo-tag {
+      display: inline-block;
+      background: rgba(26,26,94,0.08);
+      color: #1a1a5e;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 999px;
+      padding: 5px 10px;
+      margin-bottom: 12px;
+    }
+
+    .questions {
+      background: #fff9f0;
+      border: 1px solid #ffd699;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .questions p { margin-bottom: 8px; font-weight: 700; color: #b36200; }
+    .questions ol { padding-left: 18px; }
+    .questions ol li { margin-bottom: 4px; color: #555; }
+
+    .footer {
+      background: #1a1a5e;
+      color: white;
+      padding: 24px 60px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+    .footer a { color: #f7c948; }
+
+    @media (max-width: 960px) {
+      .combo-grid { grid-template-columns: 1fr; }
+      .cover, .page, .footer { padding: 28px 22px; }
+      .cover-title h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="doc-wrapper">
+  <div class="cover">
+    <div><img src="https://ewaffle.cl/assets/logoprimario.png" alt="Ewaffle" style="height: 52px;"></div>
+    <div class="cover-title">
+      <h1>Catálogo Base de Recursos<br>E-learning y Multimedia</h1>
+      <h2>Plantilla inicial para clientes LATAM que necesitan visualizar rápidamente qué recursos podemos producir y cómo se combinan en una experiencia de aprendizaje efectiva.</h2>
+    </div>
+    <div class="cover-meta">
+      Preparado por: Álvaro Villena, Fundador Ewaffle.cl &nbsp;|&nbsp; 08 de abril de 2026 &nbsp;|&nbsp; Documento base reusable &nbsp;|&nbsp; Confidencial
+    </div>
+  </div>
+
+  <div class="page">
+    <h3>1. Cómo leer este catálogo</h3>
+    <p>En este catálogo te mostramos de manera clara <strong>qué recursos puede producir Ewaffle</strong>, cuándo conviene usar cada uno y cómo se pueden mezclar para construir una experiencia de aprendizaje más efectiva según tu realidad.</p>
+    <div class="mix-box">
+      <p><strong>No recomendamos resolver todo con un solo formato.</strong> Normalmente el mejor resultado aparece cuando mezclamos video, interactividad, contenido navegable y, cuando hace falta, producción en terreno o recorridos 360.</p>
+    </div>
+
+    <h3>2. Catálogo de recursos</h3>
+    <div class="resource-grid">
+      <article class="resource-card">
+        <div class="eyebrow">Interactividad</div>
+        <h4>Cápsulas Storyline</h4>
+        <p>Simulaciones, escenarios y actividades donde el participante tiene que decidir, equivocarse y recibir feedback.</p>
+        <ul>
+          <li>Ideal para práctica activa y evaluación formativa.</li>
+          <li>Formato compatible con LMS vía SCORM o HTML5.</li>
+          <li>Útil para compliance, ventas, liderazgo y protocolos.</li>
+        </ul>
+        <a class="resource-link" href="https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" target="_blank" rel="noreferrer">Ver ejemplo Storyline →</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="eyebrow">Contenido navegable</div>
+        <h4>Guías Rise</h4>
+        <p>Recursos navegables para organizar conceptos, pasos, contenidos de consulta y materiales de apoyo.</p>
+        <ul>
+          <li>Ideal para teoría, refuerzo y consulta posterior.</li>
+          <li>Se puede combinar con video, audio y microevaluaciones.</li>
+          <li>Funciona muy bien como base de academias internas.</li>
+        </ul>
+        <a class="resource-link" href="https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" target="_blank" rel="noreferrer">Ver ejemplo Rise →</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="eyebrow">Audiovisual</div>
+        <h4>Videos animados tipo motion graphics</h4>
+        <p>Piezas para explicar conceptos, procesos, cambios, mensajes clave o storytelling de marca interna.</p>
+        <ul>
+          <li>Muy útil para instalar contexto y abrir una ruta formativa.</li>
+          <li>Permite simplificar ideas abstractas o temas técnicos.</li>
+          <li>Se puede producir con locución humana o IA.</li>
+        </ul>
+        <a class="resource-link" href="https://youtu.be/rf5-fAPg9wU" target="_blank" rel="noreferrer">Ver ejemplo de video →</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="eyebrow">Producción real</div>
+        <h4>Producción multimedia en terreno</h4>
+        <p>Grabación presencial para mostrar espacios, personas, equipos, demostraciones, procedimientos o testimonios reales.</p>
+        <ul>
+          <li>Ideal cuando el contexto operativo importa de verdad.</li>
+          <li>Sirve para onboarding, cultura, seguridad y operación.</li>
+          <li>Puede alimentar después videos, cápsulas o librerías internas.</li>
+        </ul>
+        <a class="resource-link" href="https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1" target="_blank" rel="noreferrer">Ver ejemplo en terreno 1 →</a><br />
+        <a class="resource-link" href="https://youtu.be/OCu-5fmS_mI" target="_blank" rel="noreferrer">Ver ejemplo en terreno 2 →</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="eyebrow">Inmersivo</div>
+        <h4>Recorridos y grabación 360</h4>
+        <p>Experiencias para inducción, seguridad y comprensión espacial antes del ingreso presencial o la operación en terreno.</p>
+        <ul>
+          <li>Especialmente útiles para onboarding, plantas, campus o sedes distribuidas.</li>
+          <li>Ayudan a estandarizar experiencias entre equipos y locaciones.</li>
+          <li>Pueden convivir con LMS y otros recursos de onboarding.</li>
+        </ul>
+        <a class="resource-link" href="https://storage.net-fs.com/hosting/2727323/380/index.htm" target="_blank" rel="noreferrer">Ver ejemplo 360 interactivo →</a><br />
+        <a class="resource-link" href="https://www.youtube.com/watch?v=7iaJIuOoxzE" target="_blank" rel="noreferrer">Ver ejemplo 360 video →</a><br />
+        <a class="resource-link" href="https://ewaffle.cl/servicio-360" target="_blank" rel="noreferrer">Ver servicio 360 completo →</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="eyebrow">Complementario</div>
+        <h4>Audio, locución y soporte gráfico</h4>
+        <p>Capas de audio, locución e identidad visual para dar coherencia, velocidad de producción y mejor experiencia de consumo.</p>
+        <ul>
+          <li>Locución humana o IA según objetivo y presupuesto.</li>
+          <li>Diseño gráfico, infografías, placas y recursos visuales de apoyo.</li>
+          <li>Ayuda a transformar piezas aisladas en un sistema reusable.</li>
+        </ul>
+        <a class="resource-link" href="https://ewaffle.cl/multimedia" target="_blank" rel="noreferrer">Ver capacidades complementarias →</a>
+      </article>
+    </div>
+
+    <h3>3. Cuándo conviene cada recurso</h3>
+    <table>
+      <thead>
+        <tr><th>Recurso</th><th>Mejor uso</th><th>Resultado esperado</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Storyline</strong></td>
+          <td>Cuando el usuario debe practicar decisiones, pasos o respuestas en contexto.</td>
+          <td>Más aplicación y menos consumo pasivo.</td>
+        </tr>
+        <tr>
+          <td><strong>Rise</strong></td>
+          <td>Cuando el contenido necesita quedar ordenado, navegable y disponible para consulta.</td>
+          <td>Mejor acceso, refuerzo y reutilización del conocimiento.</td>
+        </tr>
+        <tr>
+          <td><strong>Motion graphics</strong></td>
+          <td>Cuando necesitamos explicar, sintetizar o instalar una narrativa clara rápidamente.</td>
+          <td>Mensajes más claros y mejor entendimiento inicial.</td>
+        </tr>
+        <tr>
+          <td><strong>Producción en terreno</strong></td>
+          <td>Cuando la credibilidad del contenido depende de mostrar operación, personas o espacios reales.</td>
+          <td>Más cercanía, realismo y conexión con la práctica.</td>
+        </tr>
+        <tr>
+          <td><strong>360</strong></td>
+          <td>Cuando el entorno físico es parte crítica del aprendizaje o del onboarding.</td>
+          <td>Comprensión espacial antes de llegar al lugar real.</td>
+        </tr>
+        <tr>
+          <td><strong>Audio y locución</strong></td>
+          <td>Cuando el contenido necesita consistencia tonal, accesibilidad o velocidad de producción.</td>
+          <td>Mejor experiencia y mayor claridad narrativa.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>4. Combinaciones recomendadas</h3>
+    <p>En vez de vender un solo recurso aislado, normalmente recomendamos alguna de estas combinaciones según el momento del cliente:</p>
+    <div class="combo-grid">
+      <article class="combo-card">
+        <div class="combo-tag">Entrada rápida</div>
+        <h4>Mix Starter</h4>
+        <p>Para clientes que necesitan validar rápido una primera experiencia sin sobredimensionar el proyecto.</p>
+        <ul>
+          <li>1 video motion graphics o pieza audiovisual corta.</li>
+          <li>1 guía Rise para consulta y distribución.</li>
+          <li>Locución y visuales base.</li>
+        </ul>
+      </article>
+
+      <article class="combo-card featured">
+        <div class="combo-tag">Recomendado</div>
+        <h4>Mix de aprendizaje activo</h4>
+        <p>Para programas donde importa explicar, practicar y dejar material reusable dentro del LMS.</p>
+        <ul>
+          <li>Video de contexto o apertura.</li>
+          <li>Cápsula Storyline para práctica.</li>
+          <li>Guía Rise para consulta posterior.</li>
+        </ul>
+      </article>
+
+      <article class="combo-card">
+        <div class="combo-tag">Inmersivo</div>
+        <h4>Mix onboarding en terreno</h4>
+        <p>Para clientes que necesitan mostrar espacios, rutas, protocolos o experiencias reales antes del ingreso presencial.</p>
+        <ul>
+          <li>Producción multimedia en terreno.</li>
+          <li>Recorrido o video 360.</li>
+          <li>Guía o pieza interactiva de apoyo.</li>
+        </ul>
+      </article>
+    </div>
+
+    <h3>5. Cómo operamos este tipo de proyectos</h3>
+    <ul>
+      <li>Partimos identificando el objetivo de negocio y aprendizaje antes de elegir formatos.</li>
+      <li>Recomendamos un piloto pequeño pero representativo para validar tono, estándar y flujo de aprobación.</li>
+      <li>Después escalamos solo los recursos que realmente agregan valor al caso.</li>
+      <li>Entregamos pensando en LMS, intranet, onboarding interno o distribución directa según el ecosistema del cliente.</li>
+    </ul>
+
+    <h3>6. Preguntas para aterrizar este catálogo a tu propuesta</h3>
+    <div class="questions">
+      <p>Para proponerte la mejor mezcla de recursos, nos ayuda mucho entender esto contigo:</p>
+      <ol>
+        <li>¿Qué te gustaría resolver primero: explicar mejor un tema, activar práctica, ordenar contenido o mostrar contexto real?</li>
+        <li>¿Qué tan importante es para ti que estos recursos queden reutilizables dentro de un LMS, intranet o biblioteca interna?</li>
+        <li>¿Prefieres partir con un piloto acotado para validar estándar y enfoque, o ya necesitas una primera biblioteca de recursos?</li>
+        <li>¿Hace sentido incorporar producción en terreno o recorridos 360, o hoy conviene una mezcla más liviana y rápida de desplegar?</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Ewaffle.cl · Catálogo base reusable para propuestas comerciales</div>
+    <div><a href="https://ewaffle.cl">ewaffle.cl</a></div>
+  </div>
+</div>
+
+</body>
+</html>

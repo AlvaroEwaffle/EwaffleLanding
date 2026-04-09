@@ -1,0 +1,360 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Servicio 360 para Onboarding e Inducción | Ewaffle";
+const description = "Diseñamos recorridos 360, videos inmersivos y producción multimedia en terreno para onboarding, seguridad e inducción operativa en Chile y Latinoamérica.";
+const canonicalUrl = "https://ewaffle.cl/servicio-360";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+
+const examples = [
+  {
+    category: "Producción en terreno",
+    title: "Recorrido real con cámara en terreno",
+    description: "Ejemplo de captura real para mostrar espacios, flujo operativo y contexto de forma más cercana y creíble.",
+    href: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1",
+    cta: "Abrir ejemplo",
+  },
+  {
+    category: "Producción en terreno",
+    title: "Pieza audiovisual de referencia",
+    description: "Ejemplo audiovisual complementario para mostrar tono, ritmo y potencial narrativo de una producción presencial.",
+    href: "https://youtu.be/OCu-5fmS_mI",
+    cta: "Ver video",
+  },
+  {
+    category: "360 interactivo",
+    title: "Recorrido 360 con navegación",
+    description: "Ejemplo de experiencia inmersiva donde la persona puede explorar el espacio y entender puntos clave antes de llegar presencialmente.",
+    href: "https://storage.net-fs.com/hosting/2727323/380/index.htm",
+    cta: "Explorar demo",
+  },
+  {
+    category: "360 video",
+    title: "Video 360 para inducción",
+    description: "Ejemplo de contenido inmersivo pensado para onboarding, contexto operacional y comprensión espacial.",
+    href: "https://www.youtube.com/watch?v=7iaJIuOoxzE",
+    cta: "Ver ejemplo",
+  },
+];
+
+const includeCards = [
+  {
+    title: "Levantamiento y guión",
+    description: "Definimos el recorrido, los puntos críticos y el objetivo de aprendizaje para que la experiencia no sea solo visualmente llamativa, sino útil para aprender.",
+  },
+  {
+    title: "Captura y edición",
+    description: "Producimos el registro en terreno y lo convertimos en una experiencia clara, ordenada y lista para ser usada como parte de onboarding o capacitación.",
+  },
+  {
+    title: "Capas explicativas",
+    description: "Podemos integrar narración, textos, hotspots, placas y llamados de atención sobre zonas o momentos clave del recorrido.",
+  },
+  {
+    title: "Integración con LMS",
+    description: "La experiencia puede convivir con rutas formativas, evaluaciones, SCORM, cápsulas multimedia y materiales de apoyo.",
+  },
+];
+
+const useCases = [
+  "Onboarding de nuevos ingresos antes del primer día presencial.",
+  "Inducción de contratistas, visitas o proveedores en espacios con protocolos críticos.",
+  "Recorridos de seguridad, rutas, equipos y puntos de control para plantas, bodegas, campus o clínicas.",
+  "Estandarización de la experiencia de ingreso entre sedes, turnos o geografías distintas.",
+];
+
+const decisionCards = [
+  {
+    title: "Cuándo conviene 360",
+    points: [
+      "Cuando el espacio físico es parte central del aprendizaje.",
+      "Cuando mostrar contexto real reduce dudas y acelera adaptación.",
+      "Cuando quieres una inducción más inmersiva y memorable.",
+    ],
+  },
+  {
+    title: "Cuándo conviene mezclarlo",
+    points: [
+      "Cuando el recorrido necesita además una guía Rise o un recurso Storyline.",
+      "Cuando el 360 debe convivir con videos explicativos o materiales de consulta.",
+      "Cuando quieres una experiencia completa y no solo una pieza inmersiva aislada.",
+    ],
+  },
+];
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Recorridos 360 para onboarding e inducción",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": imageUrl
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamérica"
+      },
+      "url": canonicalUrl,
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <main class="min-h-screen bg-slate-50">
+    <section class="relative overflow-hidden bg-primary">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.18),transparent_24%),radial-gradient(circle_at_85%_18%,rgba(14,165,233,0.16),transparent_18%)]"></div>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 md:pt-36 md:pb-28">
+        <div class="max-w-6xl mx-auto">
+          <div class="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold tracking-[0.14em] text-white/85 uppercase">
+            Servicio dedicado · Onboarding inmersivo
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-end">
+            <div>
+              <h1 class="text-white text-[clamp(3.2rem,8vw,6.8rem)] font-black leading-[0.92] tracking-[-0.06em]">
+                Servicio 360
+              </h1>
+              <p class="mt-6 max-w-3xl text-xl md:text-2xl leading-relaxed text-white/82">
+                Diseñamos recorridos 360, videos inmersivos y producción multimedia en terreno para que tu equipo entienda el contexto real antes de operar.
+              </p>
+
+              <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#contact"
+                  class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-accent/90 hover:shadow-2xl hover:shadow-accent/20"
+                >
+                  Quiero evaluarlo para mi empresa
+                </a>
+                <a
+                  href="#demostraciones"
+                  class="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-white/15"
+                >
+                  Ver demostraciones
+                </a>
+              </div>
+            </div>
+
+            <div class="grid gap-4">
+              <div class="rounded-[2rem] bg-white/10 p-6 backdrop-blur-sm border border-white/15">
+                <p class="text-sm uppercase tracking-[0.18em] text-yellow mb-3">Qué resuelve</p>
+                <p class="text-lg text-white/88">
+                  Menos dudas al ingresar, mejor comprensión de espacios, protocolos y recorridos, y una experiencia de inducción mucho más clara y consistente.
+                </p>
+              </div>
+              <div class="rounded-[2rem] bg-white p-6 shadow-2xl">
+                <p class="text-sm uppercase tracking-[0.18em] text-primary/60 mb-3">Ideal para</p>
+                <p class="text-2xl font-bold text-primary leading-tight">
+                  Plantas, retail, clínicas, campus, logística, faenas y operaciones distribuidas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-4">Por qué funciona</p>
+              <h2 class="text-4xl md:text-5xl font-black tracking-[-0.05em] text-primary leading-tight">
+                El contexto también enseña.
+              </h2>
+            </div>
+            <div class="space-y-5 text-lg leading-relaxed text-slate-600">
+              <p>
+                Cuando una persona necesita entender un espacio, una ruta, un equipo o un protocolo, un PDF o una charla muchas veces no bastan. El 360 permite ver el entorno real antes de estar ahí.
+              </p>
+              <p>
+                Por eso este servicio funciona especialmente bien en onboarding, inducción operativa, seguridad y formación inicial: reduce incertidumbre, estandariza el mensaje y acelera la adaptación.
+              </p>
+              <div class="rounded-3xl border border-primary/10 bg-slate-50 p-6">
+                <p class="text-primary font-semibold">
+                  La mejor versión de este servicio aparece cuando mezclamos recorrido inmersivo con recursos de apoyo como video, guías o cápsulas interactivas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-50 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="max-w-3xl mb-12">
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-4">Qué incluye</p>
+            <h2 class="text-4xl md:text-5xl font-black tracking-[-0.05em] text-primary leading-tight">
+              Diseñado para explicar mejor, no solo para verse mejor.
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {includeCards.map((card) => (
+              <article class="rounded-[1.75rem] border border-primary/10 bg-white p-7 shadow-sm">
+                <h3 class="text-2xl font-bold text-primary mb-3">{card.title}</h3>
+                <p class="text-slate-600 leading-relaxed">{card.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demostraciones" class="bg-white py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="max-w-3xl mb-12">
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-4">Demostraciones</p>
+            <h2 class="text-4xl md:text-5xl font-black tracking-[-0.05em] text-primary leading-tight">
+              Referencias reales para ver el tipo de experiencia.
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {examples.map((example) => (
+              <article class="rounded-[1.75rem] border border-primary/10 bg-slate-50 p-7">
+                <div class="inline-flex rounded-full bg-primary/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                  {example.category}
+                </div>
+                <h3 class="mt-5 text-2xl font-bold text-primary">{example.title}</h3>
+                <p class="mt-3 text-slate-600 leading-relaxed">{example.description}</p>
+                <a
+                  href={example.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-accent/90"
+                >
+                  {example.cta}
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-primary py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8">
+            <div class="rounded-[2rem] border border-white/12 bg-white/10 p-8 text-white backdrop-blur-sm">
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-yellow mb-4">Casos donde hace más sentido</p>
+              <ul class="space-y-4 text-lg text-white/86 leading-relaxed">
+                {useCases.map((item) => (
+                  <li class="flex gap-3">
+                    <span class="text-yellow">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="grid gap-6">
+              {decisionCards.map((card) => (
+                <article class="rounded-[2rem] bg-white p-8 shadow-2xl">
+                  <h3 class="text-2xl font-bold text-primary mb-4">{card.title}</h3>
+                  <ul class="space-y-3 text-slate-600 leading-relaxed">
+                    {card.points.map((point) => (
+                      <li class="flex gap-3">
+                        <span class="text-accent">•</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto rounded-[2.25rem] border border-primary/10 bg-slate-50 p-8 md:p-12">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 1</p>
+              <h3 class="text-xl font-bold text-primary">Brief</h3>
+              <p class="mt-2 text-slate-600">Definimos objetivo, audiencia, espacio y tipo de experiencia.</p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 2</p>
+              <h3 class="text-xl font-bold text-primary">Guión y recorrido</h3>
+              <p class="mt-2 text-slate-600">Ordenamos qué debe verse, qué debe explicarse y qué momentos son críticos.</p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 3</p>
+              <h3 class="text-xl font-bold text-primary">Producción</h3>
+              <p class="mt-2 text-slate-600">Capturamos, editamos y preparamos la experiencia inmersiva con sus apoyos.</p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 4</p>
+              <h3 class="text-xl font-bold text-primary">Entrega</h3>
+              <p class="mt-2 text-slate-600">Lo dejamos listo para LMS, intranet o despliegue directo en onboarding.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-primary py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-yellow mb-4">Siguiente paso</p>
+          <h2 class="text-4xl md:text-5xl font-black tracking-[-0.05em] text-white leading-tight">
+            Si quieres, aterrizamos este servicio a tu realidad.
+          </h2>
+          <p class="mt-5 text-xl text-white/84 leading-relaxed">
+            Podemos recomendarte si conviene partir con un recorrido 360 puro, mezclarlo con video y guías, o construir un piloto acotado para validar el estándar.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href="#contact"
+              class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-accent/90"
+            >
+              Hablemos de tu caso
+            </a>
+            <a
+              href="/multimedia"
+              class="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-white/15"
+            >
+              Ver multimedia general
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Contact />
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>

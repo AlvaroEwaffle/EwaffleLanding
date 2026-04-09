@@ -1,0 +1,201 @@
+---
+const proposals = [
+  {
+    client: 'LATAM',
+    date: '08 abril 2026',
+    title: 'Catálogo Base de Recursos E-learning y Multimedia',
+    href: '/propuestas/latam/2026-04-08-catalogo-recursos-elearning-multimedia',
+    summary: 'Plantilla reusable para leads LATAM: Storyline, Rise, motion graphics, producción multimedia en terreno y recorridos 360.',
+    tag: 'Plantilla',
+  },
+  {
+    client: 'ANCABE',
+    date: '07 abril 2026',
+    title: 'Tracks de Trabajo para Seguimiento de Becarios + LMS + Curso Piloto',
+    href: '/propuestas/ancabe/2026-04-07-plataforma-becarios',
+    summary: 'Propuesta comercial en USD con tracks de trabajo, pricing sugerido de LMS y curso piloto e-learning.',
+    tag: 'Mexico',
+  },
+  {
+    client: 'UMINE',
+    date: '06 abril 2026',
+    title: 'Produccion Audiovisual con IA Generativa para 15 Cursos',
+    href: '/propuestas/umine/2026-04-06-produccion-audiovisual-ia',
+    summary: 'Propuesta trimestral para produccion audiovisual, Storyline, Rise y pipeline de IA generativa.',
+    tag: 'Enterprise',
+  },
+  {
+    client: 'ACHS',
+    date: '06 abril 2026',
+    title: 'Rediseño Curso E-learning DS 44 Uso y Mantencion de EPP',
+    href: '/propuestas/achs/2026-04-06-ds44-epp-gamificado',
+    summary: 'Propuesta gamificada con arboles de decision, Storyline, Rise y enfoque Quality Matters.',
+    tag: 'Chile',
+  },
+];
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Directorio de Propuestas — Ewaffle.cl</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a2e;
+      background:
+        radial-gradient(circle at top left, rgba(233,30,140,0.12), transparent 30%),
+        linear-gradient(180deg, #f6f7fb 0%, #eef1f8 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1a1a5e 58%, #e91e8c 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 18px 50px rgba(26,26,94,0.18);
+      margin-bottom: 28px;
+    }
+    .hero img { height: 52px; }
+    .hero h1 {
+      font-size: 34px;
+      line-height: 1.15;
+      margin-top: 28px;
+      font-weight: 800;
+    }
+    .hero p {
+      margin-top: 12px;
+      max-width: 700px;
+      font-size: 16px;
+      opacity: 0.88;
+    }
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: 0.72;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      border: 1px solid rgba(26,26,94,0.08);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(20, 24, 40, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .client {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e91e8c;
+      font-weight: 700;
+    }
+    .tag {
+      background: rgba(26,26,94,0.08);
+      color: #1a1a5e;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .date {
+      color: #7b8097;
+      font-size: 13px;
+    }
+    .title {
+      color: #1a1a5e;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.22;
+    }
+    .summary {
+      color: #4a5068;
+      font-size: 14px;
+      flex: 1;
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 6px;
+    }
+    .link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #1a1a5e;
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .path {
+      color: #8d93aa;
+      font-size: 12px;
+      word-break: break-word;
+    }
+    .footer {
+      margin-top: 26px;
+      color: #677087;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <img src="https://ewaffle.cl/assets/logoprimario.png" alt="Ewaffle">
+      <h1>Directorio de Propuestas</h1>
+      <p>Indice interno con acceso directo a las propuestas comerciales activas construidas en formato web dentro de Ewaffle.</p>
+      <div class="meta">Uso interno · no indexado · actualizado al 08 de abril de 2026</div>
+    </section>
+
+    <section class="grid">
+      {proposals.map((proposal) => (
+        <article class="card">
+          <div class="topline">
+            <div class="client">{proposal.client}</div>
+            <div class="tag">{proposal.tag}</div>
+          </div>
+          <div class="date">{proposal.date}</div>
+          <h2 class="title">{proposal.title}</h2>
+          <p class="summary">{proposal.summary}</p>
+          <div class="actions">
+            <a class="link" href={proposal.href}>Abrir propuesta</a>
+          </div>
+          <div class="path">{proposal.href}</div>
+        </article>
+      ))}
+    </section>
+
+    <div class="footer">
+      Ewaffle.cl · Directorio local de propuestas comerciales
+    </div>
+  </div>
+</body>
+</html>

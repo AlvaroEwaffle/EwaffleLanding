@@ -4,11 +4,11 @@ import Footer from '../components/landing/Footer.astro';
 import CTA from '../components/landing/CTA.astro';
 import Contact from '../components/landing/Contact.astro';
 
-const title = "Producción Multimedia E-learning | Ewaffle - Videos, Interactivos y Audio";
-const description = "Producción multimedia profesional para e-learning: videos, contenido interactivo (Genially, H5P), audio de alta calidad, diseño gráfico y animaciones. Chile y Latinoamérica.";
+const title = "Producción Multimedia E-learning | Ewaffle - Videos, Interactivos, Audio y 360";
+const description = "Producción multimedia profesional para e-learning: videos, videos 360 para onboarding, contenido interactivo, audio de alta calidad, diseño gráfico y animaciones. Chile y Latinoamérica.";
 const canonicalUrl = "https://ewaffle.cl/multimedia";
 const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
-const keywords = "producción multimedia e-learning, videos educativos, contenido interactivo, Genially, H5P, audio profesional, diseño gráfico educativo, producción multimedia Chile, producción multimedia Latinoamérica, text to speech español";
+const keywords = "producción multimedia e-learning, videos educativos, videos 360 onboarding, onboarding inmersivo, contenido interactivo, Genially, H5P, audio profesional, diseño gráfico educativo, producción multimedia Chile, producción multimedia Latinoamérica, text to speech español";
 ---
 
 <BaseLayout {title} {description}>
@@ -75,17 +75,23 @@ const keywords = "producción multimedia e-learning, videos educativos, contenid
         </div>
 
         <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
-          🎬 Producción Multimedia Profesional
+          🎬 Producción Multimedia para e-learning
         </h1>
         <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
-          Videos, contenido interactivo, audio de alta calidad y diseño gráfico. Contenido multimedia que engancha y convierte.
+          Videos, experiencias 360 para onboarding, contenido interactivo, audio de alta calidad y diseño gráfico. Recursos que aceleran la adopción y elevan la experiencia de aprendizaje.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
           <a 
-            href="#contact" 
+            href="/servicio-360#contact" 
             class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
           >
-            Solicitar Cotización
+            Cotizar videos 360
+          </a>
+          <a 
+            href="/servicio-360"
+            class="inline-flex items-center justify-center px-10 py-5 bg-white/10 text-white rounded-full font-semibold text-lg border border-white/20 hover:bg-white/15 transition-all duration-300"
+          >
+            Ver cómo funciona
           </a>
         </div>
       </div>
@@ -207,6 +213,111 @@ const keywords = "producción multimedia e-learning, videos educativos, contenid
       </div>
     </section>
 
+    <!-- 360 Onboarding Section -->
+    <section id="servicio-360" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-semibold text-accent mb-5">
+              <span>Servicio destacado</span>
+              <span class="text-accent/40">•</span>
+              <span>Onboarding inmersivo</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+              Videos 360 para onboarding e-learning
+            </h2>
+            <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+              Creamos recorridos inmersivos para inducción, seguridad, bienvenida de equipos y entrenamiento inicial. El objetivo es que cada persona entienda el contexto real antes de entrar a operar.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 mb-10">
+            <div class="rounded-3xl bg-white p-8 md:p-10 shadow-xl border border-gray-100">
+              <h3 class="text-2xl font-bold text-primary mb-5">Qué incluye este servicio</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="rounded-2xl bg-primary/5 p-5">
+                  <h4 class="font-semibold text-primary mb-2">Captura y guión</h4>
+                  <p class="text-gray-600">Definimos el recorrido, los puntos críticos y el mensaje formativo para que el video no sea solo visualmente atractivo, sino útil para aprender.</p>
+                </div>
+                <div class="rounded-2xl bg-accent/5 p-5">
+                  <h4 class="font-semibold text-primary mb-2">Hotspots y capas explicativas</h4>
+                  <p class="text-gray-600">Podemos sumar textos, audio, instrucciones y llamados de atención sobre zonas clave del entorno.</p>
+                </div>
+                <div class="rounded-2xl bg-secondary/5 p-5">
+                  <h4 class="font-semibold text-primary mb-2">Integración con LMS</h4>
+                  <p class="text-gray-600">Lo dejamos listo para convivir con rutas formativas, evaluaciones, SCORM u otros recursos de onboarding.</p>
+                </div>
+                <div class="rounded-2xl bg-yellow/10 p-5">
+                  <h4 class="font-semibold text-primary mb-2">Adaptación a distintos perfiles</h4>
+                  <p class="text-gray-600">Diseñamos materiales para nuevos ingresos, visitas, contratistas, líderes o áreas operativas específicas.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-3xl bg-gradient-to-br from-primary to-primary/90 p-8 md:p-10 text-white shadow-xl">
+              <h3 class="text-2xl font-bold mb-5">Cuándo hace más sentido</h3>
+              <ul class="space-y-4 text-white/85">
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow">•</span>
+                  <span>Cuando necesitas mostrar espacios, rutas, equipos o protocolos antes de la llegada presencial.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow">•</span>
+                  <span>Cuando quieres estandarizar la experiencia de inducción entre sedes, turnos o proveedores.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow">•</span>
+                  <span>Cuando el onboarding actual depende demasiado de explicaciones manuales y eso genera variabilidad.</span>
+                </li>
+              </ul>
+
+              <div class="mt-8 rounded-2xl bg-white/10 border border-white/10 p-5">
+                <p class="text-sm uppercase tracking-[0.2em] text-yellow mb-2">Resultado esperado</p>
+                <p class="text-lg text-white/90">
+                  Menos dudas en el ingreso, mejor comprensión del contexto operativo y una experiencia de onboarding más clara, memorable y profesional.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-white p-8 shadow-lg border border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <div class="text-3xl mb-3">🏭</div>
+                <h3 class="text-xl font-bold text-primary mb-2">Operaciones y seguridad</h3>
+                <p class="text-gray-600">Recorridos para plantas, bodegas, faenas o áreas con protocolos críticos.</p>
+              </div>
+              <div>
+                <div class="text-3xl mb-3">🏥</div>
+                <h3 class="text-xl font-bold text-primary mb-2">Equipos distribuidos</h3>
+                <p class="text-gray-600">Inducciones consistentes para sedes, campus, clínicas, retail o cadenas con alta rotación.</p>
+              </div>
+              <div>
+                <div class="text-3xl mb-3">🎓</div>
+                <h3 class="text-xl font-bold text-primary mb-2">Experiencias híbridas</h3>
+                <p class="text-gray-600">Material previo a sesiones presenciales o complemento para programas e-learning existentes.</p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <a
+                href="/servicio-360#contact"
+                class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Quiero una propuesta para mi onboarding
+              </a>
+              <a
+                href="/servicio-360"
+                class="inline-flex items-center justify-center px-8 py-4 bg-primary/5 text-primary rounded-full font-semibold text-lg hover:bg-primary/10 transition-all duration-300"
+              >
+                Ver servicio 360 completo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Process Section -->
     <section class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -290,7 +401,7 @@ const keywords = "producción multimedia e-learning, videos educativos, contenid
     <!-- CTA Section -->
     <CTA 
       title="🎬 ¿Listo para crear contenido multimedia profesional?"
-      subtitle="Transforma tus cursos con videos, interactivos y audio de alta calidad"
+      subtitle="Incluye videos 360, interactivos y piezas audiovisuales diseñadas para una experiencia de onboarding más clara y memorable"
       buttonText="Solicitar Cotización"
     />
 
@@ -314,4 +425,3 @@ const keywords = "producción multimedia e-learning, videos educativos, contenid
     margin: 0 auto;
   }
 </style>
-
