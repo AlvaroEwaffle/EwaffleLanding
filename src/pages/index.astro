@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/landing/Hero.astro';
 import ServicesOverview from '../components/landing/ServicesOverview.astro';
+import CatalogSpotlight from '../components/landing/CatalogSpotlight.astro';
 import Benefits from '../components/landing/Benefits.astro';
 import TechnologyShowcase from '../components/landing/TechnologyShowcase.astro';
 import UseCases from '../components/landing/UseCases.astro';
@@ -9,6 +10,7 @@ import Testimonials from '../components/landing/Testimonials.astro';
 import AcademiaBanner from '../components/landing/AcademiaBanner.astro';
 import MeetOurTeam from '../components/landing/MeetOurTeam.astro';
 import Process from '../components/landing/Process.astro';
+import Onboarding360Spotlight from '../components/landing/Onboarding360Spotlight.astro';
 import FAQ from '../components/landing/FAQ.astro';
 import Contact from '../components/landing/Contact.astro';
 import CTA from '../components/landing/CTA.astro';
@@ -74,7 +76,7 @@ const keywords = "e-learning Chile, plataforma LMS Chile, cursos SCORM, diseño 
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
-        "email": "contacto@ewaffle.cl",
+        "email": "alvaro@ewaffle.cl",
         "availableLanguage": "Spanish"
       },
       "areaServed": [
@@ -151,6 +153,12 @@ const keywords = "e-learning Chile, plataforma LMS Chile, cursos SCORM, diseño 
 	
 	<!-- 3. Services Overview (New) -->
 	<ServicesOverview />
+
+	<!-- 3.1 Catálogo vivo -->
+	<CatalogSpotlight />
+
+	<!-- 3.2 Servicio destacado -->
+	<Onboarding360Spotlight />
 	
 	<!-- 4. Bloque de beneficios clave -->
 	<Benefits />
