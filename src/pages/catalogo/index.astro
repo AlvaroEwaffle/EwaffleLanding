@@ -1,5 +1,10 @@
 ---
 import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
+
+const title = "Catalogo de Recursos E-learning y Multimedia | Ewaffle";
+const description = "Explora Storyline, Rise, motion graphics, produccion multimedia en terreno, recorridos 360 y combinaciones recomendadas para construir experiencias de aprendizaje mas efectivas.";
+const canonicalUrl = "https://ewaffle.cl/catalogo/";
+const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -7,9 +12,30 @@ import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ewaffle.cl/catalogo/">
-  <meta name="description" content="Explora el catálogo de recursos de Ewaffle: Storyline, Rise, motion graphics, producción multimedia en terreno, recorridos 360 y combinaciones recomendadas.">
-  <title>Catálogo de Recursos E-learning y Multimedia | Ewaffle</title>
+  <link rel="canonical" href={canonicalUrl}>
+  <meta name="description" content={description}>
+  <meta name="title" content={title}>
+  <meta name="theme-color" content="#101437">
+  <meta name="author" content="Ewaffle">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={socialImageUrl}>
+  <meta property="og:image:secure_url" content={socialImageUrl}>
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Catalogo de recursos e-learning y multimedia de Ewaffle">
+  <meta property="og:site_name" content="Ewaffle">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={canonicalUrl}>
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={socialImageUrl}>
+  <meta name="twitter:image:alt" content="Catalogo de recursos e-learning y multimedia de Ewaffle">
+  <title>{title}</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
