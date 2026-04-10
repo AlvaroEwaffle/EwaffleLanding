@@ -220,7 +220,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.m
 - **Website**: [https://ewaffle.cl](https://ewaffle.cl)
 - **LinkedIn**: [Ewaffle](https://linkedin.com/company/ewaffle)
 - **Instagram**: [@ewaffle.cl](https://www.instagram.com/ewaffle.cl/)
-- **Email**: contacto@ewaffle.cl
+- **Email**: alvaro@ewaffle.cl
 
 ---
 
