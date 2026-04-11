@@ -1,3 +1,7 @@
+---
+const contactApiUrl = import.meta.env.PUBLIC_EWAFFLE_CONTACT_API_URL || '';
+---
+
 <section id="contact" class="py-20 bg-white relative overflow-hidden">
   <div class="container mx-auto px-4">
     <div class="max-w-4xl mx-auto">
@@ -59,6 +63,20 @@
                 placeholder="+56 9 1234 5678"
               />
             </div>
+          </div>
+
+          <div>
+            <label for="company" class="block text-sm font-medium text-gray-700 mb-1">
+              Empresa u organización *
+            </label>
+            <input
+              type="text"
+              name="company"
+              id="company"
+              required
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition duration-200"
+              placeholder="Nombre de tu empresa"
+            />
           </div>
 
           <!-- Servicio de interés (dropdown) -->
@@ -128,11 +146,15 @@
 <!-- EmailJS SDK -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-<script>
+<script define:vars={{ contactApiUrl }}>
   // Initialize EmailJS
   (function() {
     emailjs.init("K-nZvIRLeVaUXubMu");
   })();
+
+  const CONTACT_API_URL =
+    contactApiUrl ||
+    (window.location.hostname === 'localhost' ? 'http://localhost:3000/auth/contact' : '');
 
   // Helper function to get reCAPTCHA response
   function getRecaptchaResponse() {
@@ -196,8 +218,11 @@
       const firstName = form.firstName.value;
       const email = form.email.value;
       const phone = form.phone.value || '';
+      const company = form.company.value;
       const selectedService = form.service.value || '';
       const mensaje = form.mensaje.value;
+      const companyLabel = company?.trim() || 'Sin Empresa';
+      const subject = `[${companyLabel}] Contacto Web - Ewaffle`;
 
       // Prepare template parameters for EmailJS
       const templateParams = {
@@ -205,10 +230,15 @@
         lastName: '',
         email: email,
         phone: phone,
-        company: '',
+        company: company,
+        institution: company,
         role: '',
         services: selectedService,
         message: mensaje,
+        subject: subject,
+        reply_to: email,
+        to_email: 'alvaro@ewaffle.cl',
+        cc_email: 'jose@ewaffle.cl',
         recaptchaToken: recaptchaToken
       };
 
@@ -235,12 +265,45 @@
         console.warn('API request failed, but continuing with email send');
       }
 
-      // Send email using EmailJS
-      await emailjs.send(
-        'service_d08f3xv',
-        'template_b6dnfrh',
-        templateParams
-      );
+      let emailDelivered = false;
+
+      if (CONTACT_API_URL) {
+        try {
+          const contactResponse = await fetch(CONTACT_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: firstName,
+              email: email,
+              phone: phone,
+              company: company,
+              institution: company,
+              service: selectedService,
+              source: 'ewaffle_landing_contact',
+              message: mensaje
+            })
+          });
+
+          if (contactResponse.ok) {
+            const contactPayload = await contactResponse.json().catch(() => ({}));
+            emailDelivered = contactPayload?.emailSent === true;
+          } else {
+            console.warn('Contact API request failed, falling back to EmailJS');
+          }
+        } catch (contactError) {
+          console.warn('Contact API unavailable, falling back to EmailJS', contactError);
+        }
+      }
+
+      if (!emailDelivered) {
+        await emailjs.send(
+          'service_d08f3xv',
+          'template_b6dnfrh',
+          templateParams
+        );
+      }
 
       // --- Conversion tracking (after successful submission) ---
       // Google Ads conversion via GTM dataLayer

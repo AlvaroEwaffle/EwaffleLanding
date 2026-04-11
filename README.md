@@ -155,6 +155,14 @@ Formularios de contacto configurados con:
 - Template ID: `template_b6dnfrh`
 - Public Key: `K-nZvIRLeVaUXubMu`
 
+### Contact API
+El formulario principal de contacto puede enviar por backend si está definida:
+- `PUBLIC_EWAFFLE_CONTACT_API_URL`
+
+Ejemplo:
+- Desarrollo: `http://localhost:3000/auth/contact`
+- Producción: URL pública del backend `EwaffleIO` terminando en `/auth/contact`
+
 ### SEO y Meta Tags
 - Meta tags completos para cada página
 - Open Graph para redes sociales
