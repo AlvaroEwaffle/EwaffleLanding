@@ -138,7 +138,13 @@
         if (typeof fbq !== 'undefined') {
           fbq('track', 'Contact');
         }
+        window.ewaffleAnalytics?.ctaClick({
+          buttonText: 'WhatsApp Academia',
+          section: 'academia',
+          position: 'section_cta',
+          destination: 'whatsapp',
+        });
       });
     }
   });
-</script> 
+</script>

@@ -150,6 +150,13 @@
           `;
           resultsDiv.classList.remove('hidden');
           resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+          window.ewaffleAnalytics?.ctaClick({
+            buttonText: answer,
+            section: 'service_decision_helper',
+            position: 'service_option',
+            destination: recommendation.title,
+          });
         }
       });
     });
@@ -169,5 +176,4 @@
     margin: 0 auto;
   }
 </style>
-
 

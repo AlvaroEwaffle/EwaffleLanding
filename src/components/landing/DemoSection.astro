@@ -41,6 +41,7 @@ const {
         <div class="text-center">
           <a
             href="https://gamification.ewaffle.cl/"
+            id="live-demo-link"
             class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-secondary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Ver Demo en Vivo
@@ -122,3 +123,15 @@ const {
   </div>
 </section>
 
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('live-demo-link')?.addEventListener('click', function () {
+      window.ewaffleAnalytics?.ctaClick({
+        buttonText: 'Ver Demo en Vivo',
+        section: 'demo',
+        position: 'section_cta',
+        destination: 'https://gamification.ewaffle.cl/',
+      });
+    });
+  });
+</script>

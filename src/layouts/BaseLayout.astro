@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import PostHog from '../components/posthog.astro';
 
 interface Props {
   title?: string;
@@ -220,6 +221,9 @@ const keywords = [
     <!-- Social Media Links -->
     <link rel="me" href="https://www.instagram.com/ewaffle.cl/" />
     <link rel="me" href="https://linkedin.com/company/ewaffle" />
+
+    <!-- PostHog Analytics -->
+    <PostHog />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -233,6 +237,23 @@ const keywords = [
     <!-- End Google Tag Manager (noscript) -->
 
     <slot />
+
+    <!-- PostHog: WhatsApp float button tracking -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        var whatsappBtn = document.getElementById('whatsapp-float');
+        if (whatsappBtn) {
+          whatsappBtn.addEventListener('click', function () {
+            window.ewaffleAnalytics?.ctaClick({
+              buttonText: 'WhatsApp',
+              section: 'floating_whatsapp',
+              position: 'floating',
+              destination: 'whatsapp',
+            });
+          });
+        }
+      });
+    </script>
 
     <!-- WhatsApp Float Button -->
     <a

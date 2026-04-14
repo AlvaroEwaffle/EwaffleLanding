@@ -10,7 +10,8 @@
     "deploy": "git push && npm run build && wrangler pages deploy ./dist --project-name=ewaffle"
   },
   "dependencies": {
-    "astro": "^5.6.1"
+    "astro": "^5.6.1",
+    "posthog-js": "^1.368.2"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",

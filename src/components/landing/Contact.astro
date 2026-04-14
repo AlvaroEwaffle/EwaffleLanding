@@ -178,6 +178,29 @@ const contactApiUrl = import.meta.env.PUBLIC_EWAFFLE_CONTACT_API_URL || '';
   const form = document.getElementById('contact-form');
   const submitButton = document.getElementById('submit-button');
   const serviceField = form?.querySelector('#service');
+  let contactFormStarted = false;
+  let contactFormSubmitted = false;
+
+  const markContactFormStarted = () => {
+    if (contactFormStarted) return;
+    contactFormStarted = true;
+    window.ewaffleAnalytics?.formStart('contact_form', {
+      section: 'contact',
+    });
+  };
+
+  form?.querySelectorAll('input, select, textarea').forEach((field) => {
+    field.addEventListener('focus', markContactFormStarted, { once: true });
+    field.addEventListener('input', markContactFormStarted, { once: true });
+  });
+
+  window.addEventListener('pagehide', () => {
+    if (!contactFormStarted || contactFormSubmitted) return;
+    window.ewaffleAnalytics?.formAbandon('contact_form', {
+      section: 'contact',
+      service: serviceField instanceof HTMLSelectElement ? serviceField.value || null : null,
+    });
+  });
 
   if (form && serviceField instanceof HTMLSelectElement) {
     const params = new URLSearchParams(window.location.search);
@@ -319,11 +342,21 @@ const contactApiUrl = import.meta.env.PUBLIC_EWAFFLE_CONTACT_API_URL || '';
         fbq('track', 'Lead');
       }
 
+      contactFormSubmitted = true;
+      window.ewaffleAnalytics?.formSubmit('contact_form', {
+        section: 'contact',
+        service: selectedService || null,
+        has_phone: !!phone,
+      });
+
       // Redirect to thank you page
       window.location.href = '/gracias';
 
     } catch (error) {
       console.error('Error:', error);
+
+      window.ewaffleAnalytics?.captureException(error);
+
       alert('Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
 
       // Reset reCAPTCHA on error

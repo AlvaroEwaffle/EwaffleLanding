@@ -132,6 +132,17 @@ const { courseName = "nuestros cursos", courseSlug = "academia" } = Astro.props;
   // Course information
   const courseName = '{courseName}';
   const courseSlug = '{courseSlug}';
+  let discountFormStarted = false;
+  let discountFormSubmitted = false;
+
+  const trackDiscountAbandon = () => {
+    if (!discountFormStarted || discountFormSubmitted) return;
+    window.ewaffleAnalytics?.formAbandon('discount_popup', {
+      section: 'academia_discount_popup',
+      course_slug: courseSlug,
+      course_name: courseName,
+    });
+  };
 
   // Show popup function
   function showDiscountPopup() {
@@ -221,6 +232,19 @@ const { courseName = "nuestros cursos", courseSlug = "academia" } = Astro.props;
 
   // Event Listeners
   if (getDiscountBtn && emailInput) {
+    const markDiscountFormStarted = () => {
+      if (discountFormStarted) return;
+      discountFormStarted = true;
+      window.ewaffleAnalytics?.formStart('discount_popup', {
+        section: 'academia_discount_popup',
+        course_slug: courseSlug,
+        course_name: courseName,
+      });
+    };
+
+    emailInput.addEventListener('focus', markDiscountFormStarted, { once: true });
+    emailInput.addEventListener('input', markDiscountFormStarted, { once: true });
+
     getDiscountBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       
@@ -237,23 +261,31 @@ const { courseName = "nuestros cursos", courseSlug = "academia" } = Astro.props;
       try {
         // Send email
         await sendDiscountEmail(email);
-        
+
+        discountFormSubmitted = true;
+        window.ewaffleAnalytics?.formSubmit('discount_popup', {
+          section: 'academia_discount_popup',
+          course_slug: courseSlug,
+          course_name: courseName,
+        });
+
         // Show success animation
         emailForm?.classList.add('hidden');
         successAnimation?.classList.remove('hidden');
-        
+
         // Start rolling animation
         setTimeout(() => {
           animateRollingNumber();
         }, 500);
-        
+
         // Update use code button with course link
         if (useCodeBtn) {
           useCodeBtn.href = `/academia/curso/${courseSlug}`;
         }
-        
+
       } catch (error) {
         console.error('Error:', error);
+        window.ewaffleAnalytics?.captureException(error);
         alert('Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.');
         getDiscountBtn.disabled = false;
         getDiscountBtn.textContent = '¡Quiero mi Descuento!';
@@ -268,13 +300,17 @@ const { courseName = "nuestros cursos", courseSlug = "academia" } = Astro.props;
   }
 
   if (closePopup) {
-    closePopup.addEventListener('click', hideDiscountPopup);
+    closePopup.addEventListener('click', () => {
+      trackDiscountAbandon();
+      hideDiscountPopup();
+    });
   }
 
   // Close popup when clicking outside
   if (popup) {
     popup.addEventListener('click', (e) => {
       if (e.target === popup) {
+        trackDiscountAbandon();
         hideDiscountPopup();
       }
     });
@@ -283,6 +319,7 @@ const { courseName = "nuestros cursos", courseSlug = "academia" } = Astro.props;
   // Close popup with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && popup && !popup.classList.contains('hidden')) {
+      trackDiscountAbandon();
       hideDiscountPopup();
     }
   });

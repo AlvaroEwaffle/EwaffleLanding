@@ -65,6 +65,7 @@
             href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/"
             target="_blank"
             rel="noreferrer"
+            id="catalog-modal-schedule-link"
             class="mt-6 inline-flex min-h-[50px] w-full items-center justify-center rounded-full bg-accent px-6 py-4 text-center text-base font-semibold text-white transition duration-300 hover:bg-accent/90 hover:shadow-2xl hover:shadow-accent/20 sm:mt-8 sm:w-auto sm:px-7"
           >
             Agendar reunión con Álvaro
@@ -264,37 +265,61 @@
     document.body.style.overflow = '';
   };
 
+  let catalogFormStarted = false;
+  let catalogFormSubmitted = false;
+
+  const markCatalogFormStarted = () => {
+    if (catalogFormStarted) return;
+    catalogFormStarted = true;
+    window.ewaffleAnalytics?.formStart('catalog_modal', {
+      section: 'catalog_modal',
+    });
+  };
+
+  form?.querySelectorAll('input, textarea').forEach((field) => {
+    field.addEventListener('focus', markCatalogFormStarted, { once: true });
+    field.addEventListener('input', markCatalogFormStarted, { once: true });
+  });
+
   if (canShowCatalogModal()) {
-    modalWindow.setTimeout(showModal, popupDelayMs);
+    modalWindow.setTimeout(() => {
+      showModal();
+    }, popupDelayMs);
   }
 
-  closeButton?.addEventListener('click', () => {
+  const dismissAndTrack = () => {
     markDismissed();
+    if (catalogFormStarted && !catalogFormSubmitted) {
+      window.ewaffleAnalytics?.formAbandon('catalog_modal', {
+        section: 'catalog_modal',
+      });
+    }
     hideModal();
-  });
+  };
 
-  closeSecondaryButton?.addEventListener('click', () => {
-    markDismissed();
-    hideModal();
-  });
-
-  continueButton?.addEventListener('click', () => {
-    markDismissed();
-    hideModal();
-  });
+  closeButton?.addEventListener('click', dismissAndTrack);
+  closeSecondaryButton?.addEventListener('click', dismissAndTrack);
+  continueButton?.addEventListener('click', dismissAndTrack);
 
   modal?.addEventListener('click', (event) => {
     if (event.target === modal) {
-      markDismissed();
-      hideModal();
+      dismissAndTrack();
     }
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
-      markDismissed();
-      hideModal();
+      dismissAndTrack();
     }
+  });
+
+  document.getElementById('catalog-modal-schedule-link')?.addEventListener('click', () => {
+    window.ewaffleAnalytics?.ctaClick({
+      buttonText: 'Agendar reunión con Álvaro',
+      section: 'catalog_modal',
+      position: 'modal_primary',
+      destination: scheduleUrl,
+    });
   });
 
   form?.addEventListener('submit', async (event) => {
@@ -374,12 +399,20 @@
         modalWindow.fbq('track', 'Lead');
       }
 
+      catalogFormSubmitted = true;
+      window.ewaffleAnalytics?.formSubmit('catalog_modal', {
+        section: 'catalog_modal',
+        has_company: !!company,
+        has_message: !!message,
+      });
+
       markSubmitted();
       formState?.classList.add('hidden');
       successState?.classList.remove('hidden');
       form.reset();
     } catch (error) {
       console.error('Catalog modal submit error', error);
+      window.ewaffleAnalytics?.captureException(error);
       modalWindow.alert('Hubo un problema al enviar tus datos. Si quieres, puedes agendar directo la reunión mientras lo revisamos.');
     } finally {
       submitButton.disabled = false;
