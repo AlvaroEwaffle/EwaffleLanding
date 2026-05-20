@@ -1,0 +1,93 @@
+---
+---
+
+<section class="demo-cta">
+  <div class="demo-cta__inner">
+    <h2 class="demo-cta__title">Esto es un modulo.<br>Imagina un programa completo para tu equipo.</h2>
+    <p class="demo-cta__desc">Cada recurso que probaste es exactamente lo que producimos. Agenda una reunion de descubrimiento y disenamos juntos tu primer piloto.</p>
+    <div class="demo-cta__buttons">
+      <a href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/" target="_blank" rel="noopener noreferrer" class="demo-cta__btn demo-cta__btn--primary" id="demo-cta-schedule">
+        Agendar Reunion con Alvaro
+      </a>
+      <a href="/catalogo/" class="demo-cta__btn demo-cta__btn--secondary">
+        Ver Catalogo Completo
+      </a>
+    </div>
+    <p class="demo-cta__note">30 min, sin compromiso. Te mostramos como seria un piloto para tu caso.</p>
+  </div>
+</section>
+
+<style>
+  .demo-cta {
+    background: linear-gradient(135deg, #1a1a5e 55%, #e91e8c 100%);
+    color: white;
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .demo-cta__inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .demo-cta__title {
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .demo-cta__desc {
+    font-size: 17px;
+    opacity: 0.88;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+  .demo-cta__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .demo-cta__btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 300ms, box-shadow 300ms;
+  }
+  .demo-cta__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  }
+  .demo-cta__btn--primary {
+    background: #f7c948;
+    color: #1a1a5e;
+  }
+  .demo-cta__btn--secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .demo-cta__note {
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.6;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('demo-cta-schedule')?.addEventListener('click', function () {
+      window.ewaffleAnalytics?.ctaClick({
+        buttonText: 'Agendar Reunion con Alvaro',
+        section: 'demo-cta',
+        position: 'bottom_cta',
+        destination: 'https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/',
+      });
+    });
+  });
+</script>

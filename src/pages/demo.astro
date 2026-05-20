@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DemoHero from '../components/demo/DemoHero.astro';
+import DemoModuleNav from '../components/demo/DemoModuleNav.astro';
+import DemoVideo from '../components/demo/DemoVideo.astro';
+import DemoRise from '../components/demo/DemoRise.astro';
+import DemoGame from '../components/demo/DemoGame.astro';
+import DemoInfographic from '../components/demo/DemoInfographic.astro';
+import DemoCTA from '../components/demo/DemoCTA.astro';
+
+const title = "Demo e-learning para empresas | Ewaffle";
+const description = "Explora un modulo e-learning completo para empresas: video animado, guia interactiva, simulacion gamificada e infografia. Asi construimos experiencias LMS y SCORM.";
+const keywords = "demo e-learning, demo LMS, cursos SCORM, recursos e-learning, e-learning corporativo, onboarding gamificado, capacitacion empresas, Ewaffle demo";
+
+const videoUrl = "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/preview";
+const riseUrl = "/demo-rise/index.html";
+const gameUrl = "/demo-scorm/arbol-decision/story.html";
+const geniallyUrl = "https://view.genially.com/6979ec74f273cb6bda0e930f";
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href="https://ewaffle.cl/demo/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ewaffle.cl/demo/">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:site_name" content="Ewaffle">
+    <meta property="og:locale" content="es_ES">
+    <meta name="keywords" content={keywords}>
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Bienvenido a Ewaffle - Modulo Demo",
+      "description": description,
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "duration": "PT20M"
+      },
+      "teaches": [
+        "Recursos e-learning disponibles",
+        "Combinaciones recomendadas de formatos",
+        "Proceso de trabajo Ewaffle"
+      ]
+    })} />
+  </Fragment>
+
+  <DemoHero />
+  <DemoModuleNav />
+  <DemoVideo videoUrl={videoUrl} />
+  <DemoRise riseUrl={riseUrl} />
+  <DemoGame gameUrl={gameUrl} />
+  <DemoInfographic geniallyUrl={geniallyUrl} />
+  <DemoCTA />
+</BaseLayout>

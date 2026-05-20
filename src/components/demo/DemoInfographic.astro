@@ -1,0 +1,136 @@
+---
+interface Props {
+  geniallyUrl?: string;
+}
+
+const { geniallyUrl = "" } = Astro.props;
+---
+
+<section class="demo-section demo-section--alt" id="infographic">
+  <div class="demo-section__inner">
+    <div class="demo-section__header">
+      <span class="demo-section__eyebrow">Formato: Infografia Interactiva (Genially)</span>
+      <h2 class="demo-section__title">Informacion visual, explorable y memorable</h2>
+      <p class="demo-section__desc">La infografia interactiva resume visualmente lo mas importante. Ideal para mapas conceptuales, procesos y resumen de ecosistemas. El participante explora a su ritmo.</p>
+    </div>
+    <div class="demo-section__embed">
+      {geniallyUrl ? (
+        <iframe
+          src={geniallyUrl}
+          title="Infografia Interactiva - El Ecosistema Ewaffle"
+          allowfullscreen
+          class="demo-iframe demo-iframe--infographic"
+          loading="lazy"
+        ></iframe>
+      ) : (
+        <div class="demo-placeholder demo-placeholder--infographic">
+          <div class="demo-placeholder__icon">&#9673;</div>
+          <p class="demo-placeholder__text">Infografia en produccion</p>
+          <p class="demo-placeholder__sub">Mapa interactivo | Exploracion libre</p>
+        </div>
+      )}
+    </div>
+    <div class="demo-section__tag">
+      <span class="demo-tag">Genially</span>
+      <span class="demo-tag">Exploracion libre</span>
+      <span class="demo-tag">Interactiva</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-section {
+    padding: 60px 24px;
+    position: relative;
+  }
+  .demo-section--alt {
+    background: rgba(245, 246, 251, 0.6);
+  }
+  .demo-section__inner {
+    max-width: min(1840px, calc(100vw - 48px));
+    margin: 0 auto;
+  }
+  .demo-section__header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .demo-section__eyebrow {
+    display: inline-block;
+    color: #e91e8c;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .demo-section__title {
+    font-size: clamp(22px, 3.5vw, 28px);
+    font-weight: 800;
+    color: #1a1a5e;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .demo-section__desc {
+    font-size: 16px;
+    color: #555;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .demo-section__embed {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 16px 60px rgba(18, 24, 40, 0.10);
+    border: 1px solid rgba(26, 26, 94, 0.08);
+  }
+  .demo-iframe {
+    width: 100%;
+    border: 0;
+  }
+  .demo-iframe--infographic {
+    height: min(82vh, 900px);
+    min-height: 640px;
+  }
+  .demo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  .demo-placeholder--infographic {
+    height: min(82vh, 900px);
+    min-height: 640px;
+    background: linear-gradient(135deg, #f7c948 0%, #e91e8c 100%);
+  }
+  .demo-placeholder__icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+  .demo-placeholder__text {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .demo-placeholder__sub {
+    font-size: 14px;
+    opacity: 0.6;
+  }
+  .demo-section__tag {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .demo-tag {
+    display: inline-block;
+    background: rgba(26, 26, 94, 0.06);
+    color: #1a1a5e;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+</style>

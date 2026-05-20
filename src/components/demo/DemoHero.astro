@@ -1,0 +1,85 @@
+---
+---
+
+<section class="demo-hero">
+  <div class="demo-hero__content">
+    <span class="demo-hero__badge">Modulo Demo</span>
+    <h1 class="demo-hero__title">Experimenta un Modulo Ewaffle</h1>
+    <p class="demo-hero__subtitle">No te lo contamos. Te lo mostramos.</p>
+    <p class="demo-hero__desc">Cada recurso que ves aqui es exactamente lo que producimos para nuestros clientes. Video, guia interactiva, simulacion gamificada e infografia — todo funcional, todo real.</p>
+  </div>
+</section>
+
+<style>
+  .demo-hero {
+    background: linear-gradient(135deg, #1a1a5e 55%, #e91e8c 100%);
+    color: white;
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .demo-hero::before {
+    content: "";
+    position: absolute;
+    inset: -20% auto auto -15%;
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 68%);
+    filter: blur(12px);
+    animation: shimmer-drift 14s cubic-bezier(0.22,1,0.36,1) infinite alternate;
+    z-index: -1;
+  }
+  .demo-hero::after {
+    content: "";
+    position: absolute;
+    right: -90px;
+    bottom: -120px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(247,201,72,0.18), transparent 70%);
+    filter: blur(8px);
+    animation: shimmer-drift 18s cubic-bezier(0.22,1,0.36,1) infinite alternate-reverse;
+    z-index: -1;
+  }
+  .demo-hero__content {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .demo-hero__badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .demo-hero__title {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .demo-hero__subtitle {
+    font-size: clamp(18px, 3vw, 22px);
+    opacity: 0.92;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .demo-hero__desc {
+    font-size: 16px;
+    opacity: 0.78;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  @keyframes shimmer-drift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(18px, 22px, 0) scale(1.08); }
+  }
+</style>

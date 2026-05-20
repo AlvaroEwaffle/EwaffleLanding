@@ -1,0 +1,94 @@
+---
+---
+
+<nav class="demo-nav" id="demo-nav">
+  <div class="demo-nav__inner">
+    <a href="#video" class="demo-nav__item active" data-section="video">
+      <span class="demo-nav__icon">&#9654;</span>
+      <span class="demo-nav__label">Video</span>
+    </a>
+    <a href="#rise" class="demo-nav__item" data-section="rise">
+      <span class="demo-nav__icon">&#9776;</span>
+      <span class="demo-nav__label">Guia Rise</span>
+    </a>
+    <a href="#game" class="demo-nav__item" data-section="game">
+      <span class="demo-nav__icon">&#9883;</span>
+      <span class="demo-nav__label">Juego</span>
+    </a>
+    <a href="#infographic" class="demo-nav__item" data-section="infographic">
+      <span class="demo-nav__icon">&#9673;</span>
+      <span class="demo-nav__label">Infografia</span>
+    </a>
+  </div>
+</nav>
+
+<style>
+  .demo-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(26, 26, 94, 0.08);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+  }
+  .demo-nav__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  .demo-nav__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: color 300ms, border-color 300ms;
+    white-space: nowrap;
+  }
+  .demo-nav__item:hover,
+  .demo-nav__item.active {
+    color: #1a1a5e;
+    border-bottom-color: #e91e8c;
+  }
+  .demo-nav__icon {
+    font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    .demo-nav__item {
+      padding: 12px 12px;
+      font-size: 12px;
+    }
+    .demo-nav__label {
+      display: block;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var navItems = document.querySelectorAll('.demo-nav__item');
+    var sections = ['video', 'rise', 'game', 'infographic'];
+
+    function updateActiveNav() {
+      var scrollPos = window.scrollY + 100;
+      for (var i = sections.length - 1; i >= 0; i--) {
+        var el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          navItems.forEach(function (item) { item.classList.remove('active'); });
+          var active = document.querySelector('.demo-nav__item[data-section="' + sections[i] + '"]');
+          if (active) active.classList.add('active');
+          break;
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+  });
+</script>
