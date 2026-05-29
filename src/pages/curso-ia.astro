@@ -513,9 +513,15 @@ const keywords = "curso IA e-learning, herramientas IA educación, Canva diseño
       const templateParams = {
         firstName: (form.elements.namedItem("firstName") as HTMLInputElement)
           ?.value,
+        lastName: "",
         email: (form.elements.namedItem("email") as HTMLInputElement)?.value,
         phone: (form.elements.namedItem("phone") as HTMLInputElement)?.value,
+        company: "Curso IA",
+        role: rol_actual,
+        services: "curso_ia",
         message,
+        to_email: "alvaro@ewaffle.cl",
+        cc_email: "jose@ewaffle.cl",
       };
       await _w.emailjs.send(
         "service_d08f3xv", // Replace with your EmailJS service ID
@@ -535,4 +541,3 @@ const keywords = "curso IA e-learning, herramientas IA educación, Canva diseño
     }
   });
 </script>
-
