@@ -3,370 +3,268 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/landing/Footer.astro';
 import CTA from '../components/landing/CTA.astro';
 
-const title = "Asesoría Productos Digitales | Ewaffle - Transforma tu Conocimiento";
-const description = "Asesoría personalizada para profesionales y emprendedores que quieren digitalizar y monetizar su experiencia. Sesión de 90 min con análisis, recomendaciones y plan de acción. Chile y Latinoamérica.";
+const title = "Asesoría en Formación Digital para Empresas | Ewaffle";
+const description = "Asesoría B2B: diagnosticamos la brecha de capacidades de tu equipo, diseñamos el sistema de aprendizaje y producimos la formación digital que la cierra. Diagnóstico → diseño → producción → medición. Chile y Latinoamérica.";
 const canonicalUrl = "https://ewaffle.cl/asesoria";
-const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
-const keywords = "asesoría productos digitales, digitalizar conocimiento, monetizar experiencia, productos digitales Chile, cursos online, ebooks, plantillas, asesoría emprendedores, productos digitales Latinoamérica";
+const imageUrl = "https://ewaffle.cl/assets/CoverEwaffle.png";
+const keywords = "asesoría formación digital, diagnóstico de capacidades, sistema de aprendizaje, e-learning empresas, capacitación corporativa, LMS, diseño instruccional, onboarding, SENCE, formación empresarial Chile";
+
+const heroSteps = [
+  { num: "01", title: "Diagnóstico", text: "Mapa de brechas de capacidad con costo operativo real." },
+  { num: "02", title: "Diseño & Producción", text: "Diseño instruccional + cursos gamificados, video e IA." },
+  { num: "03", title: "Plataforma & Medición", text: "LMS branded, analytics y certificación SENCE." },
+];
+
+const symptoms = [
+  "Manuales, PDFs y PPTs que nadie termina de leer.",
+  "La inducción depende de una persona — si no está, no pasa.",
+  "No sabes quién aprendió qué, ni si quedó aplicado.",
+  "Compliance y seguridad sin evidencia trazable.",
+  "Onboarding lento: semanas para que alguien sea productivo.",
+];
+
+const costRows = [
+  ["Tiempo de un nuevo colaborador hasta ser productivo", "Semanas"],
+  ["Conocimiento crítico que vive solo en una persona", "Riesgo"],
+  ["Evidencia de capacitación ante una auditoría", "0%"],
+  ["Contenido que queda obsoleto cada año", "Alto"],
+];
+
+const workSteps = [
+  { title: "Diagnóstico de capacidades", text: "Mapeamos los procesos críticos y dónde se rompe la transferencia de conocimiento. Cuantificamos el costo real de la brecha antes de proponer nada." },
+  { title: "Diseño instruccional del sistema", text: "Convertimos el diagnóstico en una arquitectura de aprendizaje: objetivos, rutas, niveles y evaluación. Diseño antes que producción." },
+  { title: "Producción & despliegue", text: "Cursos gamificados, video, 360° y chatbots IA, publicados en tu LMS branded. Implementación en 4 semanas, sin que necesites equipo técnico." },
+  { title: "Operar & medir", text: "Analytics de quién aprendió qué, certificación SENCE y mejora continua. El sistema sigue operando sin depender de heroísmo." },
+];
+
+const modelRows = [
+  { layer: "Diagnóstico", question: "¿Qué capacidad falta y cuánto cuesta esa brecha?", evidence: "Mapa de brechas + costo operativo", decision: "Capacitar, rediseñar o automatizar" },
+  { layer: "Diseño", question: "¿Cuál es la ruta de aprendizaje más efectiva?", evidence: "Blueprint instruccional + objetivos", decision: "Curso, ruta o microlearning" },
+  { layer: "Producción", question: "¿Qué formato logra que el contenido se aplique?", evidence: "Gamificación · video · IA · 360°", decision: "Producir o reutilizar" },
+  { layer: "Plataforma", question: "¿Dónde vive y cómo accede tu gente?", evidence: "LMS branded + reportería", decision: "Desplegar o integrar" },
+  { layer: "Medición", question: "¿Quién aprendió, y quedó aplicado?", evidence: "Analytics + certificación SENCE", decision: "Escalar o ajustar" },
+];
+
+const capabilities = [
+  { tag: "LMS", title: "Plataforma branded", text: "Tu LMS con tu marca, dominio y panel de admin. Escala de 10 a 10.000+ usuarios. Ewaffle invisible." },
+  { tag: "🎮", title: "Cursos gamificados", text: "Experiencias interactivas SCORM con puntos, niveles, badges y ranking. Hasta 3× más engagement." },
+  { tag: "IA", title: "Chatbots con IA (RAG)", text: "Tutores 24/7 que responden las dudas del alumno sobre tu propio contenido, en lenguaje natural." },
+  { tag: "▶", title: "Producción multimedia & 360°", text: "Video, motion graphics, audio y recorridos 360° inmersivos para inducción operativa." },
+  { tag: "✓", title: "Certificación SENCE", text: "Credenciales digitales con código de verificación, compatibles con franquicia SENCE." },
+  { tag: "DI", title: "Asesoría en Diseño Instruccional", text: "Estrategia de aprendizaje y arquitectura de contenido — el diagnóstico que ordena todo lo demás." },
+];
+
+const metrics = [
+  { value: "+40%", label: "en calidad de cursos al digitalizar y rediseñar el contenido." },
+  { value: "3×", label: "más engagement con gamificación vs. formación tradicional." },
+  { value: "4 sem", label: "de implementación promedio, sin equipo técnico de tu lado." },
+];
+
+const differentiators = [
+  { title: "Sin equipo técnico", text: "Nosotros desarrollamos, producimos y publicamos. Tú solo aportas el conocimiento del negocio." },
+  { title: "White-label completo", text: "Tu marca, tu dominio, tu experiencia. Ewaffle queda invisible para tus usuarios." },
+  { title: "IA nativa", text: "Diseño asistido por IA y tutores RAG integrados — no es un agregado, es parte del sistema." },
+  { title: "Listo para SENCE", text: "Certificación con código verificable y compatibilidad con franquicia tributaria." },
+  { title: "Velocidad real", text: "Implementación en 4 semanas. El conocimiento de tu equipo deja de esperar." },
+  { title: "6 meses de soporte", text: "Acompañamiento y ajustes ilimitados tras el lanzamiento. El sistema sigue vivo." },
+];
+
+const clientLogos = ["ACHS", "AIEP", "Duoc UC", "AccademIO", "Los Héroes", "+50 empresas"];
 ---
 
 <BaseLayout {title} {description}>
   <Fragment slot="head">
     <link rel="canonical" href={canonicalUrl} />
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Ewaffle" />
     <meta property="og:locale" content="es_ES" />
-    
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageUrl} />
-    
-    <!-- Additional SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Ewaffle" />
     <meta name="robots" content="index, follow" />
-    <meta name="language" content="es" />
     <meta name="geo.region" content="CL" />
-    <meta name="geo.placename" content="Santiago, Chile" />
-    <meta name="revisit-after" content="7 days" />
   </Fragment>
-	<main class="min-h-screen">
-		<!-- Hero Section -->
-		<section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
-			<div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
-				<!-- Logo -->
-				<div class="mb-8 flex justify-center">
-					<img 
-						src="/assets/logoprimario.png" 
-						alt="Ewaffle Logo" 
-						class="w-96 h-auto object-contain"
-					/>
-				</div>
 
-				<h1 class="text-yellow text-3xl md:text-4xl lg:text-5xl font-bold mb-6 drop-shadow-lg">
-					✨ Transforma tu experiencia en un producto digital
-				</h1>
-				<p class="text-white text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
-					Asesorías personalizadas para profesionales y emprendedeores que quieran aprender aprender a digitalizar y monetizar su experiencia y conocimiento 💻🚀
-				</p>
-			</div>
-		</section>
+  <main class="bg-[#0d0b1a] text-white">
 
-        		<!-- What's Included Section -->
-		<section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
-			<div class="text-center mb-16">
-				<h2 class="text-4xl font-bold text-gray-900 mb-4">🧩 ¿Qué incluye la asesoría?</h2>
-				<p class="text-xl text-gray-600 max-w-2xl mx-auto">Todo lo que necesitas para comenzar tu camino digital</p>
-			</div>
-			
-			<div class="max-w-3xl mx-auto">
-				<ul class="space-y-6">
-					<li class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-pink-50 transition-colors duration-300">
-						<span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pink-100 text-pink-600 rounded-full">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-							</svg>
-						</span>
-						<div>
-							<h3 class="text-lg font-semibold text-gray-900">Sesión personalizada de 90 min</h3>
-							<p class="text-gray-600">Una hora completa de asesoría por Zoom para resolver todas tus dudas</p>
-						</div>
-					</li>
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-white/10 px-6 pb-16 pt-28 md:pb-20 md:pt-36">
+      <div class="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-secondary/15 blur-3xl"></div>
+      <div class="relative mx-auto max-w-6xl">
+        <span class="inline-block rounded-full border border-accent/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-accent">
+          Asesoría en formación digital · e-learning con IA
+        </span>
+        <h1 class="mt-7 max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
+          El conocimiento de tu equipo no escala al ritmo de tu operación.
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-relaxed text-white/65">
+          Diagnosticamos la brecha de capacidades, diseñamos el sistema de aprendizaje y producimos la formación digital que la cierra. Primero entender dónde se pierde el conocimiento — después producir.
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7" class="rounded-full bg-accent px-7 py-3.5 text-center text-sm font-bold text-white shadow-lg transition hover:scale-105 hover:bg-accent/90">
+            Agendar diagnóstico gratuito
+          </a>
+          <a href="#modelo" class="rounded-full border border-white/20 px-7 py-3.5 text-center text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/5">
+            Ver el modelo
+          </a>
+        </div>
+        <div class="mt-14 grid border-y border-white/10 md:grid-cols-3">
+          {heroSteps.map((s) => (
+            <div class="border-b border-white/10 py-6 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0">
+              <p class="text-xs font-bold text-white/30">{s.num}</p>
+              <h3 class="mt-2 text-lg font-bold">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-white/50">{s.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-					<li class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-pink-50 transition-colors duration-300">
-						<span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pink-100 text-pink-600 rounded-full">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-							</svg>
-						</span>
-						<div>
-							<h3 class="text-lg font-semibold text-gray-900">Análisis de tu idea</h3>
-							<p class="text-gray-600">Evaluación detallada de tu concepto y perfil de cliente ideal</p>
-						</div>
-					</li>
+    <!-- Problema -->
+    <section class="border-b border-white/10 px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-secondary">A / El problema</p>
+        <h2 class="mt-4 max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">La capacitación tradicional no deja huella.</h2>
+        <div class="mt-12 grid gap-10 lg:grid-cols-[1.15fr_1fr]">
+          <div class="divide-y divide-white/10 border-y border-white/10">
+            {symptoms.map((s) => (
+              <div class="flex items-start gap-3 py-4">
+                <span class="mt-0.5 font-extrabold text-accent">›</span>
+                <p class="text-lg leading-relaxed text-white/80">{s}</p>
+              </div>
+            ))}
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-[#16132e] p-7">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/40">El costo real</p>
+            <div class="mt-5 space-y-4">
+              {costRows.map(([label, value]) => (
+                <div class="flex items-baseline justify-between gap-4 border-b border-white/5 pb-3 last:border-0">
+                  <span class="max-w-[62%] text-sm text-white/75">{label}</span>
+                  <span class="text-xl font-extrabold text-yellow">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-					<li class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-pink-50 transition-colors duration-300">
-						<span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pink-100 text-pink-600 rounded-full">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-							</svg>
-						</span>
-						<div>
-							<h3 class="text-lg font-semibold text-gray-900">Recomendaciones personalizadas</h3>
-							<p class="text-gray-600">Sugerencias específicas de formato, plataforma y herramientas para tu caso</p>
-						</div>
-					</li>
+    <!-- Cómo trabajamos -->
+    <section class="border-b border-white/10 px-6 py-20 md:py-24">
+      <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">B / Cómo trabajamos</p>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-5xl">Primero diagnóstico. Después producción.</h2>
+          <p class="mt-5 text-base leading-relaxed text-white/55">La plataforma y los cursos son el resultado del diagnóstico, no el punto de partida. Sin tecnología antes de entender la brecha.</p>
+        </div>
+        <div class="divide-y divide-white/10 border-y border-white/10">
+          {workSteps.map((step, i) => (
+            <div class="grid grid-cols-[56px_1fr] gap-2 py-6">
+              <p class="text-sm font-extrabold text-accent">0{i + 1}</p>
+              <div>
+                <h3 class="text-xl font-bold">{step.title}</h3>
+                <p class="mt-2 text-base leading-relaxed text-white/55">{step.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-					<li class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-pink-50 transition-colors duration-300">
-						<span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pink-100 text-pink-600 rounded-full">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-							</svg>
-						</span>
-						<div>
-							<h3 class="text-lg font-semibold text-gray-900">Mini guía PDF + Checklist</h3>
-							<p class="text-gray-600">Recursos descargables con pasos siguientes y lista de verificación</p>
-						</div>
-					</li>
+    <!-- Modelo -->
+    <section id="modelo" class="border-b border-white/10 bg-[#110e24] px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-secondary">C / El modelo</p>
+        <h2 class="mt-4 max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">Una cadena de decisiones, no de opiniones.</h2>
+        <div class="mt-10 overflow-hidden rounded-2xl border border-white/10">
+          <div class="hidden grid-cols-[0.85fr_2fr_1.5fr_1.3fr] border-b border-white/10 bg-white/5 text-xs font-bold uppercase tracking-[0.14em] text-white/40 md:grid">
+            <div class="p-4">Capa</div>
+            <div class="p-4">Pregunta</div>
+            <div class="p-4">Evidencia</div>
+            <div class="p-4">Decisión</div>
+          </div>
+          {modelRows.map((row) => (
+            <div class="grid border-b border-white/10 last:border-0 md:grid-cols-[0.85fr_2fr_1.5fr_1.3fr]">
+              <div class="p-4 md:border-r md:border-white/10"><p class="text-sm font-bold text-accent">{row.layer}</p></div>
+              <div class="p-4 md:border-r md:border-white/10"><p class="text-sm leading-relaxed text-white/80">{row.question}</p></div>
+              <div class="p-4 md:border-r md:border-white/10"><p class="text-sm leading-relaxed text-white/50">{row.evidence}</p></div>
+              <div class="p-4"><p class="text-sm leading-relaxed text-white/80">{row.decision}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-					<li class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-pink-50 transition-colors duration-300">
-						<span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pink-100 text-pink-600 rounded-full">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-							</svg>
-						</span>
-						<div>
-							<h3 class="text-lg font-semibold text-gray-900">Soporte post-asesoría</h3>
-							<p class="text-gray-600">7 días de soporte por WhatsApp para resolver dudas adicionales</p>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</section>
+    <!-- Capacidades -->
+    <section class="border-b border-white/10 px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">D / Capacidades</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-5xl">Las piezas que componen el sistema.</h2>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {capabilities.map((c) => (
+            <article class="flex h-full flex-col rounded-2xl border border-white/10 bg-[#16132e] p-7 transition hover:border-accent/40">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-sm font-extrabold text-accent">{c.tag}</div>
+              <h3 class="mt-4 text-xl font-bold">{c.title}</h3>
+              <p class="mt-3 text-base leading-7 text-white/55">{c.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
-		<!-- What is Digital Product Section -->
-		<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
-			<div class="bg-gradient-to-b from-white to-gray-50 rounded-2xl shadow-xl p-8 md:p-12">
-				<h2 class="text-3xl font-bold text-gray-900 mb-6">¿Qué es un producto digital?</h2>
-				<p class="text-lg text-gray-600 mb-8">
-					Un producto digital es cualquier bien o recurso que se crea, distribuye y consume en formato digital, sin necesidad de producción física ni envíos. Se accede a través de internet y puede consumirse desde una computadora, tablet o celular. 💻📱
-				</p>
-				
-				<h3 class="text-2xl font-semibold text-gray-900 mb-4">Ejemplos comunes:</h3>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-						<span class="text-2xl mb-2 block">🎓</span>
-						<h4 class="font-semibold mb-2">Cursos online</h4>
-						<p class="text-gray-600">Grabados o en vivo</p>
-					</div>
-					<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-						<span class="text-2xl mb-2 block">📘</span>
-						<h4 class="font-semibold mb-2">Ebooks o guías</h4>
-						<p class="text-gray-600">En formato PDF</p>
-					</div>
-					<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-						<span class="text-2xl mb-2 block">📁</span>
-						<h4 class="font-semibold mb-2">Plantillas editables</h4>
-						<p class="text-gray-600">Para redes sociales, finanzas, diseño</p>
-					</div>
-					<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-						<span class="text-2xl mb-2 block">🎧</span>
-						<h4 class="font-semibold mb-2">Podcasts</h4>
-						<p class="text-gray-600">O audio cursos</p>
-					</div>
-					<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-						<span class="text-2xl mb-2 block">📊</span>
-						<h4 class="font-semibold mb-2">Herramientas digitales</h4>
-						<p class="text-gray-600">Hojas de cálculo automatizadas</p>
-					</div>
-					<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-						<span class="text-2xl mb-2 block">🖼️</span>
-						<h4 class="font-semibold mb-2">Diseños digitales</h4>
-						<p class="text-gray-600">Recursos gráficos</p>
-					</div>
-				</div>
-			</div>
-		</section>
+    <!-- Track record -->
+    <section class="border-b border-white/10 px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-secondary">E / Track record</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-5xl">Resultados, no teoría.</h2>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {metrics.map((m) => (
+            <div class="rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-8">
+              <p class="text-4xl font-extrabold">{m.value}</p>
+              <p class="mt-3 text-base leading-7 text-white/55">{m.label}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-12 border-t border-white/10 pt-8">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/35">Han confiado en Ewaffle</p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3">
+            {clientLogos.map((name) => (
+              <span class="text-lg font-extrabold uppercase tracking-wide text-white/40">{name}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<!-- Benefits Section -->
-		<section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-b ">
-			<div class="text-center mb-16">
-				<h2 class="text-4xl font-bold text-gray-900 mb-4">¿Por qué son tan valiosos?</h2>
-				<p class="text-xl text-gray-600 max-w-2xl mx-auto">Descubre las ventajas de transformar tu conocimiento en productos digitales</p>
-			</div>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div class="relative group">
-					<div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-					<div class="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-						<div class="flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-6 mx-auto">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-						</div>
-						<h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Sin costos de envío</h3>
-						<p class="text-gray-600 text-center">No requieren producción física ni gastos de envío, maximizando tus ganancias</p>
-					</div>
-				</div>
+    <!-- Por qué -->
+    <section class="border-b border-white/10 px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">F / Por qué Ewaffle</p>
+        <h2 class="mt-4 max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">Un solo proveedor, del diagnóstico a la operación.</h2>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {differentiators.map((d) => (
+            <div class="h-full rounded-2xl border border-white/10 bg-[#16132e] p-7">
+              <h3 class="text-lg font-bold">{d.title}</h3>
+              <p class="mt-2 text-base leading-7 text-white/55">{d.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-				<div class="relative group">
-					<div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-					<div class="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-						<div class="flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-6 mx-auto">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-							</svg>
-						</div>
-						<h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Stock ilimitado</h3>
-						<p class="text-gray-600 text-center">Se pueden vender muchas veces sin "agotar stock", creando ingresos pasivos</p>
-					</div>
-				</div>
-
-				<div class="relative group">
-					<div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-					<div class="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-						<div class="flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-6 mx-auto">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-							</svg>
-						</div>
-						<h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Escalabilidad</h3>
-						<p class="text-gray-600 text-center">Permiten escalar tu negocio y llegar a más personas sin límites geográficos</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Target Audience Section -->
-		<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-gray-900 mb-4">🔎 ¿Para quién es esta asesoría?</h2>
-			</div>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				<div class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-					<span class="text-2xl">✅</span>
-					<p class="text-gray-600">Personas que ya ofrecen un servicio presencial (como talleres, asesorías, terapias, belleza, clases, etc.)</p>
-				</div>
-				<div class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-					<span class="text-2xl">✅</span>
-					<p class="text-gray-600">Emprendedoras que quieren escalar su impacto sin depender del tiempo 1:1</p>
-				</div>
-				<div class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-					<span class="text-2xl">✅</span>
-					<p class="text-gray-600">Profesionales con experiencia que quieren empaquetar su conocimiento en cursos, ebooks, plantillas, etc.</p>
-				</div>
-				<div class="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-					<span class="text-2xl">✅</span>
-					<p class="text-gray-600">Creativas con ganas de generar ingresos pasivos desde cualquier lugar</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- What You'll Achieve Section -->
-		<section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-b from-white to-gray-50">
-			<div class="text-center mb-16">
-				<h2 class="text-4xl font-bold text-gray-900 mb-4">🚀 ¿Qué lograrás con nuestra asesoría?</h2>
-				<p class="text-xl text-gray-600 max-w-2xl mx-auto">Un camino claro hacia tu éxito digital</p>
-			</div>
-			
-			<div class="relative">
-				<!-- Timeline line -->
-				<div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-pink-500 to-purple-500"></div>
-
-				<!-- Timeline items -->
-				<div class="space-y-12">
-					<!-- Item 1 -->
-					<div class="relative">
-						<div class="flex items-center">
-							<div class="flex-1 pr-8 text-right">
-								<div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-									<h3 class="text-xl font-bold text-gray-900 mb-2">Identificar tu conocimiento vendible</h3>
-									<p class="text-gray-600">Descubre qué aspectos de tu experiencia son más valiosos para tu audiencia</p>
-								</div>
-							</div>
-							<div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg"></div>
-							<div class="flex-1 pl-8"></div>
-						</div>
-					</div>
-
-					<!-- Item 2 -->
-					<div class="relative">
-						<div class="flex items-center">
-							<div class="flex-1 pr-8"></div>
-							<div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg"></div>
-							<div class="flex-1 pl-8">
-								<div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-									<h3 class="text-xl font-bold text-gray-900 mb-2">Elegir el tipo de producto digital ideal</h3>
-									<p class="text-gray-600">Selecciona el formato que mejor se adapte a tu conocimiento y audiencia</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Item 3 -->
-					<div class="relative">
-						<div class="flex items-center">
-							<div class="flex-1 pr-8 text-right">
-								<div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-									<h3 class="text-xl font-bold text-gray-900 mb-2">Diseñar tu primer producto mínimo viable</h3>
-									<p class="text-gray-600">Crea una versión inicial de tu producto para validar el mercado</p>
-								</div>
-							</div>
-							<div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg"></div>
-							<div class="flex-1 pl-8"></div>
-						</div>
-					</div>
-
-					<!-- Item 4 -->
-					<div class="relative">
-						<div class="flex items-center">
-							<div class="flex-1 pr-8"></div>
-							<div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg"></div>
-							<div class="flex-1 pl-8">
-								<div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-									<h3 class="text-xl font-bold text-gray-900 mb-2">Entender plataformas de venta</h3>
-									<p class="text-gray-600">Aprende a utilizar plataformas como Hotmart para vender tu producto</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Item 5 -->
-					<div class="relative">
-						<div class="flex items-center">
-							<div class="flex-1 pr-8 text-right">
-								<div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-									<h3 class="text-xl font-bold text-gray-900 mb-2">Evitar errores comunes</h3>
-									<p class="text-gray-600">Conoce los principales obstáculos y cómo superarlos</p>
-								</div>
-							</div>
-							<div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg"></div>
-							<div class="flex-1 pl-8"></div>
-						</div>
-					</div>
-
-					<!-- Item 6 -->
-					<div class="relative">
-						<div class="flex items-center">
-							<div class="flex-1 pr-8"></div>
-							<div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg"></div>
-							<div class="flex-1 pl-8">
-								<div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-									<h3 class="text-xl font-bold text-gray-900 mb-2">Crear un plan de lanzamiento</h3>
-									<p class="text-gray-600">Desarrolla una estrategia clara para presentar tu producto al mercado</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-
-
-		<!-- Price Section -->
-		<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-			<div class="bg-gradient-to-b from-primary to-primary/90 rounded-2xl p-8 md:p-12 text-center text-white">
-				<h2 class="text-3xl font-bold mb-4">Inversión</h2>
-				<p class="text-4xl font-bold mb-6">250 USD</p>
-				<p class="text-lg mb-8">¡Da el primer paso hacia tu negocio digital!</p>
-				<a href="https://www.fidelidapp.cl/agendalanding/68028f6bd368134c0d8551f7" class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-secondary/90 transition-colors duration-300 shadow-lg hover:shadow-xl">
-					Agenda tu asesoría profesional
-				</a>
-			</div>
-		</section>
-
-		<CTA />
-		<Footer />
-	</main>
-</BaseLayout> 
+    <CTA
+      title="Empezamos con 30 minutos."
+      subtitle="Diagnóstico gratuito. Sin pitch de ventas: un análisis honesto de tu brecha de capacidades y qué tiene sentido construir."
+      buttonText="Agendar diagnóstico gratuito"
+    />
+    <Footer />
+  </main>
+</BaseLayout>
