@@ -59,7 +59,7 @@ const pasos = [
       <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div class="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
-          <div class="lg:col-span-5 text-center lg:text-left">
+          <div class="lg:col-span-5 text-center lg:text-left" data-revela>
             <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase text-yellow/90 mb-6">
               <span class="w-8 h-px bg-yellow/60"></span>
               Simuladores de formación
@@ -81,7 +81,7 @@ const pasos = [
             </div>
           </div>
 
-          <div class="lg:col-span-7">
+          <div class="lg:col-span-7" data-revela data-revela-tarde>
             <figure class="relative">
               <div class="rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-2xl shadow-black/50 bg-primary">
                 <!-- barra de navegador: encuadra la captura como producto y no
@@ -116,7 +116,7 @@ const pasos = [
     <!-- ══ El problema ══ -->
     <section class="py-24 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto" data-revela>
           <span class="block w-14 h-1 bg-accent rounded-full mb-8"></span>
           <h2 class="text-3xl md:text-5xl font-bold text-primary leading-tight text-balance mb-8">
             El curso se aprueba.<br class="hidden sm:block" /> La práctica no cambia.
@@ -145,8 +145,8 @@ const pasos = [
 
         <div class="space-y-16 lg:space-y-24">
 
-          <article class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <div class="rounded-2xl overflow-hidden ring-1 ring-primary/10 shadow-xl">
+          <article class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center" data-revela>
+            <div class="rounded-2xl overflow-hidden ring-1 ring-primary/10 shadow-xl transition-transform duration-300 motion-safe:hover:-translate-y-1.5 motion-safe:hover:shadow-2xl">
               <img
                 src="/assets/simuladores/comex.jpg"
                 alt="Cuatro roles completan entre todos el expediente de una importación mientras recorren el puerto en 3D"
@@ -170,8 +170,8 @@ const pasos = [
             </div>
           </article>
 
-          <article class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <div class="rounded-2xl overflow-hidden ring-1 ring-primary/10 shadow-xl lg:order-2">
+          <article class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center" data-revela>
+            <div class="rounded-2xl overflow-hidden ring-1 ring-primary/10 shadow-xl lg:order-2 transition-transform duration-300 motion-safe:hover:-translate-y-1.5 motion-safe:hover:shadow-2xl">
               <img
                 src="/assets/simuladores/planta.jpg"
                 alt="Recorrido en 3D de una cámara de refrigeración: el participante camina hasta las estaciones críticas para resolver la tarea de cada puesto"
@@ -211,8 +211,8 @@ const pasos = [
           <p class="text-xl text-white/70">Entre 10 y 15 minutos. Suficiente para que pase algo, corto para que nadie se pierda.</p>
         </div>
         <ol class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
-          {pasos.map((p) => (
-            <li class="bg-primary p-8 xl:p-9">
+          {pasos.map((p, i) => (
+            <li class="bg-primary p-8 xl:p-9" data-revela style={`transition-delay:${i * 90}ms`}>
               <span class="block text-5xl font-bold text-white/15 leading-none mb-5 tabular-nums">{p.n}</span>
               <h3 class="text-lg font-bold text-yellow mb-3">{p.t}</h3>
               <p class="text-white/65 text-sm leading-relaxed">{p.d}</p>
@@ -329,4 +329,60 @@ const pasos = [
     <Contact />
     <Footer />
   </main>
+
+  <style>
+    /* Entrada por scroll. El estado oculto se aplica SOLO si el script llegó a
+       correr (la clase `js-revela` en <html>): si el JS falla o está bloqueado,
+       el contenido se ve igual. Ocultar por CSS y revelar por JS es cómo se
+       hacen las páginas que amanecen en blanco. */
+    :global(html.js-revela) [data-revela] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+    }
+    :global(html.js-revela) [data-revela][data-revela-tarde] { transition-delay: .12s; }
+    :global(html.js-revela) [data-revela].visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Quien pidió menos movimiento no recibe ninguno: el contenido aparece y
+       ya. No es un extra de accesibilidad, es respetar una preferencia que la
+       persona configuró a propósito. */
+    @media (prefers-reduced-motion: reduce) {
+      :global(html.js-revela) [data-revela] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const raiz = document.documentElement;
+      if (!("IntersectionObserver" in window)) return;
+      raiz.classList.add("js-revela");
+      const mostrar = (el) => el.classList.add("visible");
+      const observador = new IntersectionObserver((entradas) => {
+        for (const e of entradas) {
+          if (!e.isIntersecting) continue;
+          mostrar(e.target);
+          observador.unobserve(e.target);   // entra una vez y se queda
+        }
+      }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+
+      const arrancar = () => {
+        for (const el of document.querySelectorAll("[data-revela]")) {
+          // lo que ya está en pantalla al cargar no debe esperar al scroll
+          const r = el.getBoundingClientRect();
+          if (r.top < innerHeight * 0.92) mostrar(el);
+          else observador.observe(el);
+        }
+      };
+      if (document.readyState === "loading")
+        document.addEventListener("DOMContentLoaded", arrancar);
+      else arrancar();
+    })();
+  </script>
 </BaseLayout>
