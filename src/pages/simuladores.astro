@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/landing/Footer.astro';
+import CTA from '../components/landing/CTA.astro';
+import Contact from '../components/landing/Contact.astro';
+
+const title = "Simuladores de Formación | Ewaffle - Practicar, no solo aprender";
+const description = "Simuladores web donde los equipos practican decisiones reales: comercio exterior, operaciones, prevención de riesgos y cumplimiento normativo. Sin instalar nada, con evidencia de lo aprendido.";
+const canonicalUrl = "https://ewaffle.cl/simuladores";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "simuladores de formación, simulación empresarial, simulador comercio exterior, capacitación con simuladores, aprendizaje experiencial, simulador prevención de riesgos, formación práctica Chile, serious games corporativos";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Ewaffle" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+  </Fragment>
+
+  <main class="min-h-screen">
+
+    <!-- Hero -->
+    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
+      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex justify-center">
+          <img src="/assets/logoprimario.png" alt="Ewaffle Logo" class="w-64 h-auto object-contain" />
+        </div>
+        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
+          Nadie aprende a decidir leyendo sobre decisiones
+        </h1>
+        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
+          Construimos simuladores donde tu equipo practica el trabajo real: elige, se equivoca, ve la consecuencia y vuelve a intentar. En el navegador, sin instalar nada.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a href="#contact" class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform">
+            Agenda una demo guiada
+          </a>
+          <a href="#casos" class="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-semibold text-lg hover:bg-white/90 transition-all duration-300 shadow-2xl hover:scale-105 transform">
+            Ver casos construidos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- El problema -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-8">
+            El curso se aprueba. La práctica no cambia.
+          </h2>
+          <p class="text-xl text-gray-600 leading-relaxed mb-6">
+            Es el problema que nos traen todas las semanas. Los equipos completan la capacitación, responden bien la evaluación, y en el puesto siguen tomando las mismas decisiones de antes.
+          </p>
+          <p class="text-xl text-gray-600 leading-relaxed">
+            No es falta de contenido. Es que leer sobre una decisión y tomarla son cosas distintas, y solo una de las dos se entrena.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Casos -->
+    <section id="casos" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Casos construidos</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Simuladores que existen y funcionan hoy. Te los mostramos en vivo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+
+          <div class="bg-white p-10 rounded-2xl shadow-lg border border-accent/20">
+            <div class="text-5xl mb-4">🚢</div>
+            <h3 class="text-3xl font-bold text-primary mb-3">Operación de comercio exterior</h3>
+            <p class="text-sm font-semibold text-accent uppercase tracking-wide mb-6">Multijugador · roles interdependientes</p>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Una importación real desde el puerto hasta la liberación del contenedor. Cada participante toma un rol —importador, aduana, transportista, naviera— y ninguno puede avanzar solo: los documentos se completan entre varios y el contenedor se libera cuando la información calza.
+            </p>
+            <div class="border-t border-gray-100 pt-6">
+              <p class="text-sm text-gray-500 mb-2"><strong class="text-primary">Qué se entrena:</strong> Incoterms, clasificación arancelaria, consistencia documental, costeo y coordinación entre áreas.</p>
+              <p class="text-sm text-gray-500"><strong class="text-primary">Para:</strong> educación superior, exportadores, operadores logísticos y programas de formación técnica.</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-10 rounded-2xl shadow-lg border border-yellow/20">
+            <div class="text-5xl mb-4">🏭</div>
+            <h3 class="text-3xl font-bold text-primary mb-3">Recorrido de planta</h3>
+            <p class="text-sm font-semibold text-yellow-600 uppercase tracking-wide mb-6">Espacial · procedimental</p>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              El participante recorre una instalación real en 3D, entra a las estaciones críticas y resuelve la tarea de cada puesto. Cada estación abre con una mini-lección y cierra con una interacción, de modo que el conocimiento llega justo antes de usarlo.
+            </p>
+            <div class="border-t border-gray-100 pt-6">
+              <p class="text-sm text-gray-500 mb-2"><strong class="text-primary">Qué se entrena:</strong> procedimientos de puesto, secuencia correcta, puntos de control y reconocimiento del entorno.</p>
+              <p class="text-sm text-gray-500"><strong class="text-primary">Para:</strong> inducción de personal nuevo, plantas productivas y operaciones con protocolo.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Cómo es la experiencia</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">Entre 10 y 15 minutos. Suficiente para que pase algo, corto para que nadie se pierda.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div class="bg-gradient-to-br from-accent/10 to-accent/5 p-8 rounded-2xl border border-accent/20">
+            <div class="text-4xl mb-4">1️⃣</div>
+            <h3 class="text-xl font-bold text-primary mb-3">Entra al escenario</h3>
+            <p class="text-gray-600 text-sm">Un contexto reconocible: su planta, su operación, su procedimiento. No un caso genérico.</p>
+          </div>
+          <div class="bg-gradient-to-br from-yellow/10 to-yellow/5 p-8 rounded-2xl border border-yellow/20">
+            <div class="text-4xl mb-4">2️⃣</div>
+            <h3 class="text-xl font-bold text-primary mb-3">Decide</h3>
+            <p class="text-gray-600 text-sm">Elige, completa, responde. Sin opción de avanzar sin comprometerse con una decisión.</p>
+          </div>
+          <div class="bg-gradient-to-br from-secondary/10 to-secondary/5 p-8 rounded-2xl border border-secondary/20">
+            <div class="text-4xl mb-4">3️⃣</div>
+            <h3 class="text-xl font-bold text-primary mb-3">Ve la consecuencia</h3>
+            <p class="text-gray-600 text-sm">El escenario responde. Costo, plazo, riesgo o cumplimiento cambian según lo que hizo.</p>
+          </div>
+          <div class="bg-gradient-to-br from-primary/10 to-primary/5 p-8 rounded-2xl border border-primary/20">
+            <div class="text-4xl mb-4">4️⃣</div>
+            <h3 class="text-xl font-bold text-primary mb-3">Cierra con evidencia</h3>
+            <p class="text-gray-600 text-sm">Un debrief que compara su decisión con la del experto, y un registro de qué se practicó.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qué se puede simular -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Qué se puede simular</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Si la tarea tiene decisiones, secuencia y consecuencias, se puede convertir en práctica.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            <h3 class="text-2xl font-bold text-primary mb-4">Operaciones</h3>
+            <p class="text-gray-600">Procesos con variables, plazos y costos donde una decisión temprana condiciona el resto: logística, comercio exterior, producción, finanzas.</p>
+          </div>
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            <h3 class="text-2xl font-bold text-primary mb-4">Prevención de riesgos</h3>
+            <p class="text-gray-600">Protocolos donde el orden importa y saltarse un paso tiene consecuencias: uso de EPP, bloqueo de energías, espacios confinados, respuesta ante incidentes.</p>
+          </div>
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            <h3 class="text-2xl font-bold text-primary mb-4">Cumplimiento normativo</h3>
+            <p class="text-gray-600">Procedimientos reglados con plazos legales exactos, donde equivocarse expone a la organización. Aquí las reglas son deterministas: la norma no se improvisa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integración -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-primary mb-10 text-center">Entra donde ya trabajan</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex gap-4">
+              <div class="text-3xl">🌐</div>
+              <div>
+                <h3 class="font-bold text-primary mb-1">Solo navegador</h3>
+                <p class="text-gray-600 text-sm">Sin instalación, sin lentes, sin hardware. Funciona en computador y se adapta a móvil.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="text-3xl">🔗</div>
+              <div>
+                <h3 class="font-bold text-primary mb-1">Se conecta a su LMS</h3>
+                <p class="text-gray-600 text-sm">Empaquetado estándar para que el resultado quede registrado donde ya llevan la formación.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="text-3xl">📊</div>
+              <div>
+                <h3 class="font-bold text-primary mb-1">Evidencia, no completitud</h3>
+                <p class="text-gray-600 text-sm">Qué decidió cada persona, dónde se equivocó y si mejoró al reintentar. No solo si terminó.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="text-3xl">🎯</div>
+              <div>
+                <h3 class="font-bold text-primary mb-1">Con su contenido</h3>
+                <p class="text-gray-600 text-sm">Partimos de sus procedimientos y sus casos reales. El escenario tiene que ser reconocible.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Primer paso -->
+    <section class="py-20 bg-gradient-to-br from-primary to-primary/90">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-yellow mb-6">El primer paso no es un proyecto</h2>
+          <p class="text-white text-xl leading-relaxed mb-8">
+            Antes de construir nada, trabajamos dos o tres semanas con su equipo para definir qué decisión vale la pena simular, cómo se evalúa y qué tendría que pasar para considerarlo un éxito. Se llama Blueprint y es un entregable en sí mismo: si al final decide no seguir, igual se queda con el diseño.
+          </p>
+          <a href="#contact" class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:scale-105 transform">
+            Conversemos sobre su caso
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <CTA />
+    <Contact />
+    <Footer />
+  </main>
+</BaseLayout>
