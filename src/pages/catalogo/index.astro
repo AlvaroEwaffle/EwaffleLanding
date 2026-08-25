@@ -5,6 +5,138 @@ const title = "Catalogo de Recursos E-learning y Multimedia | Ewaffle";
 const description = "Explora Storyline, Rise, motion graphics, produccion multimedia en terreno, recorridos 360 y combinaciones recomendadas para construir experiencias de aprendizaje mas efectivas.";
 const canonicalUrl = "https://ewaffle.cl/catalogo/";
 const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
+
+const recursos = [
+  {
+    grupo: "Producido con IA",
+    eyebrow: "Nuevo · 2026",
+    titulo: "Video formativo generado con IA",
+    texto: "Guion, locución y animación producidos con modelos generativos y validados por nuestro equipo. Baja el costo por minuto sin bajar el estándar, y permite iterar un módulo completo en horas en vez de semanas.",
+    bullets: [
+      "Ideal para catálogos extensos y actualizaciones frecuentes.",
+      "Locución en español neutro o chileno, con control de ritmo y énfasis.",
+      "Cada pieza pasa por revisión humana antes de entregarse.",
+    ],
+    links: [
+      { t: "Ver módulo de inducción", u: "https://tefi.villelab.com/buffalo-m1-v8.3-HD.mp4" },
+      { t: "Ver cápsula normativa", u: "https://tefi.villelab.com/achs-pnce-HD.mp4" },
+    ],
+  },
+  {
+    grupo: "Producido con IA",
+    eyebrow: "Nuevo · 2026",
+    titulo: "Guías interactivas de inducción",
+    texto: "Una guía navegable que reemplaza al PDF: el participante recorre el contenido, practica en el momento y cierra con una comprobación. Se abre en el navegador, sin instalar nada y sin cuenta.",
+    bullets: [
+      "Reemplaza manuales que nadie lee por algo que se recorre.",
+      "Funciona en celular, tablet y escritorio.",
+      "Se entrega como SCORM para el LMS o como enlace directo.",
+    ],
+    links: [
+      { t: "Recorrer la guía completa", u: "/demos/buffalo-induccion.html" },
+      { t: "Ver la versión con juegos", u: "/demos/buffalo-induccion-juegos.html" },
+    ],
+  },
+  {
+    grupo: "Práctica y evaluación",
+    eyebrow: "Gamificación",
+    titulo: "Ocho tipos de juego listos para producción",
+    texto: "Ruleta, memorice, millonario, sopa de letras, rueda de conceptos, arrastrar y soltar, árbol de decisiones y ubicación en plano. Se configuran con el contenido del cliente y se montan dentro del curso.",
+    bullets: [
+      "Cada juego se arma con los conceptos reales del programa, no con ejemplos.",
+      "El árbol de decisiones sirve para dilemas donde no hay una sola respuesta correcta.",
+      "La ubicación en plano es útil para inducciones de instalaciones y seguridad.",
+    ],
+    links: [
+      { t: "Probar los ocho juegos", u: "/demos/juegos-demo.html" },
+      { t: "Ver la referencia de cada tipo", u: "/demos/juegos-referencia.html" },
+    ],
+  },
+  {
+    grupo: "Práctica y evaluación",
+    eyebrow: "Gamificación",
+    titulo: "Árbol de decisiones para temas sensibles",
+    texto: "Para contenidos donde el aprendizaje no es memorizar una norma sino sostener un criterio: buen trato, ética, prevención. El participante elige, ve la consecuencia y recibe el porqué.",
+    bullets: [
+      "Pensado para dilemas reales del puesto de trabajo.",
+      "Sin respuestas obvias: cada opción tiene un costo defendible.",
+    ],
+    links: [{ t: "Recorrer un caso completo", u: "/demos/los-heroes-decidir-mas-cerca.html" }],
+  },
+  {
+    grupo: "Simulación",
+    eyebrow: "Simuladores",
+    titulo: "Simulador de comercio exterior",
+    texto: "Una operación de importación de café Brasil→Chile donde el contenedor no se mueve hasta que los papeles cuadran. El participante recorre naviera, aduana, transportista e importador, y responde cruzando documentos en vez de recordar definiciones.",
+    bullets: [
+      "Documentación real de la operación: B/L, factura comercial y DIN.",
+      "La respuesta correcta está en el expediente, no en la memoria.",
+      "Desarrollo propio de Ewaffle, no una plantilla adaptada.",
+    ],
+    links: [{ t: "Ver cómo funciona", u: "https://tefi.villelab.com/comex-live-explainer.mp4" }],
+  },
+  {
+    grupo: "Simulación",
+    eyebrow: "Simuladores",
+    titulo: "Simulación de plataforma y recorridos",
+    texto: "Entornos donde el participante practica en una réplica del sistema o del espacio real antes de tocarlo en producción.",
+    bullets: [
+      "Útil para onboarding de plataformas internas.",
+      "Se combina con recorridos 360 cuando el espacio importa.",
+    ],
+    links: [
+      { t: "Probar la simulación de LMS", u: "/demos/lms-sim.html" },
+      { t: "Ver ubicación en plano", u: "/demos/hotspot-plano-prototipo.html" },
+    ],
+  },
+  {
+    grupo: "Base",
+    eyebrow: "Interactividad",
+    titulo: "Cápsulas Storyline",
+    texto: "Simulaciones, escenarios y actividades donde el participante tiene que decidir, equivocarse y recibir feedback.",
+    bullets: ["Ideal para práctica activa y evaluación formativa."],
+    links: [{ t: "Ver ejemplo Storyline", u: "https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" }],
+  },
+  {
+    grupo: "Base",
+    eyebrow: "Contenido",
+    titulo: "Módulos Rise",
+    texto: "Recorridos de lectura estructurada, con buen ritmo y navegación clara, para contenido que se consulta y se repasa.",
+    bullets: ["Ideal para marcos normativos, procedimientos y fundamentos."],
+    links: [{ t: "Ver ejemplo Rise", u: "https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" }],
+  },
+  {
+    grupo: "Base",
+    eyebrow: "Audiovisual",
+    titulo: "Motion graphics y video",
+    texto: "Explicaciones visuales para conceptos que en texto se vuelven densos.",
+    bullets: ["Sirve como apertura de módulo o síntesis de cierre."],
+    links: [{ t: "Ver ejemplo de video", u: "https://youtu.be/rf5-fAPg9wU" }],
+  },
+  {
+    grupo: "Base",
+    eyebrow: "En terreno",
+    titulo: "Producción en terreno",
+    texto: "Grabación presencial para mostrar espacios, personas, equipos, demostraciones, procedimientos o testimonios reales.",
+    bullets: ["Cuando la credibilidad depende de que se vea el lugar de verdad."],
+    links: [
+      { t: "Ver ejemplo en terreno 1", u: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1" },
+      { t: "Ver ejemplo en terreno 2", u: "https://youtu.be/OCu-5fmS_mI" },
+    ],
+  },
+  {
+    grupo: "Base",
+    eyebrow: "Inmersivo",
+    titulo: "Recorridos 360",
+    texto: "El participante recorre la instalación real y encuentra la información donde ocurre, en vez de leerla fuera de contexto.",
+    bullets: ["Especialmente útil en inducciones de planta y prevención de riesgos."],
+    links: [
+      { t: "Ver ejemplo 360 interactivo", u: "https://storage.net-fs.com/hosting/2727323/380/index.htm" },
+      { t: "Ver ejemplo 360 en video", u: "https://www.youtube.com/watch?v=7iaJIuOoxzE" },
+      { t: "Ver servicio 360 completo", u: "https://ewaffle.cl/servicio-360/" },
+    ],
+  },
+];
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -427,80 +559,17 @@ const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
 
     <h3 data-motion="fade-up">3. Catálogo de recursos</h3>
     <div class="resource-grid">
-      <article class="resource-card" data-motion="fade-up">
-        <div class="eyebrow">Interactividad</div>
-        <h4>Cápsulas Storyline</h4>
-        <p>Simulaciones, escenarios y actividades donde el participante tiene que decidir, equivocarse y recibir feedback.</p>
-        <ul>
-          <li>Ideal para práctica activa y evaluación formativa.</li>
-          <li>Formato compatible con LMS vía SCORM o HTML5.</li>
-          <li>Útil para compliance, ventas, liderazgo y protocolos.</li>
-        </ul>
-        <a class="resource-link" href="https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" target="_blank" rel="noreferrer">Ver ejemplo Storyline →</a>
-      </article>
-
-      <article class="resource-card" data-motion="fade-up" style="--motion-delay: 70ms;">
-        <div class="eyebrow">Contenido navegable</div>
-        <h4>Guías Rise</h4>
-        <p>Recursos navegables para organizar conceptos, pasos, contenidos de consulta y materiales de apoyo.</p>
-        <ul>
-          <li>Ideal para teoría, refuerzo y consulta posterior.</li>
-          <li>Se puede combinar con video, audio y microevaluaciones.</li>
-          <li>Funciona muy bien como base de academias internas.</li>
-        </ul>
-        <a class="resource-link" href="https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" target="_blank" rel="noreferrer">Ver ejemplo Rise →</a>
-      </article>
-
-      <article class="resource-card" data-motion="fade-up" style="--motion-delay: 110ms;">
-        <div class="eyebrow">Audiovisual</div>
-        <h4>Videos animados tipo motion graphics</h4>
-        <p>Piezas para explicar conceptos, procesos, cambios, mensajes clave o storytelling de marca interna.</p>
-        <ul>
-          <li>Muy útil para instalar contexto y abrir una ruta formativa.</li>
-          <li>Permite simplificar ideas abstractas o temas técnicos.</li>
-          <li>Se puede producir con locución humana o IA.</li>
-        </ul>
-        <a class="resource-link" href="https://youtu.be/rf5-fAPg9wU" target="_blank" rel="noreferrer">Ver ejemplo de video →</a>
-      </article>
-
-      <article class="resource-card" data-motion="fade-up" style="--motion-delay: 150ms;">
-        <div class="eyebrow">Producción real</div>
-        <h4>Producción multimedia en terreno</h4>
-        <p>Grabación presencial para mostrar espacios, personas, equipos, demostraciones, procedimientos o testimonios reales.</p>
-        <ul>
-          <li>Ideal cuando el contexto operativo importa de verdad.</li>
-          <li>Sirve para onboarding, cultura, seguridad y operación.</li>
-          <li>Puede alimentar después videos, cápsulas o librerías internas.</li>
-        </ul>
-        <a class="resource-link" href="https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1" target="_blank" rel="noreferrer">Ver ejemplo en terreno 1 →</a><br />
-        <a class="resource-link" href="https://youtu.be/OCu-5fmS_mI" target="_blank" rel="noreferrer">Ver ejemplo en terreno 2 →</a>
-      </article>
-
-      <article class="resource-card" data-motion="fade-up" style="--motion-delay: 190ms;">
-        <div class="eyebrow">Inmersivo</div>
-        <h4>Recorridos y grabación 360</h4>
-        <p>Experiencias para inducción, seguridad y comprensión espacial antes del ingreso presencial o la operación en terreno.</p>
-        <ul>
-          <li>Especialmente útiles para onboarding, plantas, campus o sedes distribuidas.</li>
-          <li>Ayudan a estandarizar experiencias entre equipos y locaciones.</li>
-          <li>Pueden convivir con LMS y otros recursos de onboarding.</li>
-        </ul>
-        <a class="resource-link" href="https://storage.net-fs.com/hosting/2727323/380/index.htm" target="_blank" rel="noreferrer">Ver ejemplo 360 interactivo →</a><br />
-        <a class="resource-link" href="https://www.youtube.com/watch?v=7iaJIuOoxzE" target="_blank" rel="noreferrer">Ver ejemplo 360 video →</a><br />
-        <a class="resource-link" href="https://ewaffle.cl/servicio-360/" target="_blank" rel="noreferrer">Ver servicio 360 completo →</a>
-      </article>
-
-      <article class="resource-card" data-motion="fade-up" style="--motion-delay: 230ms;">
-        <div class="eyebrow">Complementario</div>
-        <h4>Audio, locución y soporte gráfico</h4>
-        <p>Capas de audio, locución e identidad visual para dar coherencia, velocidad de producción y mejor experiencia de consumo.</p>
-        <ul>
-          <li>Locución humana o IA según objetivo y presupuesto.</li>
-          <li>Diseño gráfico, infografías, placas y recursos visuales de apoyo.</li>
-          <li>Ayuda a transformar piezas aisladas en un sistema reusable.</li>
-        </ul>
-        <a class="resource-link" href="https://ewaffle.cl/multimedia/" target="_blank" rel="noreferrer">Ver capacidades complementarias →</a>
-      </article>
+      {recursos.map((r, i) => (
+        <article class="resource-card" data-motion="fade-up" style={`--motion-delay: ${(i % 3) * 60}ms;`}>
+          <div class="eyebrow">{r.eyebrow}</div>
+          <h4>{r.titulo}</h4>
+          <p>{r.texto}</p>
+          <ul>{r.bullets.map((b) => <li>{b}</li>)}</ul>
+          {r.links.map((l) => (
+            <a class="resource-link" href={l.u} target="_blank" rel="noreferrer">{l.t} →</a>
+          ))}
+        </article>
+      ))}
     </div>
 
     <h3 data-motion="fade-up">4. Cuándo conviene cada recurso</h3>

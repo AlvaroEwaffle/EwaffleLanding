@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inducción a la Operación y Estándares — piezas interactivas</title>
+<style>:root{--primary:#202322;--accent:#c9222d;--accent2:#147455;--ink:#1d2021;--muted:#6b7280;--line:#e3e6e8;--bg:#f6f7f8;--paper:#ffffff;--ok:#0f7a52;--warn:#b45309;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+.shell{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh}
+/* ── nav ── */
+.nav{position:sticky;top:0;height:100vh;overflow:auto;background:var(--paper);border-right:1px solid var(--line);padding:22px 18px;display:flex;flex-direction:column;gap:16px}
+.nav .hd{display:flex;gap:11px;align-items:flex-start}
+.nav .mk{width:38px;height:38px;border-radius:9px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800;flex:0 0 auto;font-size:13px}
+.nav h1{font-size:16px;line-height:1.25;font-weight:700}
+.nav .cli{font-size:12.5px;color:var(--muted);margin-top:2px}
+.prog{background:var(--bg);border-radius:10px;padding:11px 13px}
+.prog .pl{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.prog .pb{height:6px;border-radius:99px;background:var(--line);margin:8px 0 6px;overflow:hidden}
+.prog .pf{height:100%;background:var(--accent);width:0;transition:width .35s ease}
+.prog .pt{font-size:12.5px;color:var(--muted)}
+.toc{display:flex;flex-direction:column;gap:5px}
+.toc-mod{display:flex;flex-direction:column;gap:3px;margin-bottom:14px}
+.toc-mh{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:0 11px 6px;border-bottom:1px solid var(--line);margin-bottom:5px}
+.toc a{display:flex;gap:10px;align-items:flex-start;padding:10px 11px;border-radius:9px;text-decoration:none;color:var(--ink);border:1px solid transparent;font-size:14px;line-height:1.3}
+.toc a:hover{background:var(--bg)}
+.toc a.on{background:var(--bg);border-color:var(--line);font-weight:650}
+.toc .n{width:22px;height:22px;border-radius:99px;border:1.5px solid var(--line);display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--muted);flex:0 0 auto;margin-top:1px}
+.toc a.done .n{background:var(--ok);border-color:var(--ok);color:#fff}
+.toc a.on .n{border-color:var(--accent);color:var(--accent)}
+.toc a.done.on .n{background:var(--ok);border-color:var(--ok);color:#fff}
+/* ── main ── */
+.main{padding:0;min-width:0}
+/* Centrado y mas ancho (Alvaro, 13-ago). Antes eran 820px pegados a la
+   izquierda: en un monitor ancho quedaba una columna angosta contra el borde,
+   con medio ancho de pantalla vacio a la derecha. Ahora la columna se centra
+   en el espacio que deja la navegacion. El parrafo suelto se limita aparte,
+   porque una linea de texto de 1100px es incomoda de leer. */
+.lesson{display:none;padding:34px clamp(18px,4vw,56px) 90px;max-width:1100px;margin:0 auto}
+.lesson>p,.lesson .obj{max-width:78ch}
+.lesson.on{display:block}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);font-weight:800}
+.lesson h2{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:8px 0 10px;font-weight:750;letter-spacing:-.01em}
+.obj{background:var(--paper);border-left:3px solid var(--accent2);border-radius:0 10px 10px 0;padding:12px 16px;color:var(--muted);font-size:14.5px;margin-bottom:26px}
+.obj b{color:var(--ink);font-weight:650}
+.blk{margin:0 0 22px}
+.blk h3{font-size:19px;line-height:1.25;margin:0 0 9px;font-weight:700}
+.blk p{margin:0 0 11px}
+.blk p:last-child{margin-bottom:0}
+ul.l-dot,ul.l-check,ol.l-num{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.l-dot li,ul.l-check li,ol.l-num li{position:relative;padding-left:29px}
+ul.l-dot li:before{content:"";position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:99px;background:var(--accent)}
+ul.l-check li:before{content:"✓";position:absolute;left:4px;top:0;color:var(--ok);font-weight:800}
+ol.l-num{counter-reset:n}
+ol.l-num li{counter-increment:n}
+ol.l-num li:before{content:counter(n);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:99px;background:var(--primary);color:#fff;font-size:11.5px;font-weight:700;display:grid;place-items:center}
+.callout{border-radius:11px;padding:14px 17px;background:var(--paper);border:1px solid var(--line);border-left-width:4px}
+.c-info{border-left-color:var(--accent2)}
+.c-warn{border-left-color:var(--warn);background:#fffbf4}
+.c-key{border-left-color:var(--accent);background:#fff7fa}
+.c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:5px;color:var(--muted)}
+figure.vid video{width:100%;border-radius:12px;display:block;background:#000}
+figure.img img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.ph{background:var(--paper);border:1.5px dashed var(--line);border-radius:12px;padding:44px 20px;text-align:center;color:var(--muted);font-size:14px}
+.acc details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.acc summary{cursor:pointer;padding:13px 16px;font-weight:650;list-style:none}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:before{content:"+";float:right;color:var(--accent);font-weight:800}
+.acc details[open] summary:before{content:"−"}
+.acc details>div{padding:0 16px 14px}
+.tabs{background:var(--paper);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.tb-strip{display:flex;gap:0;border-bottom:1px solid var(--line);overflow-x:auto}
+.tb{background:none;border:0;padding:12px 17px;cursor:pointer;font:inherit;font-size:14px;font-weight:600;color:var(--muted);border-bottom:2.5px solid transparent;white-space:nowrap}
+.tb.on{color:var(--ink);border-bottom-color:var(--accent)}
+.tb-pane{display:none;padding:16px 18px}
+.tb-pane.on{display:block}
+blockquote.q{border-left:3px solid var(--accent);padding:4px 0 4px 18px;font-size:18px;line-height:1.5;font-style:italic;color:var(--ink)}
+blockquote.q cite{display:block;font-style:normal;font-size:13.5px;color:var(--muted);margin-top:8px}
+hr.dv{border:0;border-top:1px solid var(--line);margin:30px 0}
+.script{background:#fffdf7;border:1px solid #f0e3c2;border-radius:12px;padding:18px 20px}
+.s-hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.s-tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#9a6b12;background:#fdf0d0;border-radius:99px;padding:4px 11px}
+.s-fmt{font-size:12.5px;color:var(--muted)}
+.s-in{font-size:14.5px;color:var(--muted);margin-bottom:14px}
+ol.s-sc{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px}
+ol.s-sc li{counter-increment:s;position:relative;padding-left:34px}
+ol.s-sc li:before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:7px;background:#f0e3c2;color:#9a6b12;font-size:12px;font-weight:800;display:grid;place-items:center}
+.s-t{font-weight:700;margin-bottom:4px}
+.s-v{font-size:13.5px;color:var(--muted);margin-bottom:5px}
+.s-v b{color:var(--ink);font-weight:650}
+.s-n{font-size:15px;border-left:2px solid #e0d0a8;padding-left:12px;font-style:italic}
+.kc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px}
+.kc-q{font-weight:650;margin-bottom:12px}
+.kc-opts{display:flex;flex-direction:column;gap:8px}
+.kc-o{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:11px 14px;cursor:pointer;font:inherit;font-size:15px;transition:border-color .15s,background .15s}
+.kc-o:hover:not(:disabled){border-color:var(--accent2)}
+.kc-o.ok{border-color:var(--ok);background:#eefaf5}
+.kc-o.no{border-color:#d9534f;background:#fdf2f2}
+.kc-o:disabled{cursor:default}
+.kc-fb{margin-top:16px;font-size:14.5px;padding:12px 14px;border-radius:9px;background:#fdf2f2;border-left:3px solid #d9534f;color:#8a2b28}
+.kc-fb:before{content:"Tu respuesta";display:block;font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;opacity:.65;margin-bottom:3px}
+.kc-fb.ok{background:#eefaf5;border-left-color:var(--ok);color:var(--ok)}
+.kc-fbs{display:none}
+/* ── pie de lección ── */
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+.btn{background:var(--primary);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:650;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ghost{background:none;color:var(--muted);border:1px solid var(--line)}
+.done-msg{background:var(--ok);color:#fff;border-radius:12px;padding:20px 24px;margin-top:30px;display:none}
+.done-msg.on{display:block}
+.done-msg b{display:block;font-size:18px;margin-bottom:4px}
+/* ── responsive ── */
+.burger{display:none}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .toc{display:none}
+  .nav.open .toc{display:flex}
+  .burger{display:block;background:none;border:1px solid var(--line);border-radius:9px;padding:9px 13px;font:inherit;font-weight:650;cursor:pointer;width:100%}
+  .lesson{padding:24px 18px 70px}
+}
+@media print{.nav{display:none}.lesson{display:block!important;page-break-after:always}}
+
+/* ── actividades gamificadas ──
+   El juego es un knowledge-check que creció: mismo cascarón, mismos botones, mismos
+   colores de acierto y error. Lo único propio es la franja del encabezado. Si al ponerlo
+   entre dos párrafos se nota que viene de otra aplicación, está mal. */
+.game{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:0 0 2px;overflow:hidden;--g-ok:var(--ok);--g-no:#d9534f}
+.g-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 18px;background:color-mix(in srgb,var(--accent) 8%,var(--paper));border-bottom:1px solid var(--line)}
+.g-kind{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.g-prog{font-size:12.5px;font-weight:700;color:var(--muted)}
+.g-ttl{font-size:17px;line-height:1.3;padding:16px 18px 0}
+.g-intro{color:var(--muted);font-size:14px;padding:6px 18px 0}
+.g-body{padding:16px 18px}
+.g-foot{padding:16px 18px;border-top:1px solid var(--line);background:var(--bg)}
+.g-foot[hidden]{display:none}
+.game button{font:inherit;cursor:pointer}
+.game button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.g-btn{background:var(--primary);color:#fff;border:0;border-radius:9px;padding:11px 18px;font-weight:700;font-size:14.5px;min-height:44px}
+.g-btn.ghost{background:transparent;color:var(--primary);border:1.5px solid var(--line)}
+.g-btn:disabled{opacity:.45;cursor:default}
+/* opciones: literalmente los botones del knowledge-check */
+.g-opts{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+.g-opt{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:11px 14px;font-size:15px;line-height:1.4;min-height:44px;transition:border-color .15s,background .15s}
+.g-opt:hover:not(:disabled){border-color:var(--primary)}
+.g-opt.ok{border-color:var(--g-ok);background:#eefaf5;font-weight:650}
+.g-opt.no{border-color:var(--g-no);background:#fdf2f2}
+/* el glifo va además del color: el 8% de los operarios no distingue verde de rojo */
+.g-opt.ok::before,.g-opt.no::before{font-weight:800;margin-right:8px}
+.g-opt.ok::before{content:"✓";color:var(--g-ok)}
+.g-opt.no::before{content:"✗";color:var(--g-no)}
+.g-fb{margin-top:12px;border-left:3px solid var(--g-no);padding:10px 14px;background:var(--bg);border-radius:0 8px 8px 0;font-size:14.5px}
+.g-fb.ok{border-left-color:var(--g-ok)}
+.g-q{font-size:16px;font-weight:650;line-height:1.4}
+.g-hint{margin-top:10px;font-size:13.5px;color:var(--muted)}
+/* ── ruleta: disco a la izquierda, pregunta a la derecha ── */
+.g-roul{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px;align-items:start}
+.g-wheel-box{position:relative;width:220px;height:220px}
+.g-wheel{width:100%;height:100%;border-radius:50%;border:4px solid var(--primary);transition:transform 2.5s cubic-bezier(.16,.84,.3,1);position:relative}
+.g-seg{position:absolute;font-size:10.5px;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);white-space:nowrap;pointer-events:none}
+.g-seg.done{opacity:.3}
+.g-needle{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:18px solid var(--primary);z-index:2}
+.g-hub{position:absolute;inset:0;margin:auto;width:48px;height:48px;border-radius:50%;background:var(--paper);border:3px solid var(--primary);display:grid;place-items:center;font-size:10.5px;font-weight:800;color:var(--primary)}
+.g-roul .g-btn{margin-top:14px;width:220px}
+.g-nota{padding:0 18px 14px;font-size:12px;color:var(--muted)}
+/* ── parejas: dos columnas, el pareo se lee en horizontal ── */
+.g-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g-col{display:flex;flex-direction:column;gap:8px}
+.g-col-t{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-bottom:2px}
+.g-bands{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.g-card{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;line-height:1.3;min-height:56px;transition:border-color .15s,background .15s,opacity .2s}
+.g-card:hover:not(:disabled){border-color:var(--primary)}
+.g-card .g-tag{display:block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.g-card.sel{border-color:var(--primary);border-width:2px;background:var(--paper)}
+.g-card.ok{border-color:var(--g-ok);background:#eefaf5;opacity:.7;cursor:default}
+.g-card.no{border-color:var(--g-no);background:#fdf2f2;animation:g-shake .3s}
+@keyframes g-shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.g-band{border-left:3px solid var(--g-ok);background:#eefaf5;border-radius:0 8px 8px 0;padding:8px 12px;font-size:13.5px}
+.g-band b{font-weight:750}
+/* ── millonario ── */
+.g-ladder{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.g-rung{font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:99px;border:1.5px solid var(--line);color:var(--muted)}
+.g-rung.on{border-color:var(--primary);color:var(--primary);background:var(--paper)}
+.g-rung.ok{border-color:var(--g-ok);background:var(--g-ok);color:#fff}
+.g-rung.ok::before{content:"✓ "}
+.g-rung.help{border-color:var(--warn);color:var(--warn)}
+/* ── cierre ── */
+.g-sum{font-size:15px;line-height:1.5}
+.g-sum b{font-weight:750}
+.g-review{margin:10px 0 14px;padding-left:18px;font-size:14.5px;color:var(--muted)}
+.g-review li{margin-bottom:5px}
+/* ── sopa de letras: dos toques, nunca arrastre ── */
+.g-sopa{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start}
+.g-grid{display:grid;gap:2px;touch-action:manipulation}
+.g-cel{width:38px;height:38px;border:1px solid var(--line);border-radius:6px;background:var(--bg);font-size:15px;font-weight:700;color:var(--ink);display:grid;place-items:center;padding:0}
+.g-cel.pick{border-color:var(--primary);border-width:2px;background:var(--paper)}
+.g-cel.hit{border-color:var(--g-ok);background:#eefaf5;color:var(--g-ok)}
+.g-pistas{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.g-pista{border-left:3px solid var(--line);padding:5px 11px;line-height:1.35}
+.g-pista.hit{border-left-color:var(--g-ok)}
+.g-pista.hit b{text-decoration:line-through;opacity:.65}
+.g-pista b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+/* ── rosco ── */
+.g-rosco{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:start}
+.g-aro{position:relative;width:200px;height:200px}
+.g-letra{position:absolute;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--muted)}
+.g-letra.on{border-color:var(--primary);border-width:2px;color:var(--primary);background:var(--paper)}
+.g-letra.hit{background:var(--g-ok);border-color:var(--g-ok);color:#fff}
+.g-letra.pass{border-color:var(--warn);color:var(--warn)}
+.g-resp{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.g-resp input{flex:1 1 180px;min-height:44px;border:1.5px solid var(--line);border-radius:9px;padding:10px 13px;font:inherit;font-size:15px;background:var(--bg);color:var(--ink)}
+.g-resp input:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+/* ── clasificar ── */
+.g-fichas{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;min-height:44px}
+.g-ficha{background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:10px 13px;font-size:14px;min-height:44px}
+.g-ficha.sel{border-color:var(--primary);border-width:2px;background:var(--paper);transform:translateY(-2px)}
+/* plano — proporción fija 4:3 y disposición relativa idéntica en todo ancho. En 390px el
+   contenedor queda en 354×266 y la zona más chica en 80×63, casi el doble del mínimo táctil
+   de 44. Por eso el validador corta en 10 zonas y 6 columnas: ahí deja de cumplirse. */
+.g-plano{display:grid;gap:6px;aspect-ratio:4/3;width:100%;margin:10px 0;grid-auto-flow:dense}
+/* SIN transición en background ni border-color: sus valores vienen de var(--g-ok)/var(--g-no) y
+   Chrome no vuelve a asentar una propiedad transicionada cuyo valor sale de un var() — la zona
+   ubicada se quedaba gris para siempre. Diagnosticado por UX Designer el 24-ago con una sonda:
+   un botón .puesta recién creado salía verde y el real gris; con transition:none el viejo se
+   destrababa. Mismo bug que en los botones del motor de reels. Si hace falta animar, animar
+   opacity o transform, nunca un color que venga de una variable. */
+.g-zona{border:1.5px dashed var(--line);border-radius:9px;background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:4px;min-height:44px;
+  font:600 12px/1.25 inherit;color:var(--fg);text-align:center}
+.g-zona:hover:not(.puesta){border-color:var(--fg);background:color-mix(in srgb,var(--fg) 6%,transparent)}
+.g-zona:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.g-zona.puesta{border-style:solid;border-color:var(--g-ok);background:color-mix(in srgb,var(--g-ok) 12%,transparent);cursor:default}
+.g-zona.mal{border-color:var(--g-no);background:color-mix(in srgb,var(--g-no) 14%,transparent)}
+.g-zona.pista{border-color:var(--g-ok);background:color-mix(in srgb,var(--g-ok) 26%,transparent)}
+.g-zn{display:block}
+.g-consigna{font-weight:600;font-size:15px;margin:0 0 4px;min-height:22px}
+.g-zq{color:var(--muted);font-size:20px;font-weight:400;opacity:.5}
+.g-cajas{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.g-caja{border:1.5px dashed var(--line);border-radius:11px;padding:11px;min-height:96px;text-align:left;background:transparent}
+.g-caja.listo{border-style:solid;border-color:var(--primary);background:color-mix(in srgb,var(--primary) 5%,transparent)}
+.g-caja-t{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.g-puesta{display:block;background:#eefaf5;border:1px solid var(--g-ok);border-radius:7px;padding:6px 9px;font-size:13px;margin-bottom:5px}
+.g-puesta::before{content:"✓ ";color:var(--g-ok);font-weight:800}
+/* ── decisiones ── */
+.g-sit{border-left:3px solid var(--primary);background:var(--bg);padding:12px 15px;border-radius:0 9px 9px 0;font-size:15.5px;line-height:1.5}
+.g-cons{margin-top:12px;border-left:3px solid var(--warn);background:var(--bg);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14.5px}
+.g-cons.ok{border-left-color:var(--g-ok);background:#eefaf5}
+.g-cons b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+@media(max-width:640px){
+  .g-sopa,.g-rosco{grid-template-columns:1fr}
+  .g-cel{width:min(38px,11vw);height:min(38px,11vw);font-size:14px}
+  .g-aro{width:180px;height:180px;margin:0 auto}
+  .g-roul{grid-template-columns:1fr;justify-items:center}
+  .g-wheel-box{width:min(200px,62vw);height:min(200px,62vw)}
+  .g-roul .g-btn{width:100%}
+  .g-pairs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:reduce){
+  .g-wheel{transition-duration:.3s}
+  .g-card.no{animation:none}
+}</style>
+
+</head>
+<body data-course-id="buffalo-induccion-genially">
+<div class="shell">
+  <nav class="nav">
+    <div class="hd"><div class="mk">BW</div><div><h1>Inducción a la Operación y Estándares — piezas interactivas</h1><div class="cli">Buffalo Waffles</div></div></div>
+    <button class="burger">Ver lecciones ▾</button>
+    <div class="prog"><div class="pl">Tu avance</div><div class="pb"><div class="pf"></div></div><div class="pt">0 de 6 lecciones · 0%</div></div>
+    <div class="toc"><a href="#m1"><span class="n">1</span><span>Bienvenida a Buffalo Waffles</span></a><a href="#m4"><span class="n">2</span><span>Limpieza, orden y procedimientos</span></a><a href="#m5"><span class="n">3</span><span>Protección y almacenamiento</span></a><a href="#m6"><span class="n">4</span><span>Calidad y gramajes</span></a><a href="#m7"><span class="n">5</span><span>Protocolo de atención y venta</span></a><a href="#m9"><span class="n">6</span><span>Apertura, recepción y cierre</span></a></div>
+  </nav>
+  <main class="main">
+    <article class="lesson" id="m1">
+  <div class="eyebrow">Lección 1 de 6 · 5 min</div>
+  <h2>Bienvenida a Buffalo Waffles</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Reconocer los cuatro pilares y qué pasa cuando falta uno.</div>
+  <section class="blk b-game"><div class="game" data-game="decisionGame" data-gid="g-0" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">🧭 Juego de decisiones</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">¿Qué pasaría si falta un pilar?</h3>
+<p class="g-intro">Cuatro momentos de un turno cualquiera. En cada uno falla uno de los pilares. Elige qué haces.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"scenarios":[{"situation":"Sale un pedido rápido, dentro del tiempo, pero el producto va mal presentado.","options":[{"text":"Detener y corregir la presentación antes de entregar","correct":true,"consequence":"La rapidez no compensa un producto fuera de estándar. El cliente recuerda cómo se veía, no cuánto esperó."},{"text":"Entregarlo igual, ya está dentro del tiempo","correct":false,"consequence":"Ganaste treinta segundos y perdiste el estándar. Es el cambio que menos conviene hacer."},{"text":"Entregarlo y avisar al siguiente turno","correct":false,"consequence":"El producto ya salió. Avisar después no arregla lo que el cliente se llevó."}]},{"situation":"Un cliente en caja recibe una explicación confusa y se queda dudando.","options":[{"text":"Aplicar el speech y guiar la compra con dos opciones concretas","correct":true,"consequence":"La orientación reduce la espera y mejora la experiencia. Dos opciones deciden más rápido que una carta entera."},{"text":"Esperar a que decida solo","correct":false,"consequence":"La duda se alarga, la fila crece, y la experiencia se deteriora para todos los que vienen detrás."},{"text":"Recomendarle lo más caro","correct":false,"consequence":"El upsell tiene que agregar valor real. Si no, se siente como venta forzada y no vuelve."}]},{"situation":"Un compañero pasa de recibir mercadería a la zona de producción sin lavarse las manos.","options":[{"text":"Detener la producción y lavarse antes de continuar","correct":true,"consequence":"La higiene es condición mínima para manipular alimentos: no es un paso más, es el permiso para empezar."},{"text":"Dejarlo pasar, las manos se veían limpias","correct":false,"consequence":"El riesgo no se ve. Cambiar de área es uno de los momentos obligatorios de lavado, sin importar cómo se vean las manos."},{"text":"Decirle que se lave cuando termine","correct":false,"consequence":"Para entonces el alimento ya se manipuló. El orden importa."}]},{"situation":"Hora punta: la cocina se desordena y cada uno hace lo que puede.","options":[{"text":"Reordenar el flujo por rol y seguir","correct":true,"consequence":"La productividad requiere coordinación, no improvisación. Con roles claros la misma gente rinde el doble."},{"text":"Que cada uno acelere en lo suyo","correct":false,"consequence":"Acelerar sin orden multiplica los cruces. Se trabaja más rápido y sale menos producto."},{"text":"Parar y reorganizar todo de cero","correct":false,"consequence":"Parar en hora punta cuesta más de lo que arregla. Se reordena sobre la marcha."}]}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+  <div class="foot">
+    <span></span>
+    <button class="btn" data-go="1">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4">
+  <div class="eyebrow">Lección 2 de 6 · 5 min</div>
+  <h2>Limpieza, orden y procedimientos</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Ubicar las zonas del local y reconocer el riesgo propio de cada una, y distinguir qué cambia entre formatos y qué no.</div>
+  <section class="blk b-game"><div class="game" data-game="hotspot" data-gid="g-1" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">🗺️ Ubica en el plano</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">El plano del local</h3>
+<p class="g-intro">El plano está vacío. Te voy a nombrar lo que ocurre en cada zona y tú tocas dónde ocurre. Al acertar, la zona queda rotulada con su riesgo y su acción.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"plano":{"areas":["sala sala sala sala","caja arma arma arma","caja wafl wafl wafl","prel refr lava seco"],"borde":{"arriba":"frente · calle y clientes","abajo":"fondo · trastienda"}},"zonas":[{"id":"sala","area":"sala","nombre":"Sala de clientes","macro":"Sala","funcion":"Atención, circulación, pago","riesgo":"Obstáculos, información confusa, suciedad visible","accion":"Mantener despejada, limpia y con material visible"},{"id":"caja","area":"caja","nombre":"Caja","macro":"Sala","funcion":"Toma de pedidos y pago","riesgo":"Errores de atención, desorden operativo","accion":"POS encendido, caja abierta, menú/QR disponibles"},{"id":"arma","area":"arma","nombre":"Zona de armado","macro":"Cocina abierta","funcion":"Ensamble de productos","riesgo":"Contaminación directa o cruzada","accion":"Utensilios limpios, ingredientes protegidos, mesón despejado"},{"id":"wafl","area":"wafl","nombre":"Wafleras","macro":"Cocina abierta","funcion":"Cocción de masas","riesgo":"Quemaduras, residuos, mal uso del equipo","accion":"Usar herramientas adecuadas, limpiar al cierre, no cerrar calientes"},{"id":"prel","area":"prel","nombre":"Pre elaboración","macro":"Cocina cerrada","funcion":"Preparación previa","riesgo":"Contaminación por superficies o manos","accion":"Lavado, desinfección, rotulación y orden"},{"id":"refr","area":"refr","nombre":"Refrigeración","macro":"Cocina cerrada","funcion":"Conservación de insumos","riesgo":"Pérdida de cadena de frío, sobrecarga, contaminación cruzada","accion":"Controlar temperatura, separar categorías, no sobrecargar"},{"id":"lava","area":"lava","nombre":"Lavado","macro":"Cocina cerrada","funcion":"Higiene de utensilios","riesgo":"Limpieza incompleta, contaminación, plagas, restos de alimentos","accion":"Agua potable, detergente, enjuague y secado correcto"},{"id":"seco","area":"seco","nombre":"Almacenamiento seco","macro":"Cocina cerrada","funcion":"Insumos no refrigerados","riesgo":"Plagas, humedad, contaminación química","accion":"Mantener fresco, seco, ventilado y separado del suelo"}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+<section class="blk b-game"><div class="game" data-game="dragDrop" data-gid="g-2" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">🎲 Clasificar</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">Local Full o Local Modular</h3>
+<p class="g-intro">Cinco aspectos de la operación. Decide si esa característica describe un local Full, uno Modular, o si es una regla que se cumple en los dos.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"categories":[{"id":"full","label":"Local Full"},{"id":"modular","label":"Local Modular"},{"id":"ambos","label":"Los dos"}],"items":[{"text":"Más zonas diferenciadas, cada una con su función","category":"full","explain":"El Full tiene superficie para separar. Esa es su ventaja y también su exigencia: cada área tiene que tener función clara."},{"text":"Espacios compactos y multifunción","category":"modular","explain":"El Modular resuelve en menos metros. No es un local incompleto: es el mismo estándar en otra distribución."},{"text":"Evitar cruces entre lo sucio y lo limpio","category":"ambos","explain":"Es la regla común. Cambia cómo se logra —con distancia en el Full, con disciplina en el Modular— pero no si se cumple."},{"text":"Mayor coordinación entre personas por el espacio reducido","category":"modular","explain":"Menos metros obligan a hablar más. La coordinación reemplaza a la separación física."},{"text":"Limpieza en apertura, mitad de jornada y cierre","category":"ambos","explain":"La rutina no depende del formato. Los tres momentos son iguales en los dos locales."},{"text":"Separar alimentos, químicos y utensilios al almacenar","category":"ambos","explain":"Regla común y sin excepciones. En el Modular exige más disciplina porque hay menos espacio para separar."},{"text":"Caja y sala con mayor superficie de atención","category":"full","explain":"El Full puede darle espacio propio a la atención. El Modular la resuelve cerca del flujo de producción."}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="0">← Anterior</button>
+    <button class="btn" data-go="2">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m5">
+  <div class="eyebrow">Lección 3 de 6 · 5 min</div>
+  <h2>Protección y almacenamiento</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Decidir si un producto puede almacenarse tal como llegó.</div>
+  <section class="blk b-game"><div class="game" data-game="dragDrop" data-gid="g-3" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">🎲 Clasificar</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">Organiza el refrigerador</h3>
+<p class="g-intro">Seis productos llegan a la zona de almacenamiento. Antes de guardarlos: mira fecha, categoría y estado del envase.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"categories":[{"id":"guardar","label":"Se guarda así"},{"id":"proteger","label":"Falta protegerlo o rotularlo"},{"id":"fuera","label":"No va al refrigerador"}],"items":[{"text":"Frutillas lavadas, en recipiente con tapa, con FR y FV vigentes","category":"guardar","explain":"Protegido, rotulado y vigente. Es el estado en que un producto puede entrar sin más pasos."},{"text":"Queso sin tapa","category":"proteger","explain":"Antes de refrigerar tiene que quedar protegido. Un alimento expuesto contamina y se contamina."},{"text":"El producto con vencimiento más próximo","category":"guardar","explain":"Se guarda, pero delante: PEPS significa que lo primero en vencer es lo primero en usarse."},{"text":"Paquete de jamón abierto, con contenido","category":"proteger","explain":"Un paquete abierto se protege y se rotula con FA —fecha de apertura— antes de almacenar. Sin eso nadie sabe desde cuándo está abierto."},{"text":"Químico de limpieza","category":"fuera","explain":"Los químicos van a un área separada, nunca junto a alimentos. No hay versión correcta de esto dentro del refrigerador."},{"text":"Producto sin etiqueta","category":"proteger","explain":"Sin rotulación no hay trazabilidad: nadie puede saber qué es, de cuándo, ni de quién."}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="1">← Anterior</button>
+    <button class="btn" data-go="3">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m6">
+  <div class="eyebrow">Lección 4 de 6 · 5 min</div>
+  <h2>Calidad y gramajes</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Sostener el estándar del producto en cada paso del armado.</div>
+  <section class="blk b-game"><div class="game" data-game="decisionGame" data-gid="g-4" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">🧭 Juego de decisiones</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">Arma el producto</h3>
+<p class="g-intro">Seis momentos del armado. En cada uno hay algo que no está en estándar. Decide qué haces.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"scenarios":[{"situation":"La waflera está tibia. No llegó a 250 °C y hay pedidos esperando.","options":[{"text":"Esperar a que termine de precalentar","correct":true,"consequence":"Correcto. La waflera fría produce masa plana o mal cocida, y eso se descarta igual: esperar cuesta menos que rehacer."},{"text":"Verter la mezcla igual, se compensa con más tiempo","correct":false,"consequence":"No se compensa. Más tiempo sobre una waflera fría da una masa distinta, no una masa lista."}]},{"situation":"La masa cruda tiene grumos visibles.","options":[{"text":"Seguir batiendo hasta homogeneizar","correct":true,"consequence":"Correcto. La mezcla tiene que ser homogénea: los grumos afectan textura y cocción, y se notan en el producto final."},{"text":"Usarla, los grumos desaparecen al cocinar","correct":false,"consequence":"No desaparecen. Quedan como zonas crudas dentro de una masa que por fuera se ve lista."}]},{"situation":"Una masa cocida lleva 8 minutos en la rejilla.","options":[{"text":"Descartarla","correct":true,"consequence":"Correcto. Superó el tiempo máximo: una masa fría o elástica no cumple estándar y el cliente lo nota en el primer bocado."},{"text":"Recalentarla unos segundos","correct":false,"consequence":"Recalentar no devuelve la textura. Cambia el producto y sigue estando fuera de estándar."}]},{"situation":"Un ingrediente se está porcionando a ojo porque la balanza está ocupada.","options":[{"text":"Esperar la balanza y pesar según receta","correct":true,"consequence":"Correcto. El gramaje es lo que hace que el producto de hoy sea igual al de ayer. Sin eso no hay estándar, hay suerte."},{"text":"Estimar, la diferencia es mínima","correct":false,"consequence":"La diferencia mínima repetida cien veces al día deja de ser mínima, y el cliente compra consistencia."}]},{"situation":"El producto terminado queda listo pero sin el adhesivo BW.","options":[{"text":"Completar el packaging antes de entregar","correct":true,"consequence":"Correcto. El packaging es parte del estándar visual: el producto sale completamente terminado o no sale."},{"text":"Entregarlo así, el producto está bien","correct":false,"consequence":"Para el cliente el packaging ES el producto. Es lo primero que ve y lo último que queda."}]},{"situation":"Una masa sale pálida, claramente menos dorada que el resto.","options":[{"text":"Descartarla y revisar la cocción","correct":true,"consequence":"Correcto. Una masa pálida indica falta de cocción, y revisar evita que las siguientes salgan igual."},{"text":"Entregarla, el sabor es el mismo","correct":false,"consequence":"No se entrega un producto bajo estándar. Y si una salió pálida, viene un problema de cocción que hay que resolver ahora."}]}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="2">← Anterior</button>
+    <button class="btn" data-go="4">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m7">
+  <div class="eyebrow">Lección 5 de 6 · 5 min</div>
+  <h2>Protocolo de atención y venta</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Practicar la secuencia completa de atención en caja.</div>
+  <section class="blk b-game"><div class="game" data-game="decisionGame" data-gid="g-5" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">🧭 Juego de decisiones</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">Role-play de atención en caja</h3>
+<p class="g-intro">Cuatro clientes, cuatro momentos distintos de la venta. Elige cómo respondes.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"scenarios":[{"situation":"Un cliente llega a la caja y dice que no sabe qué pedir.","options":[{"text":"Ofrecerle dos opciones concretas","correct":true,"consequence":"Correcto. Dos opciones reducen la fricción y aceleran la decisión. La carta completa la alarga."},{"text":"Pasarle la carta y dejarlo mirar","correct":false,"consequence":"La carta entera es más opciones, no más ayuda. La fila crece y el cliente sigue dudando."}]},{"situation":"Un cliente pide un producto individual y ya va a pagar.","options":[{"text":"Ofrecer un combo o un adicional que le sirva","correct":true,"consequence":"Correcto, si el upsell agrega valor real. Ofrecer algo que efectivamente mejora su pedido es servicio, no venta."},{"text":"Cobrar y listo","correct":false,"consequence":"Se pierde una oportunidad legítima. Ofrecer no es presionar, y muchos clientes agradecen la sugerencia."},{"text":"Insistir con el producto más caro","correct":false,"consequence":"Eso es presión, no upsell. Se nota, incomoda, y afecta si vuelve o no."}]},{"situation":"Un cliente duda por los precios y pregunta dos veces cuánto sale.","options":[{"text":"Apoyarse en el menú board o el Menú de Mano","correct":true,"consequence":"Correcto. Mostrar el precio escrito evita malentendidos y le da al cliente algo concreto sobre qué decidir."},{"text":"Repetirle los precios de memoria","correct":false,"consequence":"De memoria se equivoca uno y desconfía el otro. El material existe justamente para esto."}]},{"situation":"El pedido está cerrado y el cliente ya eligió.","options":[{"text":"Confirmar el pedido, cobrar y entregar la boleta","correct":true,"consequence":"Correcto. Confirmar antes de cobrar evita el error más caro de la caja: preparar algo que el cliente no pidió."},{"text":"Cobrar directo, ya quedó claro","correct":false,"consequence":"Lo que quedó claro para ti puede no ser lo que él dijo. Confirmar toma tres segundos y evita rehacer un pedido."}]}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="3">← Anterior</button>
+    <button class="btn" data-go="5">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m9">
+  <div class="eyebrow">Lección 6 de 6 · 5 min</div>
+  <h2>Apertura, recepción y cierre</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Decidir qué mercadería entra y qué se rechaza.</div>
+  <section class="blk b-game"><div class="game" data-game="millionaire" data-gid="g-6" data-reveal="3">
+<div class="g-hd">
+  <span class="g-kind">💰 ¿Quién quiere ser millonario?</span>
+  <span class="g-prog" aria-live="polite"></span>
+</div>
+<h3 class="g-ttl">¿Aceptas o rechazas esta mercadería?</h3>
+<p class="g-intro">Seis camiones, seis situaciones de recepción. Cada una tiene una decisión correcta y una consecuencia.</p>
+<div class="g-body"></div>
+<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
+<div class="g-foot" hidden></div>
+<script type="application/json" class="g-data">{"levels":[{"prize":"Cantidad","question":"La cantidad recibida no coincide con la guía de despacho. ¿Qué haces?","options":["Aceptar y avisar después","Detener y registrar la diferencia antes de aceptar","Aceptar solo lo que coincide y devolver el resto sin registro","Llamar al proveedor y esperar"],"correct":1,"explain":"La cantidad tiene que coincidir antes de aceptar. Una vez que firmaste, la diferencia es tuya.","feedback":{"0":"Avisar después es aceptar una diferencia que ya no puedes probar.","2":"Sin registro no hay reclamo posible.","3":"Esperar bloquea la descarga; primero registra, después escala."}},{"prize":"Marca","question":"La marca que llegó no es la indicada en la guía.","options":["Aceptarla, es equivalente","Rechazar o escalar según procedimiento","Aceptarla y anotarlo en el cuaderno","Consultar al cliente"],"correct":1,"explain":"Marca incorrecta requiere acción: la equivalencia no la decide quien recibe.","feedback":{"0":"Equivalente no es lo mismo que autorizado.","2":"Anotarlo no reemplaza el procedimiento.","3":"El cliente no participa de la recepción."}},{"prize":"Envase","question":"Un envase llega roto y con pérdida de contenido.","options":["Rechazarlo y apartarlo","Aceptarlo y trasvasijar","Usarlo primero para que no se pierda","Aceptarlo con descuento"],"correct":0,"explain":"No cumple estándar de integridad. Un envase roto no se recupera trasvasijando: ya estuvo expuesto.","feedback":{"1":"Trasvasijar no borra la exposición.","2":"Usarlo primero es incorporar a producción algo que no debió entrar.","3":"El descuento no es una decisión de quien recibe."}},{"prize":"Fecha","question":"Un producto llega con fecha vencida.","options":["Rechazarlo","Aceptarlo si es por poco","Aceptarlo para usarlo hoy mismo","Consultar si sirve"],"correct":0,"explain":"Producto vencido no se usa. No hay margen ni criterio propio: compromete la inocuidad.","feedback":{"1":"No hay 'por poco' en una fecha de vencimiento.","2":"Usarlo hoy no lo devuelve a estar vigente.","3":"No es una consulta: es un rechazo."}},{"prize":"Rotulación","question":"Aceptaste un producto y va a almacenamiento sin rotular.","options":["Guardarlo, después se rotula","Rotularlo antes de guardar","Rotular solo lo refrigerado","Anotarlo en la planilla"],"correct":1,"explain":"Sin rotulación no hay trazabilidad: dentro de tres días nadie sabrá cuándo entró.","feedback":{"0":"El 'después' de un turno con trabajo no llega.","2":"La trazabilidad no distingue por temperatura.","3":"La planilla no viaja con el producto."}},{"prize":"Cadena de frío","question":"Un producto refrigerado lleva rato fuera del frío mientras se revisa la guía.","options":["Terminar la revisión y después guardarlo","Almacenarlo primero respetando la cadena de frío","Ponerlo al frío solo si se siente tibio","Registrarlo y guardarlo al final"],"correct":1,"explain":"La cadena de frío se mantiene o se rompe: lo refrigerado entra primero y el papeleo espera.","feedback":{"0":"La revisión puede esperar; la temperatura no.","2":"Cuando se siente tibio ya pasó demasiado tiempo.","3":"Al final del proceso el daño ya está hecho."}}]}</script>
+<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="4">← Anterior</button>
+    <span></span>
+  </div>
+</article>
+    <div class="done-msg" id="doneMsg"><b>Curso completado</b>Registramos tu avance. Puedes volver a revisar cualquier lección cuando quieras.</div>
+  </main>
+</div>
+<script>(function(){
+var TOTAL=6;
+var KEY="ewaffle-course-"+document.body.dataset.courseId;
+var seen=JSON.parse(localStorage.getItem(KEY)||"[]");
+var lessons=[].slice.call(document.querySelectorAll(".lesson"));
+var links=[].slice.call(document.querySelectorAll(".toc a"));
+
+function save(){localStorage.setItem(KEY,JSON.stringify(seen));}
+function paint(){
+  links.forEach(function(a,i){
+    a.classList.toggle("done",seen.indexOf(i)>-1);
+  });
+  var pct=Math.round(seen.length/TOTAL*100);
+  document.querySelector(".pf").style.width=pct+"%";
+  document.querySelector(".pt").textContent=seen.length+" de "+TOTAL+" lecciones · "+pct+"%";
+  if(seen.length>=TOTAL){
+    document.querySelector(".done-msg").classList.add("on");
+    if(window.EwaffleSCORM)window.EwaffleSCORM.complete();
+  }
+}
+function go(i){
+  if(i<0||i>=lessons.length)return;
+  lessons.forEach(function(l,j){l.classList.toggle("on",j===i);});
+  links.forEach(function(a,j){a.classList.toggle("on",j===i);});
+  if(seen.indexOf(i)<0){seen.push(i);save();}
+  paint();
+  window.scrollTo(0,0);
+  var nav=document.querySelector(".nav");if(nav)nav.classList.remove("open");
+  try{location.hash=lessons[i].id;}catch(e){}
+}
+links.forEach(function(a,i){a.addEventListener("click",function(e){e.preventDefault();go(i);});});
+document.addEventListener("click",function(e){
+  var t=e.target;
+  if(t.matches("[data-go]")){go(parseInt(t.getAttribute("data-go"),10));}
+  if(t.matches(".burger")){document.querySelector(".nav").classList.toggle("open");}
+  if(t.matches(".tb")){
+    var box=t.closest(".tabs"),i=t.getAttribute("data-i");
+    box.querySelectorAll(".tb").forEach(function(b){b.classList.toggle("on",b===t);});
+    box.querySelectorAll(".tb-pane").forEach(function(p){p.classList.toggle("on",p.getAttribute("data-i")===i);});
+  }
+  if(t.matches(".kc-o")){
+    var kc=t.closest(".kc"),correct=parseInt(kc.getAttribute("data-correct"),10),i=parseInt(t.getAttribute("data-i"),10);
+    var fb=kc.querySelector(".kc-fb"),src=kc.querySelector('.kc-fbs [data-i="'+i+'"]');
+    kc.querySelectorAll(".kc-o").forEach(function(b){b.classList.remove("ok","no");});
+    t.classList.add(i===correct?"ok":"no");
+    if(i===correct){kc.querySelectorAll(".kc-o").forEach(function(b){b.disabled=true;});}
+    fb.hidden=false;fb.className="kc-fb"+(i===correct?" ok":"");
+    fb.textContent=src?src.textContent:(i===correct?"Correcto.":"Revisa el contenido de esta leccion.");
+  }
+});
+var start=0;
+if(location.hash){var k=lessons.map(function(l){return "#"+l.id;}).indexOf(location.hash);if(k>-1)start=k;}
+go(start);
+})();</script>
+<script>(function(){
+var PALETA=["#2f5d8c","#3f8f6b","#b0742a","#7a4a8c","#2c7d8a","#8c4a4a","#5a6b8c","#8c6a2f","#4a7a3f","#6a4a7a"];
+function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n;}
+function mezclar(a){var r=a.slice(),i,j,t;for(i=r.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=r[i];r[i]=r[j];r[j]=t;}return r;}
+function progreso(g,hechos,total){g.querySelector(".g-prog").textContent=hechos+" de "+total;}
+
+/** Cierre: resumen para el alumno. Nada de esto viaja al LMS — el LMS solo sabe si la
+ *  lección se completó. Y no hay nota: hay "a la primera" y "con ayuda". */
+function cerrar(g,primera,total,fallados,reiniciar){
+  var f=g.querySelector(".g-foot");
+  f.hidden=false;f.innerHTML="";
+  var s=el("div","g-sum");
+  s.appendChild(el("b","","Actividad terminada."));
+  s.appendChild(document.createTextNode(" Acertaste "+primera+" de "+total+" a la primera"+
+    (primera<total?", y "+(total-primera)+" con ayuda.":".")));
+  f.appendChild(s);
+  if(fallados.length){
+    f.appendChild(el("div","g-hint","Vale la pena repasar:"));
+    var ul=el("ul","g-review");
+    fallados.forEach(function(t){ul.appendChild(el("li","",t));});
+    f.appendChild(ul);
+  }
+  var b=el("button","g-btn ghost","Repetir la actividad");
+  b.type="button";
+  b.addEventListener("click",reiniciar);
+  f.appendChild(b);
+}
+
+/** Panel de pregunta, compartido por ruleta y millonario para que el alumno no tenga que
+ *  reaprender la interacción en cada juego. Reintentos ilimitados: el error revela, no
+ *  quita. Tras reveal intentos aparece "Ver la respuesta" y se puede seguir. */
+function preguntar(cont,q,reveal,alTerminar){
+  cont.innerHTML="";
+  cont.appendChild(el("div","g-q",q.question));
+  var ops=el("div","g-opts");
+  var fb=el("div","g-fb");fb.hidden=true;fb.setAttribute("aria-live","polite");
+  var intentos=0,cerrado=false;
+  function resolver(conAyuda){
+    cerrado=true;
+    ops.querySelectorAll(".g-opt").forEach(function(x,j){
+      x.disabled=true;
+      if(j===q.correct)x.classList.add("ok");
+    });
+    fb.hidden=false;fb.className="g-fb ok";fb.textContent=q.explain||"Correcto.";
+    var sig=el("button","g-btn","Continuar");
+    sig.type="button";sig.style.marginTop="14px";
+    sig.addEventListener("click",function(){alTerminar(!conAyuda);});
+    cont.appendChild(sig);sig.focus();
+  }
+  q.options.forEach(function(op,i){
+    var b=el("button","g-opt",op);
+    b.type="button";
+    b.addEventListener("click",function(){
+      if(cerrado||b.classList.contains("no"))return;
+      if(i===q.correct){resolver(intentos>0);return;}
+      intentos++;
+      b.classList.add("no");
+      fb.hidden=false;fb.className="g-fb";
+      fb.textContent=(q.feedback&&q.feedback[String(i)])||"Esa no es. Vuelve a intentarlo.";
+      if(intentos>=reveal&&!cont.querySelector(".g-ver")){
+        var v=el("button","g-btn ghost g-ver","Ver la respuesta");
+        v.type="button";v.style.marginTop="12px";
+        v.addEventListener("click",function(){v.remove();resolver(true);});
+        cont.appendChild(v);
+      }
+    });
+    ops.appendChild(b);
+  });
+  cont.appendChild(ops);
+  cont.appendChild(fb);
+}
+
+// ── ruleta ─────────────────────────────────────────────────────────────────
+function ruleta(g,d,reveal,reiniciar){
+  var segs=d.segments||[];
+  var pend=segs.map(function(_,i){return i;});
+  var primera=0,hechos=0,fallados=[],giro=0;
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var wrap=el("div","g-roul");
+  var izq=el("div");
+  var box=el("div","g-wheel-box");
+  var rueda=el("div","g-wheel");
+  var paso=360/segs.length;
+  rueda.style.background="conic-gradient("+segs.map(function(_,i){
+    return PALETA[i%PALETA.length]+" "+(i*paso)+"deg "+((i+1)*paso)+"deg";
+  }).join(",")+")";
+  segs.forEach(function(s,i){
+    var lab=el("div","g-seg",s.label);
+    // Centro del tramo, en grados desde arriba y en sentido horario.
+    var a=i*paso+paso/2, rad=a*Math.PI/180;
+    lab.style.left=(50+30*Math.sin(rad))+"%";
+    lab.style.top=(50-30*Math.cos(rad))+"%";
+    // El texto corre a lo largo del radio. En la mitad izquierda eso lo dejaría de
+    // cabeza, así que ahí se voltea 180 grados y se lee igual de bien.
+    lab.style.transform="translate(-50%,-50%) rotate("+(a<180?a-90:a+90)+"deg)";
+    lab.setAttribute("data-i",String(i));
+    rueda.appendChild(lab);
+  });
+  box.appendChild(el("div","g-needle"));box.appendChild(rueda);
+  var hub=el("div","g-hub","GIRA");box.appendChild(hub);
+  izq.appendChild(box);
+  var btn=el("button","g-btn","Girar la ruleta");btn.type="button";
+  izq.appendChild(btn);
+  var panel=el("div");
+  wrap.appendChild(izq);wrap.appendChild(panel);
+  body.appendChild(wrap);
+  progreso(g,0,segs.length);
+
+  var lento=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  btn.addEventListener("click",function(){
+    if(!pend.length)return;
+    btn.disabled=true;
+    var i=pend.splice(Math.floor(Math.random()*pend.length),1)[0];
+    giro+=(lento?0:1440)+(360-((giro%360)+i*paso+paso/2)%360);
+    rueda.style.transform="rotate("+giro+"deg)";
+    setTimeout(function(){
+      var m=rueda.querySelector('.g-seg[data-i="'+i+'"]');if(m)m.classList.add("done");
+      preguntar(panel,segs[i],reveal,function(sinAyuda){
+        hechos++;if(sinAyuda)primera++;else fallados.push(segs[i].label);
+        panel.innerHTML="";
+        progreso(g,hechos,segs.length);
+        if(pend.length){btn.disabled=false;btn.textContent="Girar de nuevo";btn.focus();}
+        else{btn.hidden=true;hub.textContent="LISTO";cerrar(g,primera,segs.length,fallados,reiniciar);}
+      });
+    },lento?320:2600);
+  });
+}
+
+// ── parejas ────────────────────────────────────────────────────────────────
+function parejas(g,d,reveal,reiniciar){
+  var pares=d.pairs||[];
+  var esSituacion=(d.kind||"concepto-situacion")==="concepto-situacion";
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  // Dos columnas, no una grilla revuelta: con las tarjetas mezcladas el alumno tiene que
+  // clasificar de qué tipo es cada una ANTES de pensar el contenido, y el rótulo repite
+  // seis veces lo que el encabezado dice una. Además, revuelto no cabe en 560px a 390px
+  // de ancho. (UX Designer Mini, 18-ago.)
+  body.appendChild(el("div","g-hint","Toca un concepto y después su "+(esSituacion?"situación":"definición")+"."));
+  var grid=el("div","g-cols");
+  var cIzq=el("div","g-col"),cDer=el("div","g-col");
+  cIzq.appendChild(el("div","g-col-t","Concepto"));
+  cDer.appendChild(el("div","g-col-t",esSituacion?"Situación":"Definición"));
+  var bandas=el("div","g-bands");
+  var sel=null,resueltos=0,primera=0,fallo={},fallados=[];
+  progreso(g,0,pares.length);
+
+  function tarjeta(texto,lado,i){
+    var b=el("button","g-card",texto);
+    b.type="button";
+    b.setAttribute("data-lado",lado);b.setAttribute("data-i",String(i));
+    b.addEventListener("click",function(){
+      if(b.disabled)return;
+      if(sel===b){sel=null;b.classList.remove("sel");return;}
+      if(sel&&sel.getAttribute("data-lado")===lado){sel.classList.remove("sel");sel=b;b.classList.add("sel");return;}
+      if(!sel){sel=b;b.classList.add("sel");return;}
+      var a=sel;sel=null;a.classList.remove("sel");
+      var ia=a.getAttribute("data-i"),ib=b.getAttribute("data-i");
+      if(ia===ib){
+        var p=pares[parseInt(ia,10)];
+        a.classList.add("ok");b.classList.add("ok");a.disabled=true;b.disabled=true;
+        resueltos++;
+        if(!fallo[ia])primera++;else fallados.push(p.left);
+        var banda=el("div","g-band");
+        banda.appendChild(el("b","",p.left+" · "));
+        banda.appendChild(document.createTextNode(p.explain||""));
+        bandas.appendChild(banda);
+        progreso(g,resueltos,pares.length);
+        if(resueltos===pares.length)cerrar(g,primera,pares.length,fallados,reiniciar);
+      }else{
+        fallo[ia]=true;fallo[ib]=true;
+        a.classList.add("no");b.classList.add("no");
+        setTimeout(function(){a.classList.remove("no");b.classList.remove("no");},420);
+      }
+    });
+    return b;
+  }
+  // Los conceptos van en orden y las situaciones mezcladas: si ambas columnas se mezclan,
+  // el alumno pierde la referencia de cuántos lleva.
+  pares.forEach(function(p,i){cIzq.appendChild(tarjeta(p.left,"a",i));});
+  mezclar(pares.map(function(p,i){return {p:p,i:i};})).forEach(function(x){cDer.appendChild(tarjeta(x.p.right,"b",x.i));});
+  grid.appendChild(cIzq);grid.appendChild(cDer);
+  body.appendChild(grid);
+  body.appendChild(bandas);
+}
+
+// ── millonario ─────────────────────────────────────────────────────────────
+function millonario(g,d,reveal,reiniciar){
+  var niveles=d.levels||[];
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var esc=el("div","g-ladder");
+  niveles.forEach(function(n,i){
+    var r=el("div","g-rung",n.prize||("Nivel "+(i+1)));
+    r.setAttribute("data-i",String(i));esc.appendChild(r);
+  });
+  var panel=el("div");
+  body.appendChild(esc);body.appendChild(panel);
+  var i=0,primera=0,fallados=[];
+  progreso(g,0,niveles.length);
+  (function turno(){
+    if(i>=niveles.length){panel.innerHTML="";cerrar(g,primera,niveles.length,fallados,reiniciar);return;}
+    esc.querySelectorAll(".g-rung").forEach(function(r,j){r.classList.toggle("on",j===i);});
+    preguntar(panel,niveles[i],reveal,function(sinAyuda){
+      var r=esc.querySelector('.g-rung[data-i="'+i+'"]');
+      if(r){r.classList.remove("on");r.classList.add(sinAyuda?"ok":"help");}
+      if(sinAyuda)primera++;else fallados.push(niveles[i].question);
+      i++;progreso(g,i,niveles.length);
+      turno();
+    });
+  })();
+}
+
+
+// ── sopa de letras ─────────────────────────────────────────────────────────
+// Dos toques, nunca arrastre: en un teléfono el navegador no sabe si el dedo mueve una
+// ficha o mueve la página, y en iOS gana la página. Tocas la primera letra y la última.
+// De regalo, el mismo modelo funciona con teclado.
+function limpiar(t){
+  return String(t==null?"":t).toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Z0-9]/g,"");
+}
+function sopa(g,d,reveal,reiniciar){
+  var lado=Math.min(Number(d.size||8),8);
+  var palabras=(d.words||[]).map(function(w){return {crudo:w.word,txt:limpiar(w.word),clue:w.clue,explain:w.explain,hallada:false};});
+  var rejilla=[],i,j;
+  for(i=0;i<lado;i++){rejilla.push([]);for(j=0;j<lado;j++)rejilla[i].push(null);}
+  var DIRS=[[0,1],[1,0],[1,1],[-1,1]];
+  function cabe(t,f,c,dir){
+    for(var k=0;k<t.length;k++){
+      var y=f+dir[0]*k,x=c+dir[1]*k;
+      if(y<0||x<0||y>=lado||x>=lado)return false;
+      if(rejilla[y][x]&&rejilla[y][x]!==t[k])return false;
+    }
+    return true;
+  }
+  palabras.forEach(function(w){
+    for(var intento=0;intento<300;intento++){
+      var dir=DIRS[Math.floor(Math.random()*DIRS.length)];
+      var f=Math.floor(Math.random()*lado),c=Math.floor(Math.random()*lado);
+      if(!cabe(w.txt,f,c,dir))continue;
+      for(var k=0;k<w.txt.length;k++)rejilla[f+dir[0]*k][c+dir[1]*k]=w.txt[k];
+      w.pos={f:f,c:c,dir:dir};
+      return;
+    }
+  });
+  // Relleno con letras de las propias palabras: una sopa con X, K y W se ve falsa.
+  var pool=palabras.map(function(w){return w.txt;}).join("")||"AEIOURSTLNMCDP";
+  for(i=0;i<lado;i++)for(j=0;j<lado;j++)if(!rejilla[i][j])rejilla[i][j]=pool[Math.floor(Math.random()*pool.length)];
+
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var wrap=el("div","g-sopa");
+  var grid=el("div","g-grid");
+  grid.style.gridTemplateColumns="repeat("+lado+",auto)";
+  var pistas=el("div","g-pistas");
+  var primera=0,fallados=[],sel=null,fallo={};
+  progreso(g,0,palabras.length);
+
+  palabras.forEach(function(w,n){
+    var p=el("div","g-pista");
+    p.setAttribute("data-n",String(n));
+    p.appendChild(el("b","",w.crudo.length+" letras"));
+    p.appendChild(document.createTextNode(w.clue));
+    pistas.appendChild(p);
+  });
+
+  function celda(f,c){return grid.querySelector('[data-f="'+f+'"][data-c="'+c+'"]');}
+  function resolver(w,n,conAyuda){
+    w.hallada=true;
+    for(var k=0;k<w.txt.length;k++){
+      var cel=celda(w.pos.f+w.pos.dir[0]*k,w.pos.c+w.pos.dir[1]*k);
+      if(cel)cel.classList.add("hit");
+    }
+    var p=pistas.querySelector('[data-n="'+n+'"]');
+    p.classList.add("hit");
+    p.innerHTML="";
+    p.appendChild(el("b","",w.crudo));
+    p.appendChild(document.createTextNode(w.explain||w.clue));
+    if(!conAyuda)primera++;else fallados.push(w.crudo);
+    var hechas=palabras.filter(function(x){return x.hallada;}).length;
+    progreso(g,hechas,palabras.length);
+    if(hechas===palabras.length)cerrar(g,primera,palabras.length,fallados,reiniciar);
+  }
+  function entre(a,b){
+    var df=b.f-a.f,dc=b.c-a.c;
+    var pasos=Math.max(Math.abs(df),Math.abs(dc));
+    if(!pasos)return null;
+    if(df&&dc&&Math.abs(df)!==Math.abs(dc))return null;   // ni recta ni diagonal
+    var sf=df/pasos,sc=dc/pasos,out=[];
+    for(var k=0;k<=pasos;k++)out.push({f:a.f+sf*k,c:a.c+sc*k});
+    return out;
+  }
+  for(i=0;i<lado;i++)for(j=0;j<lado;j++){
+    (function(f,c){
+      var b=el("button","g-cel",rejilla[f][c]);
+      b.type="button";
+      b.setAttribute("data-f",String(f));b.setAttribute("data-c",String(c));
+      b.addEventListener("click",function(){
+        if(!sel){sel={f:f,c:c};b.classList.add("pick");return;}
+        var camino=entre(sel,{f:f,c:c});
+        var ini=celda(sel.f,sel.c);
+        if(ini)ini.classList.remove("pick");
+        sel=null;
+        if(!camino)return;
+        var texto=camino.map(function(q){return rejilla[q.f][q.c];}).join("");
+        var alReves=texto.split("").reverse().join("");
+        var n=-1;
+        palabras.forEach(function(w,k){if(!w.hallada&&(w.txt===texto||w.txt===alReves))n=k;});
+        if(n<0){
+          // No penaliza: solo se anota que esa palabra costó, para el resumen final.
+          camino.forEach(function(q){var x=celda(q.f,q.c);if(x&&!x.classList.contains("hit")){x.classList.add("pick");setTimeout(function(){x.classList.remove("pick");},260);}});
+          return;
+        }
+        resolver(palabras[n],n,!!fallo[n]);
+      });
+      grid.appendChild(b);
+    })(i,j);
+  }
+  wrap.appendChild(grid);wrap.appendChild(pistas);
+  body.appendChild(el("div","g-hint","Toca la primera letra y después la última."));
+  body.appendChild(wrap);
+}
+
+// ── rosco ──────────────────────────────────────────────────────────────────
+function rosco(g,d,reveal,reiniciar){
+  var items=(d.items||[]).map(function(x){return {letra:limpiar(x.letter),clue:x.clue,answer:x.answer,explain:x.explain,estado:"",intentos:0};});
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var wrap=el("div","g-rosco");
+  var aro=el("div","g-aro");
+  items.forEach(function(it,n){
+    var a=(n/items.length)*360*Math.PI/180;
+    var b=el("div","g-letra",it.letra);
+    b.style.left=(50+42*Math.sin(a))+"%";
+    b.style.top=(50-42*Math.cos(a))+"%";
+    b.setAttribute("data-n",String(n));
+    aro.appendChild(b);
+  });
+  var panel=el("div");
+  wrap.appendChild(aro);wrap.appendChild(panel);
+  body.appendChild(el("div","g-hint","Escribe la palabra que empieza con esa letra."));
+  body.appendChild(wrap);
+  var cola=items.map(function(_,n){return n;});
+  var primera=0,fallados=[];
+
+  function pintar(n){
+    aro.querySelectorAll(".g-letra").forEach(function(b,k){
+      b.classList.toggle("on",k===n);
+      b.classList.toggle("hit",items[k].estado==="ok");
+      b.classList.toggle("pass",items[k].estado==="pass"&&k!==n);
+    });
+  }
+  function resolver(it,conAyuda){
+    it.estado="ok";
+    if(!conAyuda)primera++;else fallados.push(it.answer);
+    var hechas=items.filter(function(x){return x.estado==="ok";}).length;
+    progreso(g,hechas,items.length);
+  }
+  function turno(){
+    if(!cola.length){panel.innerHTML="";pintar(-1);cerrar(g,primera,items.length,fallados,reiniciar);return;}
+    var n=cola[0],it=items[n];
+    pintar(n);
+    panel.innerHTML="";
+    panel.appendChild(el("div","g-q",it.letra+" · "+it.clue));
+    var fila=el("div","g-resp");
+    var inp=document.createElement("input");
+    inp.type="text";inp.placeholder="Empieza con "+it.letra;inp.setAttribute("aria-label","Tu respuesta");
+    var ok=el("button","g-btn","Comprobar");ok.type="button";
+    var pasa=el("button","g-btn ghost","Pasar");pasa.type="button";
+    fila.appendChild(inp);fila.appendChild(ok);
+    if(cola.length>1)fila.appendChild(pasa);
+    var fb=el("div","g-fb");fb.hidden=true;fb.setAttribute("aria-live","polite");
+    panel.appendChild(fila);panel.appendChild(fb);
+    function avanzar(conAyuda){
+      resolver(it,conAyuda);
+      cola.shift();
+      fb.hidden=false;fb.className="g-fb ok";fb.textContent=it.answer+" — "+(it.explain||"");
+      var sig=el("button","g-btn","Continuar");sig.type="button";sig.style.marginTop="12px";
+      fila.remove();
+      sig.addEventListener("click",turno);
+      panel.appendChild(sig);sig.focus();
+    }
+    function comprobar(){
+      if(limpiar(inp.value)===limpiar(it.answer)){avanzar(it.intentos>0);return;}
+      it.intentos++;
+      fb.hidden=false;fb.className="g-fb";
+      fb.textContent="Todavía no. Empieza con "+it.letra+".";
+      inp.select();
+      if(it.intentos>=reveal&&!panel.querySelector(".g-ver")){
+        var v=el("button","g-btn ghost g-ver","Ver la respuesta");v.type="button";v.style.marginTop="12px";
+        v.addEventListener("click",function(){v.remove();inp.value=it.answer;avanzar(true);});
+        panel.appendChild(v);
+      }
+    }
+    ok.addEventListener("click",comprobar);
+    inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();comprobar();}});
+    pasa.addEventListener("click",function(){it.estado="pass";cola.push(cola.shift());turno();});
+    inp.focus();
+  }
+  progreso(g,0,items.length);
+  turno();
+}
+
+// ── clasificar ─────────────────────────────────────────────────────────────
+// Tocar la ficha y después la caja. Mismo modelo de dos pasos que la sopa, por la misma
+// razón: arrastrar dentro de una página que scrollea no funciona en un teléfono.
+function clasificar(g,d,reveal,reiniciar){
+  var cats=d.categories||[],items=d.items||[];
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var fichas=el("div","g-fichas");
+  var cajas=el("div","g-cajas");
+  var fb=el("div","g-fb");fb.hidden=true;fb.setAttribute("aria-live","polite");
+  var sel=null,puestos=0,primera=0,fallo={},fallados=[];
+  progreso(g,0,items.length);
+
+  mezclar(items.map(function(it,n){return {it:it,n:n};})).forEach(function(x){
+    var b=el("button","g-ficha",x.it.text);
+    b.type="button";b.setAttribute("data-n",String(x.n));
+    b.addEventListener("click",function(){
+      if(sel===b){sel=null;b.classList.remove("sel");return;}
+      if(sel)sel.classList.remove("sel");
+      sel=b;b.classList.add("sel");
+      cajas.querySelectorAll(".g-caja").forEach(function(c){c.classList.add("listo");});
+    });
+    fichas.appendChild(b);
+  });
+  cats.forEach(function(c){
+    var caja=el("button","g-caja");
+    caja.type="button";caja.setAttribute("data-id",c.id);
+    caja.appendChild(el("div","g-caja-t",c.label));
+    caja.addEventListener("click",function(){
+      if(!sel)return;
+      var n=parseInt(sel.getAttribute("data-n"),10),it=items[n];
+      if(it.category!==c.id){
+        fallo[n]=true;
+        fb.hidden=false;fb.className="g-fb";
+        fb.textContent=it.hint||("Ahí no va. Piensa de nuevo dónde corresponde “"+it.text+"”.");
+        return;
+      }
+      var ficha=sel;sel=null;
+      cajas.querySelectorAll(".g-caja").forEach(function(x){x.classList.remove("listo");});
+      ficha.remove();
+      var puesta=el("span","g-puesta",it.text);
+      caja.appendChild(puesta);
+      fb.hidden=false;fb.className="g-fb ok";fb.textContent=it.explain||"";
+      puestos++;
+      if(!fallo[n])primera++;else fallados.push(it.text);
+      progreso(g,puestos,items.length);
+      if(puestos===items.length)cerrar(g,primera,items.length,fallados,reiniciar);
+    });
+    cajas.appendChild(caja);
+  });
+  body.appendChild(el("div","g-hint","Toca un elemento y después su categoría."));
+  body.appendChild(fichas);body.appendChild(cajas);body.appendChild(fb);
+}
+
+// ── decisiones ─────────────────────────────────────────────────────────────
+// Lo que enseña no es acertar: es leer la consecuencia de cada camino. Por eso toda
+// opción, correcta o no, tiene que decir qué pasa si la eliges.
+function decisiones(g,d,reveal,reiniciar){
+  var escenas=d.scenarios||[];
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var panel=el("div");
+  body.appendChild(panel);
+  var i=0,primera=0,fallados=[];
+  progreso(g,0,escenas.length);
+  (function turno(){
+    if(i>=escenas.length){panel.innerHTML="";cerrar(g,primera,escenas.length,fallados,reiniciar);return;}
+    var sc=escenas[i],intentos=0,cerrado=false;
+    panel.innerHTML="";
+    panel.appendChild(el("div","g-sit",sc.situation));
+    var ops=el("div","g-opts");
+    var cons=el("div","g-cons");cons.hidden=true;cons.setAttribute("aria-live","polite");
+    function terminar(conAyuda){
+      cerrado=true;
+      ops.querySelectorAll(".g-opt").forEach(function(x,j){x.disabled=true;if(sc.options[j].correct)x.classList.add("ok");});
+      if(!conAyuda)primera++;else fallados.push(sc.situation);
+      var sig=el("button","g-btn","Continuar");sig.type="button";sig.style.marginTop="14px";
+      sig.addEventListener("click",function(){i++;progreso(g,i,escenas.length);turno();});
+      panel.appendChild(sig);sig.focus();
+    }
+    sc.options.forEach(function(o,j){
+      var b=el("button","g-opt",o.text);
+      b.type="button";
+      b.addEventListener("click",function(){
+        if(cerrado||b.classList.contains("no"))return;
+        cons.hidden=false;
+        cons.className="g-cons"+(o.correct?" ok":"");
+        cons.innerHTML="";
+        cons.appendChild(el("b","",o.correct?"Lo que pasa":"Lo que habría pasado"));
+        cons.appendChild(document.createTextNode(o.consequence||""));
+        if(o.correct){terminar(intentos>0);return;}
+        intentos++;
+        b.classList.add("no");
+        if(intentos>=reveal&&!panel.querySelector(".g-ver")){
+          var v=el("button","g-btn ghost g-ver","Ver qué corresponde");v.type="button";v.style.marginTop="12px";
+          v.addEventListener("click",function(){
+            v.remove();
+            var buena=sc.options.filter(function(x){return x.correct;})[0]||{};
+            cons.hidden=false;cons.className="g-cons ok";cons.innerHTML="";
+            cons.appendChild(el("b","","Lo que corresponde"));
+            cons.appendChild(document.createTextNode(buena.consequence||""));
+            terminar(true);
+          });
+          panel.appendChild(v);
+        }
+      });
+      ops.appendChild(b);
+    });
+    panel.appendChild(ops);panel.appendChild(cons);
+  })();
+}
+
+
+// ── plano ──────────────────────────────────────────────────────────────────
+// El plano abre VACÍO: ocho rectángulos sin rótulo. La consigna nombra la FUNCIÓN de una zona
+// y la persona toca dónde ocurre. Al acertar, la zona se rotula para siempre y muestra su riesgo
+// y su acción — así que al terminar, el plano rotulado ES la infografía que la pieza original
+// entregaba: la actividad no la envuelve, la construye. (Diseño de UX Designer, 24-ago-2026.)
+//
+// La geometría son filas de grid-template-areas, no coordenadas sobre una imagen. El plano escala
+// sin reordenarse: si reflowara en el teléfono, "dónde está" dejaría de ser una respuesta estable
+// y se perdería lo espacial, que es la razón de existir del tipo.
+function plano(g,d,reveal,reiniciar){
+  var zonas=d.zonas||[],areas=(d.plano&&d.plano.areas)||[],borde=(d.plano&&d.plano.borde)||{};
+  var body=g.querySelector(".g-body");body.innerHTML="";
+  var pend=zonas.slice(),actual=null,intentos=0,primera=0,fallados=[],botones={};
+
+  // La consigna vive DENTRO del juego: el chasis no tiene un elemento para ella, y asumir que
+  // sí lo tenía fue lo que rompió la página entera el 24-ago.
+  var consigna=el("p","g-consigna");
+  var fb=el("div","g-fb");fb.hidden=true;fb.setAttribute("aria-live","polite");
+  body.appendChild(consigna);
+  body.appendChild(el("div","g-hint","Toca en el plano la zona donde ocurre."));
+  // El feedback va ARRIBA del plano, pegado a la consigna: es donde está mirando quien acaba de
+  // leer la pregunta, y no depende de cuánto mida el plano ni de qué zona se tocó.
+  body.appendChild(fb);
+  if(borde.arriba)body.appendChild(el("div","g-hint",borde.arriba));
+  var mapa=el("div","g-plano");
+  mapa.style.gridTemplateAreas=areas.map(function(r){return '"'+r+'"';}).join(" ");
+  mapa.style.gridTemplateColumns="repeat("+String(areas[0]||"").trim().split(/s+/).length+",1fr)";
+  var ficha=el("div");
+
+  zonas.forEach(function(z){
+    var b=el("button","g-zona");
+    b.type="button";b.style.gridArea=z.area;
+    // Sin rótulo hasta que se ubica: el aria-label lo dice, porque un lector de pantalla que
+    // cantara el nombre resolvería la actividad antes de empezar.
+    b.setAttribute("aria-label","zona sin identificar");
+    b.innerHTML='<span class="g-zq" aria-hidden="true">?</span>';
+    b.addEventListener("click",function(){elegir(z,b);});
+    mapa.appendChild(b);botones[z.id]=b;
+  });
+  if(borde.abajo)body.appendChild(mapa),body.appendChild(el("div","g-hint",borde.abajo));
+  else body.appendChild(mapa);
+  body.appendChild(ficha);
+
+  function pedir(){
+    ficha.innerHTML="";fb.hidden=true;fb.className="g-fb";
+    if(!pend.length){cerrar(g,primera,zonas.length,fallados,reiniciar);return;}
+    actual=pend[0];intentos=0;
+    consigna.textContent="¿Dónde ocurre esto? — "+actual.funcion;
+  }
+  function elegir(z,b){
+    if(!actual||b.classList.contains("puesta"))return;
+    if(z.id===actual.id){
+      b.classList.add("puesta");b.classList.remove("mal");
+      // El glifo va ADEMÁS del color: nadie debería depender de distinguir verde de rojo.
+      b.innerHTML='<span class="g-zn">✓ '+z.nombre+"</span>";
+      b.setAttribute("aria-label",z.nombre+" — "+z.funcion);
+      pend.shift();
+      if(!intentos)primera++;else fallados.push(z.nombre);
+      progreso(g,zonas.length-pend.length,zonas.length);
+      fb.hidden=false;fb.className="g-fb ok";
+      fb.textContent=intentos?"Ahí es.":"Correcto, a la primera.";
+      var f=el("div","g-ficha");
+      f.appendChild(el("b","",z.nombre+(z.macro?" · "+z.macro:"")));
+      var dl=el("dl");
+      dl.appendChild(el("dt","","Riesgo"));dl.appendChild(el("dd","",z.riesgo));
+      dl.appendChild(el("dt","","Acción"));dl.appendChild(el("dd","",z.accion));
+      f.appendChild(dl);ficha.appendChild(f);
+      var sig=el("button","g-btn",pend.length?"Siguiente zona":"Ver resumen");
+      sig.type="button";sig.addEventListener("click",pedir);ficha.appendChild(sig);
+      return;
+    }
+    // Un toque errado NO es solo "no": nombra la zona que sí es esa. En una tarea espacial el que
+    // se equivoca está explorando, y cada error deja aprendida otra zona en vez de castigar.
+    intentos++;
+    b.classList.add("mal");setTimeout(function(){b.classList.remove("mal");},320);
+    fb.hidden=false;fb.className="g-fb mal";
+    fb.textContent="Ahí está "+z.nombre+" — "+String(z.funcion||"").toLowerCase()+". Prueba de nuevo.";
+    if(intentos>=reveal&&!ficha.querySelector(".g-ver")){
+      var v=el("button","g-btn g-ver","Ver la respuesta");
+      v.type="button";
+      v.addEventListener("click",function(){
+        var c=botones[actual.id];c.classList.add("pista");
+        setTimeout(function(){c.classList.remove("pista");elegir(actual,c);},700);
+        v.remove();
+      });
+      ficha.appendChild(v);
+    }
+  }
+  progreso(g,0,zonas.length);
+  pedir();
+}
+
+var JUEGOS={hotspot:plano,roulette:ruleta,matching:parejas,millionaire:millonario,wordSearch:sopa,conceptWheel:rosco,dragDrop:clasificar,decisionGame:decisiones};
+function montar(g){
+  var fn=JUEGOS[g.getAttribute("data-game")];
+  var raw=g.querySelector(".g-data");
+  if(!fn||!raw)return;
+  var d;try{d=JSON.parse(raw.textContent);}catch(e){return;}
+  g.querySelector(".g-foot").hidden=true;
+  /* Cada juego se monta aislado. Sin esto, un error en uno detiene el forEach y los que vienen
+     DESPUÉS nunca se inicializan: el 24-ago el hotspot buscó un elemento inexistente y dejó
+     cuatro actividades en blanco, que es lo que Álvaro vio. Un juego roto se degrada a un aviso
+     visible; los demás siguen jugables. */
+  try{
+    fn(g,d,parseInt(g.getAttribute("data-reveal"),10)||3,function(){montar(g);});
+  }catch(e){
+    var body=g.querySelector(".g-body");
+    body.innerHTML='<div class="callout c-warn"><div class="c-lbl">Actividad no disponible</div>'+
+      "<p>Esta actividad no pudo cargarse. El resto del curso funciona con normalidad.</p></div>";
+    if(window.console&&console.error)console.error("juego "+g.getAttribute("data-game")+":",e);
+  }
+}
+[].slice.call(document.querySelectorAll(".game")).forEach(montar);
+})();</script>
+</body></html>
