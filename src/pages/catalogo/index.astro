@@ -1,719 +1,1676 @@
 ---
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
 
-const title = "Catalogo de Recursos E-learning y Multimedia | Ewaffle";
-const description = "Explora Storyline, Rise, motion graphics, produccion multimedia en terreno, recorridos 360 y combinaciones recomendadas para construir experiencias de aprendizaje mas efectivas.";
-const canonicalUrl = "https://ewaffle.cl/catalogo/";
+/* ═══════════════════════════════════════════════════════════════════════════
+   CATÁLOGO · sala de proyección
+   ───────────────────────────────────────────────────────────────────────────
+   La versión anterior era un documento: portada, siete secciones numeradas,
+   dos tablas y una lista de enlaces que se abrían todos en otra pestaña. El
+   problema no era que estuviera fea — era que Ewaffle vende experiencias que
+   se recorren y su catálogo pedía que le creyeran de palabra. Cada prueba de
+   que el producto existe estaba a un clic de distancia... hacia afuera.
+
+   Acá el catálogo ES la demostración. Tres cambios cargan el peso:
+
+   1. DIRIGIDO. La página pregunta qué viniste a resolver antes de mostrar
+      nada. Esas cuatro preguntas ya estaban en el documento, pero al final y
+      en modo retórico ("preguntas para aterrizar este catálogo"). Puestas al
+      principio y como decisión real, ordenan todo lo que viene después.
+   2. ADENTRO. Nueve de los once recursos se abren y funcionan en esta misma
+      página, en un visor. Los otros dos lo dicen: Articulate manda
+      `x-frame-options: sameorigin` y no se deja incrustar por nadie.
+   3. RECORRIDO. Escenas numeradas, un riel que marca dónde vas y cuántos
+      recursos abriste, y un cierre que arma la recomendación con lo que
+      elegiste. La gamificación termina en algo útil, no en un puntaje.
+
+   Lo que NO hace: bloquear el contenido detrás del cuestionario. Desde la
+   apertura hay una salida directa al catálogo completo — quien vino apurado
+   a ver la lista tiene que poder verla.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const title = "Catálogo de recursos e-learning y multimedia | Ewaffle";
+const description = "Once formatos de aprendizaje digital que puedes abrir y probar acá mismo: juegos, simuladores, guías interactivas, video con IA, 360 y producción en terreno. Sin registro.";
 const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
 
+/* Las cuatro entradas del recorrido. Son las preguntas del catálogo viejo,
+   convertidas en decisión. El texto de abajo es el síntoma con el que llega
+   el cliente, no la categoría con la que lo clasificamos nosotros. */
+const objetivos = [
+  { id: "explicar",  n: "01", t: "Explicar mejor un tema",    d: "El contenido existe, pero no se entiende — o se entiende y se olvida a la semana." },
+  { id: "practicar", n: "02", t: "Que practiquen de verdad",  d: "Aprueban la evaluación y en el puesto siguen decidiendo igual que antes." },
+  { id: "ordenar",   n: "03", t: "Ordenar lo que ya existe",  d: "Hay material, pero vive en PDF, PPT y carpetas compartidas que nadie abre." },
+  { id: "terreno",   n: "04", t: "Mostrar el lugar real",     d: "Necesitan reconocer la planta, la sala o el equipo antes de pisarlo." },
+];
+
+/* Una mezcla por objetivo. El catálogo viejo tenía tres combinaciones sueltas
+   al final; acá cada una queda amarrada a la entrada que la justifica, que es
+   lo que hace que la recomendación se sienta dirigida y no un menú más. */
+const mezclas = {
+  explicar: {
+    tag: "Mix claridad",
+    t: "Primero que se entienda. Después que se recuerde.",
+    d: "Cuando el problema es de comprensión, agregar interactividad no arregla nada: hay que bajar la carga y darle una forma visual al concepto antes de pedir que lo apliquen.",
+    piezas: [
+      { t: "Video de apertura", d: "Motion graphics o video generado con IA para instalar la idea en dos minutos." },
+      { t: "Módulo Rise", d: "El desarrollo ordenado y navegable, para leer y volver a consultar." },
+      { t: "Chequeo corto", d: "Preguntas de comprensión con feedback inmediato, sin nota." },
+    ],
+  },
+  practicar: {
+    tag: "Mix aprendizaje activo",
+    t: "Nadie aprende a decidir leyendo sobre decisiones.",
+    d: "Es la mezcla que más recomendamos. El video da el contexto, la actividad obliga a comprometerse con una respuesta, y el árbol de decisiones cubre lo que no tiene respuesta única.",
+    piezas: [
+      { t: "Video de contexto", d: "Corto. Solo lo necesario para que la práctica tenga sentido." },
+      { t: "Juegos o cápsula Storyline", d: "Donde la persona elige, se equivoca y recibe el porqué." },
+      { t: "Árbol de decisiones", d: "Para los dilemas del puesto donde ninguna opción es gratis." },
+    ],
+  },
+  ordenar: {
+    tag: "Mix biblioteca",
+    t: "El material ya está. Falta que alguien lo abra.",
+    d: "Acá el trabajo es de arquitectura, no de producción: convertir lo disperso en algo que se recorra, se busque y quede disponible dentro del LMS o la intranet.",
+    piezas: [
+      { t: "Guía interactiva", d: "Reemplaza el manual PDF por algo que se recorre en el navegador." },
+      { t: "Módulo Rise", d: "Estructura de consulta, con buen ritmo y navegación clara." },
+      { t: "Entrega SCORM", d: "Empaquetado para tu LMS, con registro de avance." },
+    ],
+  },
+  terreno: {
+    tag: "Mix onboarding en terreno",
+    t: "Que reconozcan el lugar antes de llegar al lugar.",
+    d: "Cuando el espacio físico es parte del aprendizaje, describirlo no alcanza. Se graba, se recorre y se practica la ubicación antes del primer turno.",
+    piezas: [
+      { t: "Producción en terreno", d: "Grabación presencial de espacios, equipos y procedimientos reales." },
+      { t: "Recorrido 360", d: "La instalación completa, con la información puesta donde ocurre." },
+      { t: "Ubicación en plano", d: "Una actividad donde tienen que situar cada zona y su riesgo." },
+    ],
+  },
+};
+
+/* ── Los once recursos ────────────────────────────────────────────────────
+   `piezas[].modo` decide cómo se abre cada prueba:
+     iframe  → demo propia, misma página, corre de verdad
+     video   → mp4 en tefi.villelab.com; nunca autoplay (el de inducción pesa
+               134 MB, y arrancarlo solo sería quemarle los datos a alguien)
+     youtube → incrustado sin cookies
+     externo → no se deja incrustar; se dice y se abre en otra pestaña
+   `para` amarra el recurso a los objetivos donde de verdad sirve. Si estuviera
+   en los cuatro no serviría para dirigir nada. */
 const recursos = [
   {
-    grupo: "Producido con IA",
-    eyebrow: "Nuevo · 2026",
+    id: "video-ia", grupo: "Producido con IA", eyebrow: "Nuevo · 2026",
     titulo: "Video formativo generado con IA",
-    texto: "Guion, locución y animación producidos con modelos generativos y validados por nuestro equipo. Baja el costo por minuto sin bajar el estándar, y permite iterar un módulo completo en horas en vez de semanas.",
+    img: "/assets/catalogo/video-induccion.webp",
+    alt: "Fotograma del módulo de inducción de Buffalo Waffles: título sobre una escena de local con clientes",
+    para: ["explicar", "ordenar"],
+    texto: "Guion, locución y animación producidos con modelos generativos y validados por nuestro equipo. Baja el costo por minuto sin bajar el estándar, y permite rehacer un módulo completo en horas en vez de semanas.",
     bullets: [
-      "Ideal para catálogos extensos y actualizaciones frecuentes.",
+      "Sirve para catálogos extensos y para contenido que cambia seguido.",
       "Locución en español neutro o chileno, con control de ritmo y énfasis.",
       "Cada pieza pasa por revisión humana antes de entregarse.",
     ],
-    links: [
-      { t: "Ver módulo de inducción", u: "https://tefi.villelab.com/buffalo-m1-v8.3-HD.mp4" },
-      { t: "Ver cápsula normativa", u: "https://tefi.villelab.com/achs-pnce-HD.mp4" },
+    piezas: [
+      { t: "Módulo de inducción", modo: "video", src: "https://tefi.villelab.com/buffalo-m1-v8.3-HD.mp4", poster: "/assets/catalogo/video-induccion.webp", nota: "Buffalo Waffles · inducción a la operación" },
+      { t: "Cápsula normativa", modo: "video", src: "https://tefi.villelab.com/achs-pnce-HD.mp4", poster: "/assets/catalogo/video-normativa.webp", nota: "Política Nacional de Convivencia Educativa" },
     ],
   },
   {
-    grupo: "Producido con IA",
-    eyebrow: "Nuevo · 2026",
+    id: "guias", grupo: "Producido con IA", eyebrow: "Nuevo · 2026",
     titulo: "Guías interactivas de inducción",
-    texto: "Una guía navegable que reemplaza al PDF: el participante recorre el contenido, practica en el momento y cierra con una comprobación. Se abre en el navegador, sin instalar nada y sin cuenta.",
+    img: "/assets/catalogo/guias.webp",
+    alt: "Guía interactiva abierta en el navegador: índice de lecciones a la izquierda, barra de avance y contenido de la lección",
+    para: ["ordenar", "explicar"],
+    texto: "Una guía navegable que reemplaza al PDF: la persona recorre el contenido, practica en el momento y cierra con una comprobación. Se abre en el navegador, sin instalar nada y sin cuenta.",
     bullets: [
       "Reemplaza manuales que nadie lee por algo que se recorre.",
       "Funciona en celular, tablet y escritorio.",
       "Se entrega como SCORM para el LMS o como enlace directo.",
     ],
-    links: [
-      { t: "Recorrer la guía completa", u: "/demos/buffalo-induccion.html" },
-      { t: "Ver la versión con juegos", u: "/demos/buffalo-induccion-juegos.html" },
+    piezas: [
+      { t: "Recorrer la guía completa", modo: "iframe", src: "/demos/buffalo-induccion.html", nota: "Tres lecciones con video, avance y cierre" },
+      { t: "La versión con juegos", modo: "iframe", src: "/demos/buffalo-induccion-juegos.html", nota: "La misma guía, con actividades intercaladas" },
     ],
   },
   {
-    grupo: "Práctica y evaluación",
-    eyebrow: "Gamificación",
+    id: "juegos", grupo: "Práctica y evaluación", eyebrow: "Gamificación",
     titulo: "Ocho tipos de juego listos para producción",
+    img: "/assets/catalogo/juegos.webp",
+    alt: "Actividad de sopa de letras dentro de un curso, con las pistas al costado y el contador de aciertos",
+    para: ["practicar"],
     texto: "Ruleta, memorice, millonario, sopa de letras, rueda de conceptos, arrastrar y soltar, árbol de decisiones y ubicación en plano. Se configuran con el contenido del cliente y se montan dentro del curso.",
     bullets: [
       "Cada juego se arma con los conceptos reales del programa, no con ejemplos.",
-      "El árbol de decisiones sirve para dilemas donde no hay una sola respuesta correcta.",
-      "La ubicación en plano es útil para inducciones de instalaciones y seguridad.",
+      "Sin nota al LMS y con reintentos ilimitados: el error no descuenta.",
+      "La ubicación en plano sirve para inducciones de instalaciones y seguridad.",
     ],
-    links: [
-      { t: "Probar los ocho juegos", u: "/demos/juegos-demo.html" },
-      { t: "Ver la referencia de cada tipo", u: "/demos/juegos-referencia.html" },
+    piezas: [
+      { t: "Jugar la demo", modo: "iframe", src: "/demos/juegos-demo.html", nota: "Cuatro tipos encadenados como un curso real" },
+      { t: "Ver los ocho tipos", modo: "iframe", src: "/demos/juegos-referencia.html", nota: "Referencia de cuándo conviene cada uno" },
     ],
   },
   {
-    grupo: "Práctica y evaluación",
-    eyebrow: "Gamificación",
+    id: "arbol", grupo: "Práctica y evaluación", eyebrow: "Gamificación",
     titulo: "Árbol de decisiones para temas sensibles",
-    texto: "Para contenidos donde el aprendizaje no es memorizar una norma sino sostener un criterio: buen trato, ética, prevención. El participante elige, ve la consecuencia y recibe el porqué.",
+    img: "/assets/catalogo/arbol.webp",
+    alt: "Curso Decidir más cerca de Caja Los Héroes: índice de 24 lecciones y el video de la primera",
+    para: ["practicar"],
+    texto: "Para contenidos donde aprender no es memorizar una norma sino sostener un criterio: buen trato, ética, autonomía, prevención. La persona elige, ve la consecuencia y recibe el porqué.",
     bullets: [
       "Pensado para dilemas reales del puesto de trabajo.",
       "Sin respuestas obvias: cada opción tiene un costo defendible.",
     ],
-    links: [{ t: "Recorrer un caso completo", u: "/demos/los-heroes-decidir-mas-cerca.html" }],
+    piezas: [
+      { t: "Recorrer un caso completo", modo: "iframe", src: "/demos/los-heroes-decidir-mas-cerca.html", nota: "Caja Los Héroes · 24 lecciones" },
+    ],
   },
   {
-    grupo: "Simulación",
-    eyebrow: "Simuladores",
+    id: "comex", grupo: "Simulación", eyebrow: "Simuladores",
     titulo: "Simulador de comercio exterior",
-    texto: "Una operación de importación de café Brasil→Chile donde el contenedor no se mueve hasta que los papeles cuadran. El participante recorre naviera, aduana, transportista e importador, y responde cruzando documentos en vez de recordar definiciones.",
+    img: "/assets/catalogo/comex.webp",
+    alt: "Puerto con grúas y portacontenedores al atardecer, con los cuatro roles del simulador listados abajo",
+    para: ["practicar"],
+    texto: "Una importación de café Brasil→Chile donde el contenedor no se mueve hasta que los papeles cuadran. Cada participante entra con un rol distinto — naviera, aduana, transportista, importador — y responde cruzando documentos, no recordando definiciones.",
     bullets: [
       "Documentación real de la operación: B/L, factura comercial y DIN.",
       "La respuesta correcta está en el expediente, no en la memoria.",
       "Desarrollo propio de Ewaffle, no una plantilla adaptada.",
     ],
-    links: [{ t: "Ver cómo funciona", u: "https://tefi.villelab.com/comex-live-explainer.mp4" }],
+    piezas: [
+      { t: "Ver cómo funciona", modo: "video", src: "https://tefi.villelab.com/comex-live-explainer.mp4", poster: "/assets/catalogo/comex.webp", nota: "Recorrido narrado del simulador" },
+    ],
   },
   {
-    grupo: "Simulación",
-    eyebrow: "Simuladores",
-    titulo: "Simulación de plataforma y recorridos",
-    texto: "Entornos donde el participante practica en una réplica del sistema o del espacio real antes de tocarlo en producción.",
+    id: "simulacion", grupo: "Simulación", eyebrow: "Simuladores",
+    titulo: "Simulación de plataforma y de espacio",
+    img: "/assets/catalogo/lms.webp",
+    alt: "Simulador de LMS: el curso a la izquierda y a la derecha la consola registrando las llamadas SCORM en vivo",
+    para: ["practicar", "terreno"],
+    texto: "Entornos donde se practica sobre una réplica del sistema o del espacio real antes de tocarlo en producción. El simulador de LMS deja ver el diálogo SCORM en vivo: qué reporta el curso y en qué momento.",
     bullets: [
       "Útil para onboarding de plataformas internas.",
       "Se combina con recorridos 360 cuando el espacio importa.",
     ],
-    links: [
-      { t: "Probar la simulación de LMS", u: "/demos/lms-sim.html" },
-      { t: "Ver ubicación en plano", u: "/demos/hotspot-plano-prototipo.html" },
+    piezas: [
+      { t: "Simulador de LMS", modo: "iframe", src: "/demos/lms-sim.html", nota: "SCORM 1.2 con la consola de llamadas a la vista" },
+      { t: "Ubicación en plano", modo: "iframe", src: "/demos/hotspot-plano-prototipo.html", nota: "Ocho zonas de un local, por función" },
     ],
   },
   {
-    grupo: "Base",
-    eyebrow: "Interactividad",
+    id: "storyline", grupo: "Base", eyebrow: "Interactividad",
     titulo: "Cápsulas Storyline",
-    texto: "Simulaciones, escenarios y actividades donde el participante tiene que decidir, equivocarse y recibir feedback.",
-    bullets: ["Ideal para práctica activa y evaluación formativa."],
-    links: [{ t: "Ver ejemplo Storyline", u: "https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review" }],
+    img: null,
+    para: ["practicar"],
+    texto: "Simulaciones, escenarios y actividades donde la persona tiene que decidir, equivocarse y recibir retroalimentación dentro del propio recurso.",
+    bullets: ["Para práctica activa y evaluación formativa."],
+    piezas: [
+      { t: "Ver ejemplo Storyline", modo: "externo", src: "https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review", nota: "Articulate Review" },
+    ],
   },
   {
-    grupo: "Base",
-    eyebrow: "Contenido",
+    id: "rise", grupo: "Base", eyebrow: "Contenido",
     titulo: "Módulos Rise",
-    texto: "Recorridos de lectura estructurada, con buen ritmo y navegación clara, para contenido que se consulta y se repasa.",
-    bullets: ["Ideal para marcos normativos, procedimientos y fundamentos."],
-    links: [{ t: "Ver ejemplo Rise", u: "https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review" }],
+    img: null,
+    para: ["ordenar"],
+    texto: "Recorridos de lectura estructurada, con buen ritmo y navegación clara, para contenido que se consulta y se repasa más de una vez.",
+    bullets: ["Para marcos normativos, procedimientos y fundamentos."],
+    piezas: [
+      { t: "Ver ejemplo Rise", modo: "externo", src: "https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review", nota: "Articulate Review" },
+    ],
   },
   {
-    grupo: "Base",
-    eyebrow: "Audiovisual",
+    id: "motion", grupo: "Base", eyebrow: "Audiovisual",
     titulo: "Motion graphics y video",
-    texto: "Explicaciones visuales para conceptos que en texto se vuelven densos.",
-    bullets: ["Sirve como apertura de módulo o síntesis de cierre."],
-    links: [{ t: "Ver ejemplo de video", u: "https://youtu.be/rf5-fAPg9wU" }],
+    img: "/assets/catalogo/motion.webp",
+    alt: "Fotograma de un video animado: un técnico de laboratorio y tres caras que representan niveles de satisfacción",
+    para: ["explicar"],
+    texto: "Explicaciones visuales para conceptos que en texto se vuelven densos. Sirve como apertura de módulo o como síntesis de cierre.",
+    bullets: ["Cuando hay que instalar una idea rápido y que quede."],
+    piezas: [
+      { t: "Ver ejemplo animado", modo: "youtube", src: "rf5-fAPg9wU", nota: "Video caso para actividad" },
+    ],
   },
   {
-    grupo: "Base",
-    eyebrow: "En terreno",
+    id: "terreno", grupo: "Base", eyebrow: "En terreno",
     titulo: "Producción en terreno",
+    img: "/assets/catalogo/terreno.webp",
+    alt: "Grabación en estudio: una persona hablando a cámara con iluminación de set",
+    para: ["terreno", "explicar"],
     texto: "Grabación presencial para mostrar espacios, personas, equipos, demostraciones, procedimientos o testimonios reales.",
     bullets: ["Cuando la credibilidad depende de que se vea el lugar de verdad."],
-    links: [
-      { t: "Ver ejemplo en terreno 1", u: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1" },
-      { t: "Ver ejemplo en terreno 2", u: "https://youtu.be/OCu-5fmS_mI" },
+    piezas: [
+      { t: "Ver ejemplo en terreno", modo: "youtube", src: "OCu-5fmS_mI", nota: "Pieza a cámara, producción propia" },
+      { t: "Otro ejemplo (Drive)", modo: "externo", src: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view", nota: "Se abre en Google Drive" },
     ],
   },
   {
-    grupo: "Base",
-    eyebrow: "Inmersivo",
+    id: "tour360", grupo: "Base", eyebrow: "Inmersivo",
     titulo: "Recorridos 360",
-    texto: "El participante recorre la instalación real y encuentra la información donde ocurre, en vez de leerla fuera de contexto.",
-    bullets: ["Especialmente útil en inducciones de planta y prevención de riesgos."],
-    links: [
-      { t: "Ver ejemplo 360 interactivo", u: "https://storage.net-fs.com/hosting/2727323/380/index.htm" },
-      { t: "Ver ejemplo 360 en video", u: "https://www.youtube.com/watch?v=7iaJIuOoxzE" },
-      { t: "Ver servicio 360 completo", u: "https://ewaffle.cl/servicio-360/" },
+    img: "/assets/catalogo/tour360.webp",
+    alt: "Portada de un recorrido virtual 360 de un centro de simulación, con el botón de inicio sobre la fachada",
+    para: ["terreno"],
+    texto: "La persona recorre la instalación real y encuentra la información donde ocurre, en vez de leerla fuera de contexto. Especialmente útil en inducciones de planta y prevención de riesgos.",
+    bullets: ["Cuando el entorno físico es parte crítica del aprendizaje."],
+    piezas: [
+      { t: "Recorrido interactivo", modo: "iframe", src: "https://storage.net-fs.com/hosting/2727323/380/index.htm", nota: "Tour de muestra de 3DVista — la tecnología, no un proyecto nuestro" },
+      { t: "Recorrido en video", modo: "youtube", src: "7iaJIuOoxzE", nota: "Planta Arauco · Logmeter" },
+      { t: "Nuestro servicio 360", modo: "externo", src: "https://ewaffle.cl/servicio-360/", nota: "Página del servicio" },
     ],
   },
 ];
+
+/* Cuántos de verdad corren adentro. Se calcula, no se escribe a mano: si mañana
+   Articulate se deja incrustar, el número de la portada se corrige solo. */
+const adentro = recursos.filter((r) => r.piezas.some((p) => p.modo !== "externo")).length;
+
+/* Las cuatro partes del módulo base. Era una tabla; acá se despliega una a una. */
+const anatomia = [
+  { k: "video",    t: "Video principal",        d: "Una sola pieza audiovisual por módulo: con presentador, animada o generada con IA, según el objetivo y el presupuesto.", m: "01" },
+  { k: "slides",   t: "5 a 7 pantallas",        d: "Breves. Explican, ordenan, preguntan o muestran pasos. No son el curso: son el andamio entre el video y la práctica.", m: "02" },
+  { k: "actividad",t: "Actividad aplicada",     d: "Caso, simulación, árbol de decisión o ejercicio guiado. Es la parte que no se puede saltar sin comprometerse con una respuesta.", m: "03" },
+  { k: "cierre",   t: "Cierre y evaluación",    d: "Síntesis, chequeo corto, feedback inmediato y entrega lista para LMS, intranet o distribución directa.", m: "04" },
+];
+
+const estandares = [
+  { t: "Lite",      d: "Para validar rápido tono y enfoque antes de comprometer el programa completo." },
+  { t: "Standard",  d: "La base recomendada. Es el módulo de arriba, completo." },
+  { t: "Premium",   d: "Cuando el programa necesita más práctica, más interacción y más iteración." },
+  { t: "Inmersivo", d: "Cuando el entorno real o espacial es parte de lo que hay que aprender." },
+];
+
+const escenas = [
+  { id: "apertura",   n: "00", t: "Apertura" },
+  { id: "brief",      n: "01", t: "El brief" },
+  { id: "mezcla",     n: "02", t: "Tu mezcla" },
+  { id: "proyeccion", n: "03", t: "Proyección" },
+  { id: "anatomia",   n: "04", t: "Anatomía" },
+  { id: "cierre",     n: "05", t: "Cierre" },
+];
+
+const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/";
 ---
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href={canonicalUrl}>
-  <meta name="description" content={description}>
-  <meta name="title" content={title}>
-  <meta name="theme-color" content="#101437">
-  <meta name="author" content="Ewaffle">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content={canonicalUrl}>
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={description}>
-  <meta property="og:image" content={socialImageUrl}>
-  <meta property="og:image:secure_url" content={socialImageUrl}>
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Catalogo de recursos e-learning y multimedia de Ewaffle">
-  <meta property="og:site_name" content="Ewaffle">
-  <meta property="og:locale" content="es_ES">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content={canonicalUrl}>
-  <meta name="twitter:title" content={title}>
-  <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content={socialImageUrl}>
-  <meta name="twitter:image:alt" content="Catalogo de recursos e-learning y multimedia de Ewaffle">
-  <title>{title}</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
-      --shadow-soft: 0 16px 60px rgba(18, 24, 40, 0.10);
-      --shadow-lift: 0 22px 70px rgba(26, 26, 94, 0.14);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #1a1a2e;
-      background:
-        radial-gradient(circle at top left, rgba(233, 30, 140, 0.14), transparent 32%),
-        radial-gradient(circle at 85% 12%, rgba(26, 26, 94, 0.18), transparent 30%),
-        linear-gradient(180deg, #f5f6fb 0%, #edf1f8 42%, #f8f9fc 100%);
-      font-size: 16px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
 
-    .page-ambient {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(18px);
-      opacity: 0.52;
-      animation: float-orb 18s var(--ease-smooth) infinite alternate;
-    }
-    .orb-a {
-      width: 320px;
-      height: 320px;
-      top: -100px;
-      left: -60px;
-      background: radial-gradient(circle, rgba(233, 30, 140, 0.26), transparent 66%);
-    }
-    .orb-b {
-      width: 380px;
-      height: 380px;
-      right: -120px;
-      top: 160px;
-      background: radial-gradient(circle, rgba(26, 26, 94, 0.22), transparent 68%);
-      animation-duration: 22s;
-    }
-    .orb-c {
-      width: 260px;
-      height: 260px;
-      left: 16%;
-      bottom: 40px;
-      background: radial-gradient(circle, rgba(247, 201, 72, 0.16), transparent 70%);
-      animation-duration: 24s;
-    }
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Catálogo de recursos e-learning y multimedia de Ewaffle" />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="theme-color" content="#0a0812" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
+  </Fragment>
 
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      z-index: 30;
-      background: rgba(255, 255, 255, 0.32);
-      backdrop-filter: blur(12px);
-    }
-    .scroll-progress__bar {
-      display: block;
-      width: 100%;
-      height: 100%;
-      transform-origin: left center;
-      transform: scaleX(0);
-      background: linear-gradient(90deg, #f7c948 0%, #e91e8c 54%, #1a1a5e 100%);
-      transition: transform 140ms linear;
-      box-shadow: 0 0 30px rgba(233, 30, 140, 0.35);
-    }
+  <div class="sala" id="sala">
 
-    .doc-shell {
-      position: relative;
-      z-index: 1;
-      padding: 56px 24px;
-    }
-
-    .doc-wrapper {
-      max-width: 1120px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      overflow: hidden;
-    }
-
-    .cover {
-      background: linear-gradient(135deg, #1a1a5e 55%, #e91e8c 100%);
-      color: white;
-      padding: 60px;
-      min-height: 250px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    .cover::before {
-      content: "";
-      position: absolute;
-      inset: -20% auto auto -15%;
-      width: 340px;
-      height: 340px;
-      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 68%);
-      filter: blur(12px);
-      animation: shimmer-drift 14s var(--ease-smooth) infinite alternate;
-      z-index: -1;
-    }
-    .cover::after {
-      content: "";
-      position: absolute;
-      right: -90px;
-      bottom: -120px;
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(247,201,72,0.18), transparent 70%);
-      filter: blur(8px);
-      animation: shimmer-drift 18s var(--ease-smooth) infinite alternate-reverse;
-      z-index: -1;
-    }
-    .cover-title { margin-top: 36px; }
-    .cover-title h1 { font-size: 34px; font-weight: 800; line-height: 1.14; margin-bottom: 12px; }
-    .cover-title h2 { font-size: 19px; font-weight: 400; opacity: 0.88; max-width: 760px; }
-    .cover-meta { margin-top: 28px; font-size: 14px; opacity: 0.74; }
-
-    .page { padding: 42px 60px; position: relative; }
-    h3 { font-size: 15px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 12px; border-bottom: 2px solid #f0f0f8; padding-bottom: 6px; }
-    h4 { font-size: 17px; font-weight: 700; color: #1a1a5e; margin: 18px 0 8px; }
-    p { margin-bottom: 10px; color: #333; }
-    ul { padding-left: 18px; margin-bottom: 10px; }
-    ul li { margin-bottom: 4px; color: #444; }
-
-    .mix-box {
-      background: #fff5fb;
-      border-left: 4px solid #e91e8c;
-      padding: 15px 18px;
-      margin: 14px 0;
-      border-radius: 0 6px 6px 0;
-    }
-    .mix-box p { margin: 0; }
-
-    .resource-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin: 18px 0;
-    }
-    .resource-card {
-      border: 1px solid rgba(26,26,94,0.10);
-      border-radius: 14px;
-      padding: 24px 24px 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(247,248,252,0.98) 100%);
-      transition:
-        transform 500ms var(--ease-smooth),
-        box-shadow 500ms var(--ease-smooth),
-        border-color 500ms var(--ease-smooth),
-        background 500ms var(--ease-smooth);
-    }
-    .resource-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lift);
-      border-color: rgba(233, 30, 140, 0.24);
-      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(253,247,251,1) 100%);
-    }
-    .resource-card .eyebrow {
-      color: #e91e8c;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .resource-card h4 { margin-top: 8px; }
-    .resource-card ul { margin-top: 10px; }
-    .resource-link {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 12px;
-      color: #e91e8c;
-      font-weight: 700;
-      text-decoration: none;
-      position: relative;
-      transition: transform 300ms var(--ease-smooth), color 300ms var(--ease-smooth);
-    }
-    .resource-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 1px;
-      transform-origin: left center;
-      transform: scaleX(0.2);
-      opacity: 0.45;
-      background: currentColor;
-      transition: transform 320ms var(--ease-smooth), opacity 320ms var(--ease-smooth);
-    }
-    .resource-link:hover {
-      transform: translateX(3px);
-      text-decoration: none;
-    }
-    .resource-link:hover::after {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-
-    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
-    th { background: #1a1a5e; color: white; padding: 11px 14px; text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-    td { padding: 11px 14px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 15px; }
-    tr:last-child td { border-bottom: none; }
-    tr:nth-child(even) td { background: #fafafe; }
-
-    .combo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin: 18px 0;
-    }
-    .combo-card {
-      border-radius: 14px;
-      padding: 22px 20px;
-      border: 2px solid #eee;
-      background: #fff;
-      transition:
-        transform 500ms var(--ease-smooth),
-        box-shadow 500ms var(--ease-smooth),
-        border-color 500ms var(--ease-smooth);
-    }
-    .combo-card h4 { margin-top: 0; }
-    .combo-card.featured { border-color: #1a1a5e; }
-    .combo-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lift);
-      border-color: rgba(26, 26, 94, 0.18);
-    }
-    .combo-card .combo-tag {
-      display: inline-block;
-      background: rgba(26,26,94,0.08);
-      color: #1a1a5e;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-radius: 999px;
-      padding: 5px 10px;
-      margin-bottom: 12px;
-    }
-
-    .questions {
-      background: #fff9f0;
-      border: 1px solid #ffd699;
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin: 14px 0;
-    }
-    .questions p { margin-bottom: 8px; font-weight: 700; color: #b36200; }
-    .questions ol { padding-left: 18px; }
-    .questions ol li { margin-bottom: 4px; color: #555; }
-
-    .footer {
-      background: #1a1a5e;
-      color: white;
-      padding: 24px 60px;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-    }
-    .footer a { color: #f7c948; }
-
-    [data-motion] {
-      opacity: 0;
-      transform: translate3d(0, 34px, 0) scale(0.985);
-      filter: blur(8px);
-      transition:
-        opacity 820ms var(--ease-smooth),
-        transform 820ms var(--ease-smooth),
-        filter 820ms var(--ease-smooth);
-      transition-delay: var(--motion-delay, 0ms);
-      will-change: opacity, transform, filter;
-    }
-    [data-motion="fade-left"] { transform: translate3d(-36px, 24px, 0) scale(0.985); }
-    [data-motion="fade-right"] { transform: translate3d(36px, 24px, 0) scale(0.985); }
-    [data-motion="zoom"] { transform: translate3d(0, 24px, 0) scale(0.94); }
-    [data-motion].is-visible {
-      opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
-      filter: blur(0);
-    }
-
-    @keyframes shimmer-drift {
-      from { transform: translate3d(0, 0, 0) scale(1); }
-      to { transform: translate3d(18px, 22px, 0) scale(1.08); }
-    }
-    @keyframes float-orb {
-      from { transform: translate3d(0, 0, 0) scale(1); }
-      to { transform: translate3d(28px, -20px, 0) scale(1.1); }
-    }
-
-    @media (max-width: 960px) {
-      .combo-grid { grid-template-columns: 1fr; }
-      .doc-shell { padding: 24px 14px 40px; }
-      .cover, .page, .footer { padding: 28px 22px; }
-      .cover-title h1 { font-size: 28px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      [data-motion] {
-        opacity: 1 !important;
-        transform: none !important;
-        filter: none !important;
-      }
-      .scroll-progress { display: none; }
-    }
-  </style>
-</head>
-<body>
-
-<div class="page-ambient" aria-hidden="true">
-  <div class="orb orb-a"></div>
-  <div class="orb orb-b"></div>
-  <div class="orb orb-c"></div>
-</div>
-
-<div class="scroll-progress" aria-hidden="true">
-  <span class="scroll-progress__bar"></span>
-</div>
-
-<div class="doc-shell">
-<div class="doc-wrapper">
-  <div class="cover">
-    <div data-motion="fade-right"><img src="https://ewaffle.cl/assets/logoprimario.png" alt="Ewaffle" style="height: 52px;"></div>
-    <div class="cover-title" data-motion="fade-up" style="--motion-delay: 120ms;">
-      <h1>Catálogo de Recursos<br>E-learning y Multimedia</h1>
-      <h2>Una vista clara de los recursos que podemos producir y de cómo se combinan para construir experiencias de aprendizaje más efectivas.</h2>
-    </div>
-    <div class="cover-meta" data-motion="fade-up" style="--motion-delay: 220ms;">
-      Ewaffle.cl &nbsp;|&nbsp; Actualizado abril 2026 &nbsp;|&nbsp; Catálogo vivo de referencia comercial
-    </div>
-  </div>
-
-  <div class="page">
-    <h3 data-motion="fade-up">1. Cómo leer este catálogo</h3>
-    <p data-motion="fade-up" style="--motion-delay: 80ms;">En este catálogo te mostramos de manera clara <strong>qué recursos puede producir Ewaffle</strong>, cuándo conviene usar cada uno y cómo se pueden mezclar para construir una experiencia de aprendizaje más efectiva según tu realidad.</p>
-    <div class="mix-box" data-motion="zoom" style="--motion-delay: 140ms;">
-      <p><strong>No recomendamos resolver todo con un solo formato.</strong> Normalmente el mejor resultado aparece cuando mezclamos video, interactividad, contenido navegable y, cuando hace falta, producción en terreno o recorridos 360.</p>
-    </div>
-
-    <h3 data-motion="fade-up">2. Unidad base Ewaffle</h3>
-    <p data-motion="fade-up" style="--motion-delay: 80ms;">Para ordenar una propuesta rápidamente, usamos una unidad base: el <strong>módulo e-learning Ewaffle</strong>. Si un cliente pide cápsulas, módulos, cursos o una ruta completa, primero traducimos ese pedido a módulos comparables y luego definimos el estándar de calidad.</p>
-    <table data-motion="zoom" style="--motion-delay: 120ms;">
-      <thead>
-        <tr><th>Componente</th><th>Qué incluye</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Video principal</strong></td>
-          <td>Una sola pieza audiovisual por módulo. Puede ser con presentador humano, video animado/motion graphics o avatar IA, según el objetivo y presupuesto.</td>
-        </tr>
-        <tr>
-          <td><strong>5 - 7 slides interactivas</strong></td>
-          <td>Pantallas breves para explicar, ordenar contenido, hacer preguntas de chequeo, mostrar pasos o activar pequeñas interacciones.</td>
-        </tr>
-        <tr>
-          <td><strong>Actividad aplicada</strong></td>
-          <td>Caso práctico, simulación, árbol de decisión o ejercicio guiado para que la persona practique y reciba retroalimentación.</td>
-        </tr>
-        <tr>
-          <td><strong>Cierre y evaluación</strong></td>
-          <td>Síntesis del aprendizaje, quiz corto, feedback inmediato y entrega lista para LMS, intranet o distribución digital.</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="mix-box" data-motion="zoom" style="--motion-delay: 140ms;">
-      <p><strong>Estándares de producción:</strong> Lite para validar rápido, Standard como base recomendada, Premium cuando se requiere más práctica e interacción, e Inmersivo cuando el entorno real o espacial forma parte del aprendizaje.</p>
-    </div>
-
-    <h3 data-motion="fade-up">3. Catálogo de recursos</h3>
-    <div class="resource-grid">
-      {recursos.map((r, i) => (
-        <article class="resource-card" data-motion="fade-up" style={`--motion-delay: ${(i % 3) * 60}ms;`}>
-          <div class="eyebrow">{r.eyebrow}</div>
-          <h4>{r.titulo}</h4>
-          <p>{r.texto}</p>
-          <ul>{r.bullets.map((b) => <li>{b}</li>)}</ul>
-          {r.links.map((l) => (
-            <a class="resource-link" href={l.u} target="_blank" rel="noreferrer">{l.t} →</a>
-          ))}
-        </article>
-      ))}
-    </div>
-
-    <h3 data-motion="fade-up">4. Cuándo conviene cada recurso</h3>
-    <table data-motion="zoom" style="--motion-delay: 80ms;">
-      <thead>
-        <tr><th>Recurso</th><th>Mejor uso</th><th>Resultado esperado</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Storyline</strong></td>
-          <td>Cuando el usuario debe practicar decisiones, pasos o respuestas en contexto.</td>
-          <td>Más aplicación y menos consumo pasivo.</td>
-        </tr>
-        <tr>
-          <td><strong>Rise</strong></td>
-          <td>Cuando el contenido necesita quedar ordenado, navegable y disponible para consulta.</td>
-          <td>Mejor acceso, refuerzo y reutilización del conocimiento.</td>
-        </tr>
-        <tr>
-          <td><strong>Motion graphics</strong></td>
-          <td>Cuando necesitamos explicar, sintetizar o instalar una narrativa clara rápidamente.</td>
-          <td>Mensajes más claros y mejor entendimiento inicial.</td>
-        </tr>
-        <tr>
-          <td><strong>Producción en terreno</strong></td>
-          <td>Cuando la credibilidad del contenido depende de mostrar operación, personas o espacios reales.</td>
-          <td>Más cercanía, realismo y conexión con la práctica.</td>
-        </tr>
-        <tr>
-          <td><strong>360</strong></td>
-          <td>Cuando el entorno físico es parte crítica del aprendizaje o del onboarding.</td>
-          <td>Comprensión espacial antes de llegar al lugar real.</td>
-        </tr>
-        <tr>
-          <td><strong>Audio y locución</strong></td>
-          <td>Cuando el contenido necesita consistencia tonal, accesibilidad o velocidad de producción.</td>
-          <td>Mejor experiencia y mayor claridad narrativa.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 data-motion="fade-up">5. Combinaciones recomendadas</h3>
-    <p data-motion="fade-up" style="--motion-delay: 80ms;">En vez de vender un solo recurso aislado, normalmente recomendamos alguna de estas combinaciones según el momento del cliente:</p>
-    <div class="combo-grid">
-      <article class="combo-card" data-motion="fade-up">
-        <div class="combo-tag">Entrada rápida</div>
-        <h4>Mix Starter</h4>
-        <p>Para clientes que necesitan validar rápido una primera experiencia sin sobredimensionar el proyecto.</p>
-        <ul>
-          <li>1 video motion graphics o pieza audiovisual corta.</li>
-          <li>1 guía Rise para consulta y distribución.</li>
-          <li>Locución y visuales base.</li>
-        </ul>
-      </article>
-
-      <article class="combo-card featured" data-motion="fade-up" style="--motion-delay: 90ms;">
-        <div class="combo-tag">Recomendado</div>
-        <h4>Mix de aprendizaje activo</h4>
-        <p>Para programas donde importa explicar, practicar y dejar material reusable dentro del LMS.</p>
-        <ul>
-          <li>Video de contexto o apertura.</li>
-          <li>Cápsula Storyline para práctica.</li>
-          <li>Guía Rise para consulta posterior.</li>
-        </ul>
-      </article>
-
-      <article class="combo-card" data-motion="fade-up" style="--motion-delay: 180ms;">
-        <div class="combo-tag">Inmersivo</div>
-        <h4>Mix onboarding en terreno</h4>
-        <p>Para clientes que necesitan mostrar espacios, rutas, protocolos o experiencias reales antes del ingreso presencial.</p>
-        <ul>
-          <li>Producción multimedia en terreno.</li>
-          <li>Recorrido o video 360.</li>
-          <li>Guía o pieza interactiva de apoyo.</li>
-        </ul>
-      </article>
-    </div>
-
-    <h3 data-motion="fade-up">6. Cómo operamos este tipo de proyectos</h3>
-    <ul data-motion="fade-up" style="--motion-delay: 80ms;">
-      <li>Partimos identificando el objetivo de negocio y aprendizaje antes de elegir formatos.</li>
-      <li>Recomendamos un piloto pequeño pero representativo para validar tono, estándar y flujo de aprobación.</li>
-      <li>Después escalamos solo los recursos que realmente agregan valor al caso.</li>
-      <li>Entregamos pensando en LMS, intranet, onboarding interno o distribución directa según el ecosistema del cliente.</li>
-    </ul>
-
-    <h3 data-motion="fade-up">7. Preguntas para aterrizar este catálogo a tu propuesta</h3>
-    <div class="questions" data-motion="zoom" style="--motion-delay: 70ms;">
-      <p>Para proponerte la mejor mezcla de recursos, nos ayuda mucho entender esto contigo:</p>
-      <ol>
-        <li>¿Qué te gustaría resolver primero: explicar mejor un tema, activar práctica, ordenar contenido o mostrar contexto real?</li>
-        <li>¿Qué tan importante es para ti que estos recursos queden reutilizables dentro de un LMS, intranet o biblioteca interna?</li>
-        <li>¿Prefieres partir con un piloto acotado para validar estándar y enfoque, o ya necesitas una primera biblioteca de recursos?</li>
-        <li>¿Hace sentido incorporar producción en terreno o recorridos 360, o hoy conviene una mezcla más liviana y rápida de desplegar?</li>
+    <!-- ══ Riel ══ El índice de escenas y, a la vez, la barra de avance. En
+         escritorio va fijo al costado; bajo 1180px se convierte en una franja
+         delgada arriba. Cumple la función de "storyline": en todo momento se
+         ve dónde vas, cuánto falta y cuántos recursos abriste. -->
+    <aside class="riel" aria-label="Avance del recorrido">
+      <span class="riel__marca">EWAFFLE</span>
+      <ol class="riel__lista">
+        {escenas.map((e) => (
+          <li>
+            <a href={`#${e.id}`} class="riel__item" data-riel={e.id}>
+              <span class="riel__n">{e.n}</span>
+              <span class="riel__t">{e.t}</span>
+            </a>
+          </li>
+        ))}
       </ol>
+      <p class="riel__cuenta" data-vistos-riel>
+        <span data-vistos>0</span> de {recursos.length} recursos abiertos
+      </p>
+      <div class="riel__barra" aria-hidden="true"><span data-barra></span></div>
+    </aside>
+
+    <main class="cinta">
+
+      <!-- ══ ESCENA 00 · Apertura ══════════════════════════════════════════ -->
+      <section class="escena escena--apertura" id="apertura">
+        <div class="apertura__fondo" aria-hidden="true">
+          <img src="/assets/catalogo/sala.webp" alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
+        </div>
+        <div class="apertura__reja">
+        <div class="apertura__cuerpo">
+          <p class="claqueta" data-motion>
+            <span class="claqueta__punto" aria-hidden="true"></span>
+            Ewaffle · Catálogo {new Date().getFullYear()} · {recursos.length} recursos
+          </p>
+          <h1 class="titular" data-motion style="--retardo: 90ms;">
+            Un catálogo que no se lee.<br /><em>Se recorre.</em>
+          </h1>
+          <p class="bajada" data-motion style="--retardo: 180ms;">
+            Producimos experiencias de aprendizaje. Mostrarte eso en una lista de servicios sería
+            contradecirnos. Así que acá cada recurso se abre y funciona: puedes jugar, decidir,
+            equivocarte y ver cómo responde, sin salir de esta página y sin dejar tus datos.
+          </p>
+          <div class="acciones" data-motion style="--retardo: 260ms;">
+            <a href="#brief" class="boton boton--primario" data-cta="empezar">
+              Empezar el recorrido
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+            </a>
+            <a href="#proyeccion" class="boton boton--fantasma" data-cta="saltar">
+              Ir directo al catálogo
+            </a>
+          </div>
+          <dl class="datos" data-motion style="--retardo: 340ms;">
+            <div><dt>Recursos</dt><dd>{recursos.length}</dd></div>
+            <div><dt>Se abren acá</dt><dd>{adentro}</dd></div>
+            <div><dt>Registro</dt><dd>No</dd></div>
+          </dl>
+        </div>
+
+        <!-- La pared de pantallas. Son capturas de los recursos que están más
+             abajo, así que para un lector de pantalla es repetición: va oculta.
+             Existe por el mismo motivo que en la página de simuladores — una
+             portada que promete producto y no muestra ni un pixel de producto
+             se lee como catálogo de agencia. -->
+        <div class="marquesina" aria-hidden="true" data-motion style="--retardo: 200ms;">
+          <figure class="mq mq--3">
+            <span class="mq__barra"><i></i><i></i><i></i></span>
+            <!-- Acá iba la captura del plano y a este tamaño se veía como una hoja
+                 en blanco: sus ocho zonas parten vacías, que es justo la gracia de
+                 la actividad. Un retrato de rodaje aporta lo que faltaba, que es
+                 una textura distinta a las otras dos pantallas de curso. -->
+            <img src="/assets/catalogo/terreno.webp" alt="" width="1100" height="688" loading="eager" decoding="async" />
+          </figure>
+          <figure class="mq mq--2">
+            <span class="mq__barra"><i></i><i></i><i></i></span>
+            <img src="/assets/catalogo/arbol.webp" alt="" width="1100" height="688" loading="eager" decoding="async" />
+          </figure>
+          <figure class="mq mq--1">
+            <span class="mq__barra"><i></i><i></i><i></i><em>corriendo en el navegador</em></span>
+            <img src="/assets/catalogo/juegos.webp" alt="" width="1100" height="688" fetchpriority="high" decoding="async" />
+          </figure>
+        </div>
+        </div>
+        <a href="#brief" class="apertura__baja" aria-label="Bajar a la primera escena">
+          <span></span>
+        </a>
+      </section>
+
+      <!-- ══ ESCENA 01 · El brief ══════════════════════════════════════════ -->
+      <section class="escena" id="brief" data-escena="brief">
+        <p class="claqueta" data-motion>Escena 01 · El brief</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Antes de mostrarte once cosas,<br />dinos cuál es tu problema.
+        </h2>
+        <p class="parrafo" data-motion style="--retardo: 140ms;">
+          No para filtrarte el catálogo — lo vas a ver entero igual. Para que el orden y la
+          recomendación del final tengan que ver contigo y no con lo que nos gusta vender.
+        </p>
+
+        <div class="opciones" role="group" aria-label="¿Qué necesitas resolver?">
+          {objetivos.map((o, i) => (
+            <button type="button" class="opcion" data-objetivo={o.id} data-motion style={`--retardo: ${120 + i * 70}ms;`}>
+              <span class="opcion__n">{o.n}</span>
+              <span class="opcion__t">{o.t}</span>
+              <span class="opcion__d">{o.d}</span>
+              <span class="opcion__marca" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7" /></svg>
+              </span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <!-- ══ ESCENA 02 · Tu mezcla ═════════════════════════════════════════
+           Oculta hasta que hay una elección. No es un truco de suspenso: una
+           recomendación mostrada antes de preguntar no es una recomendación. -->
+      <section class="escena escena--mezcla" id="mezcla" data-escena="mezcla" hidden>
+        <p class="claqueta">Escena 02 · Tu mezcla <span class="claqueta__tag" data-mezcla-tag></span></p>
+        <h2 class="rubro" data-mezcla-titulo></h2>
+        <p class="parrafo" data-mezcla-texto></p>
+
+        <ol class="mezcla">
+          <li class="mezcla__pieza" data-mezcla-pieza="0"><span class="mezcla__n">01</span><b></b><span></span></li>
+          <li class="mezcla__pieza" data-mezcla-pieza="1"><span class="mezcla__n">02</span><b></b><span></span></li>
+          <li class="mezcla__pieza" data-mezcla-pieza="2"><span class="mezcla__n">03</span><b></b><span></span></li>
+        </ol>
+
+        <p class="nota">
+          Es un punto de partida, no una cotización. Lo afinamos cuando conozcamos tu audiencia,
+          tu plazo y lo que ya tienes producido.
+          <button type="button" class="enlace" data-recalcular>Cambiar de objetivo</button>
+        </p>
+      </section>
+
+      <!-- ══ ESCENA 03 · La proyección ═════════════════════════════════════
+           El corazón. Cada tarjeta tiene una captura del recurso real y uno o
+           más botones que lo abren en el visor. Las que no se dejan incrustar
+           lo dicen en la propia tarjeta: mentir sobre eso se descubre en el
+           primer clic. -->
+      <section class="escena escena--ancha" id="proyeccion" data-escena="proyeccion">
+        <p class="claqueta" data-motion>Escena 03 · La proyección</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Once recursos. <em>{adentro} se abren acá mismo.</em>
+        </h2>
+        <p class="parrafo" data-motion style="--retardo: 140ms;">
+          No son maquetas ni videos de producto: es el recurso corriendo, el mismo que recibe un
+          participante. Los dos de Articulate se abren en otra pestaña porque su visor no permite
+          incrustarse en ningún sitio.
+        </p>
+
+        <div class="filtro" data-filtro hidden>
+          <span data-filtro-texto></span>
+          <button type="button" class="enlace" data-filtro-quitar>Ver los once por igual</button>
+        </div>
+
+        <div class="rollo">
+          {recursos.map((r, i) => (
+            <article
+              class:list={["reel", { "reel--plano": !r.img }]}
+              data-reel={r.id}
+              data-para={r.para.join(" ")}
+              data-motion
+              style={`--retardo: ${(i % 3) * 70}ms;`}
+            >
+              {r.img ? (
+                <div class="reel__pantalla">
+                  <img src={r.img} alt={r.alt} width="1100" height="688" loading="lazy" decoding="async" />
+                  <span class="reel__lupa" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                  </span>
+                </div>
+              ) : (
+                <div class="reel__placa" aria-hidden="true">
+                  <span>{r.eyebrow}</span>
+                  <b>{r.titulo}</b>
+                  <em>Se abre fuera</em>
+                </div>
+              )}
+
+              <div class="reel__cuerpo">
+                <p class="reel__meta">
+                  <span class="reel__grupo">{r.grupo}</span>
+                  <span class="reel__eyebrow">{r.eyebrow}</span>
+                </p>
+                <h3 class="reel__titulo">{r.titulo}</h3>
+                <p class="reel__texto">{r.texto}</p>
+                <ul class="reel__lista">{r.bullets.map((b) => <li>{b}</li>)}</ul>
+
+                <div class="reel__acciones">
+                  {r.piezas.map((p) =>
+                    p.modo === "externo" ? (
+                      <a
+                        class="pieza pieza--fuera"
+                        href={p.src}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-marca={r.id}
+                        data-pieza-nombre={p.t}
+                      >
+                        {p.t}
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+                        <span class="visually-hidden">(se abre en otra pestaña)</span>
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        class="pieza"
+                        data-abrir={r.id}
+                        data-modo={p.modo}
+                        data-src={p.src}
+                        data-poster={p.poster ?? ""}
+                        data-nota={p.nota ?? ""}
+                        data-pieza-nombre={p.t}
+                        data-reel-titulo={r.titulo}
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                        {p.t}
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+
+              <span class="reel__visto" data-visto-marca hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Visto
+              </span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ══ ESCENA 04 · Anatomía ══════════════════════════════════════════
+           Era una tabla de cuatro filas. Sigue siendo la misma información,
+           pero desplegada de a una: el módulo se arma delante tuyo en vez de
+           quedar listado. -->
+      <section class="escena" id="anatomia" data-escena="anatomia">
+        <p class="claqueta" data-motion>Escena 04 · Anatomía</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Un módulo Ewaffle,<br />por dentro.
+        </h2>
+        <p class="parrafo" data-motion style="--retardo: 140ms;">
+          Cuando alguien pide "cápsulas", "módulos", "un curso" o "una ruta completa", lo primero
+          que hacemos es traducir ese pedido a esta unidad. Recién ahí se puede comparar alcance
+          entre dos propuestas.
+        </p>
+
+        <div class="anatomia" data-motion style="--retardo: 180ms;">
+          <div class="anatomia__barra" role="tablist" aria-label="Partes de un módulo">
+            {anatomia.map((a, i) => (
+              <button
+                type="button"
+                role="tab"
+                class="anatomia__parte"
+                data-parte={a.k}
+                id={`tab-${a.k}`}
+                aria-controls={`panel-${a.k}`}
+                aria-selected={i === 0 ? "true" : "false"}
+                tabindex={i === 0 ? "0" : "-1"}
+              >
+                <span class="anatomia__m">{a.m}</span>
+                <span class="anatomia__t">{a.t}</span>
+              </button>
+            ))}
+          </div>
+          {anatomia.map((a, i) => (
+            <div
+              class="anatomia__panel"
+              id={`panel-${a.k}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${a.k}`}
+              data-panel={a.k}
+              hidden={i !== 0}
+            >
+              <h3>{a.t}</h3>
+              <p>{a.d}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="sub" data-motion>Cuatro estándares de producción</h3>
+        <div class="estandares">
+          {estandares.map((e, i) => (
+            <div class="estandar" data-motion style={`--retardo: ${i * 60}ms;`}>
+              <b>{e.t}</b>
+              <span>{e.d}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="operamos" data-motion>
+          <h3 class="sub sub--sin-tope">Cómo llevamos estos proyectos</h3>
+          <ul>
+            <li>Partimos por el objetivo de negocio y de aprendizaje. El formato se elige después, nunca antes.</li>
+            <li>Recomendamos un piloto chico pero representativo, para validar tono, estándar y flujo de aprobación.</li>
+            <li>Escalamos solo lo que en ese piloto demostró aportar.</li>
+            <li>Entregamos pensando en dónde vive el contenido: LMS, intranet, onboarding o distribución directa.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ══ ESCENA 05 · Cierre ════════════════════════════════════════════
+           La hoja de rodaje: lo que la persona eligió y lo que abrió, devuelto
+           en una sola tarjeta. El formulario llega con ese contexto escrito, y
+           por eso el modal de esta página ya no se abre solo a los 15 segundos:
+           interrumpir a mitad del recorrido competiría con la pieza. -->
+      <section class="escena escena--cierre" id="cierre" data-escena="cierre">
+        <p class="claqueta" data-motion>Escena 05 · Cierre</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">Tu hoja de rodaje.</h2>
+
+        <div class="rodaje" data-motion style="--retardo: 140ms;">
+          <div class="rodaje__fila">
+            <span class="rodaje__k">Objetivo</span>
+            <span class="rodaje__v" data-rodaje-objetivo>Sin elegir todavía</span>
+          </div>
+          <div class="rodaje__fila">
+            <span class="rodaje__k">Mezcla sugerida</span>
+            <span class="rodaje__v" data-rodaje-mezcla>—</span>
+          </div>
+          <div class="rodaje__fila">
+            <span class="rodaje__k">Recursos que abriste</span>
+            <span class="rodaje__v" data-rodaje-vistos>Ninguno</span>
+          </div>
+        </div>
+
+        <p class="parrafo" data-motion style="--retardo: 200ms;">
+          Si quieres, lo bajamos a una propuesta concreta. Para eso te vamos a preguntar cuatro
+          cosas — te las dejamos acá para que llegues pensado, o para que respondas la que quieras
+          en el formulario:
+        </p>
+
+        <ol class="preguntas" data-motion style="--retardo: 240ms;">
+          <li>¿Qué resolverías primero: explicar, activar la práctica, ordenar o mostrar contexto real?</li>
+          <li>¿Cuánto importa que estos recursos queden reutilizables dentro de tu LMS o intranet?</li>
+          <li>¿Partimos con un piloto acotado, o ya necesitas una primera biblioteca?</li>
+          <li>¿Tiene sentido incorporar terreno o 360, o hoy conviene algo más liviano y rápido?</li>
+        </ol>
+
+        <div class="acciones" data-motion style="--retardo: 300ms;">
+          <button type="button" class="boton boton--primario" data-abrir-form>
+            Quiero que revisemos mi caso
+          </button>
+          <a href={agendaUrl} target="_blank" rel="noreferrer" class="boton boton--fantasma" data-cta="agenda">
+            Agendar directo con Álvaro
+          </a>
+        </div>
+
+        <p class="nota nota--cierre">
+          Ewaffle · Diseño instruccional, producción multimedia y simuladores · Santiago de Chile
+          <a href="https://ewaffle.cl">ewaffle.cl</a>
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ══ EL VISOR ════════════════════════════════════════════════════════════
+       Todo su DOM está en el marcado, no se crea desde el script: los estilos
+       de Astro llevan un atributo de alcance que el JS no aplicaría, y una
+       tarjeta creada a mano saldría sin estilo. Acá solo se rellena y se
+       muestra. -->
+  <div class="visor" id="visor" role="dialog" aria-modal="true" aria-labelledby="visor-titulo" hidden>
+    <div class="visor__fondo" data-visor-cerrar></div>
+    <div class="visor__marco">
+      <header class="visor__barra">
+        <p class="visor__meta">
+          <span class="visor__rec" aria-hidden="true"></span>
+          <span class="claqueta__mono">Proyectando</span>
+          <b id="visor-titulo"></b>
+          <span class="visor__nota" data-visor-nota></span>
+        </p>
+        <div class="visor__controles">
+          <a class="visor__fuera" data-visor-fuera href="#" target="_blank" rel="noreferrer">
+            Abrir aparte
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+          </a>
+          <button type="button" class="visor__cerrar" data-visor-cerrar aria-label="Cerrar el visor">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="visor__pantalla" data-visor-pantalla>
+        <!-- se rellena con un iframe o un video, según el modo -->
+      </div>
+
+      <footer class="visor__pie">
+        <span data-visor-pie></span>
+        <span class="visor__tecla">Esc para cerrar</span>
+      </footer>
     </div>
   </div>
 
-  <div class="footer">
-    <div>Ewaffle.cl · Catálogo vivo de recursos y combinaciones de aprendizaje</div>
-    <div><a href="https://ewaffle.cl">ewaffle.cl</a></div>
-  </div>
-</div>
-</div>
+  <CatalogLeadModal autoOpen={false} />
+</BaseLayout>
 
-<CatalogLeadModal />
+<style>
+  /* ═══ La sala ═══════════════════════════════════════════════════════════
+     Página comprometida con un solo mundo visual: oscuro. Una sala de
+     proyección con modo claro no es una sala de proyección, así que no hay
+     par de temas — hay un ambiente, y los colores de marca funcionan sobre él.
+     El negro no es negro: lleva el violeta del primario de marca (#28244a)
+     bajado, para que el ámbar y el rosa se sientan iluminados y no pegados. */
+  .sala {
+    --sala: #0a0812;
+    --sala-2: #14112b;
+    --sala-3: #1c1839;
+    --haz: #ffb148;
+    --rosa: #fd5a93;
+    --azul: #2692d6;
+    --tiza: #f4f2fb;
+    --niebla: #a9a3c4;
+    --linea: rgba(255, 255, 255, 0.09);
+    --linea-viva: rgba(255, 255, 255, 0.18);
+    --curva: cubic-bezier(0.22, 1, 0.36, 1);
+
+    background: var(--sala);
+    color: var(--tiza);
+    font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.62;
+    min-height: 100vh;
+    position: relative;
+  }
+  /* Sin `overflow-x: hidden` acá. Parece inofensivo, pero en un elemento que no es
+     la raíz obliga a `overflow-y: auto`: la página pasa a ser su propio contenedor
+     de scroll y `scrollIntoView` deja de mover la ventana — los saltos entre escenas
+     no hacían nada. Lo que sí puede desbordar (el fondo con zoom lento de la
+     apertura) ya está contenido por el `overflow: hidden` de su propia sección. */
+
+  /* El atributo `hidden` del navegador lo pone en display:none, pero una clase
+     que declare display:grid le gana por especificidad y la sección oculta
+     aparece igual. Pasa siempre y se ve como un bug de lógica. */
+  .sala [hidden],
+  [hidden] { display: none !important; }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ═══ Riel ═════════════════════════════════════════════════════════════ */
+  .riel {
+    position: fixed; inset: 0 auto 0 0; width: 216px; z-index: 40;
+    display: none; flex-direction: column; gap: 26px;
+    padding: 34px 22px; border-right: 1px solid var(--linea);
+    background: linear-gradient(180deg, rgba(20, 17, 43, 0.9), rgba(10, 8, 18, 0.9));
+    backdrop-filter: blur(10px);
+  }
+  .riel__marca {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.34em;
+    color: var(--tiza); text-decoration: none;
+  }
+  .riel__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .riel__item {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 8px 10px; margin-left: -10px; border-radius: 8px;
+    text-decoration: none; color: var(--niebla);
+    transition: color 240ms var(--curva), background 240ms var(--curva);
+  }
+  .riel__item:hover { color: var(--tiza); background: rgba(255, 255, 255, 0.05); }
+  .riel__n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; opacity: 0.55;
+  }
+  .riel__t { font-size: 14.5px; font-weight: 500; }
+  .riel__item.es-actual { color: var(--haz); background: rgba(255, 177, 72, 0.08); }
+  .riel__item.es-actual .riel__n { opacity: 1; }
+  .riel__cuenta {
+    margin: auto 0 0; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.06em; color: var(--niebla);
+  }
+  .riel__cuenta [data-vistos] { color: var(--haz); font-weight: 600; }
+  .riel__barra { height: 2px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden; }
+  .riel__barra span {
+    display: block; height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--haz), var(--rosa));
+    transition: width 260ms var(--curva);
+  }
+
+  @media (min-width: 1180px) {
+    .riel { display: flex; }
+    .cinta { margin-left: 216px; }
+  }
+  /* Bajo 1180px el riel se vuelve una franja: el índice de escenas se va y
+     queda solo el avance, que es lo único que no se puede deducir mirando. */
+  @media (max-width: 1179px) {
+    .riel {
+      /* Sin este `display: flex` el riel se quedaba en el `display: none` de la
+         regla base y en el teléfono no aparecía nada: la franja de arriba era
+         solo el hueco que le dejaba `.cinta`. El resto de las reglas de acá
+         cambiaban la forma de algo invisible. */
+      display: flex;
+      inset: 0 0 auto 0; width: auto; height: auto; flex-direction: row;
+      align-items: center; justify-content: space-between; gap: 14px;
+      padding: 9px 16px; border-right: 0; border-bottom: 1px solid var(--linea);
+    }
+    .riel__lista { display: none; }
+    .riel__cuenta { margin: 0; font-size: 10.5px; }
+    .riel__barra { position: absolute; inset: auto 0 0 0; height: 2px; }
+    .cinta { padding-top: 42px; }
+  }
+
+  /* ═══ Escenas ══════════════════════════════════════════════════════════ */
+  .escena {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(72px, 11vw, 132px) clamp(20px, 5vw, 56px);
+    border-top: 1px solid var(--linea);
+  }
+  .escena--ancha { max-width: 1320px; }
+  .escena--apertura { max-width: 1340px; }
+  .escena--apertura { border-top: 0; }
+  .escena--cierre { padding-bottom: clamp(90px, 12vw, 150px); }
+
+  /* ═══ Tipografía compartida ════════════════════════════════════════════ */
+  .claqueta {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; font-weight: 500; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--haz); margin: 0 0 20px;
+  }
+  .claqueta__mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--haz);
+  }
+  .claqueta__punto {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--rosa);
+    box-shadow: 0 0 0 4px rgba(253, 90, 147, 0.18);
+  }
+  .claqueta__tag { color: var(--niebla); letter-spacing: 0.14em; }
+
+  .titular {
+    margin: 0 0 22px;
+    font-size: clamp(2.7rem, 7.4vw, 5.4rem);
+    font-weight: 800; line-height: 0.97; letter-spacing: -0.042em;
+    text-wrap: balance;
+  }
+  .titular em { font-style: normal; color: var(--haz); }
+
+  .rubro {
+    margin: 0 0 18px;
+    font-size: clamp(1.9rem, 4.1vw, 3.1rem);
+    font-weight: 800; line-height: 1.06; letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .rubro em { font-style: normal; color: var(--haz); }
+
+  .bajada { margin: 0 0 34px; max-width: 60ch; font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: var(--niebla); }
+  .parrafo { margin: 0 0 30px; max-width: 66ch; color: var(--niebla); }
+  .nota { margin: 26px 0 0; max-width: 66ch; font-size: 14.5px; color: var(--niebla); }
+  .nota--cierre {
+    display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center;
+    margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--linea);
+    max-width: none; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .nota--cierre a { color: var(--haz); }
+  .sub {
+    margin: 64px 0 20px; font-size: 1.28rem; font-weight: 700; letter-spacing: -0.02em;
+  }
+  .sub--sin-tope { margin-top: 0; }
+  .enlace {
+    font: inherit; font-size: 14.5px; color: var(--haz); background: none;
+    border: 0; border-bottom: 1px solid rgba(255, 177, 72, 0.4);
+    padding: 0 0 1px; cursor: pointer; margin-left: 6px;
+  }
+  .enlace:hover { border-bottom-color: var(--haz); }
+
+  /* ═══ Botones ══════════════════════════════════════════════════════════ */
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .boton {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    min-height: 52px; padding: 0 26px; border-radius: 999px;
+    font: inherit; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+    text-decoration: none; cursor: pointer; border: 1px solid transparent;
+    transition: transform 220ms var(--curva), box-shadow 220ms var(--curva), opacity 220ms var(--curva);
+  }
+  .boton svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+  .boton--primario { background: var(--rosa); color: #fff; box-shadow: 0 14px 40px -14px rgba(253, 90, 147, 0.85); }
+  .boton--primario:hover { transform: translateY(-2px); box-shadow: 0 20px 52px -14px rgba(253, 90, 147, 0.95); }
+  .boton--fantasma { border-color: var(--linea-viva); color: var(--tiza); background: rgba(255, 255, 255, 0.04); }
+  .boton--fantasma:hover { border-color: rgba(255, 255, 255, 0.36); transform: translateY(-2px); }
+  .boton:focus-visible, .pieza:focus-visible, .opcion:focus-visible,
+  .enlace:focus-visible, .riel__item:focus-visible, .anatomia__parte:focus-visible {
+    outline: 2px solid var(--haz); outline-offset: 3px;
+  }
+
+  /* ═══ Escena 00 · Apertura ═════════════════════════════════════════════ */
+  .escena--apertura {
+    min-height: min(100vh, 940px);
+    display: flex; flex-direction: column; justify-content: center;
+    isolation: isolate; overflow: hidden;
+  }
+  .apertura__fondo { position: absolute; inset: 0; z-index: -1; }
+  /* El fotograma del puerto trae el título del simulador quemado encima. Nítido
+     competía con el titular —dos frases grandes peleando— así que va desenfocado:
+     lo que aporta es la luz del atardecer, no sus palabras. El `scale` extra evita
+     que el desenfoque deje los bordes transparentes. */
+  .apertura__fondo img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 46%;
+    opacity: 0.5;
+    filter: blur(22px) saturate(1.15);
+    transform: scale(1.14);
+    animation: respirar 40s var(--curva) infinite alternate;
+  }
+  /* El degradado no es decorativo: el fotograma del puerto tiene un cielo
+     claro donde el texto blanco desaparecería. */
+  .apertura__fondo::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 8, 18, 0.34) 0%, rgba(10, 8, 18, 0.72) 52%, var(--sala) 97%),
+      radial-gradient(115% 85% at 16% 74%, rgba(10, 8, 18, 0.88), transparent 64%);
+  }
+  @keyframes respirar {
+    from { transform: scale(1.14) translate3d(0, 0, 0); }
+    to   { transform: scale(1.22) translate3d(-1.2%, -1%, 0); }
+  }
+  .apertura__reja { position: relative; display: grid; gap: clamp(30px, 4vw, 54px); align-items: center; }
+  @media (min-width: 1080px) {
+    .apertura__reja { grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr); }
+  }
+  .apertura__cuerpo { position: relative; max-width: 940px; min-width: 0; }
+
+  /* Pared de pantallas: tres capturas montadas como pilas de un proyeccionista.
+     Bajo 1080px desaparece — apilarlas en vertical sería mostrar dos veces lo
+     mismo antes de llegar al catálogo. */
+  .marquesina { display: none; position: relative; height: 430px; min-width: 0; }
+  @media (min-width: 1080px) { .marquesina { display: block; } }
+  .mq {
+    position: absolute; margin: 0; border-radius: 13px; overflow: hidden;
+    border: 1px solid var(--linea-viva); background: var(--sala-2);
+    box-shadow: 0 36px 90px -28px rgba(0, 0, 0, 0.95);
+  }
+  .mq img { display: block; width: 100%; height: auto; }
+  .mq__barra {
+    display: flex; align-items: center; gap: 5px;
+    padding: 7px 10px; background: rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--linea);
+  }
+  .mq__barra i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.24); }
+  .mq__barra em {
+    margin-left: 6px; font-style: normal;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--niebla);
+  }
+  .mq--1 { left: 2%; top: 16%; width: 76%; z-index: 3; animation: flotar 9s var(--curva) infinite alternate; }
+  .mq--2 { right: 0; top: 0; width: 52%; z-index: 2; rotate: 2.2deg; }
+  .mq--3 { right: 3%; bottom: 0; width: 55%; z-index: 1; rotate: -2.4deg; }
+  @keyframes flotar { from { translate: 0 0; } to { translate: 0 -12px; } }
+  .datos {
+    display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 40px 0 0;
+    padding-top: 22px; border-top: 1px solid var(--linea);
+  }
+  .datos div { display: flex; align-items: baseline; gap: 9px; }
+  .datos dt {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--niebla);
+  }
+  .datos dd { margin: 0; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .apertura__baja {
+    position: absolute; left: 50%; bottom: 26px; translate: -50% 0;
+    width: 26px; height: 44px; border: 1px solid var(--linea-viva); border-radius: 999px;
+    display: grid; place-items: start center; padding-top: 8px;
+  }
+  .apertura__baja span {
+    width: 3px; height: 8px; border-radius: 2px; background: var(--haz);
+    animation: gotear 1.9s var(--curva) infinite;
+  }
+  @keyframes gotear { 0%, 100% { transform: translateY(0); opacity: 1; } 55% { transform: translateY(15px); opacity: 0.15; } }
+
+  /* ═══ Escena 01 · Opciones ═════════════════════════════════════════════ */
+  .opciones { display: grid; gap: 14px; grid-template-columns: 1fr; margin-top: 8px; }
+  /* 2×2 y no `auto-fit`: con cuatro tarjetas, el ajuste automático da tres arriba y
+     una suelta abajo, que se lee como un error de maquetación. */
+  @media (min-width: 760px) { .opciones { grid-template-columns: repeat(2, 1fr); } }
+  .opcion {
+    position: relative; text-align: left; font: inherit; cursor: pointer;
+    display: grid; gap: 7px; align-content: start;
+    padding: 24px 22px 26px;
+    border-radius: 16px; border: 1px solid var(--linea);
+    background: var(--sala-2); color: var(--tiza);
+    transition: transform 300ms var(--curva), border-color 300ms var(--curva);
+  }
+  .opcion:hover { transform: translateY(-4px); border-color: var(--linea-viva); }
+  .opcion__n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.18em; color: var(--haz);
+  }
+  .opcion__t { font-size: 1.16rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; }
+  .opcion__d { font-size: 14.5px; color: var(--niebla); line-height: 1.55; }
+  .opcion__marca {
+    position: absolute; top: 18px; right: 18px;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--haz); opacity: 0; scale: 0.7;
+    transition: opacity 260ms var(--curva), scale 260ms var(--curva);
+  }
+  .opcion__marca svg { width: 14px; height: 14px; fill: none; stroke: #12102a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .opcion.es-elegida { border-color: var(--haz); background: #1d1732; }
+  .opcion.es-elegida .opcion__marca { opacity: 1; scale: 1; }
+
+  /* ═══ Escena 02 · Mezcla ═══════════════════════════════════════════════ */
+    /* Ojo con el preflight de Tailwind: pone `list-style: none` en todo ul/ol del
+     sitio. Donde la viñeta o el número aportan (las listas de arriba) hay que
+     devolverlo a mano; acá la numeración es visual y sí queremos que no esté. */
+  .mezcla { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .mezcla__pieza {
+    display: grid; gap: 8px; align-content: start;
+    padding: 22px 20px; border-radius: 15px;
+    border: 1px solid var(--linea); background: var(--sala-2);
+    opacity: 0; transform: translateY(18px);
+    transition: opacity 620ms var(--curva), transform 620ms var(--curva);
+    transition-delay: var(--retardo, 0ms);
+  }
+  .mezcla__pieza.es-visible { opacity: 1; transform: none; }
+  .mezcla__n { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--rosa); }
+  .mezcla__pieza b { font-size: 1.06rem; letter-spacing: -0.015em; }
+  .mezcla__pieza span:last-child { font-size: 14.5px; color: var(--niebla); line-height: 1.55; }
+
+  /* ═══ Escena 03 · El rollo ═════════════════════════════════════════════ */
+  .filtro {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px 4px;
+    margin: 0 0 26px; padding: 12px 16px; border-radius: 12px;
+    border: 1px solid rgba(255, 177, 72, 0.25); background: rgba(255, 177, 72, 0.07);
+    font-size: 14.5px; color: var(--tiza);
+  }
+  .rollo { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+
+  .reel {
+    position: relative; display: flex; flex-direction: column;
+    border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--linea); background: var(--sala-2);
+    transition: transform 380ms var(--curva), border-color 380ms var(--curva);
+  }
+  .reel:hover { transform: translateY(-5px); border-color: var(--linea-viva); }
+  /* El destacado del objetivo elegido usa un borde ámbar Y una etiqueta: el
+     color solo no comunica nada a quien no distingue el matiz. */
+  .reel.es-recomendado { border-color: rgba(255, 177, 72, 0.55); }
+  .reel.es-recomendado::before {
+    content: "Para tu objetivo"; position: absolute; z-index: 3; top: 12px; left: 12px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 5px 9px; border-radius: 999px; background: var(--haz); color: #12102a;
+  }
+  .reel.es-apagado { opacity: 0.44; }
+  .reel.es-apagado:hover { opacity: 1; }
+
+  .reel__pantalla { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0f0d20; }
+  .reel__pantalla img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 0;
+    transition: transform 700ms var(--curva), opacity 400ms var(--curva);
+    opacity: 0.92;
+  }
+  .reel:hover .reel__pantalla img { transform: scale(1.045); opacity: 1; }
+  .reel__pantalla::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 46%, rgba(20, 17, 43, 0.92) 100%);
+  }
+  .reel__lupa {
+    position: absolute; z-index: 2; right: 14px; bottom: 14px;
+    width: 42px; height: 42px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(10, 8, 18, 0.72); border: 1px solid var(--linea-viva);
+    backdrop-filter: blur(6px);
+    transition: transform 320ms var(--curva);
+  }
+  .reel__lupa svg { width: 15px; height: 15px; fill: var(--haz); margin-left: 2px; }
+  .reel:hover .reel__lupa { transform: scale(1.12); }
+
+  /* Las dos piezas que no se dejan incrustar no reciben una captura falsa:
+     reciben una placa tipográfica. La diferencia visual dice la verdad — esta
+     se abre fuera — sin tener que escribirlo dos veces. */
+  .reel__placa {
+    aspect-ratio: 16 / 10; display: grid; align-content: center; gap: 8px;
+    padding: 26px 24px; background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 9px),
+      linear-gradient(150deg, #1b1839, #120f26);
+    border-bottom: 1px solid var(--linea);
+  }
+  .reel__placa span {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--haz);
+  }
+  .reel__placa b { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .reel__placa em {
+    font-style: normal; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--niebla);
+  }
+
+  .reel__cuerpo { display: flex; flex-direction: column; gap: 10px; padding: 20px 20px 22px; flex: 1; }
+  .reel__meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+  .reel__grupo, .reel__eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 5px;
+  }
+  .reel__grupo { background: rgba(38, 146, 214, 0.15); color: #8ecbf2; }
+  .reel__eyebrow { background: rgba(253, 90, 147, 0.14); color: #ff9dbf; }
+  .reel__titulo { margin: 0; font-size: 1.24rem; font-weight: 700; letter-spacing: -0.024em; line-height: 1.24; }
+  .reel__texto { margin: 0; font-size: 14.8px; color: var(--niebla); line-height: 1.58; }
+  .reel__lista { margin: 2px 0 0; padding: 0 0 0 17px; display: grid; gap: 4px; list-style: disc; }
+  .reel__lista li { font-size: 13.8px; color: var(--niebla); line-height: 1.5; }
+  .reel__lista li::marker { color: var(--haz); }
+  .reel__acciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 14px; }
+
+  .pieza {
+    display: inline-flex; align-items: center; gap: 7px;
+    min-height: 44px; padding: 0 15px; border-radius: 10px;
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none;
+    border: 1px solid rgba(255, 177, 72, 0.34); background: rgba(255, 177, 72, 0.09); color: var(--haz);
+    transition: transform 200ms var(--curva), border-color 200ms var(--curva);
+  }
+  .pieza svg { width: 13px; height: 13px; fill: currentColor; }
+  .pieza:hover { transform: translateY(-2px); border-color: var(--haz); }
+  .pieza--fuera {
+    border-color: var(--linea-viva); background: rgba(255, 255, 255, 0.04); color: var(--niebla);
+  }
+  .pieza--fuera svg { fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+  .pieza--fuera:hover { border-color: rgba(255, 255, 255, 0.36); color: var(--tiza); }
+
+  .reel__visto {
+    position: absolute; z-index: 3; top: 12px; right: 12px;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 10px; border-radius: 999px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    background: rgba(15, 122, 82, 0.92); color: #eafaf3;
+  }
+  .reel__visto svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ═══ Escena 04 · Anatomía ═════════════════════════════════════════════ */
+  .anatomia { border: 1px solid var(--linea); border-radius: 18px; overflow: hidden; background: var(--sala-2); }
+  .anatomia__barra { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .anatomia__parte {
+    position: relative; font: inherit; cursor: pointer; text-align: left;
+    display: grid; gap: 5px; padding: 20px 18px; min-height: 92px;
+    border: 0; border-right: 1px solid var(--linea);
+    background: transparent; color: var(--niebla);
+    transition: color 260ms var(--curva), background 260ms var(--curva);
+  }
+  .anatomia__parte:last-child { border-right: 0; }
+  .anatomia__parte:hover { background: rgba(255, 255, 255, 0.04); color: var(--tiza); }
+  .anatomia__parte::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 2px;
+    background: var(--haz); transform: scaleX(0); transform-origin: left center;
+    transition: transform 320ms var(--curva);
+  }
+  .anatomia__parte[aria-selected="true"] { color: var(--tiza); background: rgba(255, 177, 72, 0.07); }
+  .anatomia__parte[aria-selected="true"]::after { transform: scaleX(1); }
+  .anatomia__m { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--haz); }
+  .anatomia__t { font-size: 15px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; }
+  .anatomia__panel { padding: 26px 24px 30px; border-top: 1px solid var(--linea); }
+  .anatomia__panel h3 { margin: 0 0 8px; font-size: 1.28rem; font-weight: 700; letter-spacing: -0.022em; }
+  .anatomia__panel p { margin: 0; max-width: 62ch; color: var(--niebla); }
+
+  .estandares { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .estandar {
+    display: grid; gap: 6px; align-content: start;
+    padding: 20px 18px; border-radius: 14px;
+    border: 1px solid var(--linea); background: var(--sala-2);
+  }
+  .estandar b { font-size: 1.02rem; letter-spacing: -0.015em; color: var(--haz); }
+  .estandar span { font-size: 14.2px; color: var(--niebla); line-height: 1.55; }
+
+  .operamos { margin-top: 60px; padding: 28px 26px; border-radius: 18px; border: 1px solid var(--linea); background: var(--sala-2); }
+  .operamos ul { margin: 0; padding: 0 0 0 19px; display: grid; gap: 9px; list-style: disc; }
+  .operamos li { color: var(--niebla); max-width: 74ch; }
+  .operamos li::marker { color: var(--rosa); }
+
+  /* ═══ Escena 05 · Hoja de rodaje ═══════════════════════════════════════ */
+  .rodaje {
+    border: 1px solid var(--linea); border-radius: 18px; overflow: hidden;
+    background: linear-gradient(150deg, #1c1839, #120f26); margin-bottom: 34px;
+  }
+  .rodaje__fila {
+    display: grid; grid-template-columns: 190px 1fr; gap: 14px;
+    padding: 17px 22px; border-bottom: 1px solid var(--linea); align-items: baseline;
+  }
+  .rodaje__fila:last-child { border-bottom: 0; }
+  .rodaje__k {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--niebla);
+  }
+  .rodaje__v { font-size: 1.06rem; font-weight: 600; letter-spacing: -0.015em; }
+  .rodaje__v.es-lleno { color: var(--haz); }
+  @media (max-width: 620px) { .rodaje__fila { grid-template-columns: 1fr; gap: 4px; } }
+
+  .preguntas { margin: 0 0 34px; padding: 0 0 0 22px; display: grid; gap: 10px; max-width: 70ch; list-style: decimal; }
+  .preguntas li { color: var(--niebla); }
+  .preguntas li::marker { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; color: var(--haz); }
+
+  /* ═══ El visor ═════════════════════════════════════════════════════════ */
+  .visor {
+    position: fixed; inset: 0; z-index: 10050;
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(8px, 2.4vw, 26px);
+  }
+  .visor__fondo { position: absolute; inset: 0; background: rgba(5, 4, 10, 0.9); backdrop-filter: blur(8px); }
+  .visor__marco {
+    position: relative; z-index: 1; display: flex; flex-direction: column;
+    width: min(1280px, 100%); height: min(88dvh, 900px);
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--linea-viva); background: var(--sala-2);
+    box-shadow: 0 50px 130px -30px rgba(0, 0, 0, 0.9);
+  }
+  .visor__barra {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 11px 14px; border-bottom: 1px solid var(--linea); background: rgba(10, 8, 18, 0.6);
+  }
+  .visor__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin: 0; min-width: 0; }
+  .visor__meta b { font-size: 14.5px; font-weight: 700; letter-spacing: -0.015em; }
+  .visor__rec {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--rosa);
+    animation: latir 1.7s ease-in-out infinite;
+  }
+  @keyframes latir { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .visor__nota { font-size: 13px; color: var(--niebla); }
+  .visor__controles { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .visor__fuera {
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 40px; padding: 0 13px; border-radius: 9px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--linea-viva); color: var(--niebla);
+  }
+  .visor__fuera:hover { color: var(--tiza); border-color: rgba(255, 255, 255, 0.36); }
+  .visor__fuera svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+  .visor__cerrar {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px;
+    border: 1px solid var(--linea-viva); background: rgba(255, 255, 255, 0.05);
+    color: var(--tiza); cursor: pointer;
+  }
+  .visor__cerrar:hover { background: rgba(255, 255, 255, 0.12); }
+  .visor__cerrar svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+  .visor__pantalla { flex: 1; min-height: 0; background: #08070f; position: relative; }
+  .visor__pantalla :global(iframe) { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+  .visor__pantalla :global(video) { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
+  .visor__pie {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 14px; border-top: 1px solid var(--linea);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--niebla);
+  }
+  .visor__tecla { flex-shrink: 0; opacity: 0.7; }
+  @media (max-width: 640px) {
+    .visor__marco { height: 92dvh; }
+    .visor__fuera span { display: none; }
+    .visor__pie { display: none; }
+  }
+
+  /* ═══ Entrada por scroll ═══════════════════════════════════════════════ */
+  [data-motion] {
+    opacity: 0; transform: translate3d(0, 24px, 0);
+    transition: opacity 700ms var(--curva), transform 700ms var(--curva);
+    transition-delay: var(--retardo, 0ms);
+  }
+  [data-motion].es-visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sala *, .sala *::before, .sala *::after,
+    .visor *, .visor *::before, .visor *::after {
+      animation: none !important;
+      transition-duration: 1ms !important;
+    }
+    [data-motion], .mezcla__pieza { opacity: 1 !important; transform: none !important; }
+    .apertura__fondo img { animation: none !important; }
+  }
+</style>
+
+<script type="application/json" id="catalogo-datos" is:inline set:html={JSON.stringify({ mezclas, objetivos: objetivos.map((o) => ({ id: o.id, t: o.t })), nombres: Object.fromEntries(recursos.map((r) => [r.id, r.titulo])), total: recursos.length })}></script>
 
 <script is:inline>
-  const motionItems = Array.from(document.querySelectorAll('[data-motion]'));
-  const progressBar = document.querySelector('.scroll-progress__bar');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ═══════════════════════════════════════════════════════════════════════
+     El recorrido. Cuatro cosas y nada más: marcar dónde vas, recordar qué
+     elegiste, abrir el visor y armar la hoja de rodaje del cierre.
+     ═══════════════════════════════════════════════════════════════════════ */
+  (function () {
+    var datos = JSON.parse(document.getElementById("catalogo-datos").textContent);
+    var quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (prefersReducedMotion) {
-    motionItems.forEach((item) => item.classList.add('is-visible'));
-  } else {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
+    var LLAVE_OBJETIVO = "ewaffle:catalogo:objetivo";
+    var LLAVE_VISTOS = "ewaffle:catalogo:vistos";
+
+    function leer(k, porDefecto) {
+      try { var v = sessionStorage.getItem(k); return v ? JSON.parse(v) : porDefecto; } catch (e) { return porDefecto; }
+    }
+    function guardar(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+    var objetivo = leer(LLAVE_OBJETIVO, null);
+    var vistos = leer(LLAVE_VISTOS, []);
+
+    function evento(nombre, extra) {
+      var carga = Object.assign({ event: nombre }, extra || {});
+      if (window.dataLayer) window.dataLayer.push(carga);
+      if (window.ewaffleAnalytics && window.ewaffleAnalytics.capture) {
+        window.ewaffleAnalytics.capture(nombre, extra || {});
+      }
+    }
+
+    /* ── Entrada por scroll ─────────────────────────────────────────────── */
+    var animables = Array.prototype.slice.call(document.querySelectorAll("[data-motion]"));
+    if (quieto || !("IntersectionObserver" in window)) {
+      animables.forEach(function (el) { el.classList.add("es-visible"); });
+    } else {
+      var ojo = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("es-visible");
+          ojo.unobserve(e.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+      animables.forEach(function (el) { ojo.observe(el); });
+    }
+
+    /* ── Riel: escena actual + avance ───────────────────────────────────── */
+    var secciones = Array.prototype.slice.call(document.querySelectorAll(".escena[id]"));
+    var itemsRiel = Array.prototype.slice.call(document.querySelectorAll("[data-riel]"));
+    var barra = document.querySelector("[data-barra]");
+
+    function pintarRiel() {
+      var alto = document.documentElement.scrollHeight - window.innerHeight;
+      var avance = alto <= 0 ? 0 : Math.min(window.scrollY / alto, 1);
+      if (barra) barra.style.width = (avance * 100).toFixed(1) + "%";
+
+      /* La escena "actual" es la última cuyo borde superior ya pasó el tercio
+         alto de la pantalla. Usar la más visible daría saltos hacia atrás en
+         las secciones cortas. */
+      var actual = secciones[0];
+      var corte = window.innerHeight * 0.34;
+      secciones.forEach(function (s) {
+        if (s.hasAttribute("hidden")) return;
+        if (s.getBoundingClientRect().top <= corte) actual = s;
+      });
+      itemsRiel.forEach(function (a) {
+        a.classList.toggle("es-actual", a.getAttribute("data-riel") === actual.id);
+      });
+    }
+    pintarRiel();
+    window.addEventListener("scroll", pintarRiel, { passive: true });
+    window.addEventListener("resize", pintarRiel);
+    /* Un salto por ancla no siempre dispara `scroll`, así que al entrar con
+       `/catalogo/#anatomia` el riel se quedaba marcando la escena anterior. */
+    window.addEventListener("hashchange", function () { setTimeout(pintarRiel, 60); });
+    setTimeout(pintarRiel, 120);
+
+    /* Si todavía no hay objetivo, el enlace a "Tu mezcla" no puede llevar a una
+       sección oculta: lleva a la pregunta que la desbloquea. */
+    itemsRiel.forEach(function (a) {
+      a.addEventListener("click", function (ev) {
+        if (a.getAttribute("data-riel") === "mezcla" && !objetivo) {
+          ev.preventDefault();
+          irA(document.getElementById("brief"));
         }
       });
-    }, {
-      threshold: 0.18,
-      rootMargin: '0px 0px -8% 0px',
     });
 
-    motionItems.forEach((item) => revealObserver.observe(item));
+    function irA(el) {
+      if (!el) return;
+      var antes = window.scrollY;
+      var destino = el.getBoundingClientRect().top + window.scrollY;
+      if (quieto) { window.scrollTo(0, destino); return; }
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      /* Hay entornos donde `behavior:"smooth"` queda inerte —pestaña sin foco,
+         ajustes del sistema, alguna extensión— y el salto simplemente no ocurre.
+         Si a los 500 ms no nos movimos, se salta sin animación: un enlace que no
+         lleva a ninguna parte es mucho peor que uno sin transición. */
+      setTimeout(function () {
+        if (Math.abs(window.scrollY - antes) < 4) window.scrollTo(0, destino);
+      }, 500);
+    }
 
-    const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight <= 0 ? 0 : Math.min(scrollTop / scrollHeight, 1);
+    /* ── Escena 01 → 02: la elección ────────────────────────────────────── */
+    var seccionMezcla = document.getElementById("mezcla");
+    var botonesObjetivo = Array.prototype.slice.call(document.querySelectorAll("[data-objetivo]"));
+    var reels = Array.prototype.slice.call(document.querySelectorAll("[data-reel]"));
+    var filtro = document.querySelector("[data-filtro]");
+    var filtroTexto = document.querySelector("[data-filtro-texto]");
 
-      if (progressBar) {
-        progressBar.style.transform = `scaleX(${progress})`;
+    function nombreObjetivo(id) {
+      var o = datos.objetivos.filter(function (x) { return x.id === id; })[0];
+      return o ? o.t : null;
+    }
+
+    function aplicarObjetivo(id, moverse) {
+      objetivo = id;
+      guardar(LLAVE_OBJETIVO, id);
+
+      botonesObjetivo.forEach(function (b) {
+        b.classList.toggle("es-elegida", b.getAttribute("data-objetivo") === id);
+        b.setAttribute("aria-pressed", b.getAttribute("data-objetivo") === id ? "true" : "false");
+      });
+
+      var m = datos.mezclas[id];
+      if (m) {
+        seccionMezcla.removeAttribute("hidden");
+        document.querySelector("[data-mezcla-tag]").textContent = "· " + m.tag;
+        document.querySelector("[data-mezcla-titulo]").textContent = m.t;
+        document.querySelector("[data-mezcla-texto]").textContent = m.d;
+        m.piezas.forEach(function (p, i) {
+          var li = document.querySelector('[data-mezcla-pieza="' + i + '"]');
+          if (!li) return;
+          li.querySelector("b").textContent = p.t;
+          li.querySelector("span:last-child").textContent = p.d;
+          li.style.setProperty("--retardo", i * 110 + "ms");
+          li.classList.remove("es-visible");
+          /* Doble rAF: sacar y volver a poner la clase en el mismo cuadro no
+             reinicia la transición, el navegador no ve dos estados. */
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { li.classList.add("es-visible"); });
+          });
+        });
       }
+
+      /* El catálogo NO se filtra: se ordena la atención. Los que sirven para el
+         objetivo se marcan; el resto baja de intensidad pero sigue ahí y vuelve
+         a intensidad plena al pasarle el mouse. Esconderlos sería decidir por la
+         persona qué puede ver. */
+      reels.forEach(function (r) {
+        var sirve = (r.getAttribute("data-para") || "").split(" ").indexOf(id) !== -1;
+        r.classList.toggle("es-recomendado", sirve);
+        r.classList.toggle("es-apagado", !sirve);
+      });
+      if (filtro && filtroTexto) {
+        filtroTexto.textContent = "Destacando lo que sirve para " + (nombreObjetivo(id) || "tu objetivo").toLowerCase() + ".";
+        filtro.removeAttribute("hidden");
+      }
+
+      pintarRodaje();
+      pintarRiel();
+      if (moverse) irA(seccionMezcla);
+      evento("catalogo_objetivo", { objetivo: id });
+    }
+
+    function limpiarObjetivo() {
+      objetivo = null;
+      guardar(LLAVE_OBJETIVO, null);
+      botonesObjetivo.forEach(function (b) { b.classList.remove("es-elegida"); b.setAttribute("aria-pressed", "false"); });
+      reels.forEach(function (r) { r.classList.remove("es-recomendado", "es-apagado"); });
+      if (filtro) filtro.setAttribute("hidden", "");
+      seccionMezcla.setAttribute("hidden", "");
+      pintarRodaje();
+      pintarRiel();
+    }
+
+    botonesObjetivo.forEach(function (b) {
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { aplicarObjetivo(b.getAttribute("data-objetivo"), true); });
+    });
+
+    var recalcular = document.querySelector("[data-recalcular]");
+    if (recalcular) recalcular.addEventListener("click", function () { irA(document.getElementById("brief")); });
+
+    var quitarFiltro = document.querySelector("[data-filtro-quitar]");
+    if (quitarFiltro) quitarFiltro.addEventListener("click", function () { limpiarObjetivo(); });
+
+    /* ── Vistos ─────────────────────────────────────────────────────────── */
+    var cuenta = document.querySelector("[data-vistos]");
+
+    function pintarVistos() {
+      if (cuenta) cuenta.textContent = String(vistos.length);
+      reels.forEach(function (r) {
+        var marca = r.querySelector("[data-visto-marca]");
+        if (!marca) return;
+        if (vistos.indexOf(r.getAttribute("data-reel")) !== -1) marca.removeAttribute("hidden");
+        else marca.setAttribute("hidden", "");
+      });
+    }
+
+    function marcarVisto(id) {
+      if (!id || vistos.indexOf(id) !== -1) return;
+      vistos.push(id);
+      guardar(LLAVE_VISTOS, vistos);
+      pintarVistos();
+      pintarRodaje();
+    }
+
+    /* ── Hoja de rodaje ─────────────────────────────────────────────────── */
+    var celdaObjetivo = document.querySelector("[data-rodaje-objetivo]");
+    var celdaMezcla = document.querySelector("[data-rodaje-mezcla]");
+    var celdaVistos = document.querySelector("[data-rodaje-vistos]");
+
+    function pintarRodaje() {
+      var nombre = objetivo ? nombreObjetivo(objetivo) : null;
+      if (celdaObjetivo) {
+        celdaObjetivo.textContent = nombre || "Sin elegir todavía";
+        celdaObjetivo.classList.toggle("es-lleno", !!nombre);
+      }
+      if (celdaMezcla) {
+        var m = objetivo ? datos.mezclas[objetivo] : null;
+        celdaMezcla.textContent = m ? m.tag + " — " + m.piezas.map(function (p) { return p.t; }).join(" + ") : "—";
+        celdaMezcla.classList.toggle("es-lleno", !!m);
+      }
+      if (celdaVistos) {
+        celdaVistos.textContent = vistos.length === 0
+          ? "Ninguno todavía"
+          : vistos.length + " de " + datos.total;
+        celdaVistos.classList.toggle("es-lleno", vistos.length > 0);
+      }
+    }
+
+    /* ── El visor ───────────────────────────────────────────────────────── */
+    var visor = document.getElementById("visor");
+    var pantalla = visor.querySelector("[data-visor-pantalla]");
+    var tituloVisor = document.getElementById("visor-titulo");
+    var notaVisor = visor.querySelector("[data-visor-nota]");
+    var pieVisor = visor.querySelector("[data-visor-pie]");
+    var salidaVisor = visor.querySelector("[data-visor-fuera]");
+    var focoPrevio = null;
+
+    var PIES = {
+      iframe: "Es el recurso real corriendo acá dentro, no una maqueta.",
+      video: "Video completo. Empieza cuando le des play — no se descarga solo.",
+      youtube: "Alojado en YouTube, incrustado sin cookies de seguimiento."
     };
 
-    updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
-  }
-</script>
+    function abrirVisor(boton) {
+      var modo = boton.getAttribute("data-modo");
+      var src = boton.getAttribute("data-src");
+      var poster = boton.getAttribute("data-poster");
+      var nota = boton.getAttribute("data-nota");
+      var pieza = boton.getAttribute("data-pieza-nombre");
+      var reel = boton.getAttribute("data-abrir");
 
-</body>
-</html>
+      focoPrevio = document.activeElement;
+      tituloVisor.textContent = boton.getAttribute("data-reel-titulo") + " · " + pieza;
+      notaVisor.textContent = nota || "";
+      pieVisor.textContent = PIES[modo] || "";
+
+      var urlFuera = modo === "youtube" ? "https://www.youtube.com/watch?v=" + src : src;
+      salidaVisor.setAttribute("href", urlFuera);
+
+      pantalla.innerHTML = "";
+      if (modo === "video") {
+        var v = document.createElement("video");
+        v.setAttribute("controls", "");
+        v.setAttribute("playsinline", "");
+        v.setAttribute("preload", "none");
+        /* `preload="none"` no es un detalle: el módulo de inducción pesa 134 MB
+           y el de la política, 73 MB. Precargarlos le costaría los datos a
+           cualquiera que abra la página desde el celular sin pedir nada. */
+        if (poster) v.setAttribute("poster", poster);
+        v.src = src;
+        pantalla.appendChild(v);
+      } else {
+        var f = document.createElement("iframe");
+        f.setAttribute("title", tituloVisor.textContent);
+        f.setAttribute("loading", "lazy");
+        f.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; xr-spatial-tracking");
+        f.setAttribute("allowfullscreen", "");
+        f.src = modo === "youtube"
+          ? "https://www.youtube-nocookie.com/embed/" + src + "?rel=0&modestbranding=1"
+          : src;
+        pantalla.appendChild(f);
+      }
+
+      visor.removeAttribute("hidden");
+      document.body.style.overflow = "hidden";
+      visor.querySelector(".visor__cerrar").focus();
+      marcarVisto(reel);
+      evento("catalogo_visor_abre", { recurso: reel, pieza: pieza, modo: modo });
+    }
+
+    function cerrarVisor() {
+      if (visor.hasAttribute("hidden")) return;
+      visor.setAttribute("hidden", "");
+      /* Vaciar la pantalla es lo que detiene el video o el iframe. Solo ocultar
+         el visor lo dejaría sonando detrás. */
+      pantalla.innerHTML = "";
+      document.body.style.overflow = "";
+      if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+    }
+
+    document.querySelectorAll("[data-abrir]").forEach(function (b) {
+      b.addEventListener("click", function () { abrirVisor(b); });
+    });
+    visor.querySelectorAll("[data-visor-cerrar]").forEach(function (b) {
+      b.addEventListener("click", cerrarVisor);
+    });
+
+    /* Las piezas que se abren fuera también cuentan como vistas: la persona hizo
+       el gesto de mirarla, aunque el destino no se deje incrustar. */
+    document.querySelectorAll("[data-marca]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        marcarVisto(a.getAttribute("data-marca"));
+        evento("catalogo_visor_abre", { recurso: a.getAttribute("data-marca"), pieza: a.getAttribute("data-pieza-nombre"), modo: "externo" });
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (visor.hasAttribute("hidden")) return;
+      if (e.key === "Escape") { cerrarVisor(); return; }
+      if (e.key !== "Tab") return;
+
+      /* Trampa de foco. Sin esto el tabulador se va a la página de atrás, que
+         está tapada: se navega a ciegas. */
+      var focos = visor.querySelectorAll("a[href], button:not([disabled]), iframe, video, [tabindex]:not([tabindex='-1'])");
+      if (!focos.length) return;
+      var primero = focos[0];
+      var ultimo = focos[focos.length - 1];
+      if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+    });
+
+    /* ── Cierre: el formulario llega con lo que ya nos dijo ─────────────── */
+    var botonForm = document.querySelector("[data-abrir-form]");
+    if (botonForm) {
+      botonForm.addEventListener("click", function () {
+        var lineas = [];
+        if (objetivo) {
+          lineas.push("Lo que quiero resolver: " + nombreObjetivo(objetivo) + ".");
+          var m = datos.mezclas[objetivo];
+          if (m) lineas.push("Mezcla sugerida en el catálogo: " + m.tag + ".");
+        }
+        /* Los nombres, no los identificadores. El mensaje lo lee una persona del
+           equipo en el correo del lead: "guias, motion" no le dice nada. */
+        if (vistos.length) {
+          lineas.push("Recursos que abrí: " + vistos.map(function (id) {
+            return datos.nombres[id] || id;
+          }).join("; ") + ".");
+        }
+        evento("catalogo_cta", { destino: "formulario", objetivo: objetivo || "sin_elegir", vistos: vistos.length });
+        if (typeof window.ewaffleAbrirModalCatalogo === "function") {
+          window.ewaffleAbrirModalCatalogo(lineas.join("\n"));
+        } else {
+          window.location.href = "https://ewaffle.cl/#contact";
+        }
+      });
+    }
+
+    document.querySelectorAll("[data-cta]").forEach(function (a) {
+      a.addEventListener("click", function () { evento("catalogo_cta", { destino: a.getAttribute("data-cta") }); });
+    });
+
+    /* ── Anatomía: pestañas ─────────────────────────────────────────────── */
+    var pestanas = Array.prototype.slice.call(document.querySelectorAll("[data-parte]"));
+    function elegirParte(k, mover) {
+      pestanas.forEach(function (t) {
+        var suya = t.getAttribute("data-parte") === k;
+        t.setAttribute("aria-selected", suya ? "true" : "false");
+        t.setAttribute("tabindex", suya ? "0" : "-1");
+        if (suya && mover) t.focus();
+      });
+      document.querySelectorAll("[data-panel]").forEach(function (p) {
+        if (p.getAttribute("data-panel") === k) p.removeAttribute("hidden");
+        else p.setAttribute("hidden", "");
+      });
+    }
+    pestanas.forEach(function (t, i) {
+      t.addEventListener("click", function () { elegirParte(t.getAttribute("data-parte"), false); });
+      t.addEventListener("keydown", function (e) {
+        var salto = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!salto) return;
+        e.preventDefault();
+        var sig = pestanas[(i + salto + pestanas.length) % pestanas.length];
+        elegirParte(sig.getAttribute("data-parte"), true);
+      });
+    });
+
+    /* ── Estado inicial ─────────────────────────────────────────────────── */
+    pintarVistos();
+    if (objetivo && datos.mezclas[objetivo]) aplicarObjetivo(objetivo, false);
+    else pintarRodaje();
+  })();
+</script>

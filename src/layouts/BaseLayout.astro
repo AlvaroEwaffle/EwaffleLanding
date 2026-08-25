@@ -224,6 +224,13 @@ const keywords = [
 
     <!-- PostHog Analytics -->
     <PostHog />
+
+    <!-- Cabecera por página. Existía el `<Fragment slot="head">` en varias páginas
+         (simuladores, entre otras) pero no había slot que lo recibiera, así que sus
+         meta OG se descartaban en silencio: el build las dejaba fuera y las páginas
+         compartían la portada genérica del sitio. Este slot las hace efectivas.
+         Ojo: BaseLayout ya emite `canonical`, así que una página NO debe repetirlo acá. -->
+    <slot name="head" />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prototipo · hotspot del plano (m4-r2)</title>
+<title>Ubicación en plano · actividad de ejemplo | Ewaffle</title>
 <style>
   /* Tokens del curso de referencia (buffalo-induccion-juegos.html). El accent de Buffalo es
      ROJO, así que acierto y error no pueden salir de él — regla 3 de games.mjs. Verde y rojo
@@ -83,13 +83,13 @@
 </style>
 
 <div class="wrap">
-  <h1>Prototipo · hotspot del plano</h1>
-  <p class="meta">m4-r2 · 8 zonas · sirve para medir blancos de toque, no es la implementación</p>
+  <h1>Ubicación en plano</h1>
+  <p class="meta">Actividad de ejemplo · 8 zonas de un local · funciona igual en celular</p>
 
   <div class="game" id="g">
     <div class="g-prog" id="prog">0 de 8 ubicadas</div>
     <p class="g-pregunta" id="preg"></p>
-    <p class="g-ayuda">Tocá la zona del plano donde ocurre.</p>
+    <p class="g-ayuda">Toca la zona del plano donde ocurre.</p>
 
     <div class="frente">frente · calle y clientes</div>
     <div class="plano" id="plano"></div>
@@ -184,7 +184,7 @@ function elegir(z,b){
   intentos++;
   b.classList.add("mal"); setTimeout(function(){b.classList.remove("mal");},320);
   resp.className="g-resp mal";
-  resp.textContent="Ahí está "+z.nombre+" — "+z.funcion.toLowerCase()+". Probá de nuevo.";
+  resp.textContent="Ahí está "+z.nombre+" — "+z.funcion.toLowerCase()+". Prueba de nuevo.";
   if(intentos>=3&&!document.getElementById("ver")){
     var v=document.createElement("button");
     v.type="button"; v.className="g-btn"; v.id="ver"; v.textContent="Ver la respuesta";

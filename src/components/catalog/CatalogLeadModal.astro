@@ -1,5 +1,18 @@
+---
+interface Props {
+  /** Si el modal se abre solo tras unos segundos. El catálogo lo desactiva: ahí el
+      formulario es el cierre del recorrido, y una ventana que interrumpe a mitad de
+      camino compite con la pieza en vez de rematarla. Con `false` el modal sigue
+      montado y se abre desde los CTA vía `window.ewaffleAbrirModalCatalogo(contexto)`. */
+  autoOpen?: boolean;
+}
+
+const { autoOpen = true } = Astro.props;
+---
+
 <div
   id="catalog-discovery-modal"
+  data-auto-open={autoOpen ? "si" : "no"}
   class="fixed inset-0 z-[90] hidden items-start justify-center overflow-y-auto overscroll-contain p-3 sm:items-center sm:p-6"
   aria-hidden="true"
 >
@@ -281,11 +294,25 @@
     field.addEventListener('input', markCatalogFormStarted, { once: true });
   });
 
-  if (canShowCatalogModal()) {
+  const autoOpen = document.getElementById('catalog-discovery-modal')?.dataset.autoOpen !== 'no';
+
+  if (autoOpen && canShowCatalogModal()) {
     modalWindow.setTimeout(() => {
       showModal();
     }, popupDelayMs);
   }
+
+  /* Apertura desde fuera. `contexto` es lo que la persona eligió en el recorrido; entra
+     al textarea para que el lead llegue con lo que ya nos dijo, en vez de pedirle que lo
+     escriba de nuevo. No se pisa lo que haya escrito a mano. */
+  modalWindow.ewaffleAbrirModalCatalogo = (contexto) => {
+    const campo = document.getElementById('catalog-modal-message');
+    if (contexto && campo instanceof HTMLTextAreaElement && !campo.value.trim()) {
+      campo.value = contexto;
+    }
+    showModal();
+    modalWindow.setTimeout(() => document.getElementById('catalog-modal-name')?.focus(), 120);
+  };
 
   const dismissAndTrack = () => {
     markDismissed();
@@ -363,7 +390,7 @@
         services: 'catalogo_recursos',
         message: message || 'Quiero revisar con más detalle qué mezcla de recursos conviene para mi caso.',
         to_email: 'alvaro@ewaffle.cl',
-        cc_email: 'jose@ewaffle.cl',
+        cc_email: 'johana@ewaffle.cl',
         recaptchaToken: '',
       };
 
