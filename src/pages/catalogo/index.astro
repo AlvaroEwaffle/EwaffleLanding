@@ -29,9 +29,9 @@ import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
    a ver la lista tiene que poder verla.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const title = "Catálogo de recursos e-learning y multimedia | Ewaffle";
-const description = "Once formatos de aprendizaje digital que puedes abrir y probar acá mismo: juegos, simuladores, guías interactivas, video con IA, 360 y producción en terreno. Sin registro.";
-const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
+const title = "Catálogo de productos Ewaffle | E-learning, multimedia y simuladores";
+const description = "Conoce los once productos de aprendizaje digital de Ewaffle: video con IA, guías interactivas, juegos, simuladores, recorridos 360 y producción en terreno. Cada uno con un ejemplo real que puedes abrir y probar acá mismo, sin registro.";
+const socialImage = "/assets/catalogo-og.png";
 
 /* Las cuatro entradas del recorrido. Son las preguntas del catálogo viejo,
    convertidas en decisión. El texto de abajo es el síntoma con el que llega
@@ -105,11 +105,11 @@ const recursos = [
     img: "/assets/catalogo/video-induccion.webp",
     alt: "Fotograma del módulo de inducción de Buffalo Waffles: título sobre una escena de local con clientes",
     para: ["explicar", "ordenar"],
-    texto: "Guion, locución y animación producidos con modelos generativos y validados por nuestro equipo. Baja el costo por minuto sin bajar el estándar, y permite rehacer un módulo completo en horas en vez de semanas.",
+    texto: "Puedes actualizar el contenido cuando cambia el procedimiento y no cuando alcanza el presupuesto: un módulo completo se rehace en horas. Guion, locución y animación se producen con modelos generativos y los valida nuestro equipo antes de entregarlos.",
     bullets: [
-      "Sirve para catálogos extensos y para contenido que cambia seguido.",
-      "Locución en español neutro o chileno, con control de ritmo y énfasis.",
-      "Cada pieza pasa por revisión humana antes de entregarse.",
+      "Conviene cuando tienes muchos cursos, o contenido que cambia seguido.",
+      "Locución en español neutro o chileno, con el ritmo y el énfasis controlados.",
+      "Revisión humana pieza por pieza: la IA acelera, no decide.",
     ],
     piezas: [
       { t: "Módulo de inducción", modo: "video", src: "https://tefi.villelab.com/buffalo-m1-v8.3-HD.mp4", poster: "/assets/catalogo/video-induccion.webp", nota: "Buffalo Waffles · inducción a la operación" },
@@ -122,11 +122,11 @@ const recursos = [
     img: "/assets/catalogo/guias.webp",
     alt: "Guía interactiva abierta en el navegador: índice de lecciones a la izquierda, barra de avance y contenido de la lección",
     para: ["ordenar", "explicar"],
-    texto: "Una guía navegable que reemplaza al PDF: la persona recorre el contenido, practica en el momento y cierra con una comprobación. Se abre en el navegador, sin instalar nada y sin cuenta.",
+    texto: "El manual que nadie abre pasa a ser algo que la persona recorre y termina. Se abre en el navegador, sin instalar nada y sin crear cuenta, así que un trabajador nuevo puede hacer su inducción el primer día sin esperar a que TI le habilite un acceso.",
     bullets: [
-      "Reemplaza manuales que nadie lee por algo que se recorre.",
-      "Funciona en celular, tablet y escritorio.",
-      "Se entrega como SCORM para el LMS o como enlace directo.",
+      "Para inducción, procedimientos y onboarding de contratistas.",
+      "Funciona igual en celular, tablet y escritorio.",
+      "Te la entregamos como SCORM para tu LMS o como enlace directo.",
     ],
     piezas: [
       { t: "Recorrer la guía completa", modo: "iframe", src: "/demos/buffalo-induccion.html", nota: "Tres lecciones con video, avance y cierre" },
@@ -139,11 +139,11 @@ const recursos = [
     img: "/assets/catalogo/juegos.webp",
     alt: "Actividad de sopa de letras dentro de un curso, con las pistas al costado y el contador de aciertos",
     para: ["practicar"],
-    texto: "Ruleta, memorice, millonario, sopa de letras, rueda de conceptos, arrastrar y soltar, árbol de decisiones y ubicación en plano. Se configuran con el contenido del cliente y se montan dentro del curso.",
+    texto: "Sube cuánta gente termina el curso sin tener que alargarlo: en vez de leer el contenido, lo practican. Las ocho mecánicas ya están construidas y probadas, así que tu presupuesto se va en adaptar tu contenido y no en desarrollar desde cero.",
     bullets: [
-      "Cada juego se arma con los conceptos reales del programa, no con ejemplos.",
-      "Sin nota al LMS y con reintentos ilimitados: el error no descuenta.",
-      "La ubicación en plano sirve para inducciones de instalaciones y seguridad.",
+      "Se arman con los conceptos reales de tu programa, no con ejemplos genéricos.",
+      "Sin nota al LMS y con reintentos ilimitados: se practica sin miedo a reprobar.",
+      "Ruleta, memorice, millonario, sopa de letras, rueda de conceptos, arrastrar y soltar, árbol de decisiones y ubicación en plano.",
     ],
     piezas: [
       { t: "Jugar la demo", modo: "iframe", src: "/demos/juegos-demo.html", nota: "Cuatro tipos encadenados como un curso real" },
@@ -156,9 +156,9 @@ const recursos = [
     img: "/assets/catalogo/arbol.webp",
     alt: "Curso Decidir más cerca de Caja Los Héroes: índice de 24 lecciones y el video de la primera",
     para: ["practicar"],
-    texto: "Para contenidos donde aprender no es memorizar una norma sino sostener un criterio: buen trato, ética, autonomía, prevención. La persona elige, ve la consecuencia y recibe el porqué.",
+    texto: "Para buen trato, ética, prevención o autonomía, donde el objetivo no es que recuerden la norma sino que sostengan un criterio cuando nadie los está mirando. La persona elige, ve la consecuencia y recibe el porqué — que es la parte que después se repite en el pasillo.",
     bullets: [
-      "Pensado para dilemas reales del puesto de trabajo.",
+      "Trabaja los dilemas reales del puesto, no casos de manual.",
       "Sin respuestas obvias: cada opción tiene un costo defendible.",
     ],
     piezas: [
@@ -171,11 +171,11 @@ const recursos = [
     img: "/assets/catalogo/comex.webp",
     alt: "Puerto con grúas y portacontenedores al atardecer, con los cuatro roles del simulador listados abajo",
     para: ["practicar"],
-    texto: "Una importación de café Brasil→Chile donde el contenedor no se mueve hasta que los papeles cuadran. Cada participante entra con un rol distinto — naviera, aduana, transportista, importador — y responde cruzando documentos, no recordando definiciones.",
+    texto: "Tu equipo practica una operación completa antes de tocar una real: si los papeles no cuadran, el contenedor no se mueve. El error sale gratis en el simulador y caro en el puerto. Cada participante entra con un rol distinto — naviera, aduana, transportista, importador — y tienen que coordinarse entre ellos.",
     bullets: [
-      "Documentación real de la operación: B/L, factura comercial y DIN.",
-      "La respuesta correcta está en el expediente, no en la memoria.",
-      "Desarrollo propio de Ewaffle, no una plantilla adaptada.",
+      "Trabajan sobre documentación real: B/L, factura comercial y DIN.",
+      "La respuesta está en el expediente, así que entrenan criterio y no memoria.",
+      "Desarrollo propio de Ewaffle: no pagas licencia de plataforma por usuario.",
     ],
     piezas: [
       { t: "Ver cómo funciona", modo: "video", src: "https://tefi.villelab.com/comex-live-explainer.mp4", poster: "/assets/catalogo/comex.webp", nota: "Recorrido narrado del simulador" },
@@ -187,10 +187,10 @@ const recursos = [
     img: "/assets/catalogo/lms.webp",
     alt: "Simulador de LMS: el curso a la izquierda y a la derecha la consola registrando las llamadas SCORM en vivo",
     para: ["practicar", "terreno"],
-    texto: "Entornos donde se practica sobre una réplica del sistema o del espacio real antes de tocarlo en producción. El simulador de LMS deja ver el diálogo SCORM en vivo: qué reporta el curso y en qué momento.",
+    texto: "Practican sobre una réplica antes de tocar el sistema o el lugar de verdad, así nadie aprende tu plataforma equivocándose sobre datos de producción. El simulador de LMS además deja ver el diálogo SCORM en vivo, que es cómo verificamos que un curso reporte bien antes de subirlo al tuyo.",
     bullets: [
-      "Útil para onboarding de plataformas internas.",
-      "Se combina con recorridos 360 cuando el espacio importa.",
+      "Para onboarding de sistemas internos y de personal nuevo.",
+      "Se combina con recorridos 360 cuando el espacio también importa.",
     ],
     piezas: [
       { t: "Simulador de LMS", modo: "iframe", src: "/demos/lms-sim.html", nota: "SCORM 1.2 con la consola de llamadas a la vista" },
@@ -202,8 +202,8 @@ const recursos = [
     titulo: "Cápsulas Storyline",
     img: null,
     para: ["practicar"],
-    texto: "Simulaciones, escenarios y actividades donde la persona tiene que decidir, equivocarse y recibir retroalimentación dentro del propio recurso.",
-    bullets: ["Para práctica activa y evaluación formativa."],
+    texto: "Cuando necesitas que decidan y no solo que lean: escenarios donde la persona elige, se equivoca y recibe la retroalimentación dentro del propio recurso, sin que nadie tenga que corregir a mano.",
+    bullets: ["Para práctica activa y evaluación formativa, con estándar Articulate."],
     piezas: [
       { t: "Ver ejemplo Storyline", modo: "externo", src: "https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review", nota: "Articulate Review" },
     ],
@@ -213,8 +213,8 @@ const recursos = [
     titulo: "Módulos Rise",
     img: null,
     para: ["ordenar"],
-    texto: "Recorridos de lectura estructurada, con buen ritmo y navegación clara, para contenido que se consulta y se repasa más de una vez.",
-    bullets: ["Para marcos normativos, procedimientos y fundamentos."],
+    texto: "Para el contenido que se consulta más de una vez: normativa, procedimientos y fundamentos quedan ordenados para volver a buscarlos, no solo para pasarlos una vez y perderlos.",
+    bullets: ["Baja las consultas repetidas al jefe directo y al área técnica."],
     piezas: [
       { t: "Ver ejemplo Rise", modo: "externo", src: "https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review", nota: "Articulate Review" },
     ],
@@ -225,8 +225,8 @@ const recursos = [
     img: "/assets/catalogo/motion.webp",
     alt: "Fotograma de un video animado: un técnico de laboratorio y tres caras que representan niveles de satisfacción",
     para: ["explicar"],
-    texto: "Explicaciones visuales para conceptos que en texto se vuelven densos. Sirve como apertura de módulo o como síntesis de cierre.",
-    bullets: ["Cuando hay que instalar una idea rápido y que quede."],
+    texto: "Instala en dos minutos una idea que en texto ocupa tres carillas y no se entiende. Funciona para abrir un módulo, y también fuera del curso: comunicaciones internas, lanzamientos y campañas de prevención.",
+    bullets: ["Cuando necesitas que una idea difícil quede clara rápido."],
     piezas: [
       { t: "Ver ejemplo animado", modo: "youtube", src: "rf5-fAPg9wU", nota: "Video caso para actividad" },
     ],
@@ -237,8 +237,8 @@ const recursos = [
     img: "/assets/catalogo/terreno.webp",
     alt: "Grabación en estudio: una persona hablando a cámara con iluminación de set",
     para: ["terreno", "explicar"],
-    texto: "Grabación presencial para mostrar espacios, personas, equipos, demostraciones, procedimientos o testimonios reales.",
-    bullets: ["Cuando la credibilidad depende de que se vea el lugar de verdad."],
+    texto: "Cuando la credibilidad depende de que se vea tu operación de verdad: tus espacios, tus equipos, tu gente. Un caso genérico no le habla a alguien que trabaja ahí todos los días, y se nota en la primera pantalla.",
+    bullets: ["Para demostraciones de procedimiento, testimonios y recorridos de planta."],
     piezas: [
       { t: "Ver ejemplo en terreno", modo: "youtube", src: "OCu-5fmS_mI", nota: "Pieza a cámara, producción propia" },
       { t: "Otro ejemplo (Drive)", modo: "externo", src: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view", nota: "Se abre en Google Drive" },
@@ -250,8 +250,8 @@ const recursos = [
     img: "/assets/catalogo/tour360.webp",
     alt: "Portada de un recorrido virtual 360 de un centro de simulación, con el botón de inicio sobre la fachada",
     para: ["terreno"],
-    texto: "La persona recorre la instalación real y encuentra la información donde ocurre, en vez de leerla fuera de contexto. Especialmente útil en inducciones de planta y prevención de riesgos.",
-    bullets: ["Cuando el entorno físico es parte crítica del aprendizaje."],
+    texto: "Que reconozcan la planta antes del primer turno. La información aparece justo donde está el riesgo, en vez de en un anexo que se lee lejos del lugar — y la inducción presencial se acorta porque llegan ubicados.",
+    bullets: ["Para inducciones de planta, prevención de riesgos y visitas de contratistas."],
     piezas: [
       { t: "Recorrido interactivo", modo: "iframe", src: "https://storage.net-fs.com/hosting/2727323/380/index.htm", nota: "Tour de muestra de 3DVista — la tecnología, no un proyecto nuestro" },
       { t: "Recorrido en video", modo: "youtube", src: "7iaJIuOoxzE", nota: "Planta Arauco · Logmeter" },
@@ -279,25 +279,25 @@ const estandares = [
   { t: "Inmersivo", d: "Cuando el entorno real o espacial es parte de lo que hay que aprender." },
 ];
 
+/* Los nombres son los del cliente, no los del oficio. "Escena", "brief" y
+   "proyección" describen cómo trabajamos nosotros; a quien está evaluando
+   proveedores le sirve saber dónde está parado: su objetivo, su solución, los
+   productos, qué recibe y cómo seguimos. */
 const escenas = [
-  { id: "apertura",   n: "00", t: "Apertura" },
-  { id: "brief",      n: "01", t: "El brief" },
-  { id: "mezcla",     n: "02", t: "Tu mezcla" },
-  { id: "proyeccion", n: "03", t: "Proyección" },
-  { id: "anatomia",   n: "04", t: "Anatomía" },
-  { id: "cierre",     n: "05", t: "Cierre" },
+  { id: "apertura",   n: "00", t: "Inicio" },
+  { id: "brief",      n: "01", t: "Tu objetivo" },
+  { id: "mezcla",     n: "02", t: "Tu solución" },
+  { id: "proyeccion", n: "03", t: "Productos" },
+  { id: "anatomia",   n: "04", t: "Qué recibes" },
+  { id: "cierre",     n: "05", t: "Conversemos" },
 ];
 
 const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/";
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout {title} {description} image={socialImage}>
   <Fragment slot="head">
-    <meta property="og:image" content={socialImageUrl} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Catálogo de recursos e-learning y multimedia de Ewaffle" />
-    <meta name="twitter:image" content={socialImageUrl} />
     <meta name="theme-color" content="#0a0812" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -326,7 +326,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         ))}
       </ol>
       <p class="riel__cuenta" data-vistos-riel>
-        <span data-vistos>0</span> de {recursos.length} recursos abiertos
+        <span data-vistos>0</span> de {recursos.length} productos probados
       </p>
       <div class="riel__barra" aria-hidden="true"><span data-barra></span></div>
     </aside>
@@ -342,29 +342,29 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         <div class="apertura__cuerpo">
           <p class="claqueta" data-motion>
             <span class="claqueta__punto" aria-hidden="true"></span>
-            Ewaffle · Catálogo {new Date().getFullYear()} · {recursos.length} recursos
+            Ewaffle · Formación digital para empresas
           </p>
           <h1 class="titular" data-motion style="--retardo: 90ms;">
-            Un catálogo que no se lee.<br /><em>Se recorre.</em>
+            Catálogo de productos<br /><em>Ewaffle</em>
           </h1>
           <p class="bajada" data-motion style="--retardo: 180ms;">
-            Producimos experiencias de aprendizaje. Mostrarte eso en una lista de servicios sería
-            contradecirnos. Así que acá cada recurso se abre y funciona: puedes jugar, decidir,
-            equivocarte y ver cómo responde, sin salir de esta página y sin dejar tus datos.
+            Hacemos que la capacitación de tu equipo se termine y se note en el puesto: video,
+            guías interactivas, juegos, simuladores, recorridos 360 y producción en terreno.
+            Cada producto trae un ejemplo real que puedes probar acá mismo, sin registro.
           </p>
           <div class="acciones" data-motion style="--retardo: 260ms;">
             <a href="#brief" class="boton boton--primario" data-cta="empezar">
-              Empezar el recorrido
+              Encontrar lo que necesito
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
             </a>
             <a href="#proyeccion" class="boton boton--fantasma" data-cta="saltar">
-              Ir directo al catálogo
+              Ver todos los productos
             </a>
           </div>
           <dl class="datos" data-motion style="--retardo: 340ms;">
-            <div><dt>Recursos</dt><dd>{recursos.length}</dd></div>
-            <div><dt>Se abren acá</dt><dd>{adentro}</dd></div>
-            <div><dt>Registro</dt><dd>No</dd></div>
+            <div><dt>Productos</dt><dd>{recursos.length}</dd></div>
+            <div><dt>Los pruebas acá</dt><dd>{adentro}</dd></div>
+            <div><dt>Entrega</dt><dd>SCORM</dd></div>
           </dl>
         </div>
 
@@ -399,13 +399,14 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
 
       <!-- ══ ESCENA 01 · El brief ══════════════════════════════════════════ -->
       <section class="escena" id="brief" data-escena="brief">
-        <p class="claqueta" data-motion>Escena 01 · El brief</p>
+        <p class="claqueta" data-motion>01 · Tu objetivo</p>
         <h2 class="rubro" data-motion style="--retardo: 80ms;">
-          Antes de mostrarte once cosas,<br />dinos cuál es tu problema.
+          ¿Qué necesitas que cambie<br />en tu equipo?
         </h2>
         <p class="parrafo" data-motion style="--retardo: 140ms;">
-          No para filtrarte el catálogo — lo vas a ver entero igual. Para que el orden y la
-          recomendación del final tengan que ver contigo y no con lo que nos gusta vender.
+          Elige el punto de partida y te armamos la combinación que mejor resuelve eso. No es un
+          formulario ni te esconde nada: los productos los ves todos igual, solo que ordenados
+          según lo que a ti te sirve.
         </p>
 
         <div class="opciones" role="group" aria-label="¿Qué necesitas resolver?">
@@ -426,7 +427,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
            Oculta hasta que hay una elección. No es un truco de suspenso: una
            recomendación mostrada antes de preguntar no es una recomendación. -->
       <section class="escena escena--mezcla" id="mezcla" data-escena="mezcla" hidden>
-        <p class="claqueta">Escena 02 · Tu mezcla <span class="claqueta__tag" data-mezcla-tag></span></p>
+        <p class="claqueta">02 · Tu solución <span class="claqueta__tag" data-mezcla-tag></span></p>
         <h2 class="rubro" data-mezcla-titulo></h2>
         <p class="parrafo" data-mezcla-texto></p>
 
@@ -437,8 +438,9 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         </ol>
 
         <p class="nota">
-          Es un punto de partida, no una cotización. Lo afinamos cuando conozcamos tu audiencia,
-          tu plazo y lo que ya tienes producido.
+          Es una recomendación, no una cotización. La afinamos cuando conozcamos a tu audiencia,
+          tu plazo y lo que ya tienes producido — muchas veces parte del material sirve y no hay
+          que rehacerlo.
           <button type="button" class="enlace" data-recalcular>Cambiar de objetivo</button>
         </p>
       </section>
@@ -449,19 +451,20 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
            lo dicen en la propia tarjeta: mentir sobre eso se descubre en el
            primer clic. -->
       <section class="escena escena--ancha" id="proyeccion" data-escena="proyeccion">
-        <p class="claqueta" data-motion>Escena 03 · La proyección</p>
+        <p class="claqueta" data-motion>03 · Productos</p>
         <h2 class="rubro" data-motion style="--retardo: 80ms;">
-          Once recursos. <em>{adentro} se abren acá mismo.</em>
+          Qué producimos<br /><em>y para qué sirve cada uno.</em>
         </h2>
         <p class="parrafo" data-motion style="--retardo: 140ms;">
-          No son maquetas ni videos de producto: es el recurso corriendo, el mismo que recibe un
-          participante. Los dos de Articulate se abren en otra pestaña porque su visor no permite
-          incrustarse en ningún sitio.
+          Cada producto trae un ejemplo real —el mismo archivo que recibe un participante— y
+          {adentro} de ellos se abren y funcionan sin que salgas de esta página, así no tienes que
+          confiar en una descripción. Los dos de Articulate se abren en otra pestaña porque su
+          visor no permite incrustarse en ningún sitio.
         </p>
 
         <div class="filtro" data-filtro hidden>
           <span data-filtro-texto></span>
-          <button type="button" class="enlace" data-filtro-quitar>Ver los once por igual</button>
+          <button type="button" class="enlace" data-filtro-quitar>Ver todos por igual</button>
         </div>
 
         <div class="rollo">
@@ -545,14 +548,15 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
            pero desplegada de a una: el módulo se arma delante tuyo en vez de
            quedar listado. -->
       <section class="escena" id="anatomia" data-escena="anatomia">
-        <p class="claqueta" data-motion>Escena 04 · Anatomía</p>
+        <p class="claqueta" data-motion>04 · Qué recibes</p>
         <h2 class="rubro" data-motion style="--retardo: 80ms;">
-          Un módulo Ewaffle,<br />por dentro.
+          Qué incluye<br />cada módulo.
         </h2>
         <p class="parrafo" data-motion style="--retardo: 140ms;">
-          Cuando alguien pide "cápsulas", "módulos", "un curso" o "una ruta completa", lo primero
-          que hacemos es traducir ese pedido a esta unidad. Recién ahí se puede comparar alcance
-          entre dos propuestas.
+          "Cápsulas", "módulos", "un curso" y "una ruta completa" significan cosas distintas para
+          cada proveedor, y por eso dos cotizaciones parecidas terminan entregando cosas muy
+          distintas. Traducimos todo a esta unidad para que puedas comparar alcance con números
+          — incluida la propuesta de otro.
         </p>
 
         <div class="anatomia" data-motion style="--retardo: 180ms;">
@@ -615,8 +619,8 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
            por eso el modal de esta página ya no se abre solo a los 15 segundos:
            interrumpir a mitad del recorrido competiría con la pieza. -->
       <section class="escena escena--cierre" id="cierre" data-escena="cierre">
-        <p class="claqueta" data-motion>Escena 05 · Cierre</p>
-        <h2 class="rubro" data-motion style="--retardo: 80ms;">Tu hoja de rodaje.</h2>
+        <p class="claqueta" data-motion>05 · Conversemos</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">Tu punto de partida.</h2>
 
         <div class="rodaje" data-motion style="--retardo: 140ms;">
           <div class="rodaje__fila">
@@ -624,31 +628,31 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
             <span class="rodaje__v" data-rodaje-objetivo>Sin elegir todavía</span>
           </div>
           <div class="rodaje__fila">
-            <span class="rodaje__k">Mezcla sugerida</span>
+            <span class="rodaje__k">Solución sugerida</span>
             <span class="rodaje__v" data-rodaje-mezcla>—</span>
           </div>
           <div class="rodaje__fila">
-            <span class="rodaje__k">Recursos que abriste</span>
+            <span class="rodaje__k">Productos que probaste</span>
             <span class="rodaje__v" data-rodaje-vistos>Ninguno</span>
           </div>
         </div>
 
         <p class="parrafo" data-motion style="--retardo: 200ms;">
-          Si quieres, lo bajamos a una propuesta concreta. Para eso te vamos a preguntar cuatro
-          cosas — te las dejamos acá para que llegues pensado, o para que respondas la que quieras
-          en el formulario:
+          El siguiente paso es una propuesta con alcance y precio, no otra reunión de diagnóstico.
+          Para llegar con eso listo necesitamos entender cuatro cosas — te las dejamos acá para que
+          llegues pensado, o para que respondas las que quieras al escribirnos:
         </p>
 
         <ol class="preguntas" data-motion style="--retardo: 240ms;">
           <li>¿Qué resolverías primero: explicar, activar la práctica, ordenar o mostrar contexto real?</li>
-          <li>¿Cuánto importa que estos recursos queden reutilizables dentro de tu LMS o intranet?</li>
+          <li>¿Cuánto importa que estos productos queden reutilizables dentro de tu LMS o intranet?</li>
           <li>¿Partimos con un piloto acotado, o ya necesitas una primera biblioteca?</li>
           <li>¿Tiene sentido incorporar terreno o 360, o hoy conviene algo más liviano y rápido?</li>
         </ol>
 
         <div class="acciones" data-motion style="--retardo: 300ms;">
           <button type="button" class="boton boton--primario" data-abrir-form>
-            Quiero que revisemos mi caso
+            Quiero una propuesta para mi caso
           </button>
           <a href={agendaUrl} target="_blank" rel="noreferrer" class="boton boton--fantasma" data-cta="agenda">
             Agendar directo con Álvaro
@@ -844,7 +848,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
 
   .titular {
     margin: 0 0 22px;
-    font-size: clamp(2.7rem, 7.4vw, 5.4rem);
+    font-size: clamp(2.5rem, 6.6vw, 4.6rem);
     font-weight: 800; line-height: 0.97; letter-spacing: -0.042em;
     text-wrap: balance;
   }
@@ -929,16 +933,20 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
     to   { transform: scale(1.22) translate3d(-1.2%, -1%, 0); }
   }
   .apertura__reja { position: relative; display: grid; gap: clamp(30px, 4vw, 54px); align-items: center; }
-  @media (min-width: 1080px) {
-    .apertura__reja { grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr); }
+  @media (min-width: 1240px) {
+    /* La columna de texto se lleva más ancho que la de pantallas: "Catálogo de
+       productos" tiene que caber en una línea, y partido después de "de" el
+       titular se leía como un error. */
+    .apertura__reja { grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr); }
   }
   .apertura__cuerpo { position: relative; max-width: 940px; min-width: 0; }
+  @media (min-width: 1240px) { .apertura__cuerpo .titular { font-size: clamp(2.5rem, 3.5vw, 3.35rem); } }
 
   /* Pared de pantallas: tres capturas montadas como pilas de un proyeccionista.
      Bajo 1080px desaparece — apilarlas en vertical sería mostrar dos veces lo
      mismo antes de llegar al catálogo. */
-  .marquesina { display: none; position: relative; height: 430px; min-width: 0; }
-  @media (min-width: 1080px) { .marquesina { display: block; } }
+  .marquesina { display: none; position: relative; height: 400px; min-width: 0; }
+  @media (min-width: 1240px) { .marquesina { display: block; } }
   .mq {
     position: absolute; margin: 0; border-radius: 13px; overflow: hidden;
     border: 1px solid var(--linea-viva); background: var(--sala-2);
@@ -1433,7 +1441,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         r.classList.toggle("es-apagado", !sirve);
       });
       if (filtro && filtroTexto) {
-        filtroTexto.textContent = "Destacando lo que sirve para " + (nombreObjetivo(id) || "tu objetivo").toLowerCase() + ".";
+        filtroTexto.textContent = "Destacamos lo que mejor resuelve " + (nombreObjetivo(id) || "tu objetivo").toLowerCase() + ".";
         filtro.removeAttribute("hidden");
       }
 
@@ -1626,7 +1634,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         /* Los nombres, no los identificadores. El mensaje lo lee una persona del
            equipo en el correo del lead: "guias, motion" no le dice nada. */
         if (vistos.length) {
-          lineas.push("Recursos que abrí: " + vistos.map(function (id) {
+          lineas.push("Productos que probé: " + vistos.map(function (id) {
             return datos.nombres[id] || id;
           }).join("; ") + ".");
         }

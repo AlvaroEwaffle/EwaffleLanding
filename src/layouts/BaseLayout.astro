@@ -5,16 +5,22 @@ import PostHog from '../components/posthog.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Portada para compartir, relativa al sitio. Las páginas que quieran la suya
+      TIENEN que pasarla por acá y no emitir otra `og:image` en el slot de cabecera:
+      cuando hay dos, los lectores de enlaces se quedan con la primera, que es esta,
+      y la de la página nunca aparece aunque esté en el HTML. */
+  image?: string;
 }
 
 const {
   title = "Ewaffle | Expertos en E-learning, Diseño Instruccional y Producción Multimedia",
   description = "Desarrollamos soluciones e-learning personalizadas con diseño instruccional experto, producción multimedia y gamificación. Potencia el aprendizaje de tu organización.",
+  image = "/assets/CoverEwaffle.png",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://www.ewaffle.cl");
 
-const socialImageURL = new URL("/assets/CoverEwaffle.png", canonicalURL);
+const socialImageURL = new URL(image, canonicalURL);
 
 const keywords = [
   "e-learning",
@@ -118,8 +124,8 @@ const keywords = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="768" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Ewaffle, soluciones e-learning y multimedia" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Ewaffle" />
