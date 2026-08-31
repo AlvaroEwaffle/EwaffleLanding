@@ -13,8 +13,15 @@ const description = "Explora un modulo e-learning completo para empresas: video 
 const keywords = "demo e-learning, demo LMS, cursos SCORM, recursos e-learning, e-learning corporativo, onboarding gamificado, capacitacion empresas, Ewaffle demo";
 
 const videoUrl = "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/preview";
-const riseUrl = "/demo-rise/index.html";
-const gameUrl = "/demo-scorm/arbol-decision/story.html";
+// Apuntaban a /demo-rise/ y /demo-scorm/, que NUNCA se versionaron: el commit
+// 267eb6e ("host Rise content locally to fix broken iframe", 19-may) agregó los
+// componentes pero ningún archivo de contenido. Vivían sueltos en public/ sin
+// estar en git, así que funcionaba en local y no en el sitio publicado — y hoy
+// tampoco están en disco. Como Pages responde la home con 200 en vez de 404, el
+// iframe mostraba la portada de ewaffle.cl adentro del recuadro.
+// Se reapunta a dos piezas que sí están versionadas en public/demos/ y vivas.
+const riseUrl = "/demos/buffalo-induccion.html";
+const gameUrl = "/demos/los-heroes-decidir-mas-cerca.html";
 const geniallyUrl = "https://view.genially.com/6979ec74f273cb6bda0e930f";
 ---
 
