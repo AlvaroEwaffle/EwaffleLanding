@@ -17,12 +17,12 @@ import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
       nada. Esas cuatro preguntas ya estaban en el documento, pero al final y
       en modo retórico ("preguntas para aterrizar este catálogo"). Puestas al
       principio y como decisión real, ordenan todo lo que viene después.
-   2. ADENTRO. Nueve de los once recursos se abren y funcionan en esta misma
-      página, en un visor. Los otros dos lo dicen: Articulate manda
-      `x-frame-options: sameorigin` y no se deja incrustar por nadie.
+   2. ADENTRO. Casi todas las pruebas se abren y funcionan en esta misma
+      página, en un visor. Las que no lo dicen en su propio botón: Articulate
+      manda `x-frame-options: sameorigin` y no se deja incrustar por nadie.
    3. RECORRIDO. Escenas numeradas, un riel que marca dónde vas y cuántos
-      recursos abriste, y un cierre que arma la recomendación con lo que
-      elegiste. La gamificación termina en algo útil, no en un puntaje.
+      formatos abriste, y un cotizador que cierra con un número. La
+      gamificación termina en algo útil, no en un puntaje.
 
    Lo que NO hace: bloquear el contenido detrás del cuestionario. Desde la
    apertura hay una salida directa al catálogo completo — quien vino apurado
@@ -30,7 +30,7 @@ import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const title = "Catálogo de productos Ewaffle | E-learning, multimedia y simuladores";
-const description = "Conoce los once productos de aprendizaje digital de Ewaffle: video con IA, guías interactivas, juegos, simuladores, recorridos 360 y producción en terreno. Cada uno con un ejemplo real que puedes abrir y probar acá mismo, sin registro.";
+const description = "Los siete formatos de aprendizaje digital de Ewaffle: videos formativos, guías interactivas, cápsulas interactivas, simuladores, recorridos 360, actividades lúdicas y producción en terreno. Cada uno con ejemplos reales que puedes probar acá mismo, y un cotizador para armar tu programa.";
 const socialImage = "/assets/catalogo-og.png";
 
 /* Las cuatro entradas del recorrido. Son las preguntas del catálogo viejo,
@@ -45,26 +45,29 @@ const objetivos = [
 
 /* Una mezcla por objetivo. El catálogo viejo tenía tres combinaciones sueltas
    al final; acá cada una queda amarrada a la entrada que la justifica, que es
-   lo que hace que la recomendación se sienta dirigida y no un menú más. */
+   lo que hace que la recomendación se sienta dirigida y no un menú más.
+   Los nombres de las piezas son los mismos siete formatos de la escena 03: si
+   la recomendación inventa vocabulario propio, el catálogo deja de leerse como
+   un catálogo. */
 const mezclas = {
   explicar: {
     tag: "Mix claridad",
     t: "Primero que se entienda. Después que se recuerde.",
     d: "Cuando el problema es de comprensión, agregar interactividad no arregla nada: hay que bajar la carga y darle una forma visual al concepto antes de pedir que lo apliquen.",
     piezas: [
-      { t: "Video de apertura", d: "Motion graphics o video generado con IA para instalar la idea en dos minutos." },
-      { t: "Módulo Rise", d: "El desarrollo ordenado y navegable, para leer y volver a consultar." },
+      { t: "Video formativo", d: "Instala la idea en dos minutos, con el énfasis puesto donde importa." },
+      { t: "Guía interactiva", d: "El desarrollo ordenado y navegable, para leer y volver a consultar." },
       { t: "Chequeo corto", d: "Preguntas de comprensión con feedback inmediato, sin nota." },
     ],
   },
   practicar: {
     tag: "Mix aprendizaje activo",
     t: "Nadie aprende a decidir leyendo sobre decisiones.",
-    d: "Es la mezcla que más recomendamos. El video da el contexto, la actividad obliga a comprometerse con una respuesta, y el árbol de decisiones cubre lo que no tiene respuesta única.",
+    d: "Es la mezcla que más recomendamos. El video da el contexto, la actividad obliga a comprometerse con una respuesta, y la cápsula ramificada cubre lo que no tiene respuesta única.",
     piezas: [
-      { t: "Video de contexto", d: "Corto. Solo lo necesario para que la práctica tenga sentido." },
-      { t: "Juegos o cápsula Storyline", d: "Donde la persona elige, se equivoca y recibe el porqué." },
-      { t: "Árbol de decisiones", d: "Para los dilemas del puesto donde ninguna opción es gratis." },
+      { t: "Video formativo", d: "Corto. Solo lo necesario para que la práctica tenga sentido." },
+      { t: "Actividades lúdicas", d: "Donde la persona elige, se equivoca y recibe el porqué." },
+      { t: "Cápsula interactiva", d: "Para los dilemas del puesto donde ninguna opción es gratis." },
     ],
   },
   ordenar: {
@@ -73,7 +76,7 @@ const mezclas = {
     d: "Acá el trabajo es de arquitectura, no de producción: convertir lo disperso en algo que se recorra, se busque y quede disponible dentro del LMS o la intranet.",
     piezas: [
       { t: "Guía interactiva", d: "Reemplaza el manual PDF por algo que se recorre en el navegador." },
-      { t: "Módulo Rise", d: "Estructura de consulta, con buen ritmo y navegación clara." },
+      { t: "Video formativo", d: "Una pieza de apertura por tema, para dar entrada a lo que ya existe." },
       { t: "Entrega SCORM", d: "Empaquetado para tu LMS, con registro de avance." },
     ],
   },
@@ -84,220 +87,247 @@ const mezclas = {
     piezas: [
       { t: "Producción en terreno", d: "Grabación presencial de espacios, equipos y procedimientos reales." },
       { t: "Recorrido 360", d: "La instalación completa, con la información puesta donde ocurre." },
-      { t: "Ubicación en plano", d: "Una actividad donde tienen que situar cada zona y su riesgo." },
+      { t: "Actividades lúdicas", d: "Ubicación en plano: tienen que situar cada zona y su riesgo." },
     ],
   },
 };
 
-/* ── Los once recursos ────────────────────────────────────────────────────
+/* ── Los siete formatos ───────────────────────────────────────────────────
+   Antes eran once tarjetas de 330 px en una grilla, y la grilla las igualaba:
+   el simulador multijugador y un enlace a Articulate ocupaban el mismo
+   rectángulo. Ahora cada formato es una banda de ancho completo que se lee de
+   arriba a abajo, con la pantalla del recurso al lado del texto que lo explica.
+   Once entraron en siete sin perder ninguno: los módulos Rise viven dentro de
+   las guías, el motion dentro de video, y el árbol de decisiones dentro de las
+   cápsulas, que es donde el cliente lo busca.
+
    `piezas[].modo` decide cómo se abre cada prueba:
      iframe  → demo propia, misma página, corre de verdad
      video   → mp4 en tefi.villelab.com; nunca autoplay (el de inducción pesa
                134 MB, y arrancarlo solo sería quemarle los datos a alguien)
      youtube → incrustado sin cookies
      externo → no se deja incrustar; se dice y se abre en otra pestaña
-   `para` amarra el recurso a los objetivos donde de verdad sirve. Si estuviera
+   `para` amarra el formato a los objetivos donde de verdad sirve. Si estuviera
    en los cuatro no serviría para dirigir nada. */
-const recursos = [
+const formatos = [
   {
-    id: "video-ia", grupo: "Producido con IA", eyebrow: "Nuevo · 2026",
-    titulo: "Video formativo generado con IA",
+    id: "video", n: "01", grupo: "Audiovisual",
+    titulo: "Videos formativos",
+    resumen: "La pieza que abre el módulo y la que se reenvía cuando cambia un procedimiento.",
     img: "/assets/catalogo/video-induccion.webp",
     alt: "Fotograma del módulo de inducción de Buffalo Waffles: título sobre una escena de local con clientes",
     para: ["explicar", "ordenar"],
-    texto: "Puedes actualizar el contenido cuando cambia el procedimiento y no cuando alcanza el presupuesto: un módulo completo se rehace en horas. Guion, locución y animación se producen con modelos generativos y los valida nuestro equipo antes de entregarlos.",
+    texto: "Bajo un mismo nombre producimos tres cosas distintas: el video a cámara grabado con tu gente, el animado en motion graphics para las ideas que en texto ocupan tres carillas, y el video de módulo con locución y ritmo controlados. Cuál conviene lo decide el contenido, no el catálogo.",
     bullets: [
-      "Conviene cuando tienes muchos cursos, o contenido que cambia seguido.",
-      "Locución en español neutro o chileno, con el ritmo y el énfasis controlados.",
-      "Revisión humana pieza por pieza: la IA acelera, no decide.",
+      "Locución en español neutro o chileno, con el énfasis puesto donde importa.",
+      "Subtitulado, corte largo para el LMS y versión vertical para difusión interna.",
+      "Cuando cambia el procedimiento se rehace el tramo, no el video completo.",
     ],
     piezas: [
       { t: "Módulo de inducción", modo: "video", src: "https://tefi.villelab.com/buffalo-m1-v8.3-HD.mp4", poster: "/assets/catalogo/video-induccion.webp", nota: "Buffalo Waffles · inducción a la operación" },
       { t: "Cápsula normativa", modo: "video", src: "https://tefi.villelab.com/achs-pnce-HD.mp4", poster: "/assets/catalogo/video-normativa.webp", nota: "Política Nacional de Convivencia Educativa" },
+      { t: "Pieza animada", modo: "youtube", src: "rf5-fAPg9wU", nota: "Motion graphics · video caso para actividad" },
     ],
   },
   {
-    id: "guias", grupo: "Producido con IA", eyebrow: "Nuevo · 2026",
-    titulo: "Guías interactivas de inducción",
+    id: "guias", n: "02", grupo: "Contenido",
+    titulo: "Guías interactivas",
+    resumen: "El manual que nadie abre, convertido en algo que se recorre y se termina.",
     img: "/assets/catalogo/guias.webp",
     alt: "Guía interactiva abierta en el navegador: índice de lecciones a la izquierda, barra de avance y contenido de la lección",
     para: ["ordenar", "explicar"],
-    texto: "El manual que nadie abre pasa a ser algo que la persona recorre y termina. Se abre en el navegador, sin instalar nada y sin crear cuenta, así que un trabajador nuevo puede hacer su inducción el primer día sin esperar a que TI le habilite un acceso.",
+    texto: "Se abre en el navegador, sin instalar nada y sin crear cuenta, así que un trabajador nuevo puede hacer su inducción el primer día sin esperar a que TI le habilite un acceso. Es también el formato del contenido que se consulta más de una vez —normativa, procedimientos, fundamentos— y que hoy vive disperso en PDF y carpetas compartidas.",
     bullets: [
       "Para inducción, procedimientos y onboarding de contratistas.",
-      "Funciona igual en celular, tablet y escritorio.",
-      "Te la entregamos como SCORM para tu LMS o como enlace directo.",
+      "Índice, barra de avance y memoria de dónde quedó. Igual en celular, tablet y escritorio.",
+      "Se entrega como SCORM para tu LMS o como enlace directo, según dónde viva.",
     ],
     piezas: [
       { t: "Recorrer la guía completa", modo: "iframe", src: "/demos/buffalo-induccion.html", nota: "Tres lecciones con video, avance y cierre" },
-      { t: "La versión con juegos", modo: "iframe", src: "/demos/buffalo-induccion-juegos.html", nota: "La misma guía, con actividades intercaladas" },
+      { t: "La versión con actividades", modo: "iframe", src: "/demos/buffalo-induccion-juegos.html", nota: "La misma guía, con actividades intercaladas" },
+      { t: "Ejemplo en Articulate Rise", modo: "externo", src: "https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review", nota: "Articulate Review · no se deja incrustar" },
     ],
   },
   {
-    id: "juegos", grupo: "Práctica y evaluación", eyebrow: "Gamificación",
-    titulo: "Ocho tipos de juego listos para producción",
-    img: "/assets/catalogo/juegos.webp",
-    alt: "Actividad de sopa de letras dentro de un curso, con las pistas al costado y el contador de aciertos",
-    para: ["practicar"],
-    texto: "Sube cuánta gente termina el curso sin tener que alargarlo: en vez de leer el contenido, lo practican. Las ocho mecánicas ya están construidas y probadas, así que tu presupuesto se va en adaptar tu contenido y no en desarrollar desde cero.",
-    bullets: [
-      "Se arman con los conceptos reales de tu programa, no con ejemplos genéricos.",
-      "Sin nota al LMS y con reintentos ilimitados: se practica sin miedo a reprobar.",
-      "Ruleta, memorice, millonario, sopa de letras, rueda de conceptos, arrastrar y soltar, árbol de decisiones y ubicación en plano.",
-    ],
-    piezas: [
-      { t: "Jugar la demo", modo: "iframe", src: "/demos/juegos-demo.html", nota: "Cuatro tipos encadenados como un curso real" },
-      { t: "Ver los ocho tipos", modo: "iframe", src: "/demos/juegos-referencia.html", nota: "Referencia de cuándo conviene cada uno" },
-    ],
-  },
-  {
-    id: "arbol", grupo: "Práctica y evaluación", eyebrow: "Gamificación",
-    titulo: "Árbol de decisiones para temas sensibles",
+    id: "capsulas", n: "03", grupo: "Criterio",
+    titulo: "Cápsulas interactivas",
+    resumen: "Escenarios ramificados para los temas donde ninguna opción es gratis.",
     img: "/assets/catalogo/arbol.webp",
     alt: "Curso Decidir más cerca de Caja Los Héroes: índice de 24 lecciones y el video de la primera",
     para: ["practicar"],
     texto: "Para buen trato, ética, prevención o autonomía, donde el objetivo no es que recuerden la norma sino que sostengan un criterio cuando nadie los está mirando. La persona elige, ve la consecuencia y recibe el porqué — que es la parte que después se repite en el pasillo.",
     bullets: [
-      "Trabaja los dilemas reales del puesto, no casos de manual.",
-      "Sin respuestas obvias: cada opción tiene un costo defendible.",
+      "Trabaja los dilemas reales del puesto, levantados con tu gente, no casos de manual.",
+      "Sin respuestas obvias: cada camino tiene un costo defendible.",
+      "Estándar Articulate Storyline, con la retroalimentación dentro del propio recurso.",
     ],
     piezas: [
       { t: "Recorrer un caso completo", modo: "iframe", src: "/demos/los-heroes-decidir-mas-cerca.html", nota: "Caja Los Héroes · 24 lecciones" },
+      { t: "Árbol de decisiones", modo: "iframe", src: "/demo-scorm/arbol-decision/story.html", nota: "ACHS DS44 · escenario ramificado en Storyline" },
+      { t: "Otro ejemplo Storyline", modo: "externo", src: "https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review", nota: "Articulate Review · no se deja incrustar" },
     ],
   },
   {
-    id: "comex", grupo: "Simulación", eyebrow: "Simuladores",
-    titulo: "Simulador de comercio exterior",
+    id: "simuladores", n: "04", grupo: "Simulación",
+    titulo: "Simuladores",
+    resumen: "Practican la operación completa antes de tocar una real.",
     img: "/assets/catalogo/comex.webp",
     alt: "Puerto con grúas y portacontenedores al atardecer, con los cuatro roles del simulador listados abajo",
     para: ["practicar"],
-    texto: "Tu equipo practica una operación completa antes de tocar una real: si los papeles no cuadran, el contenedor no se mueve. El error sale gratis en el simulador y caro en el puerto. Cada participante entra con un rol distinto — naviera, aduana, transportista, importador — y tienen que coordinarse entre ellos.",
+    texto: "En el simulador de comercio exterior cada participante entra con un rol distinto —naviera, aduana, transportista, importador— y si los papeles no cuadran, el contenedor no se mueve. El error sale gratis acá y caro en el puerto. También replicamos sistemas internos, para que nadie aprenda tu plataforma equivocándose sobre datos de producción.",
     bullets: [
       "Trabajan sobre documentación real: B/L, factura comercial y DIN.",
       "La respuesta está en el expediente, así que entrenan criterio y no memoria.",
+      "Multijugador: lo que se entrena es la coordinación entre roles, no una tarea suelta.",
       "Desarrollo propio de Ewaffle: no pagas licencia de plataforma por usuario.",
     ],
     piezas: [
-      { t: "Ver cómo funciona", modo: "video", src: "https://tefi.villelab.com/comex-live-explainer.mp4", poster: "/assets/catalogo/comex.webp", nota: "Recorrido narrado del simulador" },
+      { t: "Ver cómo funciona", modo: "video", src: "https://tefi.villelab.com/comex-live-explainer.mp4", poster: "/assets/catalogo/comex.webp", nota: "Recorrido narrado del simulador de comercio exterior" },
+      { t: "Simulador de plataforma", modo: "iframe", src: "/demos/lms-sim.html", nota: "SCORM 1.2 con la consola de llamadas a la vista" },
     ],
   },
   {
-    id: "simulacion", grupo: "Simulación", eyebrow: "Simuladores",
-    titulo: "Simulación de plataforma y de espacio",
-    img: "/assets/catalogo/lms.webp",
-    alt: "Simulador de LMS: el curso a la izquierda y a la derecha la consola registrando las llamadas SCORM en vivo",
-    para: ["practicar", "terreno"],
-    texto: "Practican sobre una réplica antes de tocar el sistema o el lugar de verdad, así nadie aprende tu plataforma equivocándose sobre datos de producción. El simulador de LMS además deja ver el diálogo SCORM en vivo, que es cómo verificamos que un curso reporte bien antes de subirlo al tuyo.",
-    bullets: [
-      "Para onboarding de sistemas internos y de personal nuevo.",
-      "Se combina con recorridos 360 cuando el espacio también importa.",
-    ],
-    piezas: [
-      { t: "Simulador de LMS", modo: "iframe", src: "/demos/lms-sim.html", nota: "SCORM 1.2 con la consola de llamadas a la vista" },
-      { t: "Ubicación en plano", modo: "iframe", src: "/demos/hotspot-plano-prototipo.html", nota: "Ocho zonas de un local, por función" },
-    ],
-  },
-  {
-    id: "storyline", grupo: "Base", eyebrow: "Interactividad",
-    titulo: "Cápsulas Storyline",
-    img: null,
-    para: ["practicar"],
-    texto: "Cuando necesitas que decidan y no solo que lean: escenarios donde la persona elige, se equivoca y recibe la retroalimentación dentro del propio recurso, sin que nadie tenga que corregir a mano.",
-    bullets: ["Para práctica activa y evaluación formativa, con estándar Articulate."],
-    piezas: [
-      { t: "Ver ejemplo Storyline", modo: "externo", src: "https://360.articulate.com/review/content/5b3fb8d6-cecd-4f2c-84af-bf83b785ebfc/review", nota: "Articulate Review" },
-    ],
-  },
-  {
-    id: "rise", grupo: "Base", eyebrow: "Contenido",
-    titulo: "Módulos Rise",
-    img: null,
-    para: ["ordenar"],
-    texto: "Para el contenido que se consulta más de una vez: normativa, procedimientos y fundamentos quedan ordenados para volver a buscarlos, no solo para pasarlos una vez y perderlos.",
-    bullets: ["Baja las consultas repetidas al jefe directo y al área técnica."],
-    piezas: [
-      { t: "Ver ejemplo Rise", modo: "externo", src: "https://360.articulate.com/review/content/d0260191-6bb2-4656-9524-5bc9c615cb9f/review", nota: "Articulate Review" },
-    ],
-  },
-  {
-    id: "motion", grupo: "Base", eyebrow: "Audiovisual",
-    titulo: "Motion graphics y video",
-    img: "/assets/catalogo/motion.webp",
-    alt: "Fotograma de un video animado: un técnico de laboratorio y tres caras que representan niveles de satisfacción",
-    para: ["explicar"],
-    texto: "Instala en dos minutos una idea que en texto ocupa tres carillas y no se entiende. Funciona para abrir un módulo, y también fuera del curso: comunicaciones internas, lanzamientos y campañas de prevención.",
-    bullets: ["Cuando necesitas que una idea difícil quede clara rápido."],
-    piezas: [
-      { t: "Ver ejemplo animado", modo: "youtube", src: "rf5-fAPg9wU", nota: "Video caso para actividad" },
-    ],
-  },
-  {
-    id: "terreno", grupo: "Base", eyebrow: "En terreno",
-    titulo: "Producción en terreno",
-    img: "/assets/catalogo/terreno.webp",
-    alt: "Grabación en estudio: una persona hablando a cámara con iluminación de set",
-    para: ["terreno", "explicar"],
-    texto: "Cuando la credibilidad depende de que se vea tu operación de verdad: tus espacios, tus equipos, tu gente. Un caso genérico no le habla a alguien que trabaja ahí todos los días, y se nota en la primera pantalla.",
-    bullets: ["Para demostraciones de procedimiento, testimonios y recorridos de planta."],
-    piezas: [
-      { t: "Ver ejemplo en terreno", modo: "youtube", src: "OCu-5fmS_mI", nota: "Pieza a cámara, producción propia" },
-      { t: "Otro ejemplo (Drive)", modo: "externo", src: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view", nota: "Se abre en Google Drive" },
-    ],
-  },
-  {
-    id: "tour360", grupo: "Base", eyebrow: "Inmersivo",
+    id: "tour360", n: "05", grupo: "Inmersivo",
     titulo: "Recorridos 360",
+    resumen: "Que reconozcan la planta antes del primer turno.",
     img: "/assets/catalogo/tour360.webp",
     alt: "Portada de un recorrido virtual 360 de un centro de simulación, con el botón de inicio sobre la fachada",
     para: ["terreno"],
-    texto: "Que reconozcan la planta antes del primer turno. La información aparece justo donde está el riesgo, en vez de en un anexo que se lee lejos del lugar — y la inducción presencial se acorta porque llegan ubicados.",
-    bullets: ["Para inducciones de planta, prevención de riesgos y visitas de contratistas."],
+    texto: "La información aparece justo donde está el riesgo, en vez de en un anexo que se lee lejos del lugar. La inducción presencial se acorta porque la gente llega ubicada, y el contratista que viene por dos días puede recorrer la instalación antes de entrar.",
+    bullets: [
+      "Para inducciones de planta, prevención de riesgos y visitas de contratistas.",
+      "Se navega desde el navegador o con visor; no hay que instalar una aplicación.",
+      "Se combina con producción en terreno cuando el espacio hay que grabarlo de cero.",
+    ],
     piezas: [
       { t: "Recorrido interactivo", modo: "iframe", src: "https://storage.net-fs.com/hosting/2727323/380/index.htm", nota: "Tour de muestra de 3DVista — la tecnología, no un proyecto nuestro" },
       { t: "Recorrido en video", modo: "youtube", src: "7iaJIuOoxzE", nota: "Planta Arauco · Logmeter" },
       { t: "Nuestro servicio 360", modo: "externo", src: "https://ewaffle.cl/servicio-360/", nota: "Página del servicio" },
     ],
   },
+  {
+    id: "ludicas", n: "06", grupo: "Práctica",
+    titulo: "Actividades lúdicas",
+    resumen: "Ocho mecánicas ya construidas y probadas, listas para cargar tu contenido.",
+    img: "/assets/catalogo/juegos.webp",
+    alt: "Actividad de sopa de letras dentro de un curso, con las pistas al costado y el contador de aciertos",
+    para: ["practicar", "terreno"],
+    texto: "Sube cuánta gente termina el curso sin tener que alargarlo: en vez de leer el contenido, lo practican. Como las mecánicas ya están construidas, tu presupuesto se va en adaptar tu contenido y no en desarrollar desde cero.",
+    bullets: [
+      "Ruleta, memorice, millonario, sopa de letras, rueda de conceptos, arrastrar y soltar y ubicación en plano — más el árbol de decisiones, que por su peso tiene su propio formato acá arriba.",
+      "Se arman con los conceptos reales de tu programa, no con ejemplos genéricos.",
+      "Sin nota al LMS y con reintentos ilimitados: se practica sin miedo a reprobar.",
+    ],
+    piezas: [
+      { t: "Jugar la demo", modo: "iframe", src: "/demos/juegos-demo.html", nota: "Cuatro mecánicas encadenadas como un curso real" },
+      { t: "Ver las ocho mecánicas", modo: "iframe", src: "/demos/juegos-referencia.html", nota: "Referencia de cuándo conviene cada una" },
+      { t: "Ubicación en plano", modo: "iframe", src: "/demos/hotspot-plano-prototipo.html", nota: "Ocho zonas de un local, por función" },
+    ],
+  },
+  {
+    id: "terreno", n: "07", grupo: "En terreno",
+    titulo: "Producción en terreno",
+    resumen: "Tus espacios, tus equipos y tu gente, grabados donde ocurre el trabajo.",
+    img: "/assets/catalogo/terreno.webp",
+    alt: "Grabación en estudio: una persona hablando a cámara con iluminación de set",
+    para: ["terreno", "explicar"],
+    texto: "Cuando la credibilidad depende de que se vea tu operación de verdad. Un caso genérico no le habla a alguien que trabaja ahí todos los días, y se nota en la primera pantalla: el video con el uniforme y la máquina correctos se mira distinto que el de archivo.",
+    bullets: [
+      "Para demostraciones de procedimiento, testimonios y recorridos de planta.",
+      "Grabamos en tu instalación con el equipo operando, y en set cuando conviene.",
+      "Se cotiza por jornada, y una jornada bien planificada alimenta varios módulos.",
+    ],
+    piezas: [
+      { t: "Ver ejemplo en terreno", modo: "youtube", src: "OCu-5fmS_mI", nota: "Pieza a cámara, producción propia" },
+      { t: "Otro ejemplo (Drive)", modo: "externo", src: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view", nota: "Se abre en Google Drive" },
+    ],
+  },
 ];
 
 /* Cuántos de verdad corren adentro. Se calcula, no se escribe a mano: si mañana
    Articulate se deja incrustar, el número de la portada se corrige solo. */
-const adentro = recursos.filter((r) => r.piezas.some((p) => p.modo !== "externo")).length;
+const adentro = formatos.filter((r) => r.piezas.some((p) => p.modo !== "externo")).length;
+/* Y cuántas pruebas hay en total, que es el número honesto: siete formatos,
+   pero diecinueve piezas abribles. */
+const piezasTotales = formatos.reduce((n, r) => n + r.piezas.length, 0);
+const piezasAdentro = formatos.reduce((n, r) => n + r.piezas.filter((p) => p.modo !== "externo").length, 0);
 
-/* Las cuatro partes del módulo base. Era una tabla; acá se despliega una a una. */
-const anatomia = [
-  { k: "video",    t: "Video principal",        d: "Una sola pieza audiovisual por módulo: con presentador, animada o generada con IA, según el objetivo y el presupuesto.", m: "01" },
-  { k: "slides",   t: "5 a 7 pantallas",        d: "Breves. Explican, ordenan, preguntan o muestran pasos. No son el curso: son el andamio entre el video y la práctica.", m: "02" },
-  { k: "actividad",t: "Actividad aplicada",     d: "Caso, simulación, árbol de decisión o ejercicio guiado. Es la parte que no se puede saltar sin comprometerse con una respuesta.", m: "03" },
-  { k: "cierre",   t: "Cierre y evaluación",    d: "Síntesis, chequeo corto, feedback inmediato y entrega lista para LMS, intranet o distribución directa.", m: "04" },
-];
+/* ── El cotizador ─────────────────────────────────────────────────────────
+   Reemplaza a la escena "Qué recibes", que era una tabla de anatomía más
+   cuatro estándares de producción (Lite / Standard / Premium / Inmersivo).
+   La tabla decía qué trae un módulo pero no cuánto cuesta, así que el visitante
+   terminaba el catálogo sabiendo todo salvo lo único que necesitaba para
+   decidir si seguía. Los estándares se fueron: nombraban tamaños sin definirlos
+   y el cotizador hace ese trabajo mejor, con números.
 
-const estandares = [
-  { t: "Lite",      d: "Para validar rápido tono y enfoque antes de comprometer el programa completo." },
-  { t: "Standard",  d: "La base recomendada. Es el módulo de arriba, completo." },
-  { t: "Premium",   d: "Cuando el programa necesita más práctica, más interacción y más iteración." },
-  { t: "Inmersivo", d: "Cuando el entorno real o espacial es parte de lo que hay que aprender." },
-];
+   Los valores salen de VPM/Ewaffle/pricing/price-book.json (actualizado
+   2026-08-27). Lo que NO viaja acá: el DI fijo y el porcentaje de utilidad con
+   que se arman los módulos. Un cotizador público muestra precio de venta, nunca
+   cómo se compone.
 
-/* Los nombres son los del cliente, no los del oficio. "Escena", "brief" y
-   "proyección" describen cómo trabajamos nosotros; a quien está evaluando
-   proveedores le sirve saber dónde está parado: su objetivo, su solución, los
-   productos, qué recibe y cómo seguimos. */
+   Aviso conocido: cualquier calculadora en vivo lleva sus coeficientes al
+   navegador. La interfaz no muestra precios unitarios, pero alguien que
+   encienda y apague una casilla deduce por diferencia cuánto vale esa línea.
+   Si eso llegara a molestar, la salida es dejar de calcular en vivo y publicar
+   rangos cerrados — no esconder mejor los números. */
+const cotizador = {
+  bases: [
+    {
+      id: "esencial", t: "Módulo esencial",
+      d: "Un video formativo y una guía interactiva de seis capítulos. Sirve para el contenido que hay que dejar disponible y bien contado.",
+      incluye: ["1 video formativo", "1 guía interactiva (6 capítulos)", "Entrega SCORM para tu LMS"],
+      price: 1120000,
+    },
+    {
+      id: "estandar", t: "Módulo estándar", reco: true,
+      d: "El que recomendamos. Agrega la parte donde la persona decide y recibe respuesta, que es la que mueve la conducta.",
+      incluye: ["1 video formativo", "1 guía interactiva (6 capítulos)", "1 cápsula interactiva", "Material extra descargable", "Entrega SCORM para tu LMS"],
+      price: 1960000,
+    },
+  ],
+  /* `por: "curso"` se cobra una vez; `por: "modulo"` multiplica por la cantidad. */
+  extras: [
+    { id: "lab",        t: "Diagnóstico y diseño de la experiencia", d: "Terreno, entrevistas y el mapa de decisiones, antes de producir nada.",       price: 570000, por: "curso" },
+    { id: "prototipo",  t: "Prototipo probado con 5 usuarios",       d: "Una pieza funcional puesta frente a tu público antes de escalar el programa.", price: 470000, por: "curso" },
+    { id: "experto",    t: "Levantamiento de contenido con experto", d: "Cuando el contenido base todavía no existe ordenado en ninguna parte.",        price: 570000, por: "curso" },
+    { id: "jornada",    t: "Jornada de grabación en terreno",        d: "Un día de rodaje en tu instalación. Bien planificado alimenta varios módulos.", price: 770000, por: "curso" },
+    { id: "locucion",   t: "Locución profesional en todo el curso",  d: "Locutores grabados en estudio para el programa completo.",                     price: 350000, por: "curso" },
+    { id: "evaluacion", t: "Evaluación final tipo caso",             d: "Treinta preguntas situacionales para cerrar y certificar el programa.",        price:  87000, por: "curso" },
+    { id: "capsula",    t: "Cápsula interactiva adicional",          d: "Un escenario ramificado más en cada módulo.",                                  price: 470000, por: "modulo" },
+    { id: "ludica",     t: "Actividades lúdicas adicionales",        d: "Un recurso interactivo más en cada módulo.",                                   price: 250000, por: "modulo" },
+    { id: "ptbr",       t: "Versión en portugués (PT-BR)",           d: "Adaptación completa de cada módulo, no subtítulos encima del mismo video.",     price: 540000, por: "modulo" },
+  ],
+  /* Descuento por volumen del price book. Se aplica sobre los módulos, que es
+     lo que el descuento nombra — no sobre los add-ons, que no escalan igual. */
+  volumen: [
+    { desde: 1,  hasta: 1,   pct: 0 },
+    { desde: 2,  hasta: 4,   pct: 4 },
+    { desde: 5,  hasta: 10,  pct: 6 },
+    { desde: 11, hasta: 999, pct: 8 },
+  ],
+  /* El rango que se muestra alrededor de la estimación. No es un margen
+     inventado: un alcance se mueve cuando aparece el material real del cliente,
+     y publicar un número exacto al peso promete una precisión que todavía no
+     tenemos. */
+  rango: { bajo: 0.9, alto: 1.15 },
+};
+
 const escenas = [
   { id: "apertura",   n: "00", t: "Inicio" },
   { id: "brief",      n: "01", t: "Tu objetivo" },
   { id: "mezcla",     n: "02", t: "Tu solución" },
-  { id: "proyeccion", n: "03", t: "Productos" },
-  { id: "anatomia",   n: "04", t: "Qué recibes" },
+  { id: "proyeccion", n: "03", t: "Formatos" },
+  { id: "cotizador",  n: "04", t: "Cotiza acá" },
   { id: "cierre",     n: "05", t: "Conversemos" },
 ];
 
 const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/";
+
 ---
 
 <BaseLayout {title} {description} image={socialImage}>
   <Fragment slot="head">
-    <meta property="og:image:alt" content="Catálogo de recursos e-learning y multimedia de Ewaffle" />
+    <meta property="og:image:alt" content="Catálogo de formatos de aprendizaje digital de Ewaffle" />
     <meta name="theme-color" content="#0a0812" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -312,7 +342,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
     <!-- ══ Riel ══ El índice de escenas y, a la vez, la barra de avance. En
          escritorio va fijo al costado; bajo 1180px se convierte en una franja
          delgada arriba. Cumple la función de "storyline": en todo momento se
-         ve dónde vas, cuánto falta y cuántos recursos abriste. -->
+         ve dónde vas, cuánto falta y cuántos formatos abriste. -->
     <aside class="riel" aria-label="Avance del recorrido">
       <span class="riel__marca">EWAFFLE</span>
       <ol class="riel__lista">
@@ -326,7 +356,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         ))}
       </ol>
       <p class="riel__cuenta" data-vistos-riel>
-        <span data-vistos>0</span> de {recursos.length} productos probados
+        <span data-vistos>0</span> de {formatos.length} formatos probados
       </p>
       <div class="riel__barra" aria-hidden="true"><span data-barra></span></div>
     </aside>
@@ -348,9 +378,10 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
             Catálogo de productos<br /><em>Ewaffle</em>
           </h1>
           <p class="bajada" data-motion style="--retardo: 180ms;">
-            Hacemos que la capacitación de tu equipo se termine y se note en el puesto: video,
-            guías interactivas, juegos, simuladores, recorridos 360 y producción en terreno.
-            Cada producto trae un ejemplo real que puedes probar acá mismo, sin registro.
+            Hacemos que la capacitación de tu equipo se termine y se note en el puesto. Siete
+            formatos: videos formativos, guías interactivas, cápsulas interactivas, simuladores,
+            recorridos 360, actividades lúdicas y producción en terreno. Cada uno con ejemplos que
+            puedes probar acá mismo, sin registro — y un cotizador al final.
           </p>
           <div class="acciones" data-motion style="--retardo: 260ms;">
             <a href="#brief" class="boton boton--primario" data-cta="empezar">
@@ -358,17 +389,17 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
             </a>
             <a href="#proyeccion" class="boton boton--fantasma" data-cta="saltar">
-              Ver todos los productos
+              Ver los siete formatos
             </a>
           </div>
           <dl class="datos" data-motion style="--retardo: 340ms;">
-            <div><dt>Productos</dt><dd>{recursos.length}</dd></div>
-            <div><dt>Los pruebas acá</dt><dd>{adentro}</dd></div>
-            <div><dt>Entrega</dt><dd>SCORM</dd></div>
+            <div><dt>Formatos</dt><dd>{formatos.length}</dd></div>
+            <div><dt>Pruebas acá mismo</dt><dd>{piezasAdentro}</dd></div>
+            <div><dt>Cotizas</dt><dd>en línea</dd></div>
           </dl>
         </div>
 
-        <!-- La pared de pantallas. Son capturas de los recursos que están más
+        <!-- La pared de pantallas. Son capturas de los formatos que están más
              abajo, así que para un lector de pantalla es repetición: va oculta.
              Existe por el mismo motivo que en la página de simuladores — una
              portada que promete producto y no muestra ni un pixel de producto
@@ -445,21 +476,25 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         </p>
       </section>
 
-      <!-- ══ ESCENA 03 · La proyección ═════════════════════════════════════
-           El corazón. Cada tarjeta tiene una captura del recurso real y uno o
-           más botones que lo abren en el visor. Las que no se dejan incrustar
-           lo dicen en la propia tarjeta: mentir sobre eso se descubre en el
-           primer clic. -->
+      <!-- ══ ESCENA 03 · Los formatos ══════════════════════════════════════
+           El corazón. Antes era una grilla de once tarjetas de 330 px, y la
+           grilla mentía por igualación: el simulador multijugador y un enlace
+           a Articulate ocupaban el mismo rectángulo. Acá cada formato es una
+           banda de ancho completo que se lee de arriba a abajo, con la pantalla
+           del recurso al lado del texto que lo explica y alternando de costado
+           para que bajar no se sienta como pasar filas de una tabla.
+           Las piezas que no se dejan incrustar lo dicen en su propio botón:
+           mentir sobre eso se descubre en el primer clic. -->
       <section class="escena escena--ancha" id="proyeccion" data-escena="proyeccion">
-        <p class="claqueta" data-motion>03 · Productos</p>
+        <p class="claqueta" data-motion>03 · Formatos</p>
         <h2 class="rubro" data-motion style="--retardo: 80ms;">
-          Qué producimos<br /><em>y para qué sirve cada uno.</em>
+          Siete formatos.<br /><em>Uno por tipo de problema.</em>
         </h2>
         <p class="parrafo" data-motion style="--retardo: 140ms;">
-          Cada producto trae un ejemplo real —el mismo archivo que recibe un participante— y
-          {adentro} de ellos se abren y funcionan sin que salgas de esta página, así no tienes que
-          confiar en una descripción. Los dos de Articulate se abren en otra pestaña porque su
-          visor no permite incrustarse en ningún sitio.
+          Cada uno trae ejemplos reales —el mismo archivo que recibe un participante— y
+          {piezasAdentro} de las {piezasTotales} pruebas se abren y funcionan sin que salgas de
+          esta página. Las de Articulate y la de Drive van a otra pestaña porque sus visores no
+          permiten incrustarse en ningún sitio.
         </p>
 
         <div class="filtro" data-filtro hidden>
@@ -468,39 +503,35 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         </div>
 
         <div class="rollo">
-          {recursos.map((r, i) => (
+          {formatos.map((r, i) => (
             <article
-              class:list={["reel", { "reel--plano": !r.img }]}
+              class="banda"
               data-reel={r.id}
               data-para={r.para.join(" ")}
               data-motion
-              style={`--retardo: ${(i % 3) * 70}ms;`}
+              style={`--retardo: ${(i % 2) * 60}ms;`}
             >
-              {r.img ? (
-                <div class="reel__pantalla">
-                  <img src={r.img} alt={r.alt} width="1100" height="688" loading="lazy" decoding="async" />
-                  <span class="reel__lupa" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                  </span>
-                </div>
-              ) : (
-                <div class="reel__placa" aria-hidden="true">
-                  <span>{r.eyebrow}</span>
-                  <b>{r.titulo}</b>
-                  <em>Se abre fuera</em>
-                </div>
-              )}
+              <div class="banda__pantalla">
+                <img src={r.img} alt={r.alt} width="1100" height="688" loading={i < 2 ? "eager" : "lazy"} decoding="async" />
+                <span class="banda__lupa" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                </span>
+                <span class="banda__visto" data-visto-marca hidden>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Visto
+                </span>
+              </div>
 
-              <div class="reel__cuerpo">
-                <p class="reel__meta">
-                  <span class="reel__grupo">{r.grupo}</span>
-                  <span class="reel__eyebrow">{r.eyebrow}</span>
+              <div class="banda__cuerpo">
+                <p class="banda__meta">
+                  <span class="banda__n">{r.n}</span>
+                  <span class="banda__grupo">{r.grupo}</span>
                 </p>
-                <h3 class="reel__titulo">{r.titulo}</h3>
-                <p class="reel__texto">{r.texto}</p>
-                <ul class="reel__lista">{r.bullets.map((b) => <li>{b}</li>)}</ul>
+                <h3 class="banda__titulo">{r.titulo}</h3>
+                <p class="banda__resumen">{r.resumen}</p>
+                <p class="banda__texto">{r.texto}</p>
+                <ul class="banda__lista">{r.bullets.map((b) => <li>{b}</li>)}</ul>
 
-                <div class="reel__acciones">
+                <div class="banda__acciones">
                   {r.piezas.map((p) =>
                     p.modo === "externo" ? (
                       <a
@@ -534,72 +565,119 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
                   )}
                 </div>
               </div>
-
-              <span class="reel__visto" data-visto-marca hidden>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Visto
-              </span>
             </article>
           ))}
         </div>
       </section>
 
-      <!-- ══ ESCENA 04 · Anatomía ══════════════════════════════════════════
-           Era una tabla de cuatro filas. Sigue siendo la misma información,
-           pero desplegada de a una: el módulo se arma delante tuyo en vez de
-           quedar listado. -->
-      <section class="escena" id="anatomia" data-escena="anatomia">
-        <p class="claqueta" data-motion>04 · Qué recibes</p>
+      <!-- ══ ESCENA 04 · El cotizador ══════════════════════════════════════
+           Ocupa el lugar de "Qué recibes", que era una tabla de anatomía más
+           cuatro estándares de producción. La tabla decía qué trae un módulo
+           pero nunca cuánto vale, así que el visitante terminaba el catálogo
+           sabiendo todo salvo lo único que necesitaba para decidir si seguía.
+           La definición de módulo no se perdió: vive dentro de las dos tarjetas
+           de base, que es donde se usa.
+
+           La caja del resumen no muestra precio por línea. Muestra qué elegiste
+           y un total. Esa es la misma regla que rige las propuestas. -->
+      <section class="escena escena--ancha" id="cotizador" data-escena="cotizador">
+        <p class="claqueta" data-motion>04 · Cotiza acá</p>
         <h2 class="rubro" data-motion style="--retardo: 80ms;">
-          Qué incluye<br />cada módulo.
+          Arma tu programa<br /><em>y mira cuánto cuesta.</em>
         </h2>
         <p class="parrafo" data-motion style="--retardo: 140ms;">
-          "Cápsulas", "módulos", "un curso" y "una ruta completa" significan cosas distintas para
-          cada proveedor, y por eso dos cotizaciones parecidas terminan entregando cosas muy
-          distintas. Traducimos todo a esta unidad para que puedas comparar alcance con números
-          — incluida la propuesta de otro.
+          "Cápsulas", "módulos" y "una ruta completa" significan cosas distintas para cada
+          proveedor, y por eso dos cotizaciones parecidas terminan entregando cosas muy distintas.
+          Acá la unidad está definida y el precio se mueve delante tuyo: elige el tipo de módulo,
+          cuántos y qué le agregas.
         </p>
 
-        <div class="anatomia" data-motion style="--retardo: 180ms;">
-          <div class="anatomia__barra" role="tablist" aria-label="Partes de un módulo">
-            {anatomia.map((a, i) => (
-              <button
-                type="button"
-                role="tab"
-                class="anatomia__parte"
-                data-parte={a.k}
-                id={`tab-${a.k}`}
-                aria-controls={`panel-${a.k}`}
-                aria-selected={i === 0 ? "true" : "false"}
-                tabindex={i === 0 ? "0" : "-1"}
-              >
-                <span class="anatomia__m">{a.m}</span>
-                <span class="anatomia__t">{a.t}</span>
-              </button>
-            ))}
-          </div>
-          {anatomia.map((a, i) => (
-            <div
-              class="anatomia__panel"
-              id={`panel-${a.k}`}
-              role="tabpanel"
-              aria-labelledby={`tab-${a.k}`}
-              data-panel={a.k}
-              hidden={i !== 0}
-            >
-              <h3>{a.t}</h3>
-              <p>{a.d}</p>
-            </div>
-          ))}
-        </div>
+        <div class="cotiza" data-motion style="--retardo: 180ms;">
+          <div class="cotiza__panel">
 
-        <h3 class="sub" data-motion>Cuatro estándares de producción</h3>
-        <div class="estandares">
-          {estandares.map((e, i) => (
-            <div class="estandar" data-motion style={`--retardo: ${i * 60}ms;`}>
-              <b>{e.t}</b>
-              <span>{e.d}</span>
+            <fieldset class="paso">
+              <legend><span class="paso__n">01</span> Elige el tipo de módulo</legend>
+              <div class="bases">
+                {cotizador.bases.map((b) => (
+                  <label class="base">
+                    <input type="radio" name="cotiza-base" value={b.id} checked={!!b.reco} data-base />
+                    <span class="base__marco">
+                      <span class="base__cabeza">
+                        <b>{b.t}</b>
+                        {b.reco && <em class="base__sello">Recomendado</em>}
+                      </span>
+                      <span class="base__d">{b.d}</span>
+                      <ul class="base__incluye">{b.incluye.map((i) => <li>{i}</li>)}</ul>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset class="paso">
+              <legend><span class="paso__n">02</span> ¿Cuántos módulos?</legend>
+              <div class="cantidad">
+                <button type="button" class="cantidad__b" data-menos aria-label="Un módulo menos">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" /></svg>
+                </button>
+                <input
+                  type="number" inputmode="numeric" min="1" max="30" step="1" value="4"
+                  class="cantidad__n" data-cantidad aria-label="Cantidad de módulos"
+                />
+                <button type="button" class="cantidad__b" data-mas aria-label="Un módulo más">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                </button>
+                <span class="cantidad__nota" data-volumen></span>
+              </div>
+            </fieldset>
+
+            <fieldset class="paso">
+              <legend><span class="paso__n">03</span> Agrega lo que necesites</legend>
+              <div class="extras">
+                {cotizador.extras.map((e) => (
+                  <label class="extra">
+                    <input type="checkbox" value={e.id} data-extra />
+                    <span class="extra__marco">
+                      <span class="extra__tic" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7" /></svg>
+                      </span>
+                      <span class="extra__texto">
+                        <b>{e.t}</b>
+                        <span>{e.d}</span>
+                      </span>
+                      <em class="extra__por">{e.por === "modulo" ? "por módulo" : "una vez"}</em>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          </div>
+
+          <aside class="cotiza__resumen" aria-live="polite">
+            <div class="resumen">
+              <p class="claqueta__mono resumen__rotulo">Tu programa</p>
+              <ul class="resumen__lineas" data-resumen-lineas></ul>
+
+              <div class="resumen__total">
+                <span class="resumen__k">Estimación</span>
+                <b class="resumen__monto" data-total>—</b>
+                <span class="resumen__rango" data-rango></span>
+              </div>
+
+              <p class="resumen__pie">
+                Pesos chilenos, exentos de IVA. Es una estimación referencial: el número se fija
+                cuando vemos tu material, tu audiencia y tu plazo — y muchas veces parte de lo que
+                ya tienes producido sirve y no hay que rehacerlo.
+              </p>
+
+              <button type="button" class="boton boton--primario" data-cotiza-cta>
+                Recibir esta cotización
+              </button>
+              <a href={agendaUrl} target="_blank" rel="noreferrer" class="boton boton--fantasma" data-cta="agenda-cotizador">
+                Prefiero conversarlo primero
+              </a>
             </div>
-          ))}
+          </aside>
         </div>
 
         <div class="operamos" data-motion>
@@ -898,7 +976,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
   .boton--fantasma { border-color: var(--linea-viva); color: var(--tiza); background: rgba(255, 255, 255, 0.04); }
   .boton--fantasma:hover { border-color: rgba(255, 255, 255, 0.36); transform: translateY(-2px); }
   .boton:focus-visible, .pieza:focus-visible, .opcion:focus-visible,
-  .enlace:focus-visible, .riel__item:focus-visible, .anatomia__parte:focus-visible {
+  .enlace:focus-visible, .riel__item:focus-visible, .paso legend:focus-visible {
     outline: 2px solid var(--haz); outline-offset: 3px;
   }
 
@@ -1038,91 +1116,118 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
   .mezcla__pieza b { font-size: 1.06rem; letter-spacing: -0.015em; }
   .mezcla__pieza span:last-child { font-size: 14.5px; color: var(--niebla); line-height: 1.55; }
 
-  /* ═══ Escena 03 · El rollo ═════════════════════════════════════════════ */
+  /* ═══ Escena 03 · Las bandas ═══════════════════════════════════════════
+     Un formato por banda, de ancho completo, alternando de qué lado va la
+     pantalla. La grilla de tarjetas anterior repartía el mismo rectángulo a
+     todo y eso aplanaba el catálogo; acá el recurso se ve grande y el texto
+     tiene aire para explicar en vez de resumir. */
   .filtro {
     display: flex; align-items: center; flex-wrap: wrap; gap: 6px 4px;
     margin: 0 0 26px; padding: 12px 16px; border-radius: 12px;
     border: 1px solid rgba(255, 177, 72, 0.25); background: rgba(255, 177, 72, 0.07);
     font-size: 14.5px; color: var(--tiza);
   }
-  .rollo { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+  .rollo { display: grid; gap: clamp(20px, 3vw, 34px); }
 
-  .reel {
-    position: relative; display: flex; flex-direction: column;
-    border-radius: 18px; overflow: hidden;
-    border: 1px solid var(--linea); background: var(--sala-2);
-    transition: transform 380ms var(--curva), border-color 380ms var(--curva);
+  .banda {
+    position: relative;
+    display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+    gap: clamp(22px, 3vw, 44px);
+    /* `stretch` y no `center`: centrada, la pantalla dejaba una franja muerta
+       arriba y abajo cuando el texto era más alto que ella, que es casi siempre.
+       Estirada, la tarjeta usa el alto que ocupa. */
+    align-items: stretch;
+    padding: clamp(20px, 2.4vw, 30px);
+    border-radius: 22px; border: 1px solid var(--linea); background: var(--sala-2);
+    transition: border-color 380ms var(--curva), background 380ms var(--curva);
   }
-  .reel:hover { transform: translateY(-5px); border-color: var(--linea-viva); }
+  .banda:hover { border-color: var(--linea-viva); }
+  /* La pantalla cambia de costado en las pares. Es `direction`, no `order`:
+     con `order` el foco del teclado seguiría el orden visual y saltaría de la
+     imagen de una banda al texto de la otra. */
+  .banda:nth-child(even) .banda__pantalla { grid-column: 2; grid-row: 1; }
+  .banda:nth-child(even) .banda__cuerpo { grid-column: 1; grid-row: 1; }
+
   /* El destacado del objetivo elegido usa un borde ámbar Y una etiqueta: el
      color solo no comunica nada a quien no distingue el matiz. */
-  .reel.es-recomendado { border-color: rgba(255, 177, 72, 0.55); }
-  .reel.es-recomendado::before {
-    content: "Para tu objetivo"; position: absolute; z-index: 3; top: 12px; left: 12px;
+  .banda.es-recomendado { border-color: rgba(255, 177, 72, 0.55); background: rgba(255, 177, 72, 0.045); }
+  .banda.es-recomendado::before {
+    content: "Para tu objetivo"; position: absolute; z-index: 4; top: -10px; left: clamp(20px, 2.4vw, 30px);
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 5px 9px; border-radius: 999px; background: var(--haz); color: #12102a;
+    padding: 5px 10px; border-radius: 999px; background: var(--haz); color: #12102a;
   }
-  .reel.es-apagado { opacity: 0.44; }
-  .reel.es-apagado:hover { opacity: 1; }
+  .banda.es-apagado { opacity: 0.5; }
+  .banda.es-apagado:hover { opacity: 1; }
 
-  .reel__pantalla { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0f0d20; }
-  .reel__pantalla img {
+  .banda__pantalla {
+    position: relative; overflow: hidden; border-radius: 14px;
+    min-height: clamp(250px, 23vw, 340px);
+    /* Tope de alto: `cover` recorta por el lado largo, y varias de estas
+       pantallas son capturas de interfaz. Estirada sin límite, una banda de
+       texto largo dejaba la columna tan alta que el recorte se comía el borde
+       derecho de la captura. */
+    max-height: 470px;
+    background: #0f0d20; border: 1px solid var(--linea);
+  }
+  .banda__pantalla img {
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 0;
     transition: transform 700ms var(--curva), opacity 400ms var(--curva);
-    opacity: 0.92;
+    opacity: 0.94;
   }
-  .reel:hover .reel__pantalla img { transform: scale(1.045); opacity: 1; }
-  .reel__pantalla::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 46%, rgba(20, 17, 43, 0.92) 100%);
+  .banda:hover .banda__pantalla img { transform: scale(1.035); opacity: 1; }
+  .banda__pantalla::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgba(20, 17, 43, 0.78) 100%);
   }
-  .reel__lupa {
+  .banda__lupa {
     position: absolute; z-index: 2; right: 14px; bottom: 14px;
-    width: 42px; height: 42px; border-radius: 50%;
+    width: 44px; height: 44px; border-radius: 50%;
     display: grid; place-items: center;
     background: rgba(10, 8, 18, 0.72); border: 1px solid var(--linea-viva);
     backdrop-filter: blur(6px);
     transition: transform 320ms var(--curva);
   }
-  .reel__lupa svg { width: 15px; height: 15px; fill: var(--haz); margin-left: 2px; }
-  .reel:hover .reel__lupa { transform: scale(1.12); }
-
-  /* Las dos piezas que no se dejan incrustar no reciben una captura falsa:
-     reciben una placa tipográfica. La diferencia visual dice la verdad — esta
-     se abre fuera — sin tener que escribirlo dos veces. */
-  .reel__placa {
-    aspect-ratio: 16 / 10; display: grid; align-content: center; gap: 8px;
-    padding: 26px 24px; background:
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 9px),
-      linear-gradient(150deg, #1b1839, #120f26);
-    border-bottom: 1px solid var(--linea);
-  }
-  .reel__placa span {
+  .banda__lupa svg { width: 15px; height: 15px; fill: var(--haz); margin-left: 2px; }
+  .banda:hover .banda__lupa { transform: scale(1.12); }
+  .banda__visto {
+    position: absolute; z-index: 3; top: 12px; left: 12px;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 10px; border-radius: 999px;
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--haz);
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    background: rgba(15, 122, 82, 0.92); color: #eafaf3;
   }
-  .reel__placa b { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
-  .reel__placa em {
-    font-style: normal; font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--niebla);
-  }
+  .banda__visto svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
-  .reel__cuerpo { display: flex; flex-direction: column; gap: 10px; padding: 20px 20px 22px; flex: 1; }
-  .reel__meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-  .reel__grupo, .reel__eyebrow {
+  .banda__cuerpo { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .banda__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; }
+  .banda__n {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 4px 8px; border-radius: 5px;
+    font-size: 2.1rem; font-weight: 600; line-height: 1; letter-spacing: -0.02em;
+    color: var(--haz); opacity: 0.55;
   }
-  .reel__grupo { background: rgba(38, 146, 214, 0.15); color: #8ecbf2; }
-  .reel__eyebrow { background: rgba(253, 90, 147, 0.14); color: #ff9dbf; }
-  .reel__titulo { margin: 0; font-size: 1.24rem; font-weight: 700; letter-spacing: -0.024em; line-height: 1.24; }
-  .reel__texto { margin: 0; font-size: 14.8px; color: var(--niebla); line-height: 1.58; }
-  .reel__lista { margin: 2px 0 0; padding: 0 0 0 17px; display: grid; gap: 4px; list-style: disc; }
-  .reel__lista li { font-size: 13.8px; color: var(--niebla); line-height: 1.5; }
-  .reel__lista li::marker { color: var(--haz); }
-  .reel__acciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 14px; }
+  .banda__grupo {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 9px; border-radius: 5px;
+    background: rgba(38, 146, 214, 0.15); color: #8ecbf2;
+  }
+  .banda__titulo { margin: 0; font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 800; letter-spacing: -0.032em; line-height: 1.12; }
+  .banda__resumen { margin: 0; font-size: clamp(1rem, 1.4vw, 1.12rem); font-weight: 600; color: var(--haz); line-height: 1.42; }
+  .banda__texto { margin: 0; color: var(--niebla); line-height: 1.62; max-width: 60ch; }
+  .banda__lista { margin: 2px 0 0; padding: 0 0 0 18px; display: grid; gap: 6px; list-style: disc; max-width: 62ch; }
+  .banda__lista li { font-size: 14.6px; color: var(--niebla); line-height: 1.52; }
+  .banda__lista li::marker { color: var(--haz); }
+  .banda__acciones { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 6px; }
+
+  @media (max-width: 900px) {
+    .banda { grid-template-columns: 1fr; }
+    /* Apiladas ya no hay alto que igualar, así que vuelve la proporción. */
+    .banda__pantalla { aspect-ratio: 16 / 10; min-height: 0; }
+    .banda:nth-child(even) .banda__pantalla,
+    .banda:nth-child(even) .banda__cuerpo { grid-column: 1; grid-row: auto; }
+  }
 
   .pieza {
     display: inline-flex; align-items: center; gap: 7px;
@@ -1139,49 +1244,156 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
   .pieza--fuera svg { fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
   .pieza--fuera:hover { border-color: rgba(255, 255, 255, 0.36); color: var(--tiza); }
 
-  .reel__visto {
-    position: absolute; z-index: 3; top: 12px; right: 12px;
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 5px 10px; border-radius: 999px;
+  /* ═══ Escena 04 · El cotizador ═════════════════════════════════════════
+     Panel de decisiones a la izquierda, resumen pegajoso a la derecha. El
+     resumen tiene que estar a la vista mientras se elige: un total que hay que
+     ir a buscar con scroll deja de ser feedback y vuelve a ser una tabla. */
+  .cotiza {
+    display: grid; grid-template-columns: minmax(0, 1fr) 360px;
+    gap: clamp(20px, 2.6vw, 32px); align-items: start;
+  }
+  .cotiza__panel { display: grid; gap: 18px; min-width: 0; }
+
+  .paso {
+    margin: 0; padding: clamp(20px, 2.2vw, 26px);
+    border: 1px solid var(--linea); border-radius: 18px; background: var(--sala-2);
+  }
+  .paso legend {
+    display: flex; align-items: center; gap: 10px; padding: 0;
+    font-size: 1.06rem; font-weight: 700; letter-spacing: -0.018em; color: var(--tiza);
+  }
+  .paso__n {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-    background: rgba(15, 122, 82, 0.92); color: #eafaf3;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+    padding: 4px 8px; border-radius: 5px;
+    background: rgba(255, 177, 72, 0.14); color: var(--haz);
   }
-  .reel__visto svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ═══ Escena 04 · Anatomía ═════════════════════════════════════════════ */
-  .anatomia { border: 1px solid var(--linea); border-radius: 18px; overflow: hidden; background: var(--sala-2); }
-  .anatomia__barra { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .anatomia__parte {
-    position: relative; font: inherit; cursor: pointer; text-align: left;
-    display: grid; gap: 5px; padding: 20px 18px; min-height: 92px;
-    border: 0; border-right: 1px solid var(--linea);
-    background: transparent; color: var(--niebla);
-    transition: color 260ms var(--curva), background 260ms var(--curva);
+  .bases { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 18px; }
+  .base { position: relative; display: block; cursor: pointer; }
+  /* El radio se oculta del ojo pero no del teclado ni del lector: sigue siendo
+     el control real y de él salen el foco y el estado. */
+  .base input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .base__marco {
+    display: grid; gap: 9px; height: 100%; align-content: start;
+    padding: 18px 17px; border-radius: 14px;
+    border: 1px solid var(--linea); background: rgba(255, 255, 255, 0.025);
+    transition: border-color 240ms var(--curva), background 240ms var(--curva);
   }
-  .anatomia__parte:last-child { border-right: 0; }
-  .anatomia__parte:hover { background: rgba(255, 255, 255, 0.04); color: var(--tiza); }
-  .anatomia__parte::after {
-    content: ""; position: absolute; inset: auto 0 0 0; height: 2px;
-    background: var(--haz); transform: scaleX(0); transform-origin: left center;
-    transition: transform 320ms var(--curva);
+  .base:hover .base__marco { border-color: var(--linea-viva); }
+  .base input:focus-visible + .base__marco { outline: 2px solid var(--haz); outline-offset: 3px; }
+  .base input:checked + .base__marco { border-color: var(--haz); background: rgba(255, 177, 72, 0.08); }
+  .base__cabeza { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .base__cabeza b { font-size: 1.08rem; letter-spacing: -0.018em; }
+  .base__sello {
+    font-style: normal; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 999px; background: var(--haz); color: #12102a;
   }
-  .anatomia__parte[aria-selected="true"] { color: var(--tiza); background: rgba(255, 177, 72, 0.07); }
-  .anatomia__parte[aria-selected="true"]::after { transform: scaleX(1); }
-  .anatomia__m { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--haz); }
-  .anatomia__t { font-size: 15px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; }
-  .anatomia__panel { padding: 26px 24px 30px; border-top: 1px solid var(--linea); }
-  .anatomia__panel h3 { margin: 0 0 8px; font-size: 1.28rem; font-weight: 700; letter-spacing: -0.022em; }
-  .anatomia__panel p { margin: 0; max-width: 62ch; color: var(--niebla); }
+  .base__d { font-size: 14.2px; color: var(--niebla); line-height: 1.52; }
+  .base__incluye { margin: 2px 0 0; padding: 0; display: grid; gap: 5px; list-style: none; }
+  .base__incluye li {
+    position: relative; padding-left: 19px;
+    font-size: 13.4px; color: var(--niebla); line-height: 1.45;
+  }
+  .base__incluye li::before {
+    content: "+"; position: absolute; left: 3px; top: -1px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; color: var(--haz); font-weight: 600;
+  }
 
-  .estandares { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  .estandar {
-    display: grid; gap: 6px; align-content: start;
-    padding: 20px 18px; border-radius: 14px;
-    border: 1px solid var(--linea); background: var(--sala-2);
+  .cantidad { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .cantidad__b {
+    width: 46px; height: 46px; display: grid; place-items: center; cursor: pointer;
+    border-radius: 12px; border: 1px solid var(--linea-viva);
+    background: rgba(255, 255, 255, 0.04); color: var(--tiza);
+    transition: border-color 200ms var(--curva), background 200ms var(--curva);
   }
-  .estandar b { font-size: 1.02rem; letter-spacing: -0.015em; color: var(--haz); }
-  .estandar span { font-size: 14.2px; color: var(--niebla); line-height: 1.55; }
+  .cantidad__b:hover { border-color: var(--haz); color: var(--haz); }
+  .cantidad__b svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+  .cantidad__n {
+    width: 84px; height: 46px; text-align: center;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 1.24rem; font-weight: 600; color: var(--tiza);
+    border-radius: 12px; border: 1px solid var(--linea-viva); background: rgba(0, 0, 0, 0.25);
+    -moz-appearance: textfield;
+  }
+  .cantidad__n::-webkit-outer-spin-button,
+  .cantidad__n::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .cantidad__nota { font-size: 13.6px; color: var(--niebla); flex: 1 1 190px; }
+  .cantidad__nota :global(b) { color: var(--haz); font-weight: 600; }
+
+  .extras { display: grid; gap: 9px; margin-top: 18px; }
+  .extra { display: block; cursor: pointer; position: relative; }
+  .extra input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .extra__marco {
+    display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 12px; align-items: start;
+    padding: 14px 15px; border-radius: 12px;
+    border: 1px solid var(--linea); background: rgba(255, 255, 255, 0.02);
+    transition: border-color 220ms var(--curva), background 220ms var(--curva);
+  }
+  .extra:hover .extra__marco { border-color: var(--linea-viva); }
+  .extra input:focus-visible + .extra__marco { outline: 2px solid var(--haz); outline-offset: 3px; }
+  .extra input:checked + .extra__marco { border-color: rgba(255, 177, 72, 0.5); background: rgba(255, 177, 72, 0.07); }
+  .extra__tic {
+    width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center;
+    border: 1px solid var(--linea-viva); background: rgba(0, 0, 0, 0.28);
+  }
+  .extra__tic svg { width: 13px; height: 13px; fill: none; stroke: #12102a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+  .extra input:checked + .extra__marco .extra__tic { background: var(--haz); border-color: var(--haz); }
+  .extra input:checked + .extra__marco .extra__tic svg { opacity: 1; }
+  .extra__texto { display: grid; gap: 3px; min-width: 0; }
+  .extra__texto b { font-size: 15px; font-weight: 600; letter-spacing: -0.012em; }
+  .extra__texto span { font-size: 13.4px; color: var(--niebla); line-height: 1.48; }
+  .extra__por {
+    font-style: normal; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--niebla);
+    padding-top: 4px; white-space: nowrap;
+  }
+
+  .cotiza__resumen { position: sticky; top: 24px; }
+  .resumen {
+    display: grid; gap: 14px; padding: 24px 22px;
+    border-radius: 18px; border: 1px solid rgba(255, 177, 72, 0.28);
+    background: linear-gradient(160deg, #1f1a3d, #12102a);
+  }
+  .resumen__rotulo { margin: 0; color: var(--niebla); }
+  .resumen__lineas { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .resumen__lineas :global(li) {
+    display: flex; gap: 9px; align-items: baseline;
+    font-size: 14px; color: var(--tiza); line-height: 1.42;
+  }
+  .resumen__lineas :global(li)::before {
+    content: "·"; color: var(--haz); font-weight: 700; flex: none;
+  }
+  .resumen__lineas :global(li em) { font-style: normal; color: var(--niebla); white-space: nowrap; }
+
+  .resumen__total {
+    display: grid; gap: 3px; padding-top: 14px; border-top: 1px solid var(--linea);
+  }
+  .resumen__k {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--niebla);
+  }
+  .resumen__monto {
+    font-size: clamp(1.7rem, 3vw, 2.15rem); font-weight: 800;
+    letter-spacing: -0.035em; line-height: 1.05; color: var(--haz);
+    font-variant-numeric: tabular-nums;
+  }
+  .resumen__rango {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; letter-spacing: 0.04em; color: var(--niebla);
+  }
+  .resumen__pie { margin: 0; font-size: 12.6px; color: var(--niebla); line-height: 1.52; }
+  .resumen .boton { width: 100%; justify-content: center; }
+
+  @media (max-width: 1000px) {
+    .cotiza { grid-template-columns: 1fr; }
+    /* Deja de ser pegajoso. En una columna la tarjeta mide unos 400 px: pegada
+       al borde se comía media pantalla del teléfono y tapaba justamente las
+       casillas que la persona está marcando. En vertical el resumen queda
+       después de los tres pasos, que es donde se lee igual. */
+    .cotiza__resumen { position: static; }
+  }
 
   .operamos { margin-top: 60px; padding: 28px 26px; border-radius: 18px; border: 1px solid var(--linea); background: var(--sala-2); }
   .operamos ul { margin: 0; padding: 0 0 0 19px; display: grid; gap: 9px; list-style: disc; }
@@ -1287,7 +1499,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
   }
 </style>
 
-<script type="application/json" id="catalogo-datos" is:inline set:html={JSON.stringify({ mezclas, objetivos: objetivos.map((o) => ({ id: o.id, t: o.t })), nombres: Object.fromEntries(recursos.map((r) => [r.id, r.titulo])), total: recursos.length })}></script>
+<script type="application/json" id="catalogo-datos" is:inline set:html={JSON.stringify({ mezclas, objetivos: objetivos.map((o) => ({ id: o.id, t: o.t })), nombres: Object.fromEntries(formatos.map((r) => [r.id, r.titulo])), total: formatos.length, cotizador })}></script>
 
 <script is:inline>
   /* ═══════════════════════════════════════════════════════════════════════
@@ -1359,7 +1571,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
     window.addEventListener("scroll", pintarRiel, { passive: true });
     window.addEventListener("resize", pintarRiel);
     /* Un salto por ancla no siempre dispara `scroll`, así que al entrar con
-       `/catalogo/#anatomia` el riel se quedaba marcando la escena anterior. */
+       `/catalogo/#cotizador` el riel se quedaba marcando la escena anterior. */
     window.addEventListener("hashchange", function () { setTimeout(pintarRiel, 60); });
     setTimeout(pintarRiel, 120);
 
@@ -1625,22 +1837,12 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
     var botonForm = document.querySelector("[data-abrir-form]");
     if (botonForm) {
       botonForm.addEventListener("click", function () {
-        var lineas = [];
-        if (objetivo) {
-          lineas.push("Lo que quiero resolver: " + nombreObjetivo(objetivo) + ".");
-          var m = datos.mezclas[objetivo];
-          if (m) lineas.push("Mezcla sugerida en el catálogo: " + m.tag + ".");
-        }
-        /* Los nombres, no los identificadores. El mensaje lo lee una persona del
-           equipo en el correo del lead: "guias, motion" no le dice nada. */
-        if (vistos.length) {
-          lineas.push("Productos que probé: " + vistos.map(function (id) {
-            return datos.nombres[id] || id;
-          }).join("; ") + ".");
-        }
         evento("catalogo_cta", { destino: "formulario", objetivo: objetivo || "sin_elegir", vistos: vistos.length });
         if (typeof window.ewaffleAbrirModalCatalogo === "function") {
-          window.ewaffleAbrirModalCatalogo(lineas.join("\n"));
+          /* Con la cotización incluida: si la persona bajó hasta acá ya pasó por
+             el cotizador, y llegar al formulario sin ese número obligaría al
+             equipo a preguntarlo de nuevo. */
+          window.ewaffleAbrirModalCatalogo(contexto(true));
         } else {
           window.location.href = "https://ewaffle.cl/#contact";
         }
@@ -1651,33 +1853,189 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
       a.addEventListener("click", function () { evento("catalogo_cta", { destino: a.getAttribute("data-cta") }); });
     });
 
-    /* ── Anatomía: pestañas ─────────────────────────────────────────────── */
-    var pestanas = Array.prototype.slice.call(document.querySelectorAll("[data-parte]"));
-    function elegirParte(k, mover) {
-      pestanas.forEach(function (t) {
-        var suya = t.getAttribute("data-parte") === k;
-        t.setAttribute("aria-selected", suya ? "true" : "false");
-        t.setAttribute("tabindex", suya ? "0" : "-1");
-        if (suya && mover) t.focus();
+    /* ── Escena 04: el cotizador ────────────────────────────────────────
+       Reemplaza a las pestañas de anatomía. Todo el cálculo vive acá y en el
+       bloque `cotizador` del frontmatter, que sale del price book.
+
+       Regla de la interfaz: se muestra QUÉ elegiste y CUÁNTO suma. Nunca
+       cuánto vale cada línea. */
+    var cot = datos.cotizador;
+    var elCantidad = document.querySelector("[data-cantidad]");
+    var elTotal = document.querySelector("[data-total]");
+    var elRango = document.querySelector("[data-rango]");
+    var elLineas = document.querySelector("[data-resumen-lineas]");
+    var elVolumen = document.querySelector("[data-volumen]");
+
+    function pesos(n) {
+      /* Sin decimales y con punto de miles: un total con centavos en un
+         cotizador referencial promete una exactitud que no existe. */
+      return "$" + Math.round(n).toLocaleString("es-CL");
+    }
+    function aDiez(n) { return Math.round(n / 10000) * 10000; }
+
+    function pctVolumen(q) {
+      for (var i = 0; i < cot.volumen.length; i++) {
+        if (q >= cot.volumen[i].desde && q <= cot.volumen[i].hasta) return cot.volumen[i].pct;
+      }
+      return 0;
+    }
+
+    function calcular() {
+      if (!elTotal || !elCantidad) return null;
+
+      var q = parseInt(elCantidad.value, 10);
+      if (!q || q < 1) q = 1;
+      if (q > 30) q = 30;
+
+      var marcada = document.querySelector("[data-base]:checked");
+      var baseId = marcada ? marcada.value : null;
+      var base = cot.bases[0];
+      cot.bases.forEach(function (b) { if (b.id === baseId) base = b; });
+
+      var elegidos = [];
+      Array.prototype.slice.call(document.querySelectorAll("[data-extra]:checked"))
+        .forEach(function (c) { elegidos.push(c.value); });
+
+      var pct = pctVolumen(q);
+      var suma = base.price * q * (1 - pct / 100);
+      var lineas = [{ t: base.t, n: q, u: q === 1 ? "módulo" : "módulos" }];
+
+      cot.extras.forEach(function (e) {
+        if (elegidos.indexOf(e.id) === -1) return;
+        var veces = e.por === "modulo" ? q : 1;
+        suma += e.price * veces;
+        lineas.push({ t: e.t, n: veces, u: e.por === "modulo" ? (veces === 1 ? "módulo" : "módulos") : "" });
       });
-      document.querySelectorAll("[data-panel]").forEach(function (p) {
-        if (p.getAttribute("data-panel") === k) p.removeAttribute("hidden");
-        else p.setAttribute("hidden", "");
+
+      return { q: q, base: base, pct: pct, total: aDiez(suma), lineas: lineas, extras: elegidos };
+    }
+
+    function pintarCotizador() {
+      var r = calcular();
+      if (!r) return;
+
+      if (elLineas) {
+        elLineas.innerHTML = "";
+        r.lineas.forEach(function (l) {
+          var li = document.createElement("li");
+          var b = document.createElement("span");
+          b.textContent = l.t;
+          li.appendChild(b);
+          if (l.n > 1 || l.u) {
+            var em = document.createElement("em");
+            em.textContent = l.u ? "× " + l.n + " " + l.u : "× " + l.n;
+            li.appendChild(em);
+          }
+          elLineas.appendChild(li);
+        });
+      }
+
+      if (elTotal) elTotal.textContent = pesos(r.total);
+      if (elRango) {
+        elRango.textContent = "Rango de referencia " + pesos(aDiez(r.total * cot.rango.bajo)) +
+          " – " + pesos(aDiez(r.total * cot.rango.alto));
+      }
+      if (elVolumen) {
+        elVolumen.innerHTML = "";
+        var nota = document.createElement("span");
+        if (r.pct > 0) {
+          nota.innerHTML = "Incluye <b>" + r.pct + "% de descuento</b> por volumen sobre los módulos.";
+        } else {
+          nota.textContent = "Desde dos módulos se aplica descuento por volumen.";
+        }
+        elVolumen.appendChild(nota);
+      }
+      return r;
+    }
+
+    if (elCantidad) {
+      /* `change` no basta: escribiendo el número a mano el total se quedaría
+         quieto hasta perder el foco, y el cotizador dejaría de responder justo
+         cuando la persona está probando cifras. */
+      elCantidad.addEventListener("input", pintarCotizador);
+      elCantidad.addEventListener("change", function () {
+        var q = parseInt(elCantidad.value, 10);
+        if (!q || q < 1) elCantidad.value = 1;
+        if (q > 30) elCantidad.value = 30;
+        pintarCotizador();
       });
     }
-    pestanas.forEach(function (t, i) {
-      t.addEventListener("click", function () { elegirParte(t.getAttribute("data-parte"), false); });
-      t.addEventListener("keydown", function (e) {
-        var salto = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-        if (!salto) return;
-        e.preventDefault();
-        var sig = pestanas[(i + salto + pestanas.length) % pestanas.length];
-        elegirParte(sig.getAttribute("data-parte"), true);
+    function mover(paso) {
+      if (!elCantidad) return;
+      var q = (parseInt(elCantidad.value, 10) || 1) + paso;
+      elCantidad.value = Math.max(1, Math.min(30, q));
+      pintarCotizador();
+      evento("catalogo_cotizador", { campo: "cantidad", valor: elCantidad.value });
+    }
+    var bMenos = document.querySelector("[data-menos]");
+    var bMas = document.querySelector("[data-mas]");
+    if (bMenos) bMenos.addEventListener("click", function () { mover(-1); });
+    if (bMas) bMas.addEventListener("click", function () { mover(1); });
+
+    document.querySelectorAll("[data-base]").forEach(function (c) {
+      c.addEventListener("change", function () {
+        pintarCotizador();
+        evento("catalogo_cotizador", { campo: "base", valor: c.value });
+      });
+    });
+    document.querySelectorAll("[data-extra]").forEach(function (c) {
+      c.addEventListener("change", function () {
+        pintarCotizador();
+        evento("catalogo_cotizador", { campo: "extra", valor: c.value, activo: c.checked });
       });
     });
 
+    /* El contexto que viaja al formulario: lo que eligió en el recorrido más lo
+       que armó en el cotizador. Los nombres, no los identificadores — esto lo
+       lee una persona del equipo en el correo del lead. */
+    function contexto(conCotizacion) {
+      var lineas = [];
+      if (objetivo) {
+        lineas.push("Lo que quiero resolver: " + nombreObjetivo(objetivo) + ".");
+        var m = datos.mezclas[objetivo];
+        if (m) lineas.push("Mezcla sugerida en el catálogo: " + m.tag + ".");
+      }
+      if (vistos.length) {
+        lineas.push("Formatos que probé: " + vistos.map(function (id) {
+          return datos.nombres[id] || id;
+        }).join("; ") + ".");
+      }
+      if (conCotizacion) {
+        var r = calcular();
+        if (r) {
+          lineas.push("");
+          lineas.push("Armé esto en el cotizador:");
+          r.lineas.forEach(function (l) {
+            lineas.push("· " + l.t + (l.n > 1 || l.u ? " × " + l.n + (l.u ? " " + l.u : "") : ""));
+          });
+          lineas.push("Estimación que me mostró la página: " + pesos(r.total) + " (exento de IVA).");
+        }
+      }
+      return lineas.join("\n");
+    }
+
+    var ctaCotiza = document.querySelector("[data-cotiza-cta]");
+    if (ctaCotiza) {
+      ctaCotiza.addEventListener("click", function () {
+        var r = calcular();
+        evento("catalogo_cta", {
+          destino: "cotizacion",
+          modulos: r ? r.q : null,
+          base: r ? r.base.id : null,
+          extras: r ? r.extras.join(",") : "",
+          total: r ? r.total : null
+        });
+        if (typeof window.ewaffleAbrirModalCatalogo === "function") {
+          window.ewaffleAbrirModalCatalogo(contexto(true));
+        } else {
+          window.location.href = "https://ewaffle.cl/#contact";
+        }
+      });
+    }
+
     /* ── Estado inicial ─────────────────────────────────────────────────── */
     pintarVistos();
+    pintarCotizador();
     if (objetivo && datos.mezclas[objetivo]) aplicarObjetivo(objetivo, false);
     else pintarRodaje();
   })();
