@@ -1,12 +1,8 @@
-<!-- course-scorm: generado desde lab/buffalo-genially.course.json
-     spec b4044d6bd462 · 2026-09-02
-     NO EDITAR A MANO: se regenera con publicar.mjs y tus cambios se pierden.
-     La marca vive en agents/engines/course-scorm/overlays/. -->
 <!doctype html>
 <html lang="es"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Inducción a la Operación y Estándares — piezas interactivas</title>
+<title>Inducción a la Operación y Estándares — piloto con juegos</title>
 <style>:root{--primary:#000000;--accent:#661a2b;--accent2:#7e823d;--ink:#1d2021;--muted:#6b7280;--line:#e3e6e8;--bg:#f6f7f8;--paper:#ffffff;--ok:#7e823d;--warn:#F5B60E;}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -435,32 +431,132 @@ hr.dv{border-top:2px solid var(--negro);opacity:.16}
   .btn{transition:none}
 }
 </style>
+<style>/* overlay: buffalo-juegos.css */
+/* Overlay de marca para las mecánicas de juego de Buffalo Waffles.
+   Va DESPUÉS de buffalo.css: la paleta de gajos de la ruleta y los estados
+   de acierto/error son reglas propias de los juegos, no del curso base. */
 
+/* ── juegos ──
+   Mismo criterio: el juego es un knowledge-check que creció, así que hereda
+   la piel del knowledge-check. La franja de encabezado va en negro con el
+   rótulo en Fire Yellow, que es donde el amarillo sí se puede usar como texto. */
+.game{border:2px solid var(--negro);border-radius:14px;background:var(--blanco);box-shadow:6px 6px 0 var(--negro);--g-ok:var(--ok);--g-no:var(--plum)}
+.g-hd{background:var(--negro);border-bottom:2px solid var(--negro);min-height:48px}
+.g-kind{color:var(--amarillo);letter-spacing:.1em}
+.g-prog{color:#d8d5d0}
+.g-ttl{font-family:var(--titular);font-weight:400;font-size:23px;text-transform:uppercase;letter-spacing:.02em;padding:18px 18px 0;color:var(--negro)}
+.g-intro{color:var(--gris)}
+.g-nota{color:var(--gris);font-weight:600}
+.g-foot{border-top:2px solid var(--negro);background:var(--papel)}
+.g-btn{background:var(--negro);color:var(--blanco);border:2px solid var(--negro);border-radius:10px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.07em}
+.g-btn.ghost{background:var(--blanco);color:var(--negro);border:2px solid var(--negro)}
+.game button:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.g-opt{background:var(--papel);border:2px solid var(--negro);border-radius:10px}
+.g-opt:hover:not(:disabled){border-color:var(--magenta);background:var(--blanco)}
+.g-opt.ok{background:#eff1e2}
+.g-opt.no{background:#fbeef1}
+/* Mismo criterio que el knowledge-check: la retroalimentación se tiñe.
+   Sobre papel crudo dentro de una tarjeta blanca no se leía ni como acierto
+   ni como error, era una banda gris. */
+.g-fb{background:#fbeef1;color:var(--plum);border-left-width:4px;border-radius:0 10px 10px 0;padding:11px 15px}
+.g-fb.ok{background:#eff1e2;color:var(--ok)}
+.g-q{font-weight:750;color:var(--negro)}
+.g-hint{color:var(--gris)}
+
+/* ruleta: el disco lleva sólo tonos de marca oscuros, porque el rótulo del
+   segmento va en blanco. El Fire Yellow entra en el eje, no en los gajos. */
+.g-wheel{border:4px solid var(--negro)}
+.g-needle{border-top-color:var(--negro)}
+.g-hub{background:var(--amarillo);border:3px solid var(--negro);color:var(--negro);font-family:var(--titular);font-weight:400;font-size:12px;letter-spacing:.02em}
+.g-seg{text-shadow:0 1px 2px rgba(0,0,0,.55)}
+
+/* parejas */
+.g-card{background:var(--papel);border:2px solid var(--negro);border-radius:10px}
+.g-card:hover:not(:disabled){border-color:var(--magenta)}
+.g-card.sel{border-color:var(--magenta);border-width:3px;background:var(--blanco)}
+.g-card.ok{background:#eff1e2}
+.g-card.no{background:#fbeef1}
+.g-card .g-tag{color:var(--plum);font-weight:800;letter-spacing:.1em}
+.g-col-t{color:var(--negro);letter-spacing:.1em}
+.g-band{background:#eff1e2;border-left:4px solid var(--ok);border-radius:0 10px 10px 0;padding:9px 13px}
+
+/* millonario */
+.g-rung{border:2px solid var(--negro);color:var(--gris);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.g-rung.on{background:var(--amarillo);border-color:var(--negro);color:var(--negro)}
+.g-rung.ok{background:var(--ok);border-color:var(--ok);color:var(--blanco)}
+.g-rung.help{border-color:var(--warn);color:var(--warn)}
+
+/* sopa de letras */
+.g-cel{border:2px solid var(--negro);border-radius:7px;background:var(--papel);color:var(--negro)}
+.g-cel.pick{border-color:var(--magenta);border-width:3px;background:var(--blanco)}
+.g-cel.hit{border-color:var(--ok);background:#eff1e2;color:var(--ok)}
+.g-pista{border-left:4px solid var(--linea)}
+.g-pista.hit{border-left-color:var(--ok)}
+.g-pista b{color:var(--plum);letter-spacing:.1em}
+
+/* rosco */
+.g-letra{border:2px solid var(--negro);background:var(--papel);color:var(--gris);font-weight:800}
+.g-letra.on{border-color:var(--magenta);border-width:3px;background:var(--amarillo);color:var(--negro)}
+.g-letra.hit{background:var(--ok);border-color:var(--ok);color:var(--blanco)}
+.g-letra.pass{border-color:var(--warn);color:var(--warn)}
+.g-resp input{border:2px solid var(--negro);border-radius:10px;background:var(--papel);color:var(--tinta)}
+.g-resp input:focus-visible{outline:3px solid var(--magenta);outline-offset:1px}
+
+/* clasificar */
+.g-ficha{background:var(--papel);border:2px solid var(--negro);border-radius:10px;font-weight:600}
+.g-ficha.sel{border-color:var(--magenta);border-width:3px;background:var(--amarillo)}
+.g-caja{border:2px dashed var(--negro);border-radius:12px}
+.g-caja.listo{border-style:solid;border-color:var(--negro);background:#fff9e8}
+.g-caja-t{color:var(--negro);letter-spacing:.1em}
+.g-puesta{background:#eff1e2;border:1.5px solid var(--ok);border-radius:8px;color:var(--tinta)}
+.g-puesta::before{color:var(--ok)}
+
+/* decisiones */
+.g-sit{background:var(--blanco);border:2px solid var(--negro);border-left:8px solid var(--negro);border-radius:0 12px 12px 0}
+.g-cons{background:#fff9e8;border-left:4px solid var(--amarillo);border-radius:0 10px 10px 0}
+.g-cons.ok{background:#eff1e2;border-left-color:var(--ok)}
+.g-cons b{color:var(--negro);letter-spacing:.1em}
+.g-sum b{color:var(--negro)}
+.g-review{color:var(--gris)}
+
+/* guion (bloque .script: hoy sin uso en el marcado, se deja en marca por si
+   vuelve a entrar un guion de roleplay) */
+.script{background:#fff9e8;border:2px solid var(--negro);border-radius:12px}
+.s-tag{background:var(--amarillo);color:var(--negro);border:1.5px solid var(--negro);letter-spacing:.1em}
+ol.s-sc li:before{background:var(--negro);color:var(--blanco)}
+.s-n{border-left:3px solid var(--amarillo)}
+.s-v b{color:var(--negro)}
+</style>
+<script src="scormAPI.js"></script>
 </head>
-<body data-course-id="buffalo-induccion-genially">
+<body data-course-id="buffalo-induccion-juegos">
 <div class="shell">
   <nav class="nav">
-    <div class="hd"><div class="mk">BW</div><div><h1>Inducción a la Operación y Estándares — piezas interactivas</h1><div class="cli">Buffalo Waffles</div></div></div>
+    <div class="hd"><div class="mk">BW</div><div><h1>Inducción a la Operación y Estándares — piloto con juegos</h1><div class="cli">Buffalo Waffles</div></div></div>
     <button class="burger">Ver lecciones ▾</button>
-    <div class="prog"><div class="pl">Tu avance</div><div class="pb"><div class="pf"></div></div><div class="pt">0 de 6 lecciones · 0%</div></div>
-    <div class="toc"><a href="#m1"><span class="n">1</span><span>Bienvenida a Buffalo Waffles</span></a><a href="#m4"><span class="n">2</span><span>Limpieza, orden y procedimientos</span></a><a href="#m5"><span class="n">3</span><span>Protección y almacenamiento</span></a><a href="#m6"><span class="n">4</span><span>Calidad y gramajes</span></a><a href="#m7"><span class="n">5</span><span>Protocolo de atención y venta</span></a><a href="#m9"><span class="n">6</span><span>Apertura, recepción y cierre</span></a></div>
+    <div class="prog"><div class="pl">Tu avance</div><div class="pb"><div class="pf"></div></div><div class="pt">0 de 3 lecciones · 0%</div></div>
+    <div class="toc"><a href="#m1"><span class="n">1</span><span>Bienvenida a Buffalo Waffles</span></a><a href="#m3"><span class="n">2</span><span>Higiene personal y manipulación de alimentos</span></a><a href="#m7"><span class="n">3</span><span>Protocolo de atención y venta</span></a></div>
   </nav>
   <main class="main">
     <article class="lesson" id="m1">
-  <div class="eyebrow">Lección 1 de 6 · 5 min</div>
+  <div class="eyebrow">Lección 1 de 3 · 8 min</div>
   <h2>Bienvenida a Buffalo Waffles</h2>
-  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Reconocer los cuatro pilares y qué pasa cuando falta uno.</div>
-  <section class="blk b-game"><div class="game" data-game="decisionGame" data-gid="g-0" data-reveal="3">
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> reconocer qué hace distinta a la marca y qué se espera de ti desde el primer turno.</div>
+  <section class="blk b-video"><figure class="vid"><video controls preload="metadata"><source src="https://tefi.villelab.com/buffalo-m1-v8.3-HD.mp4" type="video/mp4"></video><figcaption>Módulo 1 · Bienvenida — 2:00 min</figcaption></figure></section>
+<section class="blk b-text"><h3>Por qué existe este curso</h3><p>Buffalo Waffles no vende solo un producto: vende una experiencia que se repite igual en cada local, cada día. Eso solo funciona si todos operamos con el mismo estándar.</p><p>Este curso te da ese estándar. No es teoría: es lo que vas a hacer en tu turno.</p></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>El estándar no está para limitarte. Está para que el cliente reciba lo mismo en Antofagasta que en Puerto Montt, y para que tú sepas siempre qué se espera de ti.</p></div></div></section>
+<section class="blk b-list"><h3>Qué vas a aprender</h3><ul class="l-check"><li>Qué significa ser parte de la franquicia</li><li>Higiene personal y manipulación segura de alimentos</li><li>Limpieza, orden y procedimientos del local</li><li>Protección y almacenamiento de insumos</li><li>Calidad y gramajes</li><li>Protocolo de atención y venta</li><li>Marketing en el local</li><li>Apertura, recepción y cierre</li></ul></section>
+<section class="blk b-game"><div class="game" data-game="matching" data-gid="g-4" data-reveal="3">
 <div class="g-hd">
-  <span class="g-kind">🧭 Juego de decisiones</span>
+  <span class="g-kind">🎯 Juego de parejas</span>
   <span class="g-prog" aria-live="polite"></span>
 </div>
-<h3 class="g-ttl">¿Qué pasaría si falta un pilar?</h3>
-<p class="g-intro">Cuatro momentos de un turno cualquiera. En cada uno falla uno de los pilares. Elige qué haces.</p>
+<h3 class="g-ttl">¿Dónde se juega el estándar?</h3>
+<p class="g-intro">Cada parte del estándar aparece en un momento concreto del turno. Une cada una con la situación en que te toca aplicarla.</p>
 <div class="g-body"></div>
 <div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
 <div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"scenarios":[{"situation":"Sale un pedido rápido, dentro del tiempo, pero el producto va mal presentado.","options":[{"text":"Detener y corregir la presentación antes de entregar","correct":true,"consequence":"La rapidez no compensa un producto fuera de estándar. El cliente recuerda cómo se veía, no cuánto esperó."},{"text":"Entregarlo igual, ya está dentro del tiempo","correct":false,"consequence":"Ganaste treinta segundos y perdiste el estándar. Es el cambio que menos conviene hacer."},{"text":"Entregarlo y avisar al siguiente turno","correct":false,"consequence":"El producto ya salió. Avisar después no arregla lo que el cliente se llevó."}]},{"situation":"Un cliente en caja recibe una explicación confusa y se queda dudando.","options":[{"text":"Aplicar el speech y guiar la compra con dos opciones concretas","correct":true,"consequence":"La orientación reduce la espera y mejora la experiencia. Dos opciones deciden más rápido que una carta entera."},{"text":"Esperar a que decida solo","correct":false,"consequence":"La duda se alarga, la fila crece, y la experiencia se deteriora para todos los que vienen detrás."},{"text":"Recomendarle lo más caro","correct":false,"consequence":"El upsell tiene que agregar valor real. Si no, se siente como venta forzada y no vuelve."}]},{"situation":"Un compañero pasa de recibir mercadería a la zona de producción sin lavarse las manos.","options":[{"text":"Detener la producción y lavarse antes de continuar","correct":true,"consequence":"La higiene es condición mínima para manipular alimentos: no es un paso más, es el permiso para empezar."},{"text":"Dejarlo pasar, las manos se veían limpias","correct":false,"consequence":"El riesgo no se ve. Cambiar de área es uno de los momentos obligatorios de lavado, sin importar cómo se vean las manos."},{"text":"Decirle que se lave cuando termine","correct":false,"consequence":"Para entonces el alimento ya se manipuló. El orden importa."}]},{"situation":"Hora punta: la cocina se desordena y cada uno hace lo que puede.","options":[{"text":"Reordenar el flujo por rol y seguir","correct":true,"consequence":"La productividad requiere coordinación, no improvisación. Con roles claros la misma gente rinde el doble."},{"text":"Que cada uno acelere en lo suyo","correct":false,"consequence":"Acelerar sin orden multiplica los cruces. Se trabaja más rápido y sale menos producto."},{"text":"Parar y reorganizar todo de cero","correct":false,"consequence":"Parar en hora punta cuesta más de lo que arregla. Se reordena sobre la marcha."}]}]}</script>
+<script type="application/json" class="g-data">{"kind":"concepto-situacion","pairs":[{"left":"Higiene personal","right":"Pasas de la caja a la cocina","explain":"Cambiar de área es uno de los momentos obligatorios de lavado, aunque las manos se vean limpias."},{"left":"Calidad y gramajes","right":"Sirves la misma porción que ayer","explain":"La consistencia es el producto: el cliente compra que hoy sea igual que la vez anterior."},{"left":"Protocolo de atención","right":"Entra un cliente y estás ocupado","explain":"El saludo y el contacto visual van en los primeros segundos, ocupado o no."},{"left":"Apertura y cierre","right":"Llegas primero al local","explain":"La apertura deja el local listo para que el turno completo pueda cumplir el estándar."}]}</script>
 <noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
 </div></section>
   <div class="foot">
@@ -468,34 +564,27 @@ hr.dv{border-top:2px solid var(--negro);opacity:.16}
     <button class="btn" data-go="1">Siguiente →</button>
   </div>
 </article>
-<article class="lesson" id="m4">
-  <div class="eyebrow">Lección 2 de 6 · 5 min</div>
-  <h2>Limpieza, orden y procedimientos</h2>
-  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Ubicar las zonas del local y reconocer el riesgo propio de cada una, y distinguir qué cambia entre formatos y qué no.</div>
-  <section class="blk b-game"><div class="game" data-game="hotspot" data-gid="g-1" data-reveal="3">
+<article class="lesson" id="m3">
+  <div class="eyebrow">Lección 2 de 3 · 12 min</div>
+  <h2>Higiene personal y manipulación de alimentos</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> identificar y aplicar las conductas obligatorias de higiene antes y durante la producción.</div>
+  <section class="blk b-video"><figure class="vid"><video controls preload="metadata"><source src="https://tefi.villelab.com/buffalo-m3-HD.mp4" type="video/mp4"></video><figcaption>Módulo 3 · Correcto vs incorrecto — 2:30 min</figcaption></figure></section>
+<section class="blk b-quote"><blockquote class="q"><p>Cada producto Buffalo Waffles empieza antes de la receta. Empieza con una persona preparada para manipular alimentos de forma segura.</p></blockquote></section>
+<section class="blk b-text"><h3>Antes de entrar a producción</h3><p>Revisa tu presentación: uniforme limpio, cabello completamente cubierto, uñas cortas y limpias, sin accesorios, y elementos de protección listos para usar.</p></section>
+<section class="blk b-list"><h3>Lavado de manos en 6 pasos</h3><ol class="l-num"><li>Remanga hasta el codo</li><li>Moja hasta el antebrazo</li><li>Aplica jabón</li><li>Cepilla manos y uñas</li><li>Enjuaga con agua limpia</li><li>Seca con toalla de papel o aire</li></ol></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">Cuándo repetir el lavado</div><div><p>Después de ir al baño, tocar basura, manipular insumos crudos, tocar tu cara, usar el celular o cambiar de actividad.</p><p>Un caso muy común y obligatorio: cada vez que cambias del área de caja a la cocina, o de la cocina a la caja.</p></div></div></section>
+<section class="blk b-accordion"><h3>Las dudas que aparecen siempre</h3><div class="acc"><details><summary>¿Los guantes reemplazan el lavado de manos?</summary><div><p>No. Los guantes no reemplazan el lavado. Si se contaminan, se rompen o cambias de tarea, debes cambiarlos. Y manipula alimentos con utensilios siempre que corresponda.</p></div></details><details><summary>¿Qué no puedo usar durante la manipulación?</summary><div><p>Anillos, pulseras, aros, relojes ni esmalte. Tampoco dejes mascarillas sobre mesones ni manipules el celular durante la faena.</p></div></details><details><summary>¿Qué hago si estoy enfermo o tengo una herida?</summary><div><p>Informa inmediatamente al supervisor si tienes síntomas, heridas infectadas, diarrea o una condición que pueda transmitirse por alimentos. El objetivo es proteger al equipo y al cliente.</p></div></details></div></section>
+<section class="blk b-game"><div class="game" data-game="roulette" data-gid="g-11" data-reveal="3">
 <div class="g-hd">
-  <span class="g-kind">🗺️ Ubica en el plano</span>
+  <span class="g-kind">🎰 Ruleta de preguntas</span>
   <span class="g-prog" aria-live="polite"></span>
 </div>
-<h3 class="g-ttl">El plano del local</h3>
-<p class="g-intro">El plano está vacío. Te voy a nombrar lo que ocurre en cada zona y tú tocas dónde ocurre. Al acertar, la zona queda rotulada con su riesgo y su acción.</p>
+<h3 class="g-ttl">Ruleta de higiene</h3>
+<p class="g-intro">Gira y responde. Si te equivocas no pierdes nada: la ruleta te muestra por qué.</p>
 <div class="g-body"></div>
 <div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
 <div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"plano":{"areas":["sala sala sala sala","caja arma arma arma","caja wafl wafl wafl","prel refr lava seco"],"borde":{"arriba":"frente · calle y clientes","abajo":"fondo · trastienda"}},"zonas":[{"id":"sala","area":"sala","nombre":"Sala de clientes","macro":"Sala","funcion":"Atención, circulación, pago","riesgo":"Obstáculos, información confusa, suciedad visible","accion":"Mantener despejada, limpia y con material visible"},{"id":"caja","area":"caja","nombre":"Caja","macro":"Sala","funcion":"Toma de pedidos y pago","riesgo":"Errores de atención, desorden operativo","accion":"POS encendido, caja abierta, menú/QR disponibles"},{"id":"arma","area":"arma","nombre":"Zona de armado","macro":"Cocina abierta","funcion":"Ensamble de productos","riesgo":"Contaminación directa o cruzada","accion":"Utensilios limpios, ingredientes protegidos, mesón despejado"},{"id":"wafl","area":"wafl","nombre":"Wafleras","macro":"Cocina abierta","funcion":"Cocción de masas","riesgo":"Quemaduras, residuos, mal uso del equipo","accion":"Usar herramientas adecuadas, limpiar al cierre, no cerrar calientes"},{"id":"prel","area":"prel","nombre":"Pre elaboración","macro":"Cocina cerrada","funcion":"Preparación previa","riesgo":"Contaminación por superficies o manos","accion":"Lavado, desinfección, rotulación y orden"},{"id":"refr","area":"refr","nombre":"Refrigeración","macro":"Cocina cerrada","funcion":"Conservación de insumos","riesgo":"Pérdida de cadena de frío, sobrecarga, contaminación cruzada","accion":"Controlar temperatura, separar categorías, no sobrecargar"},{"id":"lava","area":"lava","nombre":"Lavado","macro":"Cocina cerrada","funcion":"Higiene de utensilios","riesgo":"Limpieza incompleta, contaminación, plagas, restos de alimentos","accion":"Agua potable, detergente, enjuague y secado correcto"},{"id":"seco","area":"seco","nombre":"Almacenamiento seco","macro":"Cocina cerrada","funcion":"Insumos no refrigerados","riesgo":"Plagas, humedad, contaminación química","accion":"Mantener fresco, seco, ventilado y separado del suelo"}]}</script>
-<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
-</div></section>
-<section class="blk b-game"><div class="game" data-game="dragDrop" data-gid="g-2" data-reveal="3">
-<div class="g-hd">
-  <span class="g-kind">🎲 Clasificar</span>
-  <span class="g-prog" aria-live="polite"></span>
-</div>
-<h3 class="g-ttl">Local Full o Local Modular</h3>
-<p class="g-intro">Cinco aspectos de la operación. Decide si esa característica describe un local Full, uno Modular, o si es una regla que se cumple en los dos.</p>
-<div class="g-body"></div>
-<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
-<div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"categories":[{"id":"full","label":"Local Full"},{"id":"modular","label":"Local Modular"},{"id":"ambos","label":"Los dos"}],"items":[{"text":"Más zonas diferenciadas, cada una con su función","category":"full","explain":"El Full tiene superficie para separar. Esa es su ventaja y también su exigencia: cada área tiene que tener función clara."},{"text":"Espacios compactos y multifunción","category":"modular","explain":"El Modular resuelve en menos metros. No es un local incompleto: es el mismo estándar en otra distribución."},{"text":"Evitar cruces entre lo sucio y lo limpio","category":"ambos","explain":"Es la regla común. Cambia cómo se logra —con distancia en el Full, con disciplina en el Modular— pero no si se cumple."},{"text":"Mayor coordinación entre personas por el espacio reducido","category":"modular","explain":"Menos metros obligan a hablar más. La coordinación reemplaza a la separación física."},{"text":"Limpieza en apertura, mitad de jornada y cierre","category":"ambos","explain":"La rutina no depende del formato. Los tres momentos son iguales en los dos locales."},{"text":"Separar alimentos, químicos y utensilios al almacenar","category":"ambos","explain":"Regla común y sin excepciones. En el Modular exige más disciplina porque hay menos espacio para separar."},{"text":"Caja y sala con mayor superficie de atención","category":"full","explain":"El Full puede darle espacio propio a la atención. El Modular la resuelve cerca del flujo de producción."}]}</script>
+<script type="application/json" class="g-data">{"segments":[{"label":"Lavado","question":"¿Cuándo debe realizarse el lavado de manos?","options":["Solo al iniciar el turno","Antes de manipular alimentos y cada vez que exista riesgo de contaminación","Solo después del cierre","Solo si las manos se ven sucias"],"correct":1,"explain":"La regla es por situación, no por apariencia: el riesgo no se ve.","feedback":{"0":"El inicio del turno es uno de los momentos, no el único.","2":"El cierre es tarde: el alimento ya se manipuló.","3":"Las manos pueden estar contaminadas sin verse sucias."}},{"label":"Guantes","question":"¿Qué afirmación sobre los guantes es correcta?","options":["Reemplazan el lavado de manos","Pueden reutilizarse durante todo el turno","Deben mantenerse limpios y cambiarse cuando se contaminen","Solo los usa el jefe de local"],"correct":2,"explain":"El guante protege el alimento, no te exime de lavarte.","feedback":{"0":"Un guante sucio contamina igual que una mano sucia.","1":"Si se rompe, se ensucia o cambias de tarea, se cambia."}},{"label":"Joyas","question":"Llegas al turno con un anillo y un reloj. ¿Qué corresponde?","options":["Taparlos con guantes","Sacárselos antes de entrar al área de manipulación","Solo importa si son de metal","Se pueden usar si están limpios"],"correct":1,"explain":"Anillos, pulseras, aros y relojes salen antes de manipular: acumulan suciedad donde no se ve y pueden caer al alimento.","feedback":{"0":"El guante encima de un anillo se rompe con más facilidad.","3":"No hay joya limpia: el problema es lo que se acumula debajo."}},{"label":"Cambio de área","question":"Estabas en caja cobrando y te toca ir a la cocina. ¿Qué haces primero?","options":["Nada, es el mismo turno","Lavarte las manos","Ponerte guantes sobre las manos como estaban","Avisar al jefe de local"],"correct":1,"explain":"El dinero es uno de los focos de contaminación más comunes del local. Caja → cocina siempre pasa por el lavamanos.","feedback":{"0":"El turno no importa: importa el cambio de actividad.","2":"El guante sella la contaminación, no la elimina."}},{"label":"Celular","question":"Usaste el celular en medio de la preparación. ¿Qué corresponde?","options":["Seguir, si no tocaste alimentos","Lavarte las manos antes de continuar","Limpiar el celular","Cambiar de guantes sin lavarte"],"correct":1,"explain":"Tocar el celular es un cambio de actividad y obliga a repetir el lavado, igual que tocarte la cara o la basura.","feedback":{"0":"Ya tocaste una superficie que no está en el circuito limpio.","3":"El guante nuevo sobre manos sucias no resuelve nada."}},{"label":"Utensilios","question":"¿Cuándo se manipula el alimento con utensilio en vez de con la mano?","options":["Solo si no hay guantes","Siempre que el procedimiento lo permita","Solo en horario de mayor público","Cuando lo pide el cliente"],"correct":1,"explain":"El utensilio es la primera barrera: menos contacto directo, menos riesgo, aunque lleves guantes.","feedback":{"0":"El utensilio no es reemplazo del guante, es la opción preferida.","2":"El estándar no cambia según cuánta gente haya."}}]}</script>
 <noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
 </div></section>
   <div class="foot">
@@ -503,91 +592,31 @@ hr.dv{border-top:2px solid var(--negro);opacity:.16}
     <button class="btn" data-go="2">Siguiente →</button>
   </div>
 </article>
-<article class="lesson" id="m5">
-  <div class="eyebrow">Lección 3 de 6 · 5 min</div>
-  <h2>Protección y almacenamiento</h2>
-  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Decidir si un producto puede almacenarse tal como llegó.</div>
-  <section class="blk b-game"><div class="game" data-game="dragDrop" data-gid="g-3" data-reveal="3">
-<div class="g-hd">
-  <span class="g-kind">🎲 Clasificar</span>
-  <span class="g-prog" aria-live="polite"></span>
-</div>
-<h3 class="g-ttl">Organiza el refrigerador</h3>
-<p class="g-intro">Seis productos llegan a la zona de almacenamiento. Antes de guardarlos: mira fecha, categoría y estado del envase.</p>
-<div class="g-body"></div>
-<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
-<div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"categories":[{"id":"guardar","label":"Se guarda así"},{"id":"proteger","label":"Falta protegerlo o rotularlo"},{"id":"fuera","label":"No va al refrigerador"}],"items":[{"text":"Frutillas lavadas, en recipiente con tapa, con FR y FV vigentes","category":"guardar","explain":"Protegido, rotulado y vigente. Es el estado en que un producto puede entrar sin más pasos."},{"text":"Queso sin tapa","category":"proteger","explain":"Antes de refrigerar tiene que quedar protegido. Un alimento expuesto contamina y se contamina."},{"text":"El producto con vencimiento más próximo","category":"guardar","explain":"Se guarda, pero delante: PEPS significa que lo primero en vencer es lo primero en usarse."},{"text":"Paquete de jamón abierto, con contenido","category":"proteger","explain":"Un paquete abierto se protege y se rotula con FA —fecha de apertura— antes de almacenar. Sin eso nadie sabe desde cuándo está abierto."},{"text":"Químico de limpieza","category":"fuera","explain":"Los químicos van a un área separada, nunca junto a alimentos. No hay versión correcta de esto dentro del refrigerador."},{"text":"Producto sin etiqueta","category":"proteger","explain":"Sin rotulación no hay trazabilidad: nadie puede saber qué es, de cuándo, ni de quién."}]}</script>
-<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
-</div></section>
-  <div class="foot">
-    <button class="btn ghost" data-go="1">← Anterior</button>
-    <button class="btn" data-go="3">Siguiente →</button>
-  </div>
-</article>
-<article class="lesson" id="m6">
-  <div class="eyebrow">Lección 4 de 6 · 5 min</div>
-  <h2>Calidad y gramajes</h2>
-  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Sostener el estándar del producto en cada paso del armado.</div>
-  <section class="blk b-game"><div class="game" data-game="decisionGame" data-gid="g-4" data-reveal="3">
-<div class="g-hd">
-  <span class="g-kind">🧭 Juego de decisiones</span>
-  <span class="g-prog" aria-live="polite"></span>
-</div>
-<h3 class="g-ttl">Arma el producto</h3>
-<p class="g-intro">Seis momentos del armado. En cada uno hay algo que no está en estándar. Decide qué haces.</p>
-<div class="g-body"></div>
-<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
-<div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"scenarios":[{"situation":"La waflera está tibia. No llegó a 250 °C y hay pedidos esperando.","options":[{"text":"Esperar a que termine de precalentar","correct":true,"consequence":"Correcto. La waflera fría produce masa plana o mal cocida, y eso se descarta igual: esperar cuesta menos que rehacer."},{"text":"Verter la mezcla igual, se compensa con más tiempo","correct":false,"consequence":"No se compensa. Más tiempo sobre una waflera fría da una masa distinta, no una masa lista."}]},{"situation":"La masa cruda tiene grumos visibles.","options":[{"text":"Seguir batiendo hasta homogeneizar","correct":true,"consequence":"Correcto. La mezcla tiene que ser homogénea: los grumos afectan textura y cocción, y se notan en el producto final."},{"text":"Usarla, los grumos desaparecen al cocinar","correct":false,"consequence":"No desaparecen. Quedan como zonas crudas dentro de una masa que por fuera se ve lista."}]},{"situation":"Una masa cocida lleva 8 minutos en la rejilla.","options":[{"text":"Descartarla","correct":true,"consequence":"Correcto. Superó el tiempo máximo: una masa fría o elástica no cumple estándar y el cliente lo nota en el primer bocado."},{"text":"Recalentarla unos segundos","correct":false,"consequence":"Recalentar no devuelve la textura. Cambia el producto y sigue estando fuera de estándar."}]},{"situation":"Un ingrediente se está porcionando a ojo porque la balanza está ocupada.","options":[{"text":"Esperar la balanza y pesar según receta","correct":true,"consequence":"Correcto. El gramaje es lo que hace que el producto de hoy sea igual al de ayer. Sin eso no hay estándar, hay suerte."},{"text":"Estimar, la diferencia es mínima","correct":false,"consequence":"La diferencia mínima repetida cien veces al día deja de ser mínima, y el cliente compra consistencia."}]},{"situation":"El producto terminado queda listo pero sin el adhesivo BW.","options":[{"text":"Completar el packaging antes de entregar","correct":true,"consequence":"Correcto. El packaging es parte del estándar visual: el producto sale completamente terminado o no sale."},{"text":"Entregarlo así, el producto está bien","correct":false,"consequence":"Para el cliente el packaging ES el producto. Es lo primero que ve y lo último que queda."}]},{"situation":"Una masa sale pálida, claramente menos dorada que el resto.","options":[{"text":"Descartarla y revisar la cocción","correct":true,"consequence":"Correcto. Una masa pálida indica falta de cocción, y revisar evita que las siguientes salgan igual."},{"text":"Entregarla, el sabor es el mismo","correct":false,"consequence":"No se entrega un producto bajo estándar. Y si una salió pálida, viene un problema de cocción que hay que resolver ahora."}]}]}</script>
-<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
-</div></section>
-  <div class="foot">
-    <button class="btn ghost" data-go="2">← Anterior</button>
-    <button class="btn" data-go="4">Siguiente →</button>
-  </div>
-</article>
 <article class="lesson" id="m7">
-  <div class="eyebrow">Lección 5 de 6 · 5 min</div>
+  <div class="eyebrow">Lección 3 de 3 · 10 min</div>
   <h2>Protocolo de atención y venta</h2>
-  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Practicar la secuencia completa de atención en caja.</div>
-  <section class="blk b-game"><div class="game" data-game="decisionGame" data-gid="g-5" data-reveal="3">
-<div class="g-hd">
-  <span class="g-kind">🧭 Juego de decisiones</span>
-  <span class="g-prog" aria-live="polite"></span>
-</div>
-<h3 class="g-ttl">Role-play de atención en caja</h3>
-<p class="g-intro">Cuatro clientes, cuatro momentos distintos de la venta. Elige cómo respondes.</p>
-<div class="g-body"></div>
-<div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
-<div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"scenarios":[{"situation":"Un cliente llega a la caja y dice que no sabe qué pedir.","options":[{"text":"Ofrecerle dos opciones concretas","correct":true,"consequence":"Correcto. Dos opciones reducen la fricción y aceleran la decisión. La carta completa la alarga."},{"text":"Pasarle la carta y dejarlo mirar","correct":false,"consequence":"La carta entera es más opciones, no más ayuda. La fila crece y el cliente sigue dudando."}]},{"situation":"Un cliente pide un producto individual y ya va a pagar.","options":[{"text":"Ofrecer un combo o un adicional que le sirva","correct":true,"consequence":"Correcto, si el upsell agrega valor real. Ofrecer algo que efectivamente mejora su pedido es servicio, no venta."},{"text":"Cobrar y listo","correct":false,"consequence":"Se pierde una oportunidad legítima. Ofrecer no es presionar, y muchos clientes agradecen la sugerencia."},{"text":"Insistir con el producto más caro","correct":false,"consequence":"Eso es presión, no upsell. Se nota, incomoda, y afecta si vuelve o no."}]},{"situation":"Un cliente duda por los precios y pregunta dos veces cuánto sale.","options":[{"text":"Apoyarse en el menú board o el Menú de Mano","correct":true,"consequence":"Correcto. Mostrar el precio escrito evita malentendidos y le da al cliente algo concreto sobre qué decidir."},{"text":"Repetirle los precios de memoria","correct":false,"consequence":"De memoria se equivoca uno y desconfía el otro. El material existe justamente para esto."}]},{"situation":"El pedido está cerrado y el cliente ya eligió.","options":[{"text":"Confirmar el pedido, cobrar y entregar la boleta","correct":true,"consequence":"Correcto. Confirmar antes de cobrar evita el error más caro de la caja: preparar algo que el cliente no pidió."},{"text":"Cobrar directo, ya quedó claro","correct":false,"consequence":"Lo que quedó claro para ti puede no ser lo que él dijo. Confirmar toma tres segundos y evita rehacer un pedido."}]}]}</script>
-<noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
-</div></section>
-  <div class="foot">
-    <button class="btn ghost" data-go="3">← Anterior</button>
-    <button class="btn" data-go="5">Siguiente →</button>
-  </div>
-</article>
-<article class="lesson" id="m9">
-  <div class="eyebrow">Lección 6 de 6 · 5 min</div>
-  <h2>Apertura, recepción y cierre</h2>
-  <div class="obj"><b>Al terminar esta lección vas a poder:</b> Decidir qué mercadería entra y qué se rechaza.</div>
-  <section class="blk b-game"><div class="game" data-game="millionaire" data-gid="g-6" data-reveal="3">
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> aplicar el protocolo de atención en cada interacción con el cliente, incluidos los reclamos.</div>
+  <section class="blk b-video"><figure class="vid"><video controls preload="metadata"><source src="https://tefi.villelab.com/buffalo-m7-HD.mp4" type="video/mp4"></video><figcaption>Módulo 7 · Atención y venta</figcaption></figure></section>
+<section class="blk b-text"><h3>La atención también es producto</h3><p>Un waffle perfecto con una atención tibia deja un mal recuerdo. Un waffle correcto con una atención cálida deja un cliente que vuelve.</p><p>El protocolo no te quita naturalidad: te da un piso para que ningún cliente reciba menos de lo mínimo.</p></section>
+<section class="blk b-tabs"><h3>El protocolo, momento a momento</h3><div class="tabs" data-tabs="tabs-14">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Recibir</button><button role="tab" class="tb" data-i="1">Asesorar</button><button role="tab" class="tb" data-i="2">Cerrar</button><button role="tab" class="tb" data-i="3">Reclamo</button></div>
+<div class="tb-pane on" data-i="0"><p>Contacto visual y saludo dentro de los primeros segundos. Aunque estés ocupado, reconoce que la persona llegó.</p></div><div class="tb-pane" data-i="1"><p>Pregunta antes de asumir. Conoce la carta lo suficiente para recomendar sin dudar.</p></div><div class="tb-pane" data-i="2"><p>Confirma el pedido en voz alta, informa el tiempo de espera real y agradece.</p></div><div class="tb-pane" data-i="3"><p>Escucha completo sin interrumpir, no discutas el hecho, resuelve lo que esté en tu alcance y escala lo que no. Un reclamo bien atendido fideliza más que una venta sin fricción.</p></div></div></section>
+<section class="blk b-divider"><hr class="dv"></section>
+<section class="blk b-game"><div class="game" data-game="millionaire" data-gid="g-16" data-reveal="3">
 <div class="g-hd">
   <span class="g-kind">💰 ¿Quién quiere ser millonario?</span>
   <span class="g-prog" aria-live="polite"></span>
 </div>
-<h3 class="g-ttl">¿Aceptas o rechazas esta mercadería?</h3>
-<p class="g-intro">Seis camiones, seis situaciones de recepción. Cada una tiene una decisión correcta y una consecuencia.</p>
+<h3 class="g-ttl">El protocolo, nivel por nivel</h3>
+<p class="g-intro">Cuatro niveles siguiendo el orden real de una atención. Si te equivocas, el nivel te explica y sigues.</p>
 <div class="g-body"></div>
 <div class="g-nota">Sin nota · reintentos ilimitados · el error no descuenta</div>
 <div class="g-foot" hidden></div>
-<script type="application/json" class="g-data">{"levels":[{"prize":"Cantidad","question":"La cantidad recibida no coincide con la guía de despacho. ¿Qué haces?","options":["Aceptar y avisar después","Detener y registrar la diferencia antes de aceptar","Aceptar solo lo que coincide y devolver el resto sin registro","Llamar al proveedor y esperar"],"correct":1,"explain":"La cantidad tiene que coincidir antes de aceptar. Una vez que firmaste, la diferencia es tuya.","feedback":{"0":"Avisar después es aceptar una diferencia que ya no puedes probar.","2":"Sin registro no hay reclamo posible.","3":"Esperar bloquea la descarga; primero registra, después escala."}},{"prize":"Marca","question":"La marca que llegó no es la indicada en la guía.","options":["Aceptarla, es equivalente","Rechazar o escalar según procedimiento","Aceptarla y anotarlo en el cuaderno","Consultar al cliente"],"correct":1,"explain":"Marca incorrecta requiere acción: la equivalencia no la decide quien recibe.","feedback":{"0":"Equivalente no es lo mismo que autorizado.","2":"Anotarlo no reemplaza el procedimiento.","3":"El cliente no participa de la recepción."}},{"prize":"Envase","question":"Un envase llega roto y con pérdida de contenido.","options":["Rechazarlo y apartarlo","Aceptarlo y trasvasijar","Usarlo primero para que no se pierda","Aceptarlo con descuento"],"correct":0,"explain":"No cumple estándar de integridad. Un envase roto no se recupera trasvasijando: ya estuvo expuesto.","feedback":{"1":"Trasvasijar no borra la exposición.","2":"Usarlo primero es incorporar a producción algo que no debió entrar.","3":"El descuento no es una decisión de quien recibe."}},{"prize":"Fecha","question":"Un producto llega con fecha vencida.","options":["Rechazarlo","Aceptarlo si es por poco","Aceptarlo para usarlo hoy mismo","Consultar si sirve"],"correct":0,"explain":"Producto vencido no se usa. No hay margen ni criterio propio: compromete la inocuidad.","feedback":{"1":"No hay 'por poco' en una fecha de vencimiento.","2":"Usarlo hoy no lo devuelve a estar vigente.","3":"No es una consulta: es un rechazo."}},{"prize":"Rotulación","question":"Aceptaste un producto y va a almacenamiento sin rotular.","options":["Guardarlo, después se rotula","Rotularlo antes de guardar","Rotular solo lo refrigerado","Anotarlo en la planilla"],"correct":1,"explain":"Sin rotulación no hay trazabilidad: dentro de tres días nadie sabrá cuándo entró.","feedback":{"0":"El 'después' de un turno con trabajo no llega.","2":"La trazabilidad no distingue por temperatura.","3":"La planilla no viaja con el producto."}},{"prize":"Cadena de frío","question":"Un producto refrigerado lleva rato fuera del frío mientras se revisa la guía.","options":["Terminar la revisión y después guardarlo","Almacenarlo primero respetando la cadena de frío","Ponerlo al frío solo si se siente tibio","Registrarlo y guardarlo al final"],"correct":1,"explain":"La cadena de frío se mantiene o se rompe: lo refrigerado entra primero y el papeleo espera.","feedback":{"0":"La revisión puede esperar; la temperatura no.","2":"Cuando se siente tibio ya pasó demasiado tiempo.","3":"Al final del proceso el daño ya está hecho."}}]}</script>
+<script type="application/json" class="g-data">{"levels":[{"prize":"Recibir","question":"Estás armando un pedido y entra un cliente. ¿Qué haces?","options":["Terminas el pedido y después saludas","Haces contacto visual y saludas dentro de los primeros segundos","Esperas a que se acerque a la caja","Le pides a otro que lo atienda"],"correct":1,"explain":"Reconocer que la persona llegó cuesta un segundo y cambia toda la espera que viene después.","feedback":{"0":"Para el cliente, el reloj parte cuando entra, no cuando lo miras.","2":"Quedarse esperando lee como indiferencia."}},{"prize":"Asesorar","question":"Un cliente duda entre dos productos y te pregunta cuál es mejor. ¿Qué haces?","options":["Le recomiendas el más caro","Le preguntas qué está buscando antes de recomendar","Le dices que los dos son buenos","Le muestras la carta y lo dejas decidir"],"correct":1,"explain":"Preguntar antes de asumir es lo que separa asesorar de vender: recomiendas sobre información, no sobre suposición.","feedback":{"0":"Recomendar por precio se nota y quema la confianza.","2":"Es una respuesta que no ayuda a decidir."}},{"prize":"Cerrar","question":"Antes de cobrar, ¿qué corresponde hacer?","options":["Cobrar directamente para no demorar","Confirmar el pedido en voz alta","Preguntar si quiere algo más","Entregar la boleta primero"],"correct":1,"explain":"Confirmar en voz alta es el filtro que evita el error caro: el que se descubre cuando el pedido ya está armado.","feedback":{"0":"Los segundos que ahorras ahí los pierdes rehaciendo el pedido.","2":"La venta sugerida va antes del cierre, no en lugar de la confirmación."}},{"prize":"Resolver","question":"Un cliente reclama que su pedido demoró más de lo informado. ¿Qué haces primero?","options":["Explicarle por qué se demoró","Escuchar completo sin interrumpir","Ofrecerle un descuento de inmediato","Llamar al jefe de local"],"correct":1,"explain":"Escuchar completo baja la tensión y te da la información para resolver bien.","feedback":{"0":"Si partes con la excusa, el cliente siente que no lo escuchaste.","2":"Compensar antes de entender resuelve el momento y no el problema.","3":"Escalar de entrada le dice al cliente que no puedes ayudarlo."}}]}</script>
 <noscript><div class="callout c-warn"><div class="c-lbl">Actividad interactiva</div><p>Esta actividad necesita JavaScript. Actívalo para poder jugarla.</p></div></noscript>
 </div></section>
   <div class="foot">
-    <button class="btn ghost" data-go="4">← Anterior</button>
+    <button class="btn ghost" data-go="1">← Anterior</button>
     <span></span>
   </div>
 </article>
@@ -595,7 +624,7 @@ hr.dv{border-top:2px solid var(--negro);opacity:.16}
   </main>
 </div>
 <script>(function(){
-var TOTAL=6;
+var TOTAL=3;
 var KEY="ewaffle-course-"+document.body.dataset.courseId;
 var seen=JSON.parse(localStorage.getItem(KEY)||"[]");
 var lessons=[].slice.call(document.querySelectorAll(".lesson"));
