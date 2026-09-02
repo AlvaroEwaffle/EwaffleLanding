@@ -651,33 +651,88 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
                 ))}
               </div>
             </fieldset>
+            <fieldset class="paso">
+              <legend><span class="paso__n">04</span> ¿A quién le mandamos la cotización?</legend>
+              <p class="paso__d">
+                Con esto llegamos a la primera conversación con el alcance y el precio ya
+                preparados, en vez de usarla para preguntarte lo básico.
+              </p>
+              <div class="campos">
+                <label class="campo">
+                  <span class="campo__k">Nombre <i>*</i></span>
+                  <input type="text" autocomplete="name" placeholder="Tu nombre" data-dato="nombre" />
+                </label>
+                <label class="campo">
+                  <span class="campo__k">Organización <i>*</i></span>
+                  <input type="text" autocomplete="organization" placeholder="Dónde trabajas" data-dato="organizacion" />
+                </label>
+                <label class="campo">
+                  <span class="campo__k">Correo <i>*</i></span>
+                  <input type="email" autocomplete="email" placeholder="tu@organizacion.cl" data-dato="correo" />
+                </label>
+                <label class="campo">
+                  <span class="campo__k">WhatsApp <em>opcional</em></span>
+                  <input type="tel" autocomplete="tel" placeholder="+56 9 ..." data-dato="whatsapp" />
+                </label>
+              </div>
+            </fieldset>
           </div>
 
           <aside class="cotiza__resumen" aria-live="polite">
-            <div class="resumen">
-              <p class="claqueta__mono resumen__rotulo">Tu programa</p>
+            <div class="resumen" data-resumen-caja>
+              <p class="resumen__rotulo">
+                <span class="claqueta__mono">Tu programa</span>
+                <span class="resumen__cuenta" data-cuenta></span>
+              </p>
               <ul class="resumen__lineas" data-resumen-lineas></ul>
 
-              <div class="resumen__total">
+              <!-- Antes de calcular no hay número. El carrito suma ítems y el
+                   valor aparece recién cuando la persona lo pide: así el
+                   recorrido termina en un gesto suyo y no en una cifra que
+                   apareció sola mientras hojeaba. -->
+              <p class="resumen__antes" data-antes>
+                Ve sumando lo que necesitas. El valor aparece cuando lo calcules.
+              </p>
+
+              <div class="resumen__total" data-total-caja hidden>
                 <span class="resumen__k">Estimación</span>
                 <b class="resumen__monto" data-total>—</b>
                 <span class="resumen__rango" data-rango></span>
+                <p class="resumen__pie">
+                  Pesos chilenos, exentos de IVA. Es referencial: el número se fija cuando vemos
+                  tu material, tu audiencia y tu plazo — y muchas veces parte de lo que ya tienes
+                  producido sirve y no hay que rehacerlo.
+                </p>
               </div>
 
-              <p class="resumen__pie">
-                Pesos chilenos, exentos de IVA. Es una estimación referencial: el número se fija
-                cuando vemos tu material, tu audiencia y tu plazo — y muchas veces parte de lo que
-                ya tienes producido sirve y no hay que rehacerlo.
-              </p>
+              <p class="resumen__aviso" data-cotiza-error hidden role="alert"></p>
 
-              <button type="button" class="boton boton--primario" data-cotiza-cta>
-                Recibir esta cotización
+              <button type="button" class="boton boton--primario" data-calcular>
+                Calcular mi inversión
+              </button>
+              <button type="button" class="boton boton--primario" data-cotiza-cta hidden>
+                Recibir mi cotización
               </button>
               <a href={agendaUrl} target="_blank" rel="noreferrer" class="boton boton--fantasma" data-cta="agenda-cotizador">
                 Prefiero conversarlo primero
               </a>
             </div>
+
+            <div class="resumen resumen--ok" data-cotiza-ok hidden>
+              <span class="resumen__tic" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7" /></svg>
+              </span>
+              <b class="resumen__okt">Cotización enviada.</b>
+              <p class="resumen__pie">
+                Te llega al correo con el detalle, y te escribimos con la propuesta para tu caso.
+                Si quieres adelantarlo, agenda y llegamos con todo armado.
+              </p>
+              <a href={agendaUrl} target="_blank" rel="noreferrer" class="boton boton--primario" data-cta="agenda-post-cotiza">
+                Agendar con Álvaro
+              </a>
+            </div>
           </aside>
+
         </div>
 
         <div class="operamos" data-motion>
@@ -1386,6 +1441,51 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
   .resumen__pie { margin: 0; font-size: 12.6px; color: var(--niebla); line-height: 1.52; }
   .resumen .boton { width: 100%; justify-content: center; }
 
+  .paso__d { margin: 14px 0 0; max-width: 62ch; font-size: 14.2px; color: var(--niebla); line-height: 1.55; }
+
+  .campos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 16px; }
+  .campo { display: grid; gap: 6px; }
+  .campo__k { font-size: 13px; font-weight: 500; color: var(--niebla); }
+  .campo__k i { font-style: normal; color: var(--haz); }
+  .campo__k em { font-style: normal; color: rgba(255, 255, 255, 0.34); }
+  .campo input {
+    width: 100%; min-height: 46px; padding: 0 14px;
+    font: inherit; font-size: 15px; color: var(--tiza);
+    border-radius: 11px; border: 1px solid var(--linea); background: rgba(0, 0, 0, 0.28);
+    transition: border-color 200ms var(--curva), box-shadow 200ms var(--curva);
+  }
+  .campo input::placeholder { color: rgba(255, 255, 255, 0.24); }
+  .campo input:focus {
+    outline: 0; border-color: var(--haz); box-shadow: 0 0 0 3px rgba(255, 177, 72, 0.18);
+  }
+  /* Marca de campo pendiente: la pone el JS al intentar calcular sin llenarlo.
+     No se usa :invalid — marcaría en rojo desde el primer instante campos que
+     la persona todavía no ha tenido oportunidad de escribir. */
+  .campo input.es-falta { border-color: var(--rosa); box-shadow: 0 0 0 3px rgba(253, 90, 147, 0.16); }
+
+  .resumen__rotulo { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; color: var(--niebla); }
+  .resumen__cuenta {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--haz);
+  }
+  .resumen__antes {
+    margin: 0; padding-top: 14px; border-top: 1px dashed var(--linea);
+    font-size: 13.4px; color: var(--niebla); line-height: 1.5;
+  }
+  .resumen__aviso {
+    margin: 0; padding: 11px 13px; border-radius: 11px;
+    border: 1px solid rgba(253, 90, 147, 0.42); background: rgba(253, 90, 147, 0.1);
+    font-size: 13.4px; line-height: 1.45; color: #ffc0d6;
+  }
+
+  .resumen--ok { border-color: rgba(15, 122, 82, 0.5); justify-items: start; }
+  .resumen__tic {
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(15, 122, 82, 0.25);
+  }
+  .resumen__tic svg { width: 20px; height: 20px; fill: none; stroke: #5fe0ab; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .resumen__okt { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.028em; }
+
   @media (max-width: 1000px) {
     .cotiza { grid-template-columns: 1fr; }
     /* Deja de ser pegajoso. En una columna la tarjeta mide unos 400 px: pegada
@@ -1910,6 +2010,20 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
       return { q: q, base: base, pct: pct, total: aDiez(suma), lineas: lineas, extras: elegidos };
     }
 
+    /* El precio no existe hasta que la persona lo pide. Antes de eso el panel
+       es un carrito: suma ítems y nada más. `calculado` es lo único que separa
+       un estado del otro. */
+    var calculado = false;
+
+    var elAntes = document.querySelector("[data-antes]");
+    var elTotalCaja = document.querySelector("[data-total-caja]");
+    var elCuenta = document.querySelector("[data-cuenta]");
+    var bCalcular = document.querySelector("[data-calcular]");
+    var ctaCotiza = document.querySelector("[data-cotiza-cta]");
+    var elError = document.querySelector("[data-cotiza-error]");
+    var cajaResumen = document.querySelector("[data-resumen-caja]");
+    var cajaOk = document.querySelector("[data-cotiza-ok]");
+
     function pintarCotizador() {
       var r = calcular();
       if (!r) return;
@@ -1929,12 +2043,10 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
           elLineas.appendChild(li);
         });
       }
-
-      if (elTotal) elTotal.textContent = pesos(r.total);
-      if (elRango) {
-        elRango.textContent = "Rango de referencia " + pesos(aDiez(r.total * cot.rango.bajo)) +
-          " – " + pesos(aDiez(r.total * cot.rango.alto));
+      if (elCuenta) {
+        elCuenta.textContent = r.lineas.length === 1 ? "1 ítem" : r.lineas.length + " ítems";
       }
+
       if (elVolumen) {
         elVolumen.innerHTML = "";
         var nota = document.createElement("span");
@@ -1945,10 +2057,82 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
         }
         elVolumen.appendChild(nota);
       }
+
+      /* Ya calculado, el número sigue vivo: si después cambia un ítem y el total
+         se quedara congelado en el valor anterior, estaríamos mostrando un precio
+         que no corresponde a lo que la persona tiene elegido. */
+      if (calculado) {
+        if (elTotal) elTotal.textContent = pesos(r.total);
+        if (elRango) {
+          elRango.textContent = "Rango de referencia " + pesos(aDiez(r.total * cot.rango.bajo)) +
+            " – " + pesos(aDiez(r.total * cot.rango.alto));
+        }
+      }
       return r;
     }
 
+    /* ── Los datos de contacto ──────────────────────────────────────────── */
+    function dato(k) {
+      var el = document.querySelector('[data-dato="' + k + '"]');
+      return el ? el.value.trim() : "";
+    }
+    function campo(k) { return document.querySelector('[data-dato="' + k + '"]'); }
+
+    function avisar(texto, foco) {
+      if (elError) {
+        elError.textContent = texto;
+        elError.removeAttribute("hidden");
+      }
+      if (foco) {
+        foco.classList.add("es-falta");
+        foco.scrollIntoView({ block: "center", behavior: quieto ? "auto" : "smooth" });
+        foco.focus({ preventScroll: true });
+      }
+    }
+    function limpiarAviso() {
+      if (elError) elError.setAttribute("hidden", "");
+      document.querySelectorAll("[data-dato]").forEach(function (e) { e.classList.remove("es-falta"); });
+    }
+    document.querySelectorAll("[data-dato]").forEach(function (e) {
+      e.addEventListener("input", function () { e.classList.remove("es-falta"); });
+    });
+
+    /* Validación deliberadamente floja en el correo: exige una arroba y un punto
+       después, nada más. Una expresión estricta rechaza direcciones válidas y el
+       costo de un correo malo lo paga el equipo, no el visitante. */
+    function faltaAlgo() {
+      if (!dato("nombre")) return { t: "Nos falta tu nombre para poder mandarte la cotización.", e: campo("nombre") };
+      if (!dato("organizacion")) return { t: "Nos falta el nombre de tu organización.", e: campo("organizacion") };
+      var c = dato("correo");
+      if (!c || !/.+@.+\..+/.test(c)) return { t: "Necesitamos un correo válido para enviártela.", e: campo("correo") };
+      return null;
+    }
+
+    if (bCalcular) {
+      bCalcular.addEventListener("click", function () {
+        limpiarAviso();
+        var falta = faltaAlgo();
+        if (falta) { avisar(falta.t, falta.e); return; }
+
+        calculado = true;
+        if (elAntes) elAntes.setAttribute("hidden", "");
+        if (elTotalCaja) elTotalCaja.removeAttribute("hidden");
+        bCalcular.setAttribute("hidden", "");
+        if (ctaCotiza) ctaCotiza.removeAttribute("hidden");
+
+        var r = pintarCotizador();
+        evento("catalogo_cotizador", {
+          campo: "calcular",
+          modulos: r ? r.q : null,
+          base: r ? r.base.id : null,
+          extras: r ? r.extras.join(",") : "",
+          total: r ? r.total : null
+        });
+      });
+    }
+
     if (elCantidad) {
+
       /* `change` no basta: escribiendo el número a mano el total se quedaría
          quieto hasta perder el foco, y el cotizador dejaría de responder justo
          cuando la persona está probando cifras. */
@@ -1985,9 +2169,9 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
       });
     });
 
-    /* El contexto que viaja al formulario: lo que eligió en el recorrido más lo
-       que armó en el cotizador. Los nombres, no los identificadores — esto lo
-       lee una persona del equipo en el correo del lead. */
+    /* El contexto que viaja al equipo: lo que eligió en el recorrido más lo que
+       armó en el cotizador. Los nombres, no los identificadores — esto lo lee
+       una persona en el correo del lead. */
     function contexto(conCotizacion) {
       var lineas = [];
       if (objetivo) {
@@ -2003,21 +2187,38 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
       if (conCotizacion) {
         var r = calcular();
         if (r) {
-          lineas.push("");
+          /* El separador solo si ya hay algo arriba: si la persona fue directo
+             al cotizador sin pasar por el recorrido, el mensaje partía con una
+             línea en blanco. */
+          if (lineas.length) lineas.push("");
           lineas.push("Armé esto en el cotizador:");
           r.lineas.forEach(function (l) {
             lineas.push("· " + l.t + (l.n > 1 || l.u ? " × " + l.n + (l.u ? " " + l.u : "") : ""));
           });
-          lineas.push("Estimación que me mostró la página: " + pesos(r.total) + " (exento de IVA).");
+          /* Solo se cita el número si la persona llegó a calcularlo. Decir "la
+             página le mostró X" cuando nunca apretó calcular sería falso, y el
+             equipo llamaría creyendo que ya vio un precio. */
+          if (calculado) {
+            lineas.push("Estimación que me mostró la página: " + pesos(r.total) + " (exenta de IVA).");
+          } else {
+            lineas.push("Todavía no calculé el valor en la página.");
+          }
         }
       }
       return lineas.join("\n");
     }
 
-    var ctaCotiza = document.querySelector("[data-cotiza-cta]");
     if (ctaCotiza) {
       ctaCotiza.addEventListener("click", function () {
+        limpiarAviso();
+        var falta = faltaAlgo();
+        if (falta) { avisar(falta.t, falta.e); return; }
+
         var r = calcular();
+        var etiqueta = ctaCotiza.textContent;
+        ctaCotiza.disabled = true;
+        ctaCotiza.textContent = "Enviando…";
+
         evento("catalogo_cta", {
           destino: "cotizacion",
           modulos: r ? r.q : null,
@@ -2025,11 +2226,47 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
           extras: r ? r.extras.join(",") : "",
           total: r ? r.total : null
         });
-        if (typeof window.ewaffleAbrirModalCatalogo === "function") {
-          window.ewaffleAbrirModalCatalogo(contexto(true));
-        } else {
-          window.location.href = "https://ewaffle.cl/#contact";
+
+        /* El envío vive en el componente del modal, que es donde están las
+           credenciales. Acá solo se lo pide: dos copias del mismo POST se
+           habrían desincronizado al primer cambio. */
+        var enviar = window.ewaffleEnviarLeadCatalogo;
+        if (typeof enviar !== "function") {
+          /* Si el script del modal no cargó, no se pierde el lead: se abre el
+             formulario con todo escrito. */
+          ctaCotiza.disabled = false;
+          ctaCotiza.textContent = etiqueta;
+          if (typeof window.ewaffleAbrirModalCatalogo === "function") {
+            window.ewaffleAbrirModalCatalogo(contexto(true));
+          } else {
+            window.location.href = "https://ewaffle.cl/#contact";
+          }
+          return;
         }
+
+        enviar({
+          name: dato("nombre"),
+          email: dato("correo"),
+          company: dato("organizacion"),
+          phone: dato("whatsapp"),
+          message: contexto(true),
+          origen: "catalogo_cotizador"
+        }).then(function () {
+          if (cajaResumen) cajaResumen.setAttribute("hidden", "");
+          if (cajaOk) cajaOk.removeAttribute("hidden");
+          if (window.ewaffleAnalytics && window.ewaffleAnalytics.formSubmit) {
+            window.ewaffleAnalytics.formSubmit("catalogo_cotizador", {
+              section: "catalogo_cotizador",
+              has_phone: !!dato("whatsapp"),
+              total: r ? r.total : null
+            });
+          }
+        }).catch(function (err) {
+          console.error("Cotizador submit error", err);
+          ctaCotiza.disabled = false;
+          ctaCotiza.textContent = etiqueta;
+          avisar("No pudimos enviarla. Reintenta, o agenda directo y llegamos con la propuesta armada.", null);
+        });
       });
     }
 
