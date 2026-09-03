@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PlatformLandingContent from '../components/platform/PlatformLandingContent.astro';
+
+const title = "Plataforma LMS para empresas e instituciones privadas | Ewaffle";
+const description = "Tenemos una plataforma base de aprendizaje para empresas grandes e instituciones privadas y la customizamos con tu marca, sistemas propios, journeys de onboarding, gamificación y recursos e-learning de alta calidad.";
+const canonicalUrl = "https://ewaffle.cl/plataforma";
+const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+const keywords = "plataforma LMS para empresas, plataforma e-learning customizable, plataforma LMS customizada, LMS marca blanca, academia corporativa, onboarding corporativo, cursos gamificados, recursos e-learning, integraciones LMS, instituciones privadas, Ewaffle plataforma";
+---
+
+<BaseLayout {title} {description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="Ewaffle" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+    <meta name="keywords" content={keywords} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Plataforma e-learning customizable",
+      "provider": {
+        "@type": "Organization",
+        "name": "Ewaffle",
+        "url": "https://ewaffle.cl",
+        "logo": "https://ewaffle.cl/assets/logoprimario.png"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Chile y Latinoamerica"
+      },
+      "description": description,
+      "name": title
+    })} />
+  </Fragment>
+
+  <PlatformLandingContent />
+</BaseLayout>

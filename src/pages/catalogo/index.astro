@@ -1,10 +1,11 @@
 ---
 import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
 
-const title = "Catalogo de Recursos E-learning y Multimedia | Ewaffle";
-const description = "Explora Storyline, Rise, motion graphics, produccion multimedia en terreno, recorridos 360 y combinaciones recomendadas para construir experiencias de aprendizaje mas efectivas.";
+const title = "Catalogo de recursos e-learning para empresas | Ewaffle";
+const description = "Explora recursos e-learning premium para empresas e instituciones privadas: Storyline, Rise, motion graphics, produccion en terreno, recorridos 360 y bundles de cursos gamificados.";
 const canonicalUrl = "https://ewaffle.cl/catalogo/";
 const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
+const keywords = "catalogo e-learning, recursos e-learning, cursos gamificados, cursos SCORM, Storyline, Rise, motion graphics e-learning, videos 360 onboarding, capacitacion corporativa, recursos LMS";
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -15,6 +16,7 @@ const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
   <link rel="canonical" href={canonicalUrl}>
   <meta name="description" content={description}>
   <meta name="title" content={title}>
+  <meta name="keywords" content={keywords}>
   <meta name="theme-color" content="#101437">
   <meta name="author" content="Ewaffle">
   <meta property="og:type" content="website">
@@ -26,7 +28,7 @@ const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Catalogo de recursos e-learning y multimedia de Ewaffle">
+  <meta property="og:image:alt" content="Catalogo de recursos e-learning para empresas de Ewaffle">
   <meta property="og:site_name" content="Ewaffle">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary_large_image">
@@ -34,7 +36,25 @@ const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={socialImageUrl}>
-  <meta name="twitter:image:alt" content="Catalogo de recursos e-learning y multimedia de Ewaffle">
+  <meta name="twitter:image:alt" content="Catalogo de recursos e-learning para empresas de Ewaffle">
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": title,
+    "description": description,
+    "url": canonicalUrl,
+    "provider": {
+      "@type": "Organization",
+      "name": "Ewaffle",
+      "url": "https://ewaffle.cl"
+    },
+    "about": [
+      "Cursos SCORM",
+      "Motion graphics e-learning",
+      "Onboarding 360",
+      "Recursos LMS"
+    ]
+  })}></script>
   <title>{title}</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -473,7 +493,8 @@ const socialImageUrl = "https://ewaffle.cl/assets/catalogo-og.png";
           <li>Puede alimentar después videos, cápsulas o librerías internas.</li>
         </ul>
         <a class="resource-link" href="https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1" target="_blank" rel="noreferrer">Ver ejemplo en terreno 1 →</a><br />
-        <a class="resource-link" href="https://youtu.be/OCu-5fmS_mI" target="_blank" rel="noreferrer">Ver ejemplo en terreno 2 →</a>
+        <a class="resource-link" href="https://youtu.be/OCu-5fmS_mI" target="_blank" rel="noreferrer">Ver ejemplo en terreno 2 →</a><br />
+        <a class="resource-link" href="https://youtu.be/961wsf6u9K0" target="_blank" rel="noreferrer">Ver jornada de grabación producida por Ewaffle →</a>
       </article>
 
       <article class="resource-card" data-motion="fade-up" style="--motion-delay: 190ms;">

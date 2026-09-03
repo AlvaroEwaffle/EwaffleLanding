@@ -1,0 +1,914 @@
+---
+import HeroElement from '../../assets/HeroElement.png';
+import Contact from '../landing/Contact.astro';
+import Footer from '../landing/Footer.astro';
+
+const capabilities = [
+  {
+    icon: 'ri-palette-line',
+    title: 'Marca blanca real',
+    text: 'Logo, colores, fondo, favicon, mensaje de bienvenida y login por organizacion.',
+  },
+  {
+    icon: 'ri-layout-grid-line',
+    title: 'Cursos por desafios',
+    text: 'Estructura los programas en desafios, etapas, lecciones, recursos, quizzes y examenes.',
+  },
+  {
+    icon: 'ri-bar-chart-box-line',
+    title: 'Dashboard operativo',
+    text: 'Administra cursos, alumnos, avance, reportes y gestion de participantes desde una vista central.',
+  },
+  {
+    icon: 'ri-award-line',
+    title: 'Gamificacion integrada',
+    text: 'Puntos, badges, rankings y progreso visual para aumentar continuidad y finalizacion.',
+  },
+  {
+    icon: 'ri-links-line',
+    title: 'Contenido flexible',
+    text: 'Compatible con videos, PDFs, enlaces, H5P, Genially, quizzes, archivos y recursos externos.',
+  },
+  {
+    icon: 'ri-user-settings-line',
+    title: 'Roles y accesos',
+    text: 'Experiencias separadas para alumnos, administradores y super administradores.',
+  },
+];
+
+const differentiators = [
+  {
+    icon: 'ri-plug-line',
+    title: 'Integracion con sistemas propios',
+    text: 'Conectamos la plataforma a herramientas internas, CRM, intranet, HR, SSO, reportes o APIs para evitar que la LMS sea otra isla operativa.',
+  },
+  {
+    icon: 'ri-route-line',
+    title: 'Journeys y onboardings customizados',
+    text: 'Diseñamos rutas por rol, etapa, cohorte o hito: onboarding, certificacion, academia comercial, partners o clientes.',
+  },
+  {
+    icon: 'ri-gamepad-line',
+    title: 'Gamificacion aplicada',
+    text: 'Puntos, badges, rankings, misiones y progreso visual conectados a objetivos reales de aprendizaje y negocio.',
+  },
+  {
+    icon: 'ri-movie-2-line',
+    title: 'Recursos e-learning de alta calidad',
+    text: 'La plataforma puede venir con cursos, videos, Storyline, Rise, Genially, 360, quizzes y simulaciones producidas por Ewaffle.',
+  },
+];
+
+const resourceShowcase = [
+  {
+    icon: 'ri-video-line',
+    label: 'Video animado',
+    title: 'Capsulas audiovisuales para abrir o reforzar un modulo',
+    text: 'Ideales para explicar conceptos, alinear expectativas y elevar la calidad percibida de la experiencia.',
+    href: '/demo#video',
+    cta: 'Ver demo de video',
+  },
+  {
+    icon: 'ri-pages-line',
+    label: 'Rise 360',
+    title: 'Guias interactivas navegables',
+    text: 'Perfectas para contenido consultable, manuales vivos, politicas, procedimientos y rutas de aprendizaje.',
+    href: '/demo#rise',
+    cta: 'Ver guia Rise',
+  },
+  {
+    icon: 'ri-flow-chart',
+    label: 'Storyline SCORM',
+    title: 'Simulaciones y arboles de decision',
+    text: 'Para practicar decisiones, evaluar criterios y registrar avance dentro de la LMS.',
+    href: '/demo#game',
+    cta: 'Ver recurso SCORM',
+  },
+  {
+    icon: 'ri-slideshow-line',
+    label: 'Genially e infografias',
+    title: 'Piezas interactivas livianas',
+    text: 'Buenos recursos para explicar procesos, comparar escenarios o dejar material de refuerzo.',
+    href: '/demo#infographic',
+    cta: 'Ver infografia',
+  },
+  {
+    icon: 'ri-360-view',
+    label: '360 y terreno',
+    title: 'Experiencias inmersivas para espacios, procesos o seguridad',
+    text: 'Recorridos, videos 360 y produccion en terreno para onboarding operativo o entrenamiento contextual.',
+    href: '/catalogo',
+    cta: 'Ver catalogo',
+  },
+  {
+    icon: 'ri-stack-line',
+    label: 'Mix de formatos',
+    title: 'Combinaciones segun objetivo',
+    text: 'Entrada rapida, modulo completo o experiencia inmersiva, con recursos elegidos por impacto y presupuesto.',
+    href: '/catalogo',
+    cta: 'Explorar recursos',
+  },
+];
+
+const customizationLayers = [
+  'Identidad visual y experiencia de ingreso',
+  'Estructura de cursos, etapas y evaluaciones',
+  'Reportes y seguimiento segun operacion del cliente',
+  'Integraciones, dominios, automatizaciones y soporte',
+];
+
+const audiences = [
+  {
+    title: 'Empresas',
+    text: 'Onboarding, compliance, seguridad, entrenamiento comercial y rutas internas de desarrollo.',
+  },
+  {
+    title: 'Instituciones privadas',
+    text: 'Universidades privadas, colegios, institutos, programas formativos, certificaciones y seguimiento de avance.',
+  },
+  {
+    title: 'Academias corporativas',
+    text: 'Academias internas, comerciales o de partners con marca propia, catalogo de cursos y experiencia diferenciada.',
+  },
+];
+
+const implementation = [
+  {
+    step: '01',
+    title: 'Diagnostico de uso',
+    text: 'Definimos publico, cursos, volumen de usuarios, reglas de acceso y nivel de customizacion requerido.',
+  },
+  {
+    step: '02',
+    title: 'Activacion de base',
+    text: 'Levantamos la plataforma base con branding, roles, cursos iniciales y flujos esenciales.',
+  },
+  {
+    step: '03',
+    title: 'Customizacion guiada',
+    text: 'Ajustamos experiencia, reportes, contenidos, integraciones y detalles operativos del cliente.',
+  },
+  {
+    step: '04',
+    title: 'Salida a produccion',
+    text: 'Validamos con usuarios piloto, corregimos fricciones y dejamos al equipo listo para operar.',
+  },
+];
+---
+
+<main class="motion-page min-h-screen overflow-x-hidden bg-white text-text-dark">
+  <section class="motion-hero relative overflow-hidden bg-primary text-white" data-parallax-section>
+    <div class="absolute inset-0 opacity-10">
+      <img src="/assets/Patron.svg" alt="" class="h-full w-full object-cover" loading="eager" />
+    </div>
+    <div class="motion-field absolute inset-0 pointer-events-none" aria-hidden="true">
+      <span class="motion-orbit motion-orbit--one"></span>
+      <span class="motion-orbit motion-orbit--two"></span>
+      <span class="motion-dash motion-dash--one"></span>
+      <span class="motion-dash motion-dash--two"></span>
+      <span class="motion-dot motion-dot--one"></span>
+      <span class="motion-dot motion-dot--two"></span>
+    </div>
+
+    <div class="container relative mx-auto grid min-h-[92vh] max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+      <div class="pt-8 lg:pt-12" data-motion="fade-up">
+        <a href="/" class="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-yellow">
+          <img src="/assets/logoewchico.png" alt="Ewaffle" class="h-7 w-auto" />
+          Plataforma LMS Ewaffle
+        </a>
+
+        <p class="mt-10 text-sm font-bold uppercase tracking-[0.18em] text-yellow">
+          Plataforma base + journeys + contenido
+        </p>
+        <h1 class="mt-4 max-w-3xl text-4xl font-black leading-tight md:text-[2.9rem] lg:text-[3.35rem]">
+          Tu plataforma de aprendizaje, conectada a tu operacion y disenada como experiencia.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl">
+          Partimos de una LMS base y la customizamos con tu marca, tus sistemas, journeys de onboarding, gamificacion y recursos e-learning de alta calidad.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#contact" class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-7 py-3 text-base font-bold text-white shadow-xl transition hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-yellow">
+            Agendar demo de plataforma
+          </a>
+          <a href="#propuesta" class="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/25 px-7 py-3 text-base font-bold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-yellow">
+            Ver propuesta
+          </a>
+        </div>
+
+        <div class="mt-10 grid max-w-xl grid-cols-3 gap-3 text-center" data-motion="stagger">
+          <div class="motion-card rounded-lg border border-white/15 bg-white/10 px-3 py-4">
+            <div class="text-2xl font-black text-yellow">Base</div>
+            <div class="mt-1 text-xs text-white/70">lista para activar</div>
+          </div>
+          <div class="motion-card rounded-lg border border-white/15 bg-white/10 px-3 py-4">
+            <div class="text-2xl font-black text-yellow">100%</div>
+            <div class="mt-1 text-xs text-white/70">marca propia</div>
+          </div>
+          <div class="motion-card rounded-lg border border-white/15 bg-white/10 px-3 py-4">
+            <div class="text-2xl font-black text-yellow">Cursos</div>
+            <div class="mt-1 text-xs text-white/70">listos para aprender</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative" data-motion="float-in" data-parallax="0.16">
+        <div class="motion-screen rounded-[28px] border border-white/15 bg-white p-3 shadow-2xl">
+          <div class="overflow-hidden rounded-[22px] border border-slate-200 bg-slate-950">
+            <div class="flex items-center justify-between border-b border-white/10 bg-slate-900 px-5 py-4">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-xl bg-accent text-white">
+                  <i class="ri-graduation-cap-line text-xl" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-white">Academia cliente</p>
+                  <p class="text-xs text-slate-400">Vista alumno y admin</p>
+                </div>
+              </div>
+              <span class="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-bold text-emerald-200">Personalizable</span>
+            </div>
+
+            <div class="grid gap-4 p-5 md:grid-cols-[180px_1fr]">
+              <aside class="rounded-2xl bg-slate-900 p-4">
+                <div class="mb-5 h-9 w-28 rounded-lg bg-white/90"></div>
+                <div class="space-y-3">
+                  <div class="rounded-lg bg-accent px-3 py-2 text-sm font-bold text-white">Cursos</div>
+                  <div class="rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-300">Alumnos</div>
+                  <div class="rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-300">Reportes</div>
+                  <div class="rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-300">Branding</div>
+                </div>
+              </aside>
+
+              <div class="space-y-4">
+                <div class="grid gap-3 sm:grid-cols-3" data-motion="stagger">
+                  <div class="motion-card rounded-xl bg-white p-4 text-slate-950">
+                    <p class="text-xs font-bold uppercase text-slate-500">Cursos activos</p>
+                    <p class="mt-2 text-3xl font-black">12</p>
+                  </div>
+                  <div class="motion-card rounded-xl bg-white p-4 text-slate-950">
+                    <p class="text-xs font-bold uppercase text-slate-500">Avance medio</p>
+                    <p class="mt-2 text-3xl font-black">74%</p>
+                  </div>
+                  <div class="motion-card rounded-xl bg-white p-4 text-slate-950">
+                    <p class="text-xs font-bold uppercase text-slate-500">Badges</p>
+                    <p class="mt-2 text-3xl font-black">38</p>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-white p-5 text-slate-950">
+                  <div class="mb-4 flex items-center justify-between">
+                    <div>
+                      <p class="text-xs font-bold uppercase text-slate-500">Ruta formativa</p>
+                      <h2 class="text-xl font-black">Onboarding comercial</h2>
+                    </div>
+                    <span class="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold text-secondary">4 etapas</span>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="motion-progress-row flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
+                      <i class="ri-play-circle-line text-2xl text-accent" aria-hidden="true"></i>
+                      <div class="min-w-0 flex-1">
+                        <p class="font-bold">Bienvenida y cultura</p>
+                        <div class="mt-2 h-2 rounded-full bg-slate-200">
+                          <div class="motion-progress h-2 w-4/5 rounded-full bg-accent"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="motion-progress-row flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
+                      <i class="ri-question-answer-line text-2xl text-secondary" aria-hidden="true"></i>
+                      <div class="min-w-0 flex-1">
+                        <p class="font-bold">Quiz de producto</p>
+                        <div class="mt-2 h-2 rounded-full bg-slate-200">
+                          <div class="motion-progress h-2 w-3/5 rounded-full bg-secondary"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src={HeroElement.src} alt="Recursos digitales para experiencias e-learning" class="motion-hero-element absolute -bottom-16 -right-8 hidden w-40 drop-shadow-2xl lg:block" loading="eager" data-parallax="-0.24" />
+      </div>
+    </div>
+  </section>
+
+  <section id="propuesta" class="motion-section bg-gray-50 py-20" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div data-motion="fade-right">
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">La propuesta</p>
+          <h2 class="mt-3 text-3xl font-black text-primary md:text-5xl">
+            No vendemos solo software: dejamos una plataforma operando para tu organizacion.
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            La ventaja es partir desde una base probada y customizar solo lo que genera valor: marca, experiencia, cursos, reportes, integraciones y operacion. Eso reduce tiempo, riesgo y dependencia tecnica.
+          </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2" data-motion="stagger">
+          {capabilities.map((item) => (
+            <article class="motion-card rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <i class={`${item.icon} text-3xl text-accent`} aria-hidden="true"></i>
+              <h3 class="mt-4 text-xl font-black text-primary">{item.title}</h3>
+              <p class="mt-2 leading-relaxed text-gray-600">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-white py-20" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center" data-motion="fade-up">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-secondary">Lo que mas llama la atencion</p>
+        <h2 class="mt-3 text-3xl font-black text-primary md:text-5xl">
+          La LMS se vuelve valiosa cuando vive dentro de la operacion del cliente.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-gray-600">
+          Por eso la propuesta no es solo activar usuarios y cursos. Es disenar una experiencia conectada, medible y con recursos de aprendizaje que se sientan profesionales desde el primer dia.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4" data-motion="stagger">
+        {differentiators.map((item) => (
+          <article class="motion-card rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <span class="grid h-12 w-12 place-items-center rounded-lg bg-secondary/10 text-secondary">
+              <i class={`${item.icon} text-2xl`} aria-hidden="true"></i>
+            </span>
+            <h3 class="mt-5 text-xl font-black text-primary">{item.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-gray-600">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-white py-20" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div class="rounded-[28px] border border-gray-200 bg-gray-50 p-6 md:p-8" data-motion="fade-right" data-parallax="0.08">
+          <div class="rounded-2xl bg-primary p-5 text-white">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-bold uppercase tracking-[0.18em] text-yellow">Branding</p>
+                <h3 class="mt-2 text-2xl font-black">Login por cliente</h3>
+              </div>
+              <i class="ri-palette-line text-4xl text-yellow" aria-hidden="true"></i>
+            </div>
+            <div class="mt-6 rounded-xl border border-white/15 bg-white/10 p-4">
+              <div class="mb-4 h-12 w-36 rounded-lg bg-white"></div>
+              <p class="text-xl font-black">Bienvenido a tu academia</p>
+              <p class="mt-2 text-sm text-white/75">Mensaje, colores, fondo y logo adaptados a la organizacion.</p>
+              <div class="mt-5 rounded-lg bg-accent px-4 py-3 text-center text-sm font-bold">Ingresar</div>
+            </div>
+          </div>
+        </div>
+
+        <div data-motion="fade-left">
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-secondary">Customizacion inteligente</p>
+          <h2 class="mt-3 text-3xl font-black text-primary md:text-5xl">
+            Base comun, experiencia propia.
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            El cliente no compra una herramienta generica. Compra una plataforma que se siente suya y que refleja su forma de operar, sin asumir el costo de desarrollar una LMS desde cero.
+          </p>
+          <ul class="mt-8 space-y-4" data-motion="stagger">
+            {customizationLayers.map((item) => (
+              <li class="motion-card flex gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-secondary/10 text-secondary">
+                  <i class="ri-check-line text-xl" aria-hidden="true"></i>
+                </span>
+                <span class="font-semibold text-primary">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-gray-50 py-20" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div data-motion="fade-right">
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">Recursos que pueden vivir dentro</p>
+          <h2 class="mt-3 text-3xl font-black text-primary md:text-5xl">
+            No dejamos una plataforma vacia: podemos llenarla con experiencias e-learning reales.
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Revisamos la demo y el catalogo actual para traer a esta propuesta formatos concretos: video, Rise, Storyline SCORM, Genially, 360 y combinaciones de recursos segun objetivo.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/demo" class="inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-accent">
+              Ver demo interactiva
+            </a>
+            <a href="/catalogo" class="inline-flex min-h-[48px] items-center justify-center rounded-full border border-primary/20 px-6 py-3 text-sm font-bold text-primary transition hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-accent">
+              Ver catalogo de recursos
+            </a>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2" data-motion="stagger">
+          {resourceShowcase.map((item) => (
+            <article class="motion-card rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div class="flex items-start justify-between gap-4">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent">
+                  <i class={`${item.icon} text-2xl`} aria-hidden="true"></i>
+                </span>
+                <span class="rounded-full bg-primary/5 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-primary">{item.label}</span>
+              </div>
+              <h3 class="mt-4 text-lg font-black text-primary">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600">{item.text}</p>
+              <a href={item.href} class="mt-4 inline-flex min-h-[44px] items-center text-sm font-bold text-accent transition hover:text-accent/80 focus:outline-none focus:ring-2 focus:ring-accent">
+                {item.cta}
+                <i class="ri-arrow-right-line ml-2" aria-hidden="true"></i>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-white py-20" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="motion-bundle overflow-hidden rounded-[28px] border border-primary/10 bg-primary text-white" data-motion="scale-in">
+        <div class="grid gap-0 lg:grid-cols-[0.95fr_1.05fr]">
+          <div class="p-8 md:p-12" data-motion="fade-right">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-yellow">Bundle recomendado</p>
+            <h2 class="mt-3 text-3xl font-black leading-tight md:text-5xl">
+              Plataforma + Cursos Gamificados
+            </h2>
+            <p class="mt-5 text-lg leading-relaxed text-white/80">
+              Para clientes que no quieren solo tecnologia: quieren salir a produccion con una academia propia, cursos listos y una experiencia que motive a completar.
+            </p>
+            <div class="mt-8 grid gap-3 sm:grid-cols-3" data-motion="stagger">
+              <div class="motion-card rounded-lg border border-white/15 bg-white/10 p-4">
+                <p class="text-xs font-bold uppercase tracking-[0.12em] text-yellow">Incluye</p>
+                <p class="mt-2 font-bold">LMS customizada</p>
+              </div>
+              <div class="motion-card rounded-lg border border-white/15 bg-white/10 p-4">
+                <p class="text-xs font-bold uppercase tracking-[0.12em] text-yellow">Incluye</p>
+                <p class="mt-2 font-bold">Cursos gamificados</p>
+              </div>
+              <div class="motion-card rounded-lg border border-white/15 bg-white/10 p-4">
+                <p class="text-xs font-bold uppercase tracking-[0.12em] text-yellow">Incluye</p>
+                <p class="mt-2 font-bold">Implementacion guiada</p>
+              </div>
+            </div>
+            <a href="#contact" class="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-8 py-3 text-base font-bold text-white transition hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-yellow">
+              Cotizar bundle
+            </a>
+          </div>
+
+          <div class="bg-white p-6 text-primary md:p-8" data-motion="fade-left">
+            <div class="grid h-full gap-4" data-motion="stagger">
+              <article class="motion-card rounded-lg border border-gray-200 bg-gray-50 p-5">
+                <div class="flex items-center gap-3">
+                  <i class="ri-computer-line text-3xl text-secondary" aria-hidden="true"></i>
+                  <h3 class="text-xl font-black">Plataforma base personalizada</h3>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-gray-600">Marca, login, roles, cursos, reportes, reglas de acceso y posibles integraciones con sistemas del cliente.</p>
+              </article>
+              <article class="motion-card rounded-lg border border-gray-200 bg-gray-50 p-5">
+                <div class="flex items-center gap-3">
+                  <i class="ri-medal-line text-3xl text-accent" aria-hidden="true"></i>
+                  <h3 class="text-xl font-black">Cursos gamificados listos</h3>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-gray-600">Modulos con narrativa, quizzes, desafios, puntos, badges, progreso visual y recursos interactivos.</p>
+              </article>
+              <article class="motion-card rounded-lg border border-gray-200 bg-gray-50 p-5">
+                <div class="flex items-center gap-3">
+                  <i class="ri-line-chart-line text-3xl text-yellow" aria-hidden="true"></i>
+                  <h3 class="text-xl font-black">Salida a produccion con medicion</h3>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-gray-600">Piloto, ajustes, carga inicial de usuarios/contenidos y seguimiento de avance para demostrar adopcion.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-primary py-20 text-white" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl" data-motion="fade-up">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-yellow">Casos donde calza mejor</p>
+        <h2 class="mt-3 text-3xl font-black md:text-5xl">
+          Para organizaciones que necesitan una experiencia LMS propia, no otro login olvidado.
+        </h2>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-3" data-motion="stagger">
+        {audiences.map((item) => (
+          <article class="motion-card rounded-lg border border-white/15 bg-white/10 p-6">
+            <h3 class="text-2xl font-black text-yellow">{item.title}</h3>
+            <p class="mt-3 leading-relaxed text-white/80">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-white py-20" data-motion-section>
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center" data-motion="fade-up">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">Implementacion</p>
+        <h2 class="mx-auto mt-3 max-w-3xl text-3xl font-black text-primary md:text-5xl">
+          Un camino simple para pasar de idea a plataforma operativa.
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-4" data-motion="stagger">
+        {implementation.map((item) => (
+          <article class="motion-card rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <span class="text-sm font-black text-accent">{item.step}</span>
+            <h3 class="mt-3 text-xl font-black text-primary">{item.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-gray-600">{item.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-14 rounded-[28px] bg-gradient-to-r from-primary to-secondary p-8 text-center text-white md:p-12" data-motion="scale-in">
+        <h2 class="text-3xl font-black md:text-4xl">Veamos si tu caso necesita base, customizacion o integracion.</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-white/90">
+          En una llamada podemos mapear usuarios, contenidos, reglas de acceso, reportes y esfuerzo real de lanzamiento.
+        </p>
+        <a href="#contact" class="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-8 py-3 text-base font-bold text-white transition hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-yellow">
+          Solicitar evaluacion
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="motion-section bg-slate-50 py-16" data-motion-section>
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-5 md:grid-cols-2" data-motion="stagger">
+        <article class="motion-card rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-secondary">Opcion rapida</p>
+          <h2 class="mt-3 text-2xl font-black text-primary md:text-3xl">Agendar directo en Capu</h2>
+          <p class="mt-3 leading-relaxed text-gray-600">
+            Si ya tienes claro que quieres conversar, reserva una reunion de descubrimiento en el calendario.
+          </p>
+          <a href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/" class="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-accent">
+            Abrir calendario
+          </a>
+        </article>
+
+        <article class="motion-card rounded-lg border border-accent/20 bg-white p-6 shadow-sm">
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent">Prefiero dejar mis datos</p>
+          <h2 class="mt-3 text-2xl font-black text-primary md:text-3xl">Te enviamos el contacto y luego agendas</h2>
+          <p class="mt-3 leading-relaxed text-gray-600">
+            Completa el formulario con tu empresa, necesidad y servicio de interes. Al enviarlo, el lead queda registrado y te llevamos al link de Capu.
+          </p>
+          <a href="#contact" class="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-bold text-white transition hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-primary">
+            Dejar datos
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <Contact
+    title="Deja tus datos y agenda la reunion"
+    subtitle="Usamos el mismo formulario de Ewaffle: guardamos tu contacto, enviamos el correo al equipo y luego te llevamos al calendario de Capu."
+    submitText="Enviar datos y agendar"
+    defaultService="plataforma_lms"
+    source="ewaffle_platform_landing_contact"
+    sectionClass="py-20 bg-white"
+  />
+  <Footer />
+</main>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var motionItems = Array.from(document.querySelectorAll('[data-motion], .motion-card'));
+    var parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
+
+    if (reduceMotion) {
+      motionItems.forEach(function (item) {
+        item.classList.add('is-visible');
+      });
+      return;
+    }
+
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, {
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.12,
+    });
+
+    motionItems.forEach(function (item, index) {
+      if (item.classList.contains('motion-card')) {
+        item.style.setProperty('--motion-delay', Math.min(index % 6, 5) * 70 + 'ms');
+      }
+      revealObserver.observe(item);
+    });
+
+    var ticking = false;
+    function updateParallax() {
+      var viewportHeight = window.innerHeight || 1;
+      parallaxItems.forEach(function (item) {
+        var rect = item.getBoundingClientRect();
+        var depth = Number(item.getAttribute('data-parallax')) || 0.12;
+        var progress = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
+        var y = Math.max(-42, Math.min(42, progress * -120 * depth));
+        item.style.setProperty('--parallax-y', y.toFixed(2) + 'px');
+      });
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+
+    updateParallax();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  });
+</script>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .motion-page {
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .motion-field {
+    transform: translate3d(0, calc(var(--parallax-y, 0px) * 0.2), 0);
+  }
+
+  .motion-orbit,
+  .motion-dash,
+  .motion-dot {
+    position: absolute;
+    display: block;
+    will-change: transform, opacity;
+  }
+
+  .motion-orbit {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    animation: platform-orbit 18s var(--ease-out) infinite alternate;
+  }
+
+  .motion-orbit--one {
+    width: 300px;
+    height: 300px;
+    right: 7%;
+    top: 12%;
+  }
+
+  .motion-orbit--two {
+    width: 180px;
+    height: 180px;
+    left: 9%;
+    bottom: 14%;
+    animation-duration: 15s;
+    animation-direction: alternate-reverse;
+  }
+
+  .motion-dash {
+    height: 2px;
+    width: 180px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(255, 177, 72, 0.72), transparent);
+    animation: platform-dash 7s ease-in-out infinite;
+  }
+
+  .motion-dash--one {
+    right: 18%;
+    top: 28%;
+  }
+
+  .motion-dash--two {
+    left: 14%;
+    top: 58%;
+    animation-delay: 1.2s;
+  }
+
+  .motion-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: #ffb148;
+    box-shadow: 0 0 24px rgba(255, 177, 72, 0.72);
+    animation: platform-float 6s ease-in-out infinite;
+  }
+
+  .motion-dot--one {
+    left: 24%;
+    top: 26%;
+  }
+
+  .motion-dot--two {
+    right: 13%;
+    bottom: 22%;
+    background: #fd5a93;
+    animation-delay: 1s;
+  }
+
+  [data-motion],
+  .motion-card {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 760ms var(--ease-out) var(--motion-delay, 0ms),
+      transform 760ms var(--ease-out) var(--motion-delay, 0ms),
+      box-shadow 260ms ease,
+      border-color 260ms ease,
+      background-color 260ms ease;
+    will-change: transform, opacity;
+  }
+
+  [data-motion='fade-right'] {
+    transform: translate3d(-34px, 24px, 0);
+  }
+
+  [data-motion='fade-left'] {
+    transform: translate3d(34px, 24px, 0);
+  }
+
+  [data-motion='float-in'] {
+    transform: translate3d(28px, 32px, 0) scale(0.96) rotate(1.5deg);
+  }
+
+  [data-motion='scale-in'] {
+    transform: translate3d(0, 24px, 0) scale(0.96);
+  }
+
+  [data-motion].is-visible,
+  .motion-card.is-visible {
+    opacity: 1;
+    transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1) rotate(0deg);
+  }
+
+  .motion-screen {
+    position: relative;
+    transform: translate3d(0, var(--parallax-y, 0px), 0);
+    animation: platform-screen-breathe 7s ease-in-out infinite;
+  }
+
+  .motion-screen::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: 22px;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.18) 42%, transparent 58%);
+    transform: translateX(-130%);
+    animation: platform-sheen 5.8s ease-in-out infinite;
+  }
+
+  .motion-hero-element {
+    transform: translate3d(0, var(--parallax-y, 0px), 0);
+    animation: platform-float 6.5s ease-in-out infinite;
+  }
+
+  .motion-card:hover {
+    border-color: rgba(253, 90, 147, 0.28);
+    transform: translate3d(0, calc(var(--parallax-y, 0px) - 4px), 0);
+  }
+
+  .motion-progress {
+    transform-origin: left center;
+    animation: platform-progress 2.6s var(--ease-out) both;
+  }
+
+  .motion-progress-row:nth-child(2) .motion-progress {
+    animation-delay: 180ms;
+  }
+
+  .motion-bundle {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .motion-bundle::before {
+    content: "";
+    position: absolute;
+    inset: -30% auto auto -8%;
+    width: 360px;
+    height: 360px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 177, 72, 0.26), transparent 68%);
+    filter: blur(8px);
+    z-index: -1;
+    animation: platform-orbit 12s var(--ease-out) infinite alternate;
+  }
+
+  @keyframes platform-orbit {
+    from {
+      transform: translate3d(-10px, 8px, 0) rotate(-4deg) scale(0.98);
+    }
+    to {
+      transform: translate3d(18px, -18px, 0) rotate(8deg) scale(1.05);
+    }
+  }
+
+  @keyframes platform-dash {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: translate3d(-14px, 0, 0) scaleX(0.72);
+    }
+    50% {
+      opacity: 0.85;
+      transform: translate3d(18px, 0, 0) scaleX(1);
+    }
+  }
+
+  @keyframes platform-float {
+    0%,
+    100% {
+      transform: translate3d(0, var(--parallax-y, 0px), 0);
+    }
+    50% {
+      transform: translate3d(0, calc(var(--parallax-y, 0px) - 12px), 0);
+    }
+  }
+
+  @keyframes platform-screen-breathe {
+    0%,
+    100% {
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    }
+    50% {
+      box-shadow: 0 36px 110px rgba(253, 90, 147, 0.20);
+    }
+  }
+
+  @keyframes platform-sheen {
+    0%,
+    45% {
+      transform: translateX(-130%);
+      opacity: 0;
+    }
+    55% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(130%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes platform-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .motion-orbit,
+    .motion-dash {
+      opacity: 0.45;
+      transform: scale(0.78);
+    }
+
+    [data-motion='fade-right'],
+    [data-motion='fade-left'],
+    [data-motion='float-in'],
+    [data-motion='scale-in'] {
+      transform: translate3d(0, 24px, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.001ms !important;
+    }
+
+    [data-motion],
+    .motion-card,
+    [data-motion].is-visible,
+    .motion-card.is-visible,
+    .motion-screen,
+    .motion-hero-element {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>

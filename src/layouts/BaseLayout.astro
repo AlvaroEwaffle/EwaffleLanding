@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Ewaffle | Expertos en E-learning, Diseño Instruccional y Producción Multimedia",
-  description = "Desarrollamos soluciones e-learning personalizadas con diseño instruccional experto, producción multimedia y gamificación. Potencia el aprendizaje de tu organización.",
+  title = "Ewaffle | Plataforma LMS y cursos e-learning para empresas e instituciones privadas",
+  description = "Implementamos plataformas LMS personalizadas, journeys de onboarding, cursos gamificados, recursos multimedia e IA para grandes empresas e instituciones privadas en Latinoamérica.",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://www.ewaffle.cl");
@@ -32,11 +32,15 @@ const keywords = [
   "aprendizaje virtual",
   "capacitación corporativa",
   "diseño instruccional chile",
-  "OTEC",
-  "SENCE",
+  "plataforma LMS para empresas",
+  "LMS corporativo",
+  "instituciones privadas",
+  "academia corporativa",
+  "onboarding corporativo",
+  "integraciones LMS",
   "cursos SCORM",
   "marca blanca",
-  "engagement estudiantil",
+  "engagement aprendizaje",
   "transformación digital",
   "soluciones e-learning",
   "cursos gamificados",
@@ -50,7 +54,7 @@ const keywords = [
   "academia e-learning",
   "cursos diseño instruccional",
   "formación en e-learning",
-  "cursos Canva",
+  "recursos e-learning premium",
   "H5P interactivo",
   "creación de contenido digital",
   "cursos online certificados",
@@ -60,7 +64,7 @@ const keywords = [
   "certificación diseño instruccional",
   "academia digital chile",
   "cursos creación contenido",
-  "formación educadores digitales",
+  "compliance corporativo",
 ];
 ---
 
@@ -120,7 +124,7 @@ const keywords = [
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:width" content="1024" />
     <meta property="og:image:height" content="768" />
-    <meta property="og:image:alt" content="Ewaffle, soluciones e-learning y multimedia" />
+    <meta property="og:image:alt" content="Ewaffle, plataforma LMS y recursos e-learning corporativos" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Ewaffle" />
 
@@ -130,7 +134,7 @@ const keywords = [
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
-    <meta property="twitter:image:alt" content="Ewaffle, soluciones e-learning y multimedia" />
+    <meta property="twitter:image:alt" content="Ewaffle, plataforma LMS y recursos e-learning corporativos" />
 
     <!-- Additional Meta Tags -->
     <meta name="robots" content="index, follow" />
@@ -159,7 +163,7 @@ const keywords = [
         "name": "Ewaffle",
         "url": "https://www.ewaffle.cl",
         "logo": "https://www.ewaffle.cl/assets/logoewchico.png",
-        "description": "Expertos en desarrollo de soluciones e-learning, diseño instruccional y producción multimedia para empresas y organizaciones educativas.",
+        "description": "Plataformas LMS personalizadas, journeys de onboarding, cursos gamificados y recursos e-learning premium para grandes empresas e instituciones privadas.",
         "sameAs": [
           "https://www.instagram.com/ewaffle.cl/",
           "https://linkedin.com/company/ewaffle"
@@ -181,30 +185,30 @@ const keywords = [
         },
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Servicios E-learning",
+          "name": "Soluciones e-learning para empresas",
           "itemListElement": [
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Cursos SCORM Gamificados",
-                "description": "Desarrollo de cursos digitales con gamificación y cumplimiento SENCE"
+                "name": "Plataforma LMS personalizable",
+                "description": "LMS marca blanca con journeys, integraciones y reportería para empresas e instituciones privadas"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Diseño Instruccional",
-                "description": "Creación de experiencias de aprendizaje digital efectivas"
+                "name": "Cursos gamificados corporativos",
+                "description": "Cursos SCORM y recursos interactivos para onboarding, compliance y capacitación interna"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Soluciones Marca Blanca",
-                "description": "Plataformas e-learning personalizadas con tu identidad"
+                "name": "Producción multimedia e-learning",
+                "description": "Videos, audio, animaciones y experiencias 360 para aprendizaje corporativo"
               }
             }
           ]

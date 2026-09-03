@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Curso Convivencia Escolar</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      iframe {
+        border: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      const storageKey = "ewaffle:rise-html:sip-convivencia-escolar";
+
+      function readState() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || "{}");
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function writeState(nextState) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(nextState));
+        } catch (error) {
+          // Ignore localStorage quota/private mode failures.
+        }
+      }
+
+      function getStateValue(key, fallback) {
+        const state = readState();
+        return state[key] || fallback;
+      }
+
+      function setStateValue(key, value) {
+        const state = readState();
+        state[key] = value;
+        writeState(state);
+      }
+
+      window.IsLmsPresent = function () {
+        return true;
+      };
+
+      window.CommitData = function () {
+        return true;
+      };
+
+      window.ConcedeControl = function () {
+        return true;
+      };
+
+      window.CreateResponseIdentifier = function (_, text) {
+        return String(text || "");
+      };
+
+      window.Finish = function () {
+        return true;
+      };
+
+      window.GetDataChunk = function () {
+        return getStateValue("dataChunk", "");
+      };
+
+      window.GetStatus = function () {
+        return getStateValue("status", "incomplete");
+      };
+
+      window.GetStudentID = function () {
+        return "html-preview";
+      };
+
+      window.GetBookmark = function () {
+        return getStateValue("bookmark", "");
+      };
+
+      window.MatchingResponse = function () {
+        return true;
+      };
+
+      window.RecordFillInInteraction = function () {
+        return true;
+      };
+
+      window.RecordMatchingInteraction = function () {
+        return true;
+      };
+
+      window.RecordMultipleChoiceInteraction = function () {
+        return true;
+      };
+
+      window.ResetStatus = function () {
+        setStateValue("status", "incomplete");
+        return true;
+      };
+
+      window.SetBookmark = function (bookmark) {
+        setStateValue("bookmark", bookmark || "");
+        return true;
+      };
+
+      window.SetDataChunk = function (dataChunk) {
+        setStateValue("dataChunk", dataChunk || "");
+        return true;
+      };
+
+      window.SetFailed = function () {
+        setStateValue("status", "failed");
+        return true;
+      };
+
+      window.SetLanguagePreference = function () {
+        return true;
+      };
+
+      window.SetPassed = function () {
+        setStateValue("status", "passed");
+        return true;
+      };
+
+      window.SetReachedEnd = function () {
+        setStateValue("status", "completed");
+        return true;
+      };
+
+      window.SetScore = function (score) {
+        setStateValue("score", score);
+        return true;
+      };
+
+      window.WriteToDebug = function () {
+        return true;
+      };
+    </script>
+  </head>
+  <body>
+    <iframe
+      title="Curso Convivencia Escolar"
+      src="../scorm12/scormcontent/index.html#/preview"
+      allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </body>
+</html>

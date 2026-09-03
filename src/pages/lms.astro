@@ -1,52 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/landing/Footer.astro';
-import CTA from '../components/landing/CTA.astro';
-import Contact from '../components/landing/Contact.astro';
+import PlatformLandingContent from '../components/platform/PlatformLandingContent.astro';
 
-const title = "Plataforma LMS | Ewaffle - Sistema de Gestión de Aprendizaje Completo";
-const description = "Plataforma LMS completa con gestión de usuarios, desafíos, gamificación, seguimiento de progreso y más. Escalable desde 10 hasta 10,000+ usuarios. Marca blanca incluida. Chile y Latinoamérica.";
+const title = "Plataforma LMS para empresas e instituciones privadas | Ewaffle";
+const description = "Plataforma LMS base para empresas grandes e instituciones privadas. La customizamos con marca blanca, sistemas propios, journeys de onboarding, cursos gamificados, recursos e-learning y reportes.";
 const canonicalUrl = "https://ewaffle.cl/lms";
 const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
-const keywords = "plataforma LMS, sistema gestión aprendizaje, LMS Chile, plataforma educativa, LMS Latinoamérica, gestión usuarios, seguimiento progreso, marca blanca LMS, plataforma e-learning, sistema aprendizaje online";
+const keywords = "plataforma LMS para empresas, LMS corporativo, LMS marca blanca, plataforma educativa privada, academia corporativa, onboarding corporativo, cursos gamificados, recursos e-learning, integraciones LMS, instituciones privadas";
 ---
 
 <BaseLayout {title} {description}>
   <Fragment slot="head">
     <link rel="canonical" href={canonicalUrl} />
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Ewaffle" />
     <meta property="og:locale" content="es_ES" />
-    
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageUrl} />
-    
-    <!-- Additional SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
-    <meta name="author" content="Ewaffle" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="es" />
-    <meta name="geo.region" content="CL" />
-    <meta name="geo.placename" content="Santiago, Chile" />
-    <meta name="revisit-after" content="7 days" />
-    
-    <!-- Schema.org Service Markup -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Service",
-      "serviceType": "Plataforma LMS",
+      "serviceType": "Plataforma LMS personalizable",
       "provider": {
         "@type": "Organization",
         "name": "Ewaffle",
@@ -55,206 +36,12 @@ const keywords = "plataforma LMS, sistema gestión aprendizaje, LMS Chile, plata
       },
       "areaServed": {
         "@type": "Place",
-        "name": "Chile y Latinoamérica"
+        "name": "Chile y Latinoamerica"
       },
       "description": description,
       "name": title
     })} />
   </Fragment>
 
-  <main class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90">
-      <div class="relative z-30 max-w-7xl mt-20 px-4 sm:px-6 lg:px-8">
-        <div class="mb-8 flex justify-center">
-          <img 
-            src="/assets/logoprimario.png" 
-            alt="Ewaffle Logo" 
-            class="w-64 h-auto object-contain"
-          />
-        </div>
-
-        <h1 class="text-yellow text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
-          💻 Tu Propia Plataforma LMS
-        </h1>
-        <p class="text-white text-xl md:text-2xl max-w-4xl mx-auto mb-8 leading-relaxed">
-          Sistema completo de gestión de aprendizaje. Escalable, personalizable y listo para usar sin necesidad de desarrolladores internos.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-          <a 
-            href="#contact" 
-            class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
-          >
-            Solicitar Demo Gratuita
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-            🚀 Características Principales
-          </h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            Todo lo que necesitas para gestionar el aprendizaje de tu organización
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          <!-- Feature Cards -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">📚</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Gestión de Desafíos</h3>
-            <p class="text-gray-600">Crea y organiza desafíos de aprendizaje con múltiples etapas y contenido estructurado.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">👥</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Gestión de Usuarios</h3>
-            <p class="text-gray-600">Sistema flexible de gestión: por dominio de email o código de acceso. Asociación automática.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">🎮</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Gamificación Integrada</h3>
-            <p class="text-gray-600">Sistema de puntos, badges y seguimiento de progreso para aumentar engagement.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">📹</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Múltiples Tipos de Contenido</h3>
-            <p class="text-gray-600">Videos, contenido interactivo (Genially, H5P), quizzes, exámenes y archivos.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">📊</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Seguimiento de Progreso</h3>
-            <p class="text-gray-600">Monitoreo en tiempo real del progreso y finalización de contenido por usuario.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">📅</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Programación Automática</h3>
-            <p class="text-gray-600">Notificaciones automáticas y liberación programada de contenido por fechas.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">🔐</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Roles y Permisos</h3>
-            <p class="text-gray-600">Sistema de roles (admin, usuario, superAdmin) con control de acceso granular.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">📱</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Diseño Responsive</h3>
-            <p class="text-gray-600">Interfaz moderna y completamente responsive. Funciona en desktop, tablet y móvil.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <div class="text-4xl mb-4">🏷️</div>
-            <h3 class="text-xl font-bold text-primary mb-3">Marca Blanca</h3>
-            <p class="text-gray-600">Personalización completa con tu logo, colores e identidad visual. Ewaffle invisible.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="py-20 bg-gray-50">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-            💡 ¿Por qué elegir nuestra Plataforma LMS?
-          </h2>
-        </div>
-
-        <div class="max-w-4xl mx-auto">
-          <div class="space-y-8">
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 class="text-2xl font-bold text-primary mb-4">✅ Sin Necesidad de Desarrolladores</h3>
-              <p class="text-gray-600 text-lg">Todo está listo para usar. No necesitas contratar un equipo técnico interno. Nosotros manejamos la infraestructura y tú te enfocas en el contenido.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 class="text-2xl font-bold text-primary mb-4">📈 Escalable desde 10 hasta 10,000+ Usuarios</h3>
-              <p class="text-gray-600 text-lg">La plataforma crece contigo. Desde startups hasta grandes empresas, nuestro sistema se adapta a tu crecimiento sin problemas de rendimiento.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 class="text-2xl font-bold text-primary mb-4">⚡ Implementación Rápida</h3>
-              <p class="text-gray-600 text-lg">Tu plataforma puede estar funcionando en semanas, no meses. Proceso ágil y sin complicaciones técnicas.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 class="text-2xl font-bold text-primary mb-4">🎯 Enfocado en la Experiencia del Usuario</h3>
-              <p class="text-gray-600 text-lg">Interfaz intuitiva y moderna diseñada pensando en los estudiantes. Aumenta la participación y finalización de cursos.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-            🎯 Casos de Uso
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-8 rounded-2xl">
-            <h3 class="text-2xl font-bold text-primary mb-4">🏢 Capacitación Corporativa</h3>
-            <p class="text-gray-700">Capacita a tus empleados con cursos internos, onboarding, compliance y desarrollo profesional.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-accent/10 to-secondary/10 p-8 rounded-2xl">
-            <h3 class="text-2xl font-bold text-primary mb-4">🎓 Instituciones Educativas</h3>
-            <p class="text-gray-700">Universidades, OTECs y centros de formación pueden gestionar sus programas educativos completos.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-secondary/10 to-yellow/10 p-8 rounded-2xl">
-            <h3 class="text-2xl font-bold text-primary mb-4">📚 Cursos Online</h3>
-            <p class="text-gray-700">Vende cursos online con tu propia plataforma, sin depender de terceros.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-yellow/10 to-primary/10 p-8 rounded-2xl">
-            <h3 class="text-2xl font-bold text-primary mb-4">🏅 Certificaciones</h3>
-            <p class="text-gray-700">Gestiona programas de certificación profesional con seguimiento y credenciales verificables.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <CTA 
-      title="🚀 ¿Listo para tener tu propia plataforma LMS?"
-      subtitle="Solicita una demo gratuita y descubre cómo podemos transformar la capacitación en tu organización"
-      buttonText="Solicitar Demo Gratuita"
-    />
-
-    <!-- Contact Section -->
-    <Contact />
-
-    <!-- Final CTA -->
-    <CTA 
-      title="💬 ¿Tienes preguntas sobre nuestra plataforma LMS?"
-      subtitle="Conversemos sobre cómo podemos ayudarte a implementar la mejor solución de aprendizaje para tu organización"
-      buttonText="Agendar Consultoría Gratuita"
-    />
-
-    <Footer />
-  </main>
+  <PlatformLandingContent />
 </BaseLayout>
-
-<style>
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-</style>
-

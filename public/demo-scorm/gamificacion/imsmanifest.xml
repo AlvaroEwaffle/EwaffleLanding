@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="gamification-ewaffle" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 
+                      imscp_rootv1p1p2.xsd 
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 
+                      adlcp_rootv1p2.xsd">
+  <organizations default="default_org">
+    <organization identifier="default_org">
+      <title>Gamification Ewaffle</title>
+      <item identifier="item1" identifierref="resource1">
+        <title>Gamification Experience</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="resource1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href=".DS_Store"/>
+      <file href="assets/1-3025cb14.png"/>
+      <file href="assets/2-4182d22e.png"/>
+      <file href="assets/3-f1b24e61.png"/>
+      <file href="assets/4-32acfd5e.png"/>
+      <file href="assets/Background-0b519945.png"/>
+      <file href="assets/index-c81a4b7d.js"/>
+      <file href="assets/index-cf4e12e8.css"/>
+      <file href="index.html"/>
+      <file href="logoewchico.png"/>
+      <file href="assets/1-3025cb14.png"/>
+      <file href="assets/2-4182d22e.png"/>
+      <file href="assets/3-f1b24e61.png"/>
+      <file href="assets/4-32acfd5e.png"/>
+      <file href="assets/Background-0b519945.png"/>
+      <file href="assets/index-c81a4b7d.js"/>
+      <file href="assets/index-cf4e12e8.css"/>
+    </resource>
+  </resources>
+</manifest>
