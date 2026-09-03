@@ -153,7 +153,7 @@ const formatos = [
     titulo: "Cápsulas interactivas",
     resumen: "Escenarios ramificados para los temas donde ninguna opción es gratis.",
     img: "/assets/catalogo/arbol.webp",
-    alt: "Escena de una cápsula ramificada de Buffalo Waffles: la promo de septiembre, con el vaso de marca y la tarjeta 2x1 waffles",
+    alt: "Pantalla de bienvenida de Waffle Quest, cápsula ramificada de Buffalo Waffles ambientada en la tienda",
     para: ["practicar"],
     texto: "Para buen trato, ética, prevención o autonomía, donde el objetivo no es que recuerden la norma sino que sostengan un criterio cuando nadie los está mirando. La persona elige, ve la consecuencia y recibe el porqué — que es la parte que después se repite en el pasillo.",
     bullets: [
@@ -182,7 +182,6 @@ const formatos = [
       "Desarrollo propio de Ewaffle: no pagas licencia de plataforma por usuario.",
     ],
     piezas: [
-      { t: "Ver cómo funciona", modo: "video", src: "https://tefi.villelab.com/comex-live-explainer.mp4", poster: "/assets/catalogo/comex.webp", nota: "Recorrido narrado del simulador de comercio exterior" },
       { t: "Simulador Buffalo Waffles", modo: "iframe", src: "https://tefi.villelab.com/buffalo-sim.html", nota: "Cámara de refrigeración en 3D, motor propio Ewaffle" },
       { t: "Simulador de comercio exterior", modo: "iframe", src: "https://comex.villelab.com/sim?modo=dirigido", nota: "Comex Live · modo dirigido" },
     ],
@@ -1229,6 +1228,9 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
     transition: transform 700ms var(--curva), opacity 400ms var(--curva);
     opacity: 0.94;
   }
+  /* La captura de la guía trae el menú lateral pegado al borde izquierdo:
+     centrado (50%) lo recorta casi entero. Alineado a la izquierda se ve. */
+  article.banda[data-reel="guias"] .banda__pantalla img { object-position: 0 0; }
   .banda:hover .banda__pantalla img { transform: scale(1.035); opacity: 1; }
   .banda__pantalla::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
