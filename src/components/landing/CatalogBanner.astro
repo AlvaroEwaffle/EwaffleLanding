@@ -1,0 +1,24 @@
+---
+// Banner delgado bajo el Hero: entrada directa al catálogo, sin competir con
+// la sección de catálogo más completa (CatalogSpotlight) que ya vive más abajo.
+---
+
+<section class="relative overflow-hidden bg-primary">
+  <div class="absolute inset-0 pointer-events-none opacity-90 bg-gradient-to-r from-primary via-primary to-primary/80"></div>
+  <div class="absolute -top-10 right-0 h-40 w-40 rounded-full bg-accent/20 blur-3xl pointer-events-none"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 py-6 sm:py-7 text-center sm:text-left">
+      <p class="text-lg md:text-xl font-semibold text-white">
+        Mira nuestro catálogo de recursos e-learning y cotiza online.
+      </p>
+      <a
+        href="/catalogo/"
+        class="inline-flex shrink-0 items-center justify-center gap-2 px-6 py-3 bg-yellow text-primary rounded-full font-semibold hover:bg-yellow/90 hover:scale-[1.02] transition-all duration-300 shadow-lg"
+      >
+        Ver catálogo y cotizar
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
