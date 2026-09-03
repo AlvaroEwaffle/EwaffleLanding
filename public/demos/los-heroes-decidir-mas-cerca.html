@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Decidir más cerca</title>
+<style>:root{--primary:#1b3a6b;--accent:#e8452c;--accent2:#2e7d9a;--ink:#1d2021;--muted:#6b7280;--line:#e3e6e8;--bg:#f6f7f8;--paper:#ffffff;--ok:#0f7a52;--warn:#b45309;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+.shell{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh}
+/* ── nav ── */
+.nav{position:sticky;top:0;height:100vh;overflow:auto;background:var(--paper);border-right:1px solid var(--line);padding:22px 18px;display:flex;flex-direction:column;gap:16px}
+.nav .hd{display:flex;gap:11px;align-items:flex-start}
+.nav .mk{width:38px;height:38px;border-radius:9px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800;flex:0 0 auto;font-size:13px}
+.nav h1{font-size:16px;line-height:1.25;font-weight:700}
+.nav .cli{font-size:12.5px;color:var(--muted);margin-top:2px}
+.prog{background:var(--bg);border-radius:10px;padding:11px 13px}
+.prog .pl{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.prog .pb{height:6px;border-radius:99px;background:var(--line);margin:8px 0 6px;overflow:hidden}
+.prog .pf{height:100%;background:var(--accent);width:0;transition:width .35s ease}
+.prog .pt{font-size:12.5px;color:var(--muted)}
+.toc{display:flex;flex-direction:column;gap:5px}
+.toc-mod{display:flex;flex-direction:column;gap:3px;margin-bottom:14px}
+.toc-mh{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:0 11px 6px;border-bottom:1px solid var(--line);margin-bottom:5px}
+.toc a{display:flex;gap:10px;align-items:flex-start;padding:10px 11px;border-radius:9px;text-decoration:none;color:var(--ink);border:1px solid transparent;font-size:14px;line-height:1.3}
+.toc a:hover{background:var(--bg)}
+.toc a.on{background:var(--bg);border-color:var(--line);font-weight:650}
+.toc .n{width:22px;height:22px;border-radius:99px;border:1.5px solid var(--line);display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--muted);flex:0 0 auto;margin-top:1px}
+.toc a.done .n{background:var(--ok);border-color:var(--ok);color:#fff}
+.toc a.on .n{border-color:var(--accent);color:var(--accent)}
+.toc a.done.on .n{background:var(--ok);border-color:var(--ok);color:#fff}
+/* ── main ── */
+.main{padding:0;min-width:0}
+/* Centrado y mas ancho (Alvaro, 13-ago). Antes eran 820px pegados a la
+   izquierda: en un monitor ancho quedaba una columna angosta contra el borde,
+   con medio ancho de pantalla vacio a la derecha. Ahora la columna se centra
+   en el espacio que deja la navegacion. El parrafo suelto se limita aparte,
+   porque una linea de texto de 1100px es incomoda de leer. */
+.lesson{display:none;padding:34px clamp(18px,4vw,56px) 90px;max-width:1100px;margin:0 auto}
+.lesson>p,.lesson .obj{max-width:78ch}
+.lesson.on{display:block}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);font-weight:800}
+.lesson h2{font-size:clamp(24px,3.4vw,33px);line-height:1.15;margin:8px 0 10px;font-weight:750;letter-spacing:-.01em}
+.obj{background:var(--paper);border-left:3px solid var(--accent2);border-radius:0 10px 10px 0;padding:12px 16px;color:var(--muted);font-size:14.5px;margin-bottom:26px}
+.obj b{color:var(--ink);font-weight:650}
+.blk{margin:0 0 22px}
+.blk h3{font-size:19px;line-height:1.25;margin:0 0 9px;font-weight:700}
+.blk p{margin:0 0 11px}
+.blk p:last-child{margin-bottom:0}
+ul.l-dot,ul.l-check,ol.l-num{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.l-dot li,ul.l-check li,ol.l-num li{position:relative;padding-left:29px}
+ul.l-dot li:before{content:"";position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:99px;background:var(--accent)}
+ul.l-check li:before{content:"✓";position:absolute;left:4px;top:0;color:var(--ok);font-weight:800}
+ol.l-num{counter-reset:n}
+ol.l-num li{counter-increment:n}
+ol.l-num li:before{content:counter(n);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:99px;background:var(--primary);color:#fff;font-size:11.5px;font-weight:700;display:grid;place-items:center}
+.callout{border-radius:11px;padding:14px 17px;background:var(--paper);border:1px solid var(--line);border-left-width:4px}
+.c-info{border-left-color:var(--accent2)}
+.c-warn{border-left-color:var(--warn);background:#fffbf4}
+.c-key{border-left-color:var(--accent);background:#fff7fa}
+.c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:5px;color:var(--muted)}
+figure.vid video{width:100%;border-radius:12px;display:block;background:#000}
+figure.img img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.ph{background:var(--paper);border:1.5px dashed var(--line);border-radius:12px;padding:44px 20px;text-align:center;color:var(--muted);font-size:14px}
+.acc details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.acc summary{cursor:pointer;padding:13px 16px;font-weight:650;list-style:none}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:before{content:"+";float:right;color:var(--accent);font-weight:800}
+.acc details[open] summary:before{content:"−"}
+.acc details>div{padding:0 16px 14px}
+.tabs{background:var(--paper);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.tb-strip{display:flex;gap:0;border-bottom:1px solid var(--line);overflow-x:auto}
+.tb{background:none;border:0;padding:12px 17px;cursor:pointer;font:inherit;font-size:14px;font-weight:600;color:var(--muted);border-bottom:2.5px solid transparent;white-space:nowrap}
+.tb.on{color:var(--ink);border-bottom-color:var(--accent)}
+.tb-pane{display:none;padding:16px 18px}
+.tb-pane.on{display:block}
+blockquote.q{border-left:3px solid var(--accent);padding:4px 0 4px 18px;font-size:18px;line-height:1.5;font-style:italic;color:var(--ink)}
+blockquote.q cite{display:block;font-style:normal;font-size:13.5px;color:var(--muted);margin-top:8px}
+hr.dv{border:0;border-top:1px solid var(--line);margin:30px 0}
+.script{background:#fffdf7;border:1px solid #f0e3c2;border-radius:12px;padding:18px 20px}
+.s-hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.s-tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#9a6b12;background:#fdf0d0;border-radius:99px;padding:4px 11px}
+.s-fmt{font-size:12.5px;color:var(--muted)}
+.s-in{font-size:14.5px;color:var(--muted);margin-bottom:14px}
+ol.s-sc{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px}
+ol.s-sc li{counter-increment:s;position:relative;padding-left:34px}
+ol.s-sc li:before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:7px;background:#f0e3c2;color:#9a6b12;font-size:12px;font-weight:800;display:grid;place-items:center}
+.s-t{font-weight:700;margin-bottom:4px}
+.s-v{font-size:13.5px;color:var(--muted);margin-bottom:5px}
+.s-v b{color:var(--ink);font-weight:650}
+.s-n{font-size:15px;border-left:2px solid #e0d0a8;padding-left:12px;font-style:italic}
+.kc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px}
+.kc-q{font-weight:650;margin-bottom:12px}
+.kc-opts{display:flex;flex-direction:column;gap:8px}
+.kc-o{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:11px 14px;cursor:pointer;font:inherit;font-size:15px;transition:border-color .15s,background .15s}
+.kc-o:hover:not(:disabled){border-color:var(--accent2)}
+.kc-o.ok{border-color:var(--ok);background:#eefaf5}
+.kc-o.no{border-color:#d9534f;background:#fdf2f2}
+.kc-o:disabled{cursor:default}
+.kc-fb{margin-top:16px;font-size:14.5px;padding:12px 14px;border-radius:9px;background:#fdf2f2;border-left:3px solid #d9534f;color:#8a2b28}
+.kc-fb:before{content:"Tu respuesta";display:block;font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;opacity:.65;margin-bottom:3px}
+.kc-fb.ok{background:#eefaf5;border-left-color:var(--ok);color:var(--ok)}
+.kc-fbs{display:none}
+/* ── pie de lección ── */
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+.btn{background:var(--primary);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:650;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ghost{background:none;color:var(--muted);border:1px solid var(--line)}
+.done-msg{background:var(--ok);color:#fff;border-radius:12px;padding:20px 24px;margin-top:30px;display:none}
+.done-msg.on{display:block}
+.done-msg b{display:block;font-size:18px;margin-bottom:4px}
+/* ── responsive ── */
+.burger{display:none}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .toc{display:none}
+  .nav.open .toc{display:flex}
+  .burger{display:block;background:none;border:1px solid var(--line);border-radius:9px;padding:9px 13px;font:inherit;font-weight:650;cursor:pointer;width:100%}
+  .lesson{padding:24px 18px 70px}
+}
+@media print{.nav{display:none}.lesson{display:block!important;page-break-after:always}}</style>
+
+</head>
+<body data-course-id="los-heroes-decidir-mas-cerca">
+<div class="shell">
+  <nav class="nav">
+    <div class="hd"><div class="mk">LH</div><div><h1>Decidir más cerca</h1><div class="cli">Caja Los Héroes</div></div></div>
+    <button class="burger">Ver lecciones ▾</button>
+    <div class="prog"><div class="pl">Tu avance</div><div class="pb"><div class="pf"></div></div><div class="pt">0 de 24 lecciones · 0%</div></div>
+    <div class="toc"><div class="toc-mod"><div class="toc-mh">Módulo 1 · El contrato nuevo: autonomía y confianza</div><a href="#m1p1"><span class="n">1</span><span>Qué cambia cuando decides tú</span></a><a href="#m1p2"><span class="n">2</span><span>Los tres niveles de decisión</span></a><a href="#m1p3"><span class="n">3</span><span>Confianza no es fe: es previsibilidad</span></a><a href="#m1p4"><span class="n">4</span><span>El costo invisible de consultar todo</span></a><a href="#m1p5"><span class="n">5</span><span>Escalar bien: cómo se ve una buena escalada</span></a><a href="#m1p6"><span class="n">6</span><span>Tu marco de decisión</span></a></div><div class="toc-mod"><div class="toc-mh">Módulo 2 · Conversar para decidir</div><a href="#m2p1"><span class="n">7</span><span>La conversación que se evitó</span></a><a href="#m2p2"><span class="n">8</span><span>Pedir sin rodeos</span></a><a href="#m2p3"><span class="n">9</span><span>Decir que no sin romper la relación</span></a><a href="#m2p4"><span class="n">10</span><span>Corregir mientras es barato</span></a><a href="#m2p5"><span class="n">11</span><span>Dar contexto, no instrucciones</span></a><a href="#m2p6"><span class="n">12</span><span>La conversación difícil, paso a paso</span></a></div><div class="toc-mod"><div class="toc-mh">Módulo 3 · Equipos que se hacen cargo</div><a href="#m3p1"><span class="n">13</span><span>Hacerse cargo no es hacerlo todo</span></a><a href="#m3p2"><span class="n">14</span><span>Quién decide qué</span></a><a href="#m3p3"><span class="n">15</span><span>Delegar decisiones, no tareas</span></a><a href="#m3p4"><span class="n">16</span><span>El error como información</span></a><a href="#m3p5"><span class="n">17</span><span>Acuerdos que se sostienen solos</span></a><a href="#m3p6"><span class="n">18</span><span>El diagnóstico de tu equipo</span></a></div><div class="toc-mod"><div class="toc-mh">Módulo 4 · Planificar sin que te digan qué hacer</div><a href="#m4p1"><span class="n">19</span><span>Planificar es elegir qué no hacer</span></a><a href="#m4p2"><span class="n">20</span><span>De la meta al lunes</span></a><a href="#m4p3"><span class="n">21</span><span>Cuando todo parece urgente</span></a><a href="#m4p4"><span class="n">22</span><span>Anticipar el problema</span></a><a href="#m4p5"><span class="n">23</span><span>Seguimiento sin control</span></a><a href="#m4p6"><span class="n">24</span><span>Tu plan de noventa días</span></a></div></div>
+  </nav>
+  <main class="main">
+    <article class="lesson" id="m1p1">
+  <div class="eyebrow">El contrato nuevo: autonomía y confianza · 1 de 6 · 6 min</div>
+  <h2>Qué cambia cuando decides tú</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> distinguir el modelo de decisión anterior del nuevo y nombrar qué se espera de ti que antes no se esperaba.</div>
+  <section class="blk b-video"><figure class="vid"><video controls preload="metadata"><source src="https://tefi.villelab.com/los-heroes-decidir-mas-cerca-m1p1.mp4" type="video/mp4"></video><figcaption>Módulo 1 · El contrato nuevo — 3:12 min</figcaption></figure></section>
+<section class="blk b-text"><h3>El cambio en una frase</h3><p>Antes, cuando aparecía algo fuera del libreto, lo correcto era consultar. Ahora, dentro de tu ámbito, lo correcto es resolver y contar.</p><p>Suena simple y no lo es, porque cambia dónde queda la responsabilidad. Consultar la dejaba arriba. Decidir la deja contigo.</p></section>
+<section class="blk b-tabs"><h3>Los dos modelos, lado a lado</h3><div class="tabs" data-tabs="tabs-2">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Antes</button><button role="tab" class="tb" data-i="1">Ahora</button><button role="tab" class="tb" data-i="2">Lo que no cambia</button></div>
+<div class="tb-pane on" data-i="0"><p>La decisión subía. Tú describías el problema con el mayor detalle posible y esperabas. El mérito estaba en informar bien y en no equivocarte por cuenta propia. El costo lo pagaba el cliente en tiempo de espera, y nadie lo medía.</p></div><div class="tb-pane" data-i="1"><p>La decisión se queda donde está el problema. Lo que sube es información: qué pasó, qué hiciste, qué resultado tuvo. El mérito está en resolver bien y contar a tiempo. El costo de equivocarse existe, y es bastante menor que el costo de la parálisis.</p></div><div class="tb-pane" data-i="2"><p>Las políticas, los límites de atribución y las normas de cumplimiento siguen siendo exactamente las mismas. La autonomía es sobre el cómo y el cuándo dentro del marco, nunca sobre saltarse el marco.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>La pregunta ya no es «¿puedo?». Es «¿está dentro de mi ámbito, y puedo explicar por qué lo hice así?».</p></div></div></section>
+<section class="blk b-list"><h3>Lo que ahora se espera de ti</h3><ul class="l-check"><li>Resolver en tu ámbito sin pedir permiso previo</li><li>Dejar registro de lo que decidiste y por qué</li><li>Avisar temprano cuando algo se sale de tu ámbito</li><li>Sostener el resultado, bueno o malo, sin repartir la culpa</li></ul></section>
+<section class="blk b-text"><h3>Por qué se está haciendo este cambio</h3><p>No es una moda de gestión ni un ejercicio de confianza abstracto. Es una respuesta a algo concreto: las decisiones que se toman lejos del problema llegan tarde y con menos información.</p><p>Tú ves al cliente. Ves al equipo. Ves el caso completo. Esa es una ventaja real que el modelo anterior desperdiciaba.</p></section>
+  <div class="foot">
+    <span></span>
+    <button class="btn" data-go="1">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m1p2">
+  <div class="eyebrow">El contrato nuevo: autonomía y confianza · 2 de 6 · 7 min</div>
+  <h2>Los tres niveles de decisión</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> clasificar cualquier situación de tu día en decides / decides e informas / escalas.</div>
+  <section class="blk b-text"><h3>No todas las decisiones son iguales</h3><p>El error más común al recibir autonomía es tratarlo todo igual: o se consulta todo por seguridad, o se decide todo por entusiasmo. Ninguna de las dos funciona.</p><p>Casi todo lo que pasa en una sucursal cae en uno de tres niveles. Aprender a ubicarlo rápido es la mitad del trabajo.</p></section>
+<section class="blk b-list"><h3>Los tres niveles</h3><ol class="l-num"><li>Decides y sigues. Está dentro de tu ámbito, es reversible y no afecta a otras áreas. No requiere aviso: requiere que lo hagas bien.</li><li>Decides e informas. Está dentro de tu ámbito pero alguien más necesita saberlo para hacer su trabajo. Decides primero, avisas después — no al revés.</li><li>Escalas antes de actuar. Compromete recursos fuera de tu atribución, es difícil de revertir, o toca una norma. Acá consultar no es debilidad: es el procedimiento.</li></ol></section>
+<section class="blk b-accordion"><h3>Cómo ubicar el nivel en treinta segundos</h3><div class="acc"><details><summary>¿Se puede deshacer?</summary><div><p>Si el efecto se revierte en un día y sin costo relevante, es nivel uno. La reversibilidad es el mejor criterio que existe: las decisiones reversibles se toman rápido, las irreversibles se piensan.</p></div></details><details><summary>¿Alguien más se entera por su cuenta?</summary><div><p>Si otra área va a chocar con tu decisión sin saberlo, es nivel dos. Decides igual, pero el aviso es parte de la decisión, no un extra opcional.</p></div></details><details><summary>¿Compromete plata, contratos o normas?</summary><div><p>Si compromete recursos fuera de tu atribución, toca un contrato, o roza una política de cumplimiento, es nivel tres. Sin excepciones y sin interpretaciones creativas.</p></div></details><details><summary>¿Y si estoy en duda entre dos niveles?</summary><div><p>Sube uno. Una decisión de nivel uno tratada como nivel dos solo cuesta un mensaje de más. Una de nivel tres tratada como nivel uno cuesta muchísimo más que eso.</p></div></details></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">El error caro</div><div><p>Escalar una decisión de nivel uno no es prudente: es devolverle el trabajo a tu jefatura y enseñarle a tu equipo que acá nadie decide.</p></div></div></section>
+<section class="blk b-text"><h3>El nivel no depende del tamaño</h3><p>Una decisión puede involucrar poca plata y aun así ser nivel tres, porque toca una norma. Y puede involucrar bastante trabajo y ser nivel uno, porque se deshace en un día.</p><p>El criterio nunca es cuánto pesa la decisión en tu cabeza. Es si se revierte, a quién afecta y si toca el marco.</p></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="0">← Anterior</button>
+    <button class="btn" data-go="2">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m1p3">
+  <div class="eyebrow">El contrato nuevo: autonomía y confianza · 3 de 6 · 6 min</div>
+  <h2>Confianza no es fe: es previsibilidad</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> identificar las conductas concretas que construyen o destruyen la confianza que hace posible tu autonomía.</div>
+  <section class="blk b-quote"><blockquote class="q"><p>Nadie confía en alguien porque acierte siempre. Se confía en alguien porque uno sabe qué va a hacer.</p></blockquote></section>
+<section class="blk b-text"><h3>La confianza es un pronóstico</h3><p>Cuando alguien dice que confía en ti, lo que está diciendo es que puede predecir tu comportamiento. Sabe que si algo se cae, te vas a hacer cargo. Sabe que si comprometes una fecha, esa fecha vale.</p><p>Por eso la confianza no se pierde principalmente por errores. Se pierde por sorpresas: enterarse tarde, descubrir que algo no se hizo, o recibir una versión distinta según a quién se le pregunte.</p></section>
+<section class="blk b-tabs"><h3>Qué la construye y qué la rompe</h3><div class="tabs" data-tabs="tabs-13">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">La construye</button><button role="tab" class="tb" data-i="1">La rompe</button><button role="tab" class="tb" data-i="2">Ni la construye ni la rompe</button></div>
+<div class="tb-pane on" data-i="0"><p>Avisar antes de que se note. Cumplir las fechas chicas, que son las que nadie está mirando. Dar la misma versión a todo el mundo. Reconocer lo que no sabes. Cerrar los temas que abriste.</p></div><div class="tb-pane" data-i="1"><p>Que se enteren por terceros. Comprometer fechas que sabes que no vas a cumplir, solo para evitar la conversación incómoda de hoy. Explicar el resultado hacia arriba distinto de como se lo explicas al equipo.</p></div><div class="tb-pane" data-i="2"><p>Equivocarse. Un error informado a tiempo y sostenido no daña la confianza. Con frecuencia la aumenta, porque confirma el pronóstico que la otra persona tenía sobre ti.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>El margen que tienes para decidir crece o se achica solo, según cuán previsible seas. Nadie te lo va a anunciar.</p></div></div></section>
+<section class="blk b-list"><h3>Cuatro conductas que puedes empezar esta semana</h3><ul class="l-check"><li>Avisar de un atraso el día que lo ves venir, no el día del plazo</li><li>Cumplir un compromiso chico que nadie está controlando</li><li>Decir «no sé» una vez, en vez de improvisar una respuesta</li><li>Cerrar un tema que dejaste abierto hace semanas</li></ul></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="1">← Anterior</button>
+    <button class="btn" data-go="3">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m1p4">
+  <div class="eyebrow">El contrato nuevo: autonomía y confianza · 4 de 6 · 5 min</div>
+  <h2>El costo invisible de consultar todo</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> dimensionar lo que se pierde cuando la decisión viaja, para poder sostener tu propia decisión.</div>
+  <section class="blk b-text"><h3>Consultar parece gratis</h3><p>Consultar se siente responsable y no tiene un costo visible en el momento. Por eso es tan difícil de erradicar: nadie te va a llamar la atención por preguntar.</p><p>Pero el costo existe y lo paga alguien. Vale la pena mirarlo entero antes de tomar el atajo.</p></section>
+<section class="blk b-list"><h3>Quién paga cuando la decisión viaja</h3><ul class="l-check"><li>El cliente, que espera mientras el tema sube y baja</li><li>Tu jefatura, que decide sobre un problema que no vio de cerca</li><li>Tu equipo, que aprende que acá las cosas se resuelven en otra parte</li><li>Tú, que quedas ejecutando decisiones que no diseñaste y no puedes defender</li></ul></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">El punto ciego</div><div><p>Quien decide a distancia decide con menos información que tú. Tu ventaja no es la jerarquía: es que estás mirando el problema.</p></div></div></section>
+<section class="blk b-text"><h3>Cuándo consultar sigue siendo lo correcto</h3><p>Esto no es un alegato contra preguntar. Es un alegato contra preguntar por defecto.</p><p>Consultar es correcto cuando la decisión es de nivel tres, cuando genuinamente no tienes la información, o cuando el criterio es nuevo y quieres calibrarlo. En esos casos, pregunta con una propuesta en la mano: «pienso hacer esto, ¿lo ves bien?» en lugar de «¿qué hago?».</p></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="2">← Anterior</button>
+    <button class="btn" data-go="4">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m1p5">
+  <div class="eyebrow">El contrato nuevo: autonomía y confianza · 5 de 6 · 6 min</div>
+  <h2>Escalar bien: cómo se ve una buena escalada</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> escalar de manera que quien recibe pueda decidir rápido, sin devolverte el problema.</div>
+  <section class="blk b-text"><h3>Escalar no es traspasar el problema</h3><p>Hay dos formas de escalar. Una entrega un problema y espera. La otra entrega una decisión preparada y pide confirmación.</p><p>La diferencia entre ambas es la diferencia entre una respuesta en dos días y una en diez minutos.</p></section>
+<section class="blk b-list"><h3>Los cuatro elementos de una escalada útil</h3><ol class="l-num"><li>Qué pasó, en dos líneas y sin antecedentes innecesarios</li><li>Qué hiciste ya, para que nadie repita trabajo</li><li>Qué propones, con una opción concreta y su alternativa</li><li>Qué necesitas de la otra persona y para cuándo</li></ol></section>
+<section class="blk b-accordion"><h3>Dudas frecuentes al escalar</h3><div class="acc"><details><summary>¿Y si no tengo una propuesta?</summary><div><p>Casi siempre tienes una intuición aunque no la llames propuesta. Dila igual, marcándola como tal. «No estoy seguro, pero me inclino por esto» es infinitamente más útil que una pregunta abierta.</p></div></details><details><summary>¿Y si es urgente de verdad?</summary><div><p>Entonces llama, no escribas. Un mensaje urgente esperando respuesta no es una escalada: es una espera con testigos. Deja el registro escrito después.</p></div></details><details><summary>¿Cómo evito escalar de más?</summary><div><p>Antes de escribir, pregúntate qué harías si no pudieras contactar a nadie por dos horas. Si tienes una respuesta razonable y es reversible, ya sabes qué hacer.</p></div></details></div></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-23" data-correct="1">
+<div class="kc-q">Detectas un problema operativo que puedes resolver hoy, pero tu solución le cambia el trabajo de mañana al área de operaciones. ¿Qué nivel es?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">Nivel uno: decides y sigues, está en tu ámbito</button><button class="kc-o" data-i="1">Nivel dos: decides e informas a operaciones</button><button class="kc-o" data-i="2">Nivel tres: escalas antes de hacer nada</button><button class="kc-o" data-i="3">Depende de si operaciones se va a molestar</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">Está en tu ámbito, sí, pero alguien más va a chocar con tu decisión sin saberlo. El aviso es parte de la decisión, no un extra.</span><span data-i="1">Exacto. Decides igual y sin pedir permiso, pero avisar es parte de haber decidido bien.</span><span data-i="2">Escalar acá te frena a ti y le devuelve a tu jefatura una decisión que puedes tomar. La clave es que es reversible y está en tu ámbito.</span><span data-i="3">El criterio no es la reacción de la otra persona, es si necesita la información para hacer su trabajo.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="3">← Anterior</button>
+    <button class="btn" data-go="5">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m1p6">
+  <div class="eyebrow">El contrato nuevo: autonomía y confianza · 6 de 6 · 7 min</div>
+  <h2>Tu marco de decisión</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> escribir el marco con el que vas a decidir esta semana y ponerlo a prueba.</div>
+  <section class="blk b-text"><h3>De la idea al lunes</h3><p>Todo lo anterior no sirve de nada si el lunes vuelves a preguntar por costumbre. Y vas a volver, porque la costumbre no se rompe con buenas intenciones: se rompe con un marco escrito y visible.</p><p>Este es el ejercicio de cierre del módulo. Ocupa quince minutos, una sola vez.</p></section>
+<section class="blk b-list"><h3>El ejercicio</h3><ol class="l-num"><li>Anota las cinco situaciones que más se te repiten en la semana</li><li>Clasifica cada una en nivel uno, dos o tres, con el criterio de reversibilidad</li><li>Para las de nivel dos, escribe a quién avisas y por qué canal</li><li>Para las de nivel tres, escribe con quién las verificas</li><li>Guarda esa hoja donde la veas y revísala en un mes</li></ol></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Si al clasificar te salen cuatro o cinco de nivel tres, revísalo con tu jefatura: o tu ámbito quedó mal definido, o estás escalando por costumbre.</p></div></div></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-27" data-correct="1">
+<div class="kc-q">¿Cuál de estas conductas construye más confianza en tu jefatura?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">No cometer errores durante el trimestre</button><button class="kc-o" data-i="1">Avisar el mismo día que algo se salió de lo previsto, contando lo que ya hiciste</button><button class="kc-o" data-i="2">Resolver todo sin molestar a nadie y contarlo en la reunión mensual</button><button class="kc-o" data-i="3">Consultar cada decisión relevante para asegurarte de que hay acuerdo</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">No cometer errores no depende enteramente de ti, y además no es lo que se está midiendo. La confianza es sobre previsibilidad, no sobre perfección.</span><span data-i="1">Correcto. La confianza se rompe con sorpresas, no con errores. Avisar temprano con lo que ya hiciste es exactamente el pronóstico que se espera de ti.</span><span data-i="2">Resolver está bien, pero guardarse la información un mes es justamente la sorpresa que erosiona la confianza.</span><span data-i="3">Consultar todo devuelve el trabajo hacia arriba y le enseña a tu equipo que acá nadie decide.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="4">← Anterior</button>
+    <button class="btn" data-go="6">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m2p1">
+  <div class="eyebrow">Conversar para decidir · 1 de 6 · 6 min</div>
+  <h2>La conversación que se evitó</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> reconocer el costo compuesto de postergar una conversación y nombrar la tuya pendiente.</div>
+  <section class="blk b-video"><figure class="vid"><div class="ph">Video pendiente de producción</div><figcaption>Módulo 2 · Conversar para decidir — 2:30 min</figcaption></figure></section>
+<section class="blk b-text"><h3>Los problemas no envejecen bien</h3><p>Casi todo problema grave de equipo empezó como un tema chico que alguien decidió no decir. No por cobardía: por cálculo. En el momento se veía más barato dejarlo pasar.</p><p>El cálculo está mal porque los temas no se quedan quietos. Un desacuerdo no dicho se convierte en interpretación, la interpretación en resentimiento, y el resentimiento en una conversación mucho más difícil que la original.</p></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>El precio de una conversación sube con el tiempo. Siempre. Nunca hubo un caso en que esperar la hiciera más fácil.</p></div></div></section>
+<section class="blk b-accordion"><h3>Las excusas más comunes para postergar</h3><div class="acc"><details><summary>«Prefiero esperar a tener todos los antecedentes»</summary><div><p>Los antecedentes suelen llegar precisamente en la conversación. Esperar a tenerlos todos es esperar para siempre. Puedes abrir con lo que sabes y decir explícitamente que te falta información.</p></div></details><details><summary>«No quiero desmotivar»</summary><div><p>Lo que desmotiva no es la corrección: es descubrir meses después que algo se venía haciendo mal y nadie lo dijo. Eso además desmotiva al resto del equipo, que sí lo notaba.</p></div></details><details><summary>«Se va a arreglar solo»</summary><div><p>A veces sí. Pero si vuelves a pensarlo por segunda vez, ya no se va a arreglar solo: tu propia insistencia mental es el dato.</p></div></details><details><summary>«No es el momento»</summary><div><p>Rara vez lo es. Un buen sustituto del momento perfecto es un momento privado, con tiempo suficiente y sin nadie esperando en la puerta.</p></div></details></div></section>
+<section class="blk b-list"><h3>Señales de que estás postergando una</h3><ul class="l-check"><li>Ensayas la conversación mentalmente y no la tienes</li><li>Evitas coincidir con esa persona en espacios informales</li><li>Le comentas el tema a un tercero antes que al involucrado</li><li>Ajustas tu propio trabajo para no tener que abordarlo</li></ul></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="5">← Anterior</button>
+    <button class="btn" data-go="7">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m2p2">
+  <div class="eyebrow">Conversar para decidir · 2 de 6 · 6 min</div>
+  <h2>Pedir sin rodeos</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> formular un pedido que se pueda cumplir, con los tres elementos que no pueden faltar.</div>
+  <section class="blk b-text"><h3>La mayoría de los incumplimientos son pedidos mal hechos</h3><p>Cuando algo no llega como esperabas, la reacción natural es pensar que la otra persona no puso atención. Casi siempre el problema fue anterior: el pedido nunca fue claro.</p><p>Un pedido cumplible tiene tres elementos. Si falta uno, quien lo recibe tiene que adivinar — y va a adivinar distinto que tú.</p></section>
+<section class="blk b-list"><h3>Los tres elementos</h3><ol class="l-num"><li>Qué exactamente. No «revisa esto», sino qué resultado esperas ver.</li><li>Para cuándo. Una fecha concreta, no «cuando puedas» ni «lo antes posible».</li><li>Por qué importa. El contexto que le permite decidir bien si aparece un imprevisto.</li></ol></section>
+<section class="blk b-tabs"><h3>El mismo pedido, dos versiones</h3><div class="tabs" data-tabs="tabs-35">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Ambiguo</button><button role="tab" class="tb" data-i="1">Claro</button><button role="tab" class="tb" data-i="2">Qué ganaste</button></div>
+<div class="tb-pane on" data-i="0"><p>«Oye, ¿puedes ver el tema de los reclamos de la semana pasada cuando tengas un rato?»</p><p>Quien lo recibe no sabe si es urgente, qué significa verlo, ni qué debe entregar. Lo más probable es que lo postergue, y con razón.</p></div><div class="tb-pane" data-i="1"><p>«Necesito que revises los cinco reclamos de la semana pasada y me digas cuáles tienen la misma causa. Lo necesito el jueves antes de mediodía, porque el viernes propongo un cambio de procedimiento y quiero apoyarlo en datos.»</p><p>Ahora se puede cumplir, se puede negociar la fecha, y si aparece un imprevisto la persona sabe qué proteger.</p></div><div class="tb-pane" data-i="2"><p>No solo claridad. Le diste a la otra persona la posibilidad de decirte que no puede, o de proponerte algo mejor. Un pedido ambiguo no se puede negociar: solo se puede incumplir.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">Cuidado con el pedido disfrazado</div><div><p>«Sería bueno que alguien mirara esto» no es un pedido: es un comentario. Si necesitas que se haga, dilo con nombre y con fecha.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="6">← Anterior</button>
+    <button class="btn" data-go="8">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m2p3">
+  <div class="eyebrow">Conversar para decidir · 3 de 6 · 6 min</div>
+  <h2>Decir que no sin romper la relación</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> declinar un pedido de manera que preserve la relación y deje una salida abierta.</div>
+  <section class="blk b-text"><h3>Decidir implica negarse</h3><p>Si vas a decidir más, vas a tener que decir que no más seguido: a un pedido que no cabe, a una fecha imposible, a una prioridad que no es la tuya.</p><p>El no que daña la relación no es el no. Es el no tardío, el no ambiguo, y sobre todo el sí que después no se cumple.</p></section>
+<section class="blk b-list"><h3>La estructura de un no que funciona</h3><ol class="l-num"><li>Responde pronto. Un no en el día vale más que un quizás de una semana.</li><li>Sé claro en la respuesta: «no voy a poder», no «voy a ver si logro».</li><li>Da la razón real en una línea, sin justificarte de más.</li><li>Ofrece la alternativa que sí puedes: otra fecha, otro alcance, otra persona.</li></ol></section>
+<section class="blk b-quote"><blockquote class="q"><p>Un no explicado y a tiempo cuida la relación mucho más que un sí que después no se cumple.</p></blockquote></section>
+<section class="blk b-accordion"><h3>Situaciones difíciles</h3><div class="acc"><details><summary>Me lo pide alguien de más arriba</summary><div><p>El no sigue siendo válido, pero cambia la forma: en vez de negarte, muestra el intercambio. «Puedo tomarlo, y en ese caso esto otro se mueve a la próxima semana. ¿Lo hacemos así?». Estás pidiendo una decisión de prioridad, que es de quien pide.</p></div></details><details><summary>Ya dije que sí y me arrepentí</summary><div><p>Vuelve lo antes posible. Un compromiso que se corrige el mismo día es un ajuste; el mismo compromiso incumplido dos semanas después es una falla. Y no hay conversación que mejore por esperar.</p></div></details><details><summary>Me cuesta porque quiero ayudar</summary><div><p>Ayudar y comprometerte no son lo mismo. Puedes ayudar sin hacerte cargo: orientar, conectar con quien corresponde, revisar algo puntual. Lo que no ayuda a nadie es un compromiso que sabes que no vas a poder sostener.</p></div></details></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="7">← Anterior</button>
+    <button class="btn" data-go="9">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m2p4">
+  <div class="eyebrow">Conversar para decidir · 4 de 6 · 7 min</div>
+  <h2>Corregir mientras es barato</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> dar una corrección específica y a tiempo, separando la conducta de la persona.</div>
+  <section class="blk b-text"><h3>La corrección tardía ya no es corrección</h3><p>Cuando corriges apenas ves algo, la conversación es sobre un hecho puntual y se arregla en minutos. Cuando esperas, la conversación pasa a ser sobre un patrón — y hablar de patrones se siente como hablar de la persona.</p><p>Ese es el momento exacto en que la corrección deja de recibirse como ayuda y empieza a recibirse como juicio.</p></section>
+<section class="blk b-list"><h3>Cómo se estructura</h3><ol class="l-num"><li>Describe el hecho concreto, sin adjetivos ni generalizaciones</li><li>Explica el efecto que tuvo, en el trabajo o en el cliente</li><li>Pregunta por la mirada de la otra persona, y escucha completo</li><li>Acuerden qué se hace distinto la próxima vez, en concreto</li><li>Cierra confirmando el acuerdo con palabras de ambos</li></ol></section>
+<section class="blk b-tabs"><h3>La diferencia está en la primera frase</h3><div class="tabs" data-tabs="tabs-43">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Sobre la persona</button><button role="tab" class="tb" data-i="1">Sobre el hecho</button><button role="tab" class="tb" data-i="2">Por qué importa</button></div>
+<div class="tb-pane on" data-i="0"><p>«Te está faltando prolijidad últimamente.»</p><p>Es una etiqueta. No se puede discutir, no se puede corregir, y lo único que provoca es defensa.</p></div><div class="tb-pane" data-i="1"><p>«En el informe de ayer los totales de dos columnas no cuadraban, y el cliente lo notó antes que nosotros.»</p><p>Es verificable, acotado en el tiempo y deja abierta la explicación. Ahí sí puede empezar una conversación.</p></div><div class="tb-pane" data-i="2"><p>La persona se defiende de las etiquetas y conversa sobre los hechos. Si quieres que algo cambie, necesitas la segunda conversación, no la primera.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">El sándwich no funciona</div><div><p>Envolver la corrección entre dos elogios diluye el mensaje: la persona se queda con los elogios y no escucha el medio. Di lo que tengas que decir de frente, con respeto y sin relleno.</p></div></div></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-45" data-correct="1">
+<div class="kc-q">Un integrante de tu equipo entregó tarde por tercera vez este mes. ¿Cómo abres la conversación?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">«Necesito hablar contigo sobre tu compromiso con el equipo.»</button><button class="kc-o" data-i="1">«Los tres últimos informes llegaron después de la fecha que acordamos. Quiero entender qué está pasando.»</button><button class="kc-o" data-i="2">«Sé que has estado con mucha carga, pero tienes que mejorar los plazos.»</button><button class="kc-o" data-i="3">Esperar al final del mes y verlo en la evaluación formal.</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">«Tu compromiso» es una etiqueta sobre la persona. Va a generar defensa antes de que llegues al hecho.</span><span data-i="1">Correcto. Hecho verificable, acotado, y una pregunta genuina que deja espacio a la explicación que todavía no tienes.</span><span data-i="2">El «pero» borra todo lo anterior, y «mejorar los plazos» no es un acuerdo concreto sobre qué se hace distinto.</span><span data-i="3">Esperar convierte tres hechos puntuales en un patrón, y la evaluación formal es el peor lugar para una noticia que la persona debió recibir hace semanas.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="8">← Anterior</button>
+    <button class="btn" data-go="10">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m2p5">
+  <div class="eyebrow">Conversar para decidir · 5 de 6 · 6 min</div>
+  <h2>Dar contexto, no instrucciones</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> entregar el porqué junto con el qué, para que tu equipo pueda decidir cuando no estás.</div>
+  <section class="blk b-text"><h3>La instrucción es más rápida y más cara</h3><p>Dar una instrucción toma diez segundos. Dar contexto toma un minuto. La instrucción parece más eficiente hasta la primera vez que aparece un imprevisto y tú no estás disponible.</p><p>Un equipo que solo recibe instrucciones se paraliza cuando la realidad no calza. Un equipo que tiene el contexto ajusta.</p></section>
+<section class="blk b-tabs"><h3>El mismo encargo, dos formas</h3><div class="tabs" data-tabs="tabs-47">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Instrucción</button><button role="tab" class="tb" data-i="1">Contexto</button><button role="tab" class="tb" data-i="2">El costo real</button></div>
+<div class="tb-pane on" data-i="0"><p>«Atiende primero a los clientes con hora agendada.»</p><p>Funciona hasta que llega alguien sin hora con una urgencia real. Ahí el equipo o te llama, o aplica la regla al pie de la letra y el cliente se va molesto.</p></div><div class="tb-pane" data-i="1"><p>«Priorizamos a quienes tienen hora porque comprometimos un tiempo de espera, y esa promesa es la que nos diferencia. Si llega algo que claramente no puede esperar, resuélvelo y déjalo anotado para que lo revisemos.»</p><p>Ahora el equipo entiende qué está protegiendo y puede decidir en el caso que tú no previste.</p></div><div class="tb-pane" data-i="2"><p>Cincuenta segundos más de conversación, una sola vez. A cambio, cada situación no prevista deja de ser una consulta.</p></div></div></section>
+<section class="blk b-list"><h3>Qué incluye un buen contexto</h3><ul class="l-check"><li>Qué estamos protegiendo con esta forma de hacer las cosas</li><li>Qué pasa si no se cumple</li><li>Qué margen tiene la persona para ajustar</li><li>A quién recurrir si el caso se sale del margen</li></ul></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Si tu equipo te consulta lo mismo tres veces, no es falta de atención: es que le diste la instrucción sin el contexto.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="9">← Anterior</button>
+    <button class="btn" data-go="11">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m2p6">
+  <div class="eyebrow">Conversar para decidir · 6 de 6 · 8 min</div>
+  <h2>La conversación difícil, paso a paso</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> preparar y sostener una conversación difícil concreta que tengas pendiente hoy.</div>
+  <section class="blk b-text"><h3>Se prepara en diez minutos</h3><p>Las conversaciones difíciles salen mal casi siempre por lo mismo: se entra sin saber qué se quiere lograr, y la conversación termina donde la lleve la emoción del momento.</p><p>Diez minutos de preparación cambian el resultado por completo.</p></section>
+<section class="blk b-list"><h3>La preparación</h3><ol class="l-num"><li>Escribe el hecho en una frase, sin interpretaciones</li><li>Escribe qué quieres que sea distinto después de la conversación</li><li>Anticipa la reacción más probable y qué vas a responder</li><li>Decide qué es negociable y qué no lo es</li><li>Elige el momento: privado, con tiempo, sin nadie esperando</li></ol></section>
+<section class="blk b-accordion"><h3>Cuando se pone difícil de verdad</h3><div class="acc"><details><summary>La persona se pone a la defensiva</summary><div><p>Baja el ritmo y vuelve al hecho. «Puede que yo esté viendo solo una parte. Cuéntame cómo lo viste tú.» La defensa casi siempre es señal de que la persona escuchó un juicio; volver al hecho la desarma.</p></div></details><details><summary>Se pone emocional</summary><div><p>No sigas empujando el contenido. Reconoce lo que está pasando, ofrece una pausa, y retoma. Una conversación pausada y retomada bien es mucho mejor que una terminada a la fuerza.</p></div></details><details><summary>No estamos de acuerdo en los hechos</summary><div><p>Para acá. Si no hay acuerdo sobre qué pasó, no puede haber acuerdo sobre qué hacer. Consigan la información que falta y vuelvan con ella.</p></div></details><details><summary>Cede en todo pero no cambia nada</summary><div><p>El acuerdo fue demasiado vago. Cierra siempre con qué se hace distinto, quién lo hace y cuándo lo revisan. Sin esos tres, no hubo acuerdo.</p></div></details></div></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Toda conversación difícil cierra igual: qué acordamos, quién hace qué, y cuándo lo revisamos. Si no puedes decir esas tres cosas al final, no terminó.</p></div></div></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-54" data-correct="2">
+<div class="kc-q">¿Cuál es la señal más confiable de que una conversación difícil terminó bien?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">Ambos quedaron tranquilos y el ambiente se distendió</button><button class="kc-o" data-i="1">La otra persona reconoció que tenías razón</button><button class="kc-o" data-i="2">Los dos pueden decir qué se hace distinto, quién lo hace y cuándo se revisa</button><button class="kc-o" data-i="3">No se levantó la voz en ningún momento</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">La tranquilidad se siente bien pero no cambia nada. Muchas conversaciones cómodas terminan sin ningún acuerdo.</span><span data-i="1">Ganar la conversación no es el objetivo, y además suele producir acuerdos que no se sostienen.</span><span data-i="2">Exacto. El acuerdo concreto es lo único que sobrevive a la conversación.</span><span data-i="3">El tono importa, pero una conversación educada y vaga deja el problema exactamente donde estaba.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="10">← Anterior</button>
+    <button class="btn" data-go="12">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m3p1">
+  <div class="eyebrow">Equipos que se hacen cargo · 1 de 6 · 6 min</div>
+  <h2>Hacerse cargo no es hacerlo todo</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> distinguir un equipo sobrecargado de un equipo que decide, y ubicar dónde está el tuyo.</div>
+  <section class="blk b-video"><figure class="vid"><div class="ph">Video pendiente de producción</div><figcaption>Módulo 3 · Equipos que se hacen cargo — 2:30 min</figcaption></figure></section>
+<section class="blk b-text"><h3>El jefe embudo</h3><p>Hay un tipo de jefatura que trabaja muchísimo y aun así frena a todo su equipo: aquella por la que tiene que pasar cada decisión. No es mala voluntad, casi nunca lo es. Es una forma de cuidar que terminó volviéndose un cuello de botella.</p><p>La señal es fácil de reconocer: si te tomas dos días de vacaciones y a la vuelta hay una fila de temas esperando tu respuesta, el equipo no está parado por falta de trabajo. Está parado porque no puede decidir.</p></section>
+<section class="blk b-tabs"><h3>Dos equipos que se ven parecidos</h3><div class="tabs" data-tabs="tabs-57">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">El que ejecuta</button><button role="tab" class="tb" data-i="1">El que se hace cargo</button><button role="tab" class="tb" data-i="2">La diferencia real</button></div>
+<div class="tb-pane on" data-i="0"><p>Hace todo lo que se le pide, y lo hace bien. Pregunta cuando algo no calza. Nunca te sorprende con una iniciativa. Funciona perfecto mientras tú estés disponible, y se detiene apenas no lo estás.</p></div><div class="tb-pane" data-i="1"><p>Sabe qué le toca decidir y lo decide. Te avisa de lo que resolvió, no te pide permiso. Te trae problemas con una propuesta adelante. A veces se equivoca, y esos errores son visibles porque nadie los esconde.</p></div><div class="tb-pane" data-i="2"><p>No es el talento ni las ganas: normalmente son las mismas personas. Es que en el segundo caso alguien se sentó a definir quién decide qué, y lo dijo en voz alta.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Un equipo que se hace cargo no trabaja más horas. Trabaja con menos esperas.</p></div></div></section>
+<section class="blk b-list"><h3>Señales de que eres el cuello de botella</h3><ul class="l-check"><li>Te consultan cosas que la persona sabe resolver mejor que tú</li><li>Tu bandeja de entrada es la ruta crítica de varios temas a la vez</li><li>Cuando no estás, las cosas no avanzan: esperan</li><li>Sabes el detalle de todo, y por eso nunca alcanzas a mirar lo importante</li></ul></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="11">← Anterior</button>
+    <button class="btn" data-go="13">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m3p2">
+  <div class="eyebrow">Equipos que se hacen cargo · 2 de 6 · 7 min</div>
+  <h2>Quién decide qué</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> escribir el mapa de ámbitos de decisión de tu equipo y detectar los huecos.</div>
+  <section class="blk b-text"><h3>El acuerdo que casi nunca se hace explícito</h3><p>Pregúntale por separado a dos personas de tu equipo quién decide si se atiende fuera de horario a un cliente que llegó tarde. Es muy probable que te den respuestas distintas, y que ninguna de las dos sea la que tú tienes en la cabeza.</p><p>Eso no es desorden: es lo normal cuando el reparto de decisiones nunca se escribió. Todos operan con una versión propia, razonable y distinta.</p></section>
+<section class="blk b-list"><h3>Cómo se arma el mapa</h3><ol class="l-num"><li>Lista los ocho o diez tipos de situación que más se repiten en la sucursal</li><li>Para cada una, escribe quién decide hoy en la práctica, no en el organigrama</li><li>Al lado, escribe quién debería decidir para que el trabajo fluya</li><li>Marca las filas donde las dos columnas no coinciden: ahí está el trabajo</li><li>Conversa esas filas con el equipo y déjalas escritas donde todos las vean</li></ol></section>
+<section class="blk b-accordion"><h3>Preguntas que aparecen al armarlo</h3><div class="acc"><details><summary>¿Y si nadie decide hoy?</summary><div><p>Es el hallazgo más común y el más valioso. Una situación sin dueño se resuelve por quien pase primero, distinto cada vez, y el cliente lo nota. Asígnala aunque no sea perfecta: un dueño imperfecto es mejor que ninguno.</p></div></details><details><summary>¿Y si la persona no se siente lista?</summary><div><p>Acompaña las primeras veces sin quitarle la decisión. «Decide tú y lo revisamos juntos después» hace crecer. «Yo decido esta vez y después lo tomas tú» rara vez llega a la segunda parte.</p></div></details><details><summary>¿Puedo cambiar el mapa después?</summary><div><p>Debes. El mapa se revisa cada dos o tres meses, y sobre todo cuando entra alguien nuevo. Lo que no puede pasar es que cambie sin que nadie se entere.</p></div></details><details><summary>¿Qué hago con las decisiones que quiero seguir tomando yo?</summary><div><p>Déjalas escritas también, y explica por qué. Un ámbito que te reservas y explicas se respeta; uno que te reservas en silencio se lee como desconfianza.</p></div></details></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">El mapa no es un organigrama</div><div><p>No estás definiendo cargos ni jerarquías. Estás respondiendo una sola pregunta por situación: si esto pasa mañana y yo no estoy, ¿quién decide?</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="12">← Anterior</button>
+    <button class="btn" data-go="14">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m3p3">
+  <div class="eyebrow">Equipos que se hacen cargo · 3 de 6 · 6 min</div>
+  <h2>Delegar decisiones, no tareas</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> delegar de manera que libere tu tiempo y haga crecer a la persona, en vez de solo mover trabajo.</div>
+  <section class="blk b-text"><h3>Delegar tareas te deja igual de ocupado</h3><p>Cuando delegas una tarea, quien sigue pensando eres tú: tú decidiste qué había que hacer, en qué orden y con qué criterio. La otra persona ejecuta. Tu carga mental no bajó, solo se movió el trabajo de manos.</p><p>Cuando delegas una decisión, entregas el criterio junto con el trabajo. Eso sí libera, y es lo único que hace que alguien crezca.</p></section>
+<section class="blk b-tabs"><h3>El mismo encargo, tres niveles</h3><div class="tabs" data-tabs="tabs-65">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Tarea</button><button role="tab" class="tb" data-i="1">Resultado</button><button role="tab" class="tb" data-i="2">Decisión</button></div>
+<div class="tb-pane on" data-i="0"><p>«Llama a estos seis clientes y ofréceles reagendar para el jueves.»</p><p>Rápido de explicar. Si un cliente propone el viernes, te llaman a ti.</p></div><div class="tb-pane" data-i="1"><p>«Necesito que estos seis clientes queden reagendados esta semana.»</p><p>Mejor: la persona resuelve el cómo. Todavía decides tú qué es lo importante.</p></div><div class="tb-pane" data-i="2"><p>«Estos seis clientes quedaron sin atención por la falla del sistema. Necesito que ninguno se vaya molesto. Tienes margen para reagendar, priorizar o compensar dentro de lo habitual. Cuéntame qué hiciste el viernes.»</p><p>Ahora entregaste el criterio. La persona puede resolver casos que tú no anticipaste, y aprendió algo que le sirve la próxima vez.</p></div></div></section>
+<section class="blk b-list"><h3>Qué acompaña siempre a una decisión delegada</h3><ol class="l-num"><li>El resultado que se espera, en una frase</li><li>El margen: qué puede decidir sin preguntar</li><li>El límite: qué queda fuera y por qué</li><li>Cuándo se revisa, acordado desde el principio</li></ol></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Si después de delegar sigues recibiendo preguntas sobre el cómo, no delegaste una decisión: delegaste una tarea con más palabras.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="13">← Anterior</button>
+    <button class="btn" data-go="15">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m3p4">
+  <div class="eyebrow">Equipos que se hacen cargo · 4 de 6 · 6 min</div>
+  <h2>El error como información</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> responder a un error de manera que el criterio del equipo mejore en vez de que la gente deje de decidir.</div>
+  <section class="blk b-quote"><blockquote class="q"><p>En un equipo que decide va a haber errores. La pregunta no es cómo evitarlos todos, es qué pasa con el primero.</p></blockquote></section>
+<section class="blk b-text"><h3>Tu reacción al primer error define el resto del año</h3><p>La primera vez que alguien de tu equipo decide por su cuenta y le sale mal, todo el equipo está mirando. No lo que digas en la reunión de equipo: lo que hagas en ese momento.</p><p>Si el error se castiga, el mensaje que se entiende es que decidir es peligroso. Y la conducta racional frente a eso es volver a preguntarte todo. Vas a recuperar el control y vas a perder el equipo que estabas construyendo.</p></section>
+<section class="blk b-list"><h3>Cómo se conversa un error</h3><ol class="l-num"><li>Primero los hechos: qué pasó, sin buscar responsables todavía</li><li>Después el criterio: qué información tenía la persona cuando decidió</li><li>Separa la decisión del resultado: se puede decidir bien y salir mal</li><li>Saca la regla: qué mirar la próxima vez que aparezca algo parecido</li><li>Cierra dejando la decisión donde estaba, salvo que el problema sea de ámbito</li></ol></section>
+<section class="blk b-accordion"><h3>Casos que cuestan más</h3><div class="acc"><details><summary>El error fue caro</summary><div><p>El costo cambia la urgencia de la conversación, no su forma. Si además cambia el ámbito de esa persona, dilo explícitamente y por cuánto tiempo — un ámbito que se achica en silencio se nota igual y se interpreta peor.</p></div></details><details><summary>Es la tercera vez que pasa lo mismo</summary><div><p>Ahí ya no es un error: es un patrón, y el patrón se conversa distinto. Pero primero revisa si el patrón es de la persona o del proceso. Tres veces lo mismo suele ser una falta de criterio compartido, no una falta de cuidado individual.</p></div></details><details><summary>La persona lo escondió</summary><div><p>Ese es el problema de verdad, y es mucho más grave que el error. Trátalo como tema de confianza, no de competencia: lo que necesitas es que la próxima vez aparezca temprano, no que no vuelva a equivocarse.</p></div></details><details><summary>El error lo cometí yo</summary><div><p>Cuéntalo con la misma estructura que le pedirías a tu equipo. Nada enseña más rápido que ver a la jefatura reconocer una decisión propia que salió mal y sacar la regla en voz alta.</p></div></details></div></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-72" data-correct="1">
+<div class="kc-q">Alguien de tu equipo tomó una decisión dentro de su ámbito y salió mal. ¿Qué haces primero?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">Retomas esa decisión tú hasta que la persona esté más preparada</button><button class="kc-o" data-i="1">Revisas con la persona qué información tenía y qué criterio usó</button><button class="kc-o" data-i="2">Lo dejas pasar para no desmotivar, ya va a aprender sola</button><button class="kc-o" data-i="3">Lo conversas en la reunión de equipo para que todos aprendan</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">Es lo más tentador y lo más caro: le enseñas al equipo entero que decidir es peligroso, y vuelven a preguntarte todo.</span><span data-i="1">Correcto. Separar la decisión del resultado es lo que permite mejorar el criterio sin quitar la autonomía.</span><span data-i="2">Dejarlo pasar no protege a nadie: la persona repite el error y el resto del equipo ve que acá los temas no se hablan.</span><span data-i="3">Exponer un error individual frente al grupo garantiza que el próximo se esconda. La regla general sí se comparte; el caso se conversa a solas.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="14">← Anterior</button>
+    <button class="btn" data-go="16">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m3p5">
+  <div class="eyebrow">Equipos que se hacen cargo · 5 de 6 · 6 min</div>
+  <h2>Acuerdos que se sostienen solos</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> cerrar acuerdos de equipo que no requieran que tú los recuerdes ni los persigas.</div>
+  <section class="blk b-text"><h3>El acuerdo que hay que recordar no era un acuerdo</h3><p>Todos hemos salido de una reunión con la sensación de que quedó claro, para descubrir dos semanas después que cada uno entendió algo distinto o simplemente no pasó nada.</p><p>Casi siempre es el mismo defecto: se acordó una intención, no una conducta. «Vamos a comunicarnos mejor» no es un acuerdo. «Los cambios de turno se avisan el viernes anterior por el grupo» sí lo es.</p></section>
+<section class="blk b-list"><h3>Un acuerdo que se sostiene tiene</h3><ul class="l-check"><li>Una conducta observable, no una intención</li><li>Un responsable con nombre, no «el equipo»</li><li>Un plazo o una frecuencia concreta</li><li>Un lugar visible donde está escrito</li><li>Una fecha de revisión puesta desde el día uno</li></ul></section>
+<section class="blk b-tabs"><h3>Antes y después</h3><div class="tabs" data-tabs="tabs-75">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Intención</button><button role="tab" class="tb" data-i="1">Acuerdo</button><button role="tab" class="tb" data-i="2">Qué cambió</button></div>
+<div class="tb-pane on" data-i="0"><p>«Hay que ser más ordenados con la caja al cierre.»</p><p>Nadie sabe qué tiene que hacer distinto mañana. En dos semanas nadie se acuerda.</p></div><div class="tb-pane" data-i="1"><p>«El cierre de caja lo revisa quien cierra, y deja el registro firmado antes de irse. Lo revisamos el primer lunes de cada mes en la reunión.»</p><p>Se puede cumplir, se puede verificar y no depende de que tú lo recuerdes.</p></div><div class="tb-pane" data-i="2"><p>Pasó de ser un deseo tuyo a ser una regla del equipo. Esa es toda la diferencia entre un acuerdo que necesita jefatura y uno que se sostiene solo.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">La trampa del acuerdo colectivo</div><div><p>Cuando algo queda a cargo de «todos», queda a cargo de nadie. Si la conducta es de todos, igual necesita a alguien responsable de que se revise.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="15">← Anterior</button>
+    <button class="btn" data-go="17">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m3p6">
+  <div class="eyebrow">Equipos que se hacen cargo · 6 de 6 · 7 min</div>
+  <h2>El diagnóstico de tu equipo</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> producir el mapa de decisiones de tu equipo y la primera conversación que vas a tener con él.</div>
+  <section class="blk b-text"><h3>El ejercicio de cierre</h3><p>Este módulo termina con algo que puedes hacer esta semana y que cambia cómo trabaja tu equipo el resto del año. Toma unos treinta minutos, más una conversación.</p><p>No lo hagas perfecto. Un mapa incompleto y conversado vale infinitamente más que uno completo guardado en tu computador.</p></section>
+<section class="blk b-list"><h3>Los pasos</h3><ol class="l-num"><li>Escribe las diez situaciones más frecuentes de tu sucursal</li><li>Marca quién decide hoy cada una, en la práctica</li><li>Marca quién debería decidirla para que el trabajo no espere</li><li>Elige las tres brechas más caras y define qué cambia en cada una</li><li>Conversa esas tres con el equipo, no las anuncies por escrito</li><li>Deja el mapa visible y ponle fecha de revisión a dos meses</li></ol></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Si al terminar el mapa la mayoría de las decisiones importantes siguen siendo tuyas, ese es el resultado del ejercicio. No es un fracaso: es el punto de partida.</p></div></div></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-80" data-correct="2">
+<div class="kc-q">¿Cuál de estos es un acuerdo de equipo bien formulado?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">«Vamos a mejorar la coordinación entre turnos.»</button><button class="kc-o" data-i="1">«Todos tenemos que estar más atentos a los reclamos.»</button><button class="kc-o" data-i="2">«Quien cierra el turno deja anotados los temas pendientes en la pizarra, y quien abre los revisa antes de atender.»</button><button class="kc-o" data-i="3">«Ojalá nos avisemos con tiempo cuando alguien no puede venir.»</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">Es una intención. Nadie sabe qué hace distinto mañana.</span><span data-i="1">«Todos» y «más atentos» no son ni responsable ni conducta observable.</span><span data-i="2">Correcto. Conducta observable, responsable claro, momento definido y verificable sin que nadie persiga a nadie.</span><span data-i="3">«Ojalá» y «con tiempo» dejan todo a interpretación. Un acuerdo necesita plazo concreto.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="16">← Anterior</button>
+    <button class="btn" data-go="18">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4p1">
+  <div class="eyebrow">Planificar sin que te digan qué hacer · 1 de 6 · 6 min</div>
+  <h2>Planificar es elegir qué no hacer</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> entender la planificación como decisión de exclusión y no como lista de intenciones.</div>
+  <section class="blk b-video"><figure class="vid"><div class="ph">Video pendiente de producción</div><figcaption>Módulo 4 · Planificar sin que te digan qué hacer — 2:30 min</figcaption></figure></section>
+<section class="blk b-text"><h3>El día que se te fue</h3><p>Trabajaste diez horas, resolviste veinte cosas y ninguna era la que importaba. Eso le pasa a todo el mundo, y casi nunca es un problema de tiempo: es un problema de plan.</p><p>Sin un plan, el día lo organiza quien te interrumpe. Y quien te interrumpe siempre tiene una razón razonable.</p></section>
+<section class="blk b-text"><h3>Un plan es una lista de exclusiones</h3><p>La mayoría de las listas de tareas son inventarios de buenas intenciones: todo lo que podríamos hacer si el día tuviera treinta horas. Esa lista no ayuda a decidir; de hecho, hace más difícil decidir.</p><p>Un plan de verdad dice qué va a quedar fuera. Y por eso incomoda un poco: dejar algo fuera es aceptar un costo, y aceptar costos es exactamente lo que se te está pidiendo ahora que decides.</p></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Si tu plan de la semana no te obliga a postergar nada, no es un plan: es una lista de deseos.</p></div></div></section>
+<section class="blk b-list"><h3>Cómo se ve un plan que sirve</h3><ul class="l-check"><li>Cabe en una hoja y se lee en treinta segundos</li><li>Tiene tres prioridades, no diez</li><li>Dice explícitamente qué no se va a hacer esta semana</li><li>Se puede mostrar a tu equipo sin explicaciones adicionales</li></ul></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="17">← Anterior</button>
+    <button class="btn" data-go="19">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4p2">
+  <div class="eyebrow">Planificar sin que te digan qué hacer · 2 de 6 · 7 min</div>
+  <h2>De la meta al lunes</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> bajar una meta anual hasta una acción concreta de esta semana.</div>
+  <section class="blk b-text"><h3>Las metas anuales no se ejecutan</h3><p>Una meta de año es una dirección, no una instrucción. Nadie llega el lunes y ejecuta «crecer un porcentaje en colocaciones». Lo que se ejecuta es lo que cabe en una semana.</p><p>Bajar la meta hasta el lunes es tu trabajo. Antes venía bajada; ahora es exactamente el tipo de decisión que la autonomía te entrega.</p></section>
+<section class="blk b-list"><h3>Los tres peldaños</h3><ol class="l-num"><li>La meta del período: la dirección, en una frase, con su número</li><li>El foco del mes: qué palanca vas a mover este mes, una sola</li><li>La acción de la semana: qué se hace, quién lo hace, qué se ve el viernes</li></ol></section>
+<section class="blk b-tabs"><h3>Un ejemplo bajado entero</h3><div class="tabs" data-tabs="tabs-88">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">Meta del período</button><button role="tab" class="tb" data-i="1">Foco del mes</button><button role="tab" class="tb" data-i="2">Acción de la semana</button><button role="tab" class="tb" data-i="3">Qué se logró</button></div>
+<div class="tb-pane on" data-i="0"><p>Reducir el tiempo de espera promedio en sucursal manteniendo la calidad de la atención.</p></div><div class="tb-pane" data-i="1"><p>Los trámites que hoy requieren dos ventanillas. Es la causa más frecuente de espera larga y es la que sí depende de nosotros.</p></div><div class="tb-pane" data-i="2"><p>Registrar durante cinco días qué trámites obligan a pasar dos veces y cuánto suman. Lo hace quien está en atención directa. El viernes tenemos la lista ordenada por frecuencia.</p></div><div class="tb-pane" data-i="3"><p>Una meta que no se podía ejecutar se convirtió en algo que una persona puede hacer esta semana, y cuyo resultado se ve el viernes. Eso es planificar.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">El salto que no funciona</div><div><p>Pasar de la meta anual directo a la acción de la semana casi siempre produce actividad sin dirección. El peldaño del medio es el que evita que trabajes mucho en lo que no mueve la aguja.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="18">← Anterior</button>
+    <button class="btn" data-go="20">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4p3">
+  <div class="eyebrow">Planificar sin que te digan qué hacer · 3 de 6 · 6 min</div>
+  <h2>Cuando todo parece urgente</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> priorizar con un criterio que puedas defender frente a tu equipo y tu jefatura.</div>
+  <section class="blk b-text"><h3>Urgente e importante no son lo mismo</h3><p>Lo urgente se anuncia solo: suena el teléfono, llega el correo, alguien aparece en tu puerta. Lo importante no hace ruido, y por eso siempre pierde.</p><p>El problema práctico es que a media mañana todo se siente urgente. Necesitas un criterio que funcione en ese momento, no una teoría.</p></section>
+<section class="blk b-list"><h3>Las tres preguntas, en orden</h3><ol class="l-num"><li>¿Qué pasa si esto se hace la próxima semana? Si la respuesta es «nada», no era urgente.</li><li>¿Esto lo tengo que hacer yo? Si otra persona puede decidirlo, ya sabes qué hacer con ello.</li><li>¿Esto mueve el foco del mes? Si no lo mueve y además no es urgente de verdad, va a la lista de lo que no se hace.</li></ol></section>
+<section class="blk b-accordion"><h3>Las urgencias más difíciles de ordenar</h3><div class="acc"><details><summary>Me lo pidió mi jefatura</summary><div><p>No lo conviertas automáticamente en prioridad uno: muéstrale el intercambio. «Puedo tomarlo hoy, y en ese caso esto otro se mueve al jueves. ¿Lo hacemos así?» Estás pidiendo una decisión de prioridad a quien corresponde tomarla.</p></div></details><details><summary>Es un cliente molesto</summary><div><p>Casi siempre es urgente de verdad y hay que atenderlo. Lo que no es urgente es la solución de fondo del problema que lo causó: eso va al plan, no al día.</p></div></details><details><summary>Todo el equipo está esperando que yo resuelva</summary><div><p>Eso no es una urgencia: es una señal de que hay decisiones mal repartidas. Resuelve hoy lo que bloquea y agenda para esta semana la conversación de ámbitos.</p></div></details><details><summary>Es algo que me gusta hacer</summary><div><p>Vale la pena mirarlo de frente. Muchas de las horas que se van en lo no importante se van en tareas cómodas que dominamos bien. Es la trampa más difícil de ver.</p></div></details></div></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Priorizar es defendible cuando puedes explicar en una frase por qué lo otro puede esperar. Si no puedes explicarlo, todavía no priorizaste.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="19">← Anterior</button>
+    <button class="btn" data-go="21">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4p4">
+  <div class="eyebrow">Planificar sin que te digan qué hacer · 4 de 6 · 6 min</div>
+  <h2>Anticipar el problema</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> identificar por adelantado los dos o tres riesgos que pueden voltear tu plan, y qué harías.</div>
+  <section class="blk b-text"><h3>Los planes no fallan por sorpresas nuevas</h3><p>Cuando un plan se cae, casi nunca fue por algo que nadie podía prever. Fue por algo que todos sabían que podía pasar y que nadie se detuvo a pensar qué haríamos si pasaba.</p><p>Anticipar no es adivinar. Es tomarse diez minutos para nombrar lo que ya sabes que puede fallar.</p></section>
+<section class="blk b-list"><h3>El ejercicio de diez minutos</h3><ol class="l-num"><li>Imagina que ya pasó el mes y el plan no se cumplió</li><li>Escribe las tres razones más probables, sin filtrarlas</li><li>Para cada una, define la señal temprana que la anunciaría</li><li>Para cada una, define qué harías si aparece esa señal</li><li>Comparte esas tres con tu equipo: casi siempre agregan una que no viste</li></ol></section>
+<section class="blk b-tabs"><h3>Riesgo, señal y respuesta</h3><div class="tabs" data-tabs="tabs-96">
+<div class="tb-strip" role="tablist"><button role="tab" class="tb on" data-i="0">El riesgo</button><button role="tab" class="tb" data-i="1">La señal</button><button role="tab" class="tb" data-i="2">La respuesta</button></div>
+<div class="tb-pane on" data-i="0"><p>Se ausenta una persona clave del turno de mayor carga.</p></div><div class="tb-pane" data-i="1"><p>Dos ausencias en la misma semana, o un aviso de licencia que se extiende.</p></div><div class="tb-pane" data-i="2"><p>Está definido de antemano quién cubre, qué se deja de hacer esos días y a quién se avisa. Decidido con calma, no a las ocho de la mañana con la sucursal abriendo.</p></div></div></section>
+<section class="blk b-callout"><div class="callout c-warn"><div class="c-lbl">La diferencia práctica</div><div><p>Un riesgo anticipado se maneja con una decisión tomada de antemano. Un riesgo no anticipado se maneja improvisando, y las improvisaciones se pagan.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="20">← Anterior</button>
+    <button class="btn" data-go="22">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4p5">
+  <div class="eyebrow">Planificar sin que te digan qué hacer · 5 de 6 · 6 min</div>
+  <h2>Seguimiento sin control</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> diseñar un ritmo de revisión que no requiera perseguir a nadie ni preguntar cómo van.</div>
+  <section class="blk b-text"><h3>«¿Cómo vas?» no es seguimiento</h3><p>Preguntar cómo va algo interrumpe, se siente como desconfianza y además entrega poca información: la respuesta casi siempre es «bien».</p><p>El seguimiento que funciona se acuerda antes de empezar, no se improvisa cuando te empiezas a poner nervioso.</p></section>
+<section class="blk b-list"><h3>Los cuatro elementos</h3><ul class="l-check"><li>Cuándo se revisa: día y hora fijos, no «la próxima semana»</li><li>Qué se mira: un número o un entregable concreto, acordado antes</li><li>Quién lo trae: la persona responsable, no tú buscándolo</li><li>Qué pasa si viene mal: acordado de antemano, para que nadie tema traerlo</li></ul></section>
+<section class="blk b-text"><h3>El ritmo importa más que la profundidad</h3><p>Una revisión de quince minutos cada semana detecta problemas mucho antes que una reunión de dos horas cada mes, y cuesta menos.</p><p>Además hace algo que la reunión larga no hace: vuelve normal hablar de lo que va mal. Cuando la revisión es frecuente y breve, traer un problema deja de ser un evento.</p></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Si tienes que perseguir a alguien para saber cómo va algo, el problema no es esa persona: es que el seguimiento no se acordó.</p></div></div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="21">← Anterior</button>
+    <button class="btn" data-go="23">Siguiente →</button>
+  </div>
+</article>
+<article class="lesson" id="m4p6">
+  <div class="eyebrow">Planificar sin que te digan qué hacer · 6 de 6 · 8 min</div>
+  <h2>Tu plan de noventa días</h2>
+  <div class="obj"><b>Al terminar esta lección vas a poder:</b> escribir un plan propio de noventa días que puedas defender y revisar.</div>
+  <section class="blk b-text"><h3>El cierre del curso</h3><p>Este es el último ejercicio y el que amarra los cuatro módulos: decides tú, lo conversas, tu equipo se hace cargo, y ahora lo planificas.</p><p>Noventa días es el plazo correcto: suficiente para que algo cambie de verdad, corto como para que no se convierta en una declaración de buenas intenciones.</p></section>
+<section class="blk b-list"><h3>El plan, en una hoja</h3><ol class="l-num"><li>Un resultado. Qué va a ser distinto en tu sucursal en noventa días, con un número si se puede.</li><li>Tres focos. Las tres palancas que vas a mover, una por mes o en paralelo.</li><li>Lo que no vas a hacer. Dos o tres cosas que dejas fuera a propósito.</li><li>Los ámbitos. Qué decisiones pasan a tu equipo para que esto sea posible.</li><li>El ritmo. Cuándo revisas, con quién y qué miras.</li><li>Los riesgos. Los dos más probables, con su señal temprana y tu respuesta.</li></ol></section>
+<section class="blk b-callout"><div class="callout c-key"><div class="c-lbl">Lo esencial</div><div><p>Este plan no se lo pediste a nadie y nadie te lo aprobó. Eso es exactamente el punto: es la primera decisión grande que tomas con el contrato nuevo.</p></div></div></section>
+<section class="blk b-text"><h3>Qué hacer con él</h3><p>Compártelo con tu jefatura, no para pedir permiso sino para que sepa hacia dónde vas. Compártelo con tu equipo, porque varias de las decisiones que necesitas mover son suyas.</p><p>Y ponle fecha de revisión antes de guardarlo. Un plan sin fecha de revisión es un documento; con fecha de revisión es una herramienta.</p></section>
+<section class="blk b-knowledge-check"><div class="kc" data-kc="kc-106" data-correct="2">
+<div class="kc-q">Tu jefatura te pide algo que no estaba en tu plan y es para hoy. ¿Cuál es la mejor respuesta?</div>
+<div class="kc-opts"><button class="kc-o" data-i="0">Tomarlo de inmediato: viene de arriba y eso define la prioridad</button><button class="kc-o" data-i="1">Explicar que ya tienes un plan definido para la semana</button><button class="kc-o" data-i="2">Mostrar el intercambio: puedes tomarlo, y en ese caso qué se mueve</button><button class="kc-o" data-i="3">Tomarlo y además cumplir lo planificado, aunque implique quedarte más</button></div>
+<div class="kc-fb" hidden></div>
+<div class="kc-fbs" hidden><span data-i="0">El origen del pedido no determina la prioridad por sí solo, y aceptar todo sin mostrar el costo termina en un plan que nunca se cumple.</span><span data-i="1">Tener un plan no es un escudo. La prioridad puede cambiar con razón; lo que no puede es cambiar sin que nadie vea el costo.</span><span data-i="2">Correcto. Muestras el costo y le devuelves la decisión de prioridad a quien corresponde. Ni te niegas ni aceptas a ciegas.</span><span data-i="3">Es la respuesta más común y la que menos se sostiene: absorber todo en horas propias oculta el problema hasta que revienta.</span></div>
+</div></section>
+  <div class="foot">
+    <button class="btn ghost" data-go="22">← Anterior</button>
+    <span></span>
+  </div>
+</article>
+    <div class="done-msg" id="doneMsg"><b>Curso completado</b>Registramos tu avance. Puedes volver a revisar cualquier lección cuando quieras.</div>
+  </main>
+</div>
+<script>(function(){
+var TOTAL=24;
+var KEY="ewaffle-course-"+document.body.dataset.courseId;
+var seen=JSON.parse(localStorage.getItem(KEY)||"[]");
+var lessons=[].slice.call(document.querySelectorAll(".lesson"));
+var links=[].slice.call(document.querySelectorAll(".toc a"));
+
+function save(){localStorage.setItem(KEY,JSON.stringify(seen));}
+function paint(){
+  links.forEach(function(a,i){
+    a.classList.toggle("done",seen.indexOf(i)>-1);
+  });
+  var pct=Math.round(seen.length/TOTAL*100);
+  document.querySelector(".pf").style.width=pct+"%";
+  document.querySelector(".pt").textContent=seen.length+" de "+TOTAL+" lecciones · "+pct+"%";
+  if(seen.length>=TOTAL){
+    document.querySelector(".done-msg").classList.add("on");
+    if(window.EwaffleSCORM)window.EwaffleSCORM.complete();
+  }
+}
+function go(i){
+  if(i<0||i>=lessons.length)return;
+  lessons.forEach(function(l,j){l.classList.toggle("on",j===i);});
+  links.forEach(function(a,j){a.classList.toggle("on",j===i);});
+  if(seen.indexOf(i)<0){seen.push(i);save();}
+  paint();
+  window.scrollTo(0,0);
+  var nav=document.querySelector(".nav");if(nav)nav.classList.remove("open");
+  try{location.hash=lessons[i].id;}catch(e){}
+}
+links.forEach(function(a,i){a.addEventListener("click",function(e){e.preventDefault();go(i);});});
+document.addEventListener("click",function(e){
+  var t=e.target;
+  if(t.matches("[data-go]")){go(parseInt(t.getAttribute("data-go"),10));}
+  if(t.matches(".burger")){document.querySelector(".nav").classList.toggle("open");}
+  if(t.matches(".tb")){
+    var box=t.closest(".tabs"),i=t.getAttribute("data-i");
+    box.querySelectorAll(".tb").forEach(function(b){b.classList.toggle("on",b===t);});
+    box.querySelectorAll(".tb-pane").forEach(function(p){p.classList.toggle("on",p.getAttribute("data-i")===i);});
+  }
+  if(t.matches(".kc-o")){
+    var kc=t.closest(".kc"),correct=parseInt(kc.getAttribute("data-correct"),10),i=parseInt(t.getAttribute("data-i"),10);
+    var fb=kc.querySelector(".kc-fb"),src=kc.querySelector('.kc-fbs [data-i="'+i+'"]');
+    kc.querySelectorAll(".kc-o").forEach(function(b){b.classList.remove("ok","no");});
+    t.classList.add(i===correct?"ok":"no");
+    if(i===correct){kc.querySelectorAll(".kc-o").forEach(function(b){b.disabled=true;});}
+    fb.hidden=false;fb.className="kc-fb"+(i===correct?" ok":"");
+    fb.textContent=src?src.textContent:(i===correct?"Correcto.":"Revisa el contenido de esta leccion.");
+  }
+});
+var start=0;
+if(location.hash){var k=lessons.map(function(l){return "#"+l.id;}).indexOf(location.hash);if(k>-1)start=k;}
+go(start);
+})();</script>
+</body></html>

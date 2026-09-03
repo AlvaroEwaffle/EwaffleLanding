@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Referencia visual — juegos dentro del curso</title>
+<style>
+/* Tokens IDÉNTICOS a los de render.mjs, con la marca de Buffalo.
+   Si esta referencia usara sus propios colores no serviría de nada. */
+:root{
+  --primary:#202322; --accent:#c9222d; --accent2:#147455;
+  --ink:#1d2021; --muted:#6b7280; --line:#e3e6e8; --bg:#f6f7f8; --paper:#fff;
+  --ok:#0f7a52; --no:#d9534f; --ok-bg:#eefaf5; --no-bg:#fdf2f2; --no-ink:#8a2b28;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#e9ebec;color:var(--ink);font:15px/1.55 var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding:34px 20px 90px}
+h1{font-size:27px;letter-spacing:-.02em;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 30px;max-width:70ch}
+h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+   margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid #d5d9db}
+.nota{background:#fff8e6;border-left:3px solid #b45309;padding:11px 14px;border-radius:0 8px 8px 0;
+      font-size:13.5px;margin:14px 0;color:#6b4708}
+.nota b{color:#4a3105}
+.mal{background:var(--no-bg);border-left-color:var(--no);color:var(--no-ink)}
+.mal b{color:#6d211f}
+
+/* ── el contexto: una lección real, para juzgar el juego DENTRO ── */
+.leccion{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px 28px;max-width:680px}
+.l-eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.leccion h3{font-size:22px;margin:6px 0 14px;letter-spacing:-.015em}
+.leccion p{margin:0 0 14px;color:#33383a}
+
+/* ── EL JUEGO: hereda el cascarón del knowledge-check ── */
+.gm{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:18px 0}
+.gm-hd{display:flex;align-items:center;gap:9px;height:44px;padding:0 16px;
+       background:color-mix(in srgb,var(--accent) 8%,var(--paper));border-bottom:1px solid var(--line)}
+.gm-kind{font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.gm-prog{margin-left:auto;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.gm-body{padding:18px}
+.gm-q{font-weight:650;margin-bottom:4px}
+/* La instrucción va ARRIBA del tablero: abajo llega después de que ya tocaste. */
+.gm-how{font-size:13px;color:var(--muted);margin:0 0 14px}
+
+/* Parejas en DOS COLUMNAS: concepto ↔ situación. La columna dice lo que la
+   tarjeta ya no necesita rotular, y el ojo compara en horizontal. */
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.mt-h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-bottom:2px}
+.mt-c{display:flex;flex-direction:column;gap:9px}
+.card{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;
+      padding:11px 14px;font:inherit;font-size:14.5px;cursor:pointer;min-height:62px;
+      display:flex;align-items:center;transition:border-color .15s,background .15s}
+.card:hover{border-color:#c8cdd0}
+.card:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+.card.sel{border-color:var(--accent2);background:#eef6fb;box-shadow:0 0 0 3px #14745518}
+.card.ok{border-color:var(--ok);background:var(--ok-bg)}
+.card.no{border-color:var(--no);background:var(--no-bg);animation:shake .28s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.g{font-weight:700;margin-right:7px}
+.g.ok{color:var(--ok)} .g.no{color:var(--no)}
+
+/* Feedback: mismos colores y forma que .kc-fb del curso */
+.fb{margin-top:14px;font-size:14px;padding:11px 14px;border-radius:9px;
+    background:var(--no-bg);border-left:3px solid var(--no);color:var(--no-ink)}
+.fb.ok{background:var(--ok-bg);border-left-color:var(--ok);color:#0b5c3e}
+.reveal{margin-top:12px;background:var(--bg);border:1px dashed #c9ced1;border-radius:9px;padding:11px 14px;font-size:13.5px}
+.reveal b{color:var(--ink)}
+
+/* Ruleta: el disco NO es el protagonista. 220px y la pregunta al lado. */
+.rl{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start}
+.disco{width:220px;height:220px;border-radius:50%;position:relative;
+  background:conic-gradient(var(--accent) 0 60deg,#2a2e2d 60deg 120deg,var(--accent) 120deg 180deg,
+  #2a2e2d 180deg 240deg,var(--accent) 240deg 300deg,#2a2e2d 300deg 360deg);
+  box-shadow:inset 0 0 0 6px var(--paper),0 2px 10px #0002}
+.disco::after{content:"";position:absolute;top:-3px;left:50%;transform:translateX(-50%);
+  border:9px solid transparent;border-top-color:var(--ink)}
+.opt{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;
+     padding:11px 14px;font:inherit;font-size:15px;cursor:pointer;display:block;width:100%;margin-bottom:8px}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}
+.opt.no{border-color:var(--no);background:var(--no-bg)}
+.btn{background:var(--primary);color:#fff;border:0;border-radius:9px;padding:12px 22px;
+     font:inherit;font-weight:650;cursor:pointer;min-height:44px}
+
+.gm-foot{border-top:1px solid var(--line);padding:12px 18px;font-size:13px;color:var(--muted);
+         display:flex;gap:14px;align-items:center}
+
+/* Cierre */
+.fin{text-align:center;padding:8px 0 4px}
+.fin .big{font-size:19px;font-weight:700;margin-bottom:4px}
+.repaso{text-align:left;background:var(--bg);border-radius:9px;padding:12px 14px;margin-top:14px;font-size:13.5px}
+.repaso li{margin:4px 0}
+
+.movil{width:390px;border:10px solid #22262a;border-radius:26px;overflow:hidden;background:var(--paper)}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+@media(max-width:900px){.par{grid-template-columns:1fr}.rl{grid-template-columns:1fr}.disco{margin:0 auto}}
+</style></head><body><div class="wrap">
+
+<h1>Juegos dentro del curso — referencia visual</h1>
+<p class="sub">Contra el render actual de <code>buffalo-induccion-juegos.html</code>. Tokens y marca idénticos a los del curso: si esta página usara colores propios no serviría para decidir nada. Cada corrección va anotada con el porqué.</p>
+
+<h2>1 · El juego dentro de una lección</h2>
+<div class="leccion">
+  <div class="l-eyebrow">Lección 1 de 3 · 8 min</div>
+  <h3>Bienvenida a Buffalo Waffles</h3>
+  <p>Buffalo Waffles no vende solo un producto: vende una experiencia que se repite igual en cada local, cada día. Eso solo funciona si todos operamos con el mismo estándar.</p>
+
+  <div class="gm">
+    <div class="gm-hd"><span>🎯</span><span class="gm-kind">Juego de parejas</span><span class="gm-prog">2 de 6</span></div>
+    <div class="gm-body">
+      <div class="gm-q">¿Dónde se juega el estándar?</div>
+      <p class="gm-how">Toca un concepto y después su situación.</p>
+      <div class="mt">
+        <div><div class="mt-h">Concepto</div><div class="mt-c">
+          <button class="card ok"><span class="g ok">✓</span>Higiene personal</button>
+          <button class="card sel">Calidad y gramajes</button>
+          <button class="card">Protocolo de atención</button>
+        </div></div>
+        <div><div class="mt-h">Cuándo aplica</div><div class="mt-c">
+          <button class="card ok"><span class="g ok">✓</span>Pasas de la caja a la cocina</button>
+          <button class="card">Entra un cliente y estás ocupado</button>
+          <button class="card">Sirves la misma porción que ayer</button>
+        </div></div>
+      </div>
+      <div class="fb ok"><b>✓ Correcto.</b> Cambiar de tarea es justamente cuando se contamina: la mano que tocó dinero no puede tocar alimento.</div>
+    </div>
+    <div class="gm-foot">Sin nota · reintentos ilimitados · el error no descuenta</div>
+  </div>
+
+  <p>Este curso te da ese estándar. No es teoría: es lo que vas a hacer en tu turno.</p>
+</div>
+
+<div class="nota mal"><b>Cambio 1 — dos columnas, no una grilla mezclada.</b> Hoy las seis tarjetas van revueltas y cada una lleva el rótulo <em>CONCEPTO</em> o <em>SITUACIÓN</em>. Eso obliga a clasificar antes de jugar: el alumno primero separa de qué tipo es cada tarjeta y recién después piensa el contenido. Con dos columnas el encabezado dice lo que el rótulo repetía seis veces, y el ojo compara en horizontal, que es como se lee un pareo.</div>
+
+<div class="nota mal"><b>Cambio 2 — la instrucción va arriba.</b> Hoy «Toca un concepto y después la tarjeta que le corresponde» está <em>debajo</em> del tablero. Se lee de arriba hacia abajo: para cuando llegas a la instrucción ya tocaste algo.</div>
+
+<div class="nota mal"><b>Cambio 3 — el enunciado en 12 palabras.</b> Hoy son 28 («Cada parte del estándar aparece en un momento concreto del turno. Une cada una con la situación en que te toca aplicarla»). El título ya dice de qué va; la instrucción solo tiene que decir qué hacer con el dedo.</div>
+
+<h2>2 · Los estados, uno por uno</h2>
+<div class="par">
+  <div class="gm">
+    <div class="gm-hd"><span>🎯</span><span class="gm-kind">Error</span><span class="gm-prog">3 de 6</span></div>
+    <div class="gm-body">
+      <div class="mt"><div><div class="mt-h">Concepto</div><div class="mt-c">
+        <button class="card no"><span class="g no">✗</span>Calidad y gramajes</button></div></div>
+        <div><div class="mt-h">Cuándo aplica</div><div class="mt-c">
+        <button class="card no"><span class="g no">✗</span>Entra un cliente y estás ocupado</button></div></div></div>
+      <div class="fb"><b>✗ No es ese.</b> Un cliente esperando es atención, no gramaje. La porción se mide siempre igual, haya fila o no.</div>
+      <p class="gm-how" style="margin:12px 0 0">Las dos tarjetas siguen disponibles. Puedes volver a intentarlo.</p>
+    </div>
+  </div>
+
+  <div class="gm">
+    <div class="gm-hd"><span>🎯</span><span class="gm-kind">Se trabó</span><span class="gm-prog">3 de 6</span></div>
+    <div class="gm-body">
+      <div class="mt"><div><div class="mt-h">Concepto</div><div class="mt-c">
+        <button class="card">Calidad y gramajes</button></div></div>
+        <div><div class="mt-h">Cuándo aplica</div><div class="mt-c">
+        <button class="card">Sirves la misma porción que ayer</button></div></div></div>
+      <div class="reveal"><b>Después de 3 intentos aparece esto:</b><br>
+        «Calidad y gramajes» va con «Sirves la misma porción que ayer». El estándar es que el cliente reciba lo mismo en Antofagasta que en Puerto Montt.
+        <div style="margin-top:10px"><button class="btn">Continuar</button></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="nota"><b>La regla que gobierna los siete estados: el error nunca quita, solo revela.</b> Sin vidas, sin cronómetro, sin descuento. El ítem fallado sigue disponible. A los 3 intentos se ofrece la respuesta con su explicación y se puede seguir — esto es inducción operativa, no una evaluación. Y el acierto también explica: un «¡Correcto!» sin porqué no enseña nada.</div>
+
+<h2>3 · Cierre</h2>
+<div class="gm" style="max-width:680px">
+  <div class="gm-hd"><span>🎯</span><span class="gm-kind">Terminado</span><span class="gm-prog">6 de 6</span></div>
+  <div class="gm-body"><div class="fin">
+    <div class="big">Listo — completaste las 6 parejas</div>
+    <div style="color:var(--muted);font-size:14px">4 a la primera · 2 con ayuda</div>
+    <div class="repaso"><b>Para repasar antes del turno:</b>
+      <ul><li>Calidad y gramajes — la porción no cambia por tener fila.</li>
+      <li>Protocolo de atención — escuchar completo va antes de explicar.</li></ul></div>
+    <div style="margin-top:16px"><button class="btn">Repetir el juego</button></div>
+  </div></div>
+  <div class="gm-foot">Marca el bloque como visto. No viaja ninguna nota al LMS.</div>
+</div>
+
+<h2>4 · Ruleta — el disco no es el protagonista</h2>
+<div class="gm" style="max-width:680px">
+  <div class="gm-hd"><span>🎰</span><span class="gm-kind">Ruleta de higiene</span><span class="gm-prog">2 de 6</span></div>
+  <div class="gm-body">
+    <div class="gm-q">¿Cuándo hay que repetir el lavado de manos?</div>
+    <p class="gm-how">Gira y responde. Seis situaciones del turno.</p>
+    <div class="rl">
+      <div class="disco"></div>
+      <div>
+        <button class="opt">Solo al empezar el turno</button>
+        <button class="opt ok"><span class="g ok">✓</span>Cada vez que cambias de tarea</button>
+        <button class="opt">Cuando se ven sucias</button>
+        <div class="fb ok" style="margin-top:12px"><b>✓ Correcto.</b> El riesgo no es la suciedad visible: es el cambio de tarea. Caja → cocina siempre exige lavado.</div>
+      </div>
+    </div>
+  </div>
+  <div class="gm-foot">Con <code>prefers-reduced-motion</code> el giro dura 0,3 s en vez de 2,5 s</div>
+</div>
+<div class="nota"><b>Las opciones son literalmente los botones del knowledge-check.</b> Misma altura, mismo borde, mismos colores. La ruleta solo elige la pregunta; responder es un gesto que el alumno ya hizo antes en el curso.</div>
+
+<h2>5 · Móvil — 390 px</h2>
+<div class="movil"><div style="padding:16px">
+  <div class="gm" style="margin:0">
+    <div class="gm-hd"><span>🎯</span><span class="gm-kind">Parejas</span><span class="gm-prog">2 de 6</span></div>
+    <div class="gm-body" style="padding:14px">
+      <div class="gm-q" style="font-size:15px">¿Dónde se juega el estándar?</div>
+      <p class="gm-how" style="font-size:12.5px">Toca un concepto y después su situación.</p>
+      <div class="mt" style="gap:8px 10px">
+        <div><div class="mt-h">Concepto</div><div class="mt-c">
+          <button class="card ok" style="font-size:13.5px;min-height:56px"><span class="g ok">✓</span>Higiene personal</button>
+          <button class="card sel" style="font-size:13.5px;min-height:56px">Calidad y gramajes</button>
+        </div></div>
+        <div><div class="mt-h">Cuándo aplica</div><div class="mt-c">
+          <button class="card ok" style="font-size:13.5px;min-height:56px"><span class="g ok">✓</span>Pasas de la caja a la cocina</button>
+          <button class="card" style="font-size:13.5px;min-height:56px">Sirves la misma porción</button>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<div class="nota mal"><b>Cambio 4 — el presupuesto de altura se pasó.</b> Medido en el render actual a 390 px: <b>676 px</b>. El techo es 560. En un iPhone con la barra del navegador eso significa que no se puede ver el encabezado y la última fila a la vez, y el alumno pierde el hilo de qué está emparejando. Con dos columnas de 3 filas y tarjetas de 56 px la misma partida cabe en ~470 px.</div>
+<div class="nota"><b>Lo que ya está bien y no hay que tocar:</b> sin scroll horizontal a 360 px, tarjetas de 153×95 (muy por sobre los 44 px táctiles), el modelo de dos toques en vez de arrastrar, la franja de marca solo como cromo, y los glifos ✓/✗ además del color.</div>
+
+</div></body></html>

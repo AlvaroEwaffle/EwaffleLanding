@@ -1,196 +1,167 @@
+---
+interface Props {
+  /** Si el modal se abre solo tras unos segundos. El catálogo lo desactiva: ahí el
+      formulario es el cierre del recorrido, y una ventana que interrumpe a mitad de
+      camino compite con la pieza en vez de rematarla. Con `false` el modal sigue
+      montado y se abre desde los CTA vía `window.ewaffleAbrirModalCatalogo(contexto)`. */
+  autoOpen?: boolean;
+}
+
+const { autoOpen = true } = Astro.props;
+---
+
 <div
   id="catalog-discovery-modal"
+  data-auto-open={autoOpen ? "si" : "no"}
   class="fixed inset-0 z-[90] hidden items-start justify-center overflow-y-auto overscroll-contain p-3 sm:items-center sm:p-6"
   aria-hidden="true"
 >
-  <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-md"></div>
+  <div class="absolute inset-0 bg-[#06050d]/80 backdrop-blur-md"></div>
 
+  <!-- Una sola superficie oscura. La versión anterior partía el modal en un
+       panel morado y un formulario blanco, y el corte hacía que el formulario
+       —la única parte que hay que llenar— pareciera de otro sitio. También
+       medía 920 px de alto por repetir en dos columnas lo que cabe en una. -->
   <div
     role="dialog"
     aria-modal="true"
     aria-labelledby="catalog-modal-title"
-    class="relative my-3 w-full max-w-5xl overflow-hidden rounded-[1.75rem] border border-white/20 bg-white shadow-[0_45px_120px_rgba(15,23,42,0.35)] sm:my-0 sm:rounded-[2rem]"
+    class="relative my-3 w-full max-w-3xl overflow-hidden rounded-[1.75rem] border border-white/12 bg-[#14112b] shadow-[0_45px_120px_rgba(6,5,13,0.6)] sm:my-0 sm:rounded-[2rem]"
   >
-    <div class="catalog-modal-scroll relative max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain sm:max-h-[min(920px,calc(100dvh-3rem))]">
-      <div class="sticky top-0 z-30 flex justify-end p-3 sm:p-4">
-        <button
-          type="button"
-          id="catalog-modal-close"
-          aria-label="Cerrar modal"
-          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-primary/90 text-white shadow-lg transition duration-300 hover:bg-primary"
-        >
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(110%_90%_at_15%_0%,rgba(253,90,147,0.16),transparent_60%),radial-gradient(80%_70%_at_92%_6%,rgba(255,177,72,0.13),transparent_62%)]"></div>
 
-      <div class="-mt-14 grid grid-cols-1 lg:mt-0 lg:grid-cols-[0.92fr_1.08fr]">
-      <aside class="relative overflow-hidden bg-primary px-5 pb-9 pt-16 text-white sm:px-7 sm:pb-10 md:px-10 md:py-12">
-        <div class="pointer-events-none absolute inset-0">
-          <div class="absolute -left-14 top-0 h-48 w-48 rounded-full bg-white/10 blur-3xl"></div>
-          <div class="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-accent/20 blur-3xl"></div>
-        </div>
+    <div class="catalog-modal-scroll relative max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain px-5 py-6 sm:max-h-[min(880px,calc(100dvh-3rem))] sm:px-9 sm:py-9">
+      <button
+        type="button"
+        id="catalog-modal-close"
+        aria-label="Cerrar"
+        class="absolute right-4 top-4 z-30 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/70 transition duration-300 hover:border-white/30 hover:text-white sm:right-6 sm:top-6"
+      >
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"></path>
+        </svg>
+      </button>
 
-        <div class="relative z-10">
-          <div class="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-yellow sm:text-xs">
-            Conversemos con contexto
-          </div>
+      <div id="catalog-modal-form-state" class="relative">
+        <p class="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-yellow">
+          Conversemos con contexto
+        </p>
 
-          <h2 id="catalog-modal-title" class="mt-5 text-[2rem] font-black leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
-            Podemos revisar juntos qué mezcla de recursos tiene más sentido para tu caso.
-          </h2>
+        <h2 id="catalog-modal-title" class="mt-4 max-w-[22ch] text-[1.9rem] font-black leading-[1.1] tracking-[-0.04em] text-white sm:text-[2.25rem]">
+          Te escribimos con una propuesta, no con un saludo.
+        </h2>
 
-          <p class="mt-4 text-[15px] leading-relaxed text-white/90 sm:mt-5 sm:text-base md:text-lg">
-            Si quieres, lo aterrizamos contigo en una propuesta concreta según tu objetivo, tu audiencia y el tipo de experiencia que necesitas construir.
-          </p>
+        <p class="mt-4 max-w-[58ch] text-[15px] leading-relaxed text-[#a9a3c4]">
+          Déjanos cómo ubicarte y qué quieres resolver. Con eso preparamos alcance y precio antes
+          de la primera reunión, en vez de usarla para preguntarte lo básico.
+        </p>
 
-          <div class="mt-6 space-y-3 sm:mt-8 sm:space-y-4">
-            <div class="rounded-[1.5rem] border border-white/20 bg-white/10 p-4 backdrop-blur-sm sm:p-5">
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-yellow">Opción 1</p>
-              <p class="mt-2 text-white/90">
-                Déjanos tus datos y te escribimos para ver tu caso con más detalle.
-              </p>
-            </div>
+        <form id="catalog-modal-form" class="mt-7 space-y-4">
+          <input type="text" name="companyWebsite" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
 
-            <div class="rounded-[1.5rem] border border-white/20 bg-white/10 p-4 backdrop-blur-sm sm:p-5">
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-yellow">Opción 2</p>
-              <p class="mt-2 text-white/90">
-                Si prefieres avanzar más rápido, agenda directo una reunión de descubrimiento con Álvaro.
-              </p>
-            </div>
-          </div>
-
-          <a
-            href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/"
-            target="_blank"
-            rel="noreferrer"
-            id="catalog-modal-schedule-link"
-            class="mt-6 inline-flex min-h-[50px] w-full items-center justify-center rounded-full bg-accent px-6 py-4 text-center text-base font-semibold text-white transition duration-300 hover:bg-accent/90 hover:shadow-2xl hover:shadow-accent/20 sm:mt-8 sm:w-auto sm:px-7"
-          >
-            Agendar reunión con Álvaro
-          </a>
-        </div>
-      </aside>
-
-      <section class="bg-white px-5 pb-6 pt-8 sm:px-7 sm:pb-8 sm:pt-10 md:px-10 md:py-12">
-        <div id="catalog-modal-form-state">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent">Déjanos tus datos</p>
-          <h3 class="mt-3 text-[2rem] font-black text-primary sm:text-3xl">
-            Te ayudamos a bajar este catálogo a una conversación útil.
-          </h3>
-          <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
-            Cuéntanos quién eres y qué te interesa explorar. Te contactaremos para recomendarte la mejor combinación de recursos.
-          </p>
-
-          <form id="catalog-modal-form" class="mt-6 space-y-4 sm:mt-8 sm:space-y-5">
-            <input type="text" name="companyWebsite" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label for="catalog-modal-name" class="mb-1 block text-sm font-medium text-slate-700">Nombre *</label>
+              <label for="catalog-modal-name" class="mb-1.5 block text-[13px] font-medium text-[#a9a3c4]">Nombre <span class="text-yellow">*</span></label>
               <input
-                id="catalog-modal-name"
-                name="name"
-                type="text"
-                required
+                id="catalog-modal-name" name="name" type="text" required autocomplete="name"
                 placeholder="Tu nombre"
-                class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                class="w-full rounded-xl border border-white/12 bg-black/25 px-4 py-3 text-[15px] text-white placeholder:text-white/25 outline-none transition duration-200 focus:border-yellow focus:ring-2 focus:ring-yellow/25"
               />
             </div>
-
-            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-              <div>
-                <label for="catalog-modal-email" class="mb-1 block text-sm font-medium text-slate-700">Email corporativo *</label>
-                <input
-                  id="catalog-modal-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="tu@empresa.com"
-                  class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </div>
-
-              <div>
-                <label for="catalog-modal-company" class="mb-1 block text-sm font-medium text-slate-700">Empresa</label>
-                <input
-                  id="catalog-modal-company"
-                  name="company"
-                  type="text"
-                  placeholder="Nombre de tu empresa"
-                  class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </div>
-            </div>
-
             <div>
-              <label for="catalog-modal-message" class="mb-1 block text-sm font-medium text-slate-700">Qué te gustaría revisar</label>
-              <textarea
-                id="catalog-modal-message"
-                name="message"
-                rows="4"
-                placeholder="Ej: onboarding, inducción, producción en terreno, cápsulas interactivas, 360, academia interna..."
-                class="w-full resize-none rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-              ></textarea>
+              <label for="catalog-modal-company" class="mb-1.5 block text-[13px] font-medium text-[#a9a3c4]">Organización <span class="text-yellow">*</span></label>
+              <input
+                id="catalog-modal-company" name="company" type="text" required autocomplete="organization"
+                placeholder="Dónde trabajas"
+                class="w-full rounded-xl border border-white/12 bg-black/25 px-4 py-3 text-[15px] text-white placeholder:text-white/25 outline-none transition duration-200 focus:border-yellow focus:ring-2 focus:ring-yellow/25"
+              />
             </div>
-
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p class="text-sm leading-relaxed text-slate-500">
-                También puedes ir directo a la agenda si ya quieres avanzar con una reunión.
-              </p>
-
-              <button
-                id="catalog-modal-submit"
-                type="submit"
-                class="inline-flex min-h-[50px] items-center justify-center rounded-full bg-primary px-7 py-3 text-base font-semibold text-white transition duration-300 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                <span>Quiero que lo revisemos</span>
-              </button>
+            <div>
+              <label for="catalog-modal-email" class="mb-1.5 block text-[13px] font-medium text-[#a9a3c4]">Correo <span class="text-yellow">*</span></label>
+              <input
+                id="catalog-modal-email" name="email" type="email" required autocomplete="email"
+                placeholder="tu@organizacion.cl"
+                class="w-full rounded-xl border border-white/12 bg-black/25 px-4 py-3 text-[15px] text-white placeholder:text-white/25 outline-none transition duration-200 focus:border-yellow focus:ring-2 focus:ring-yellow/25"
+              />
             </div>
-
-            <button
-              type="button"
-              id="catalog-modal-close-secondary"
-              class="inline-flex min-h-[48px] w-full items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition duration-300 hover:border-slate-300 hover:bg-slate-50 sm:hidden"
-            >
-              Cerrar y seguir viendo
-            </button>
-          </form>
-        </div>
-
-        <div id="catalog-modal-success" class="hidden py-8">
-          <div class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-600">
-            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 13 4 4L19 7"></path>
-            </svg>
+            <div>
+              <label for="catalog-modal-phone" class="mb-1.5 block text-[13px] font-medium text-[#a9a3c4]">WhatsApp <span class="text-white/35">· opcional</span></label>
+              <input
+                id="catalog-modal-phone" name="phone" type="tel" autocomplete="tel"
+                placeholder="+56 9 ..."
+                class="w-full rounded-xl border border-white/12 bg-black/25 px-4 py-3 text-[15px] text-white placeholder:text-white/25 outline-none transition duration-200 focus:border-yellow focus:ring-2 focus:ring-yellow/25"
+              />
+            </div>
           </div>
 
-          <h3 class="mt-6 text-3xl font-black text-primary">
-            Perfecto, ya recibimos tus datos.
-          </h3>
-          <p class="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-            Te contactaremos para revisar contigo qué combinación de recursos conviene priorizar. Si prefieres avanzar altiro, también puedes agendar directo una reunión.
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/"
-              target="_blank"
-              rel="noreferrer"
-              class="inline-flex min-h-[50px] items-center justify-center rounded-full bg-accent px-7 py-3 text-base font-semibold text-white transition duration-300 hover:bg-accent/90"
-            >
-              Agendar reunión
-            </a>
-            <button
-              type="button"
-              id="catalog-modal-continue"
-              class="inline-flex min-h-[50px] items-center justify-center rounded-full border border-slate-200 px-7 py-3 text-base font-semibold text-slate-700 transition duration-300 hover:border-slate-300 hover:bg-slate-50"
-            >
-              Seguir viendo el catálogo
-            </button>
+          <div>
+            <label for="catalog-modal-message" class="mb-1.5 block text-[13px] font-medium text-[#a9a3c4]">Qué quieres resolver</label>
+            <textarea
+              id="catalog-modal-message" name="message" rows="4"
+              placeholder="Ej: inducción de contratistas, prevención en planta, onboarding de sistema interno…"
+              class="w-full resize-none rounded-xl border border-white/12 bg-black/25 px-4 py-3 text-[15px] leading-relaxed text-white placeholder:text-white/25 outline-none transition duration-200 focus:border-yellow focus:ring-2 focus:ring-yellow/25"
+            ></textarea>
           </div>
+
+          <p id="catalog-modal-error" class="hidden rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-[14px] text-[#ffc0d6]" role="alert"></p>
+
+          <!-- El rosa es la acción y el ámbar el énfasis; la agenda queda como
+               enlace y no como segundo botón, para que no compitan dos primarios. -->
+          <div class="flex flex-col gap-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
+            <button
+              id="catalog-modal-submit" type="submit"
+              class="inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-accent px-8 text-[15px] font-bold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/25 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+            >
+              <span>Quiero que lo revisemos</span>
+            </button>
+
+            <p class="text-[13.5px] leading-relaxed text-[#a9a3c4]">
+              ¿Prefieres avanzar altiro?
+              <a
+                href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/"
+                target="_blank" rel="noreferrer" id="catalog-modal-schedule-link"
+                class="font-semibold text-yellow underline decoration-yellow/40 underline-offset-4 transition hover:decoration-yellow"
+              >Agenda directo con Álvaro</a>
+            </p>
+          </div>
+
+          <button
+            type="button" id="catalog-modal-close-secondary"
+            class="inline-flex min-h-[46px] w-full items-center justify-center rounded-full border border-white/12 text-[14px] font-semibold text-[#a9a3c4] transition duration-300 hover:border-white/25 hover:text-white sm:hidden"
+          >
+            Cerrar y seguir viendo
+          </button>
+        </form>
+      </div>
+
+      <div id="catalog-modal-success" class="relative hidden py-6">
+        <div class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#0f7a52]/25 text-[#5fe0ab]">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7"></path>
+          </svg>
         </div>
-      </section>
+
+        <h3 class="mt-6 text-[2rem] font-black tracking-[-0.04em] text-white">Recibido.</h3>
+        <p class="mt-3 max-w-[56ch] text-[15px] leading-relaxed text-[#a9a3c4]">
+          Te escribimos con alcance y precio para tu caso. Si quieres adelantarlo, agenda la
+          reunión y llegamos con la propuesta ya armada.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/"
+            target="_blank" rel="noreferrer"
+            class="inline-flex min-h-[50px] items-center justify-center rounded-full bg-accent px-7 text-[15px] font-bold text-white transition duration-300 hover:-translate-y-0.5"
+          >
+            Agendar reunión
+          </a>
+          <button
+            type="button" id="catalog-modal-continue"
+            class="inline-flex min-h-[50px] items-center justify-center rounded-full border border-white/12 px-7 text-[15px] font-semibold text-[#a9a3c4] transition duration-300 hover:border-white/25 hover:text-white"
+          >
+            Seguir viendo el catálogo
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -281,11 +252,25 @@
     field.addEventListener('input', markCatalogFormStarted, { once: true });
   });
 
-  if (canShowCatalogModal()) {
+  const autoOpen = document.getElementById('catalog-discovery-modal')?.dataset.autoOpen !== 'no';
+
+  if (autoOpen && canShowCatalogModal()) {
     modalWindow.setTimeout(() => {
       showModal();
     }, popupDelayMs);
   }
+
+  /* Apertura desde fuera. `contexto` es lo que la persona eligió en el recorrido; entra
+     al textarea para que el lead llegue con lo que ya nos dijo, en vez de pedirle que lo
+     escriba de nuevo. No se pisa lo que haya escrito a mano. */
+  modalWindow.ewaffleAbrirModalCatalogo = (contexto) => {
+    const campo = document.getElementById('catalog-modal-message');
+    if (contexto && campo instanceof HTMLTextAreaElement && !campo.value.trim()) {
+      campo.value = contexto;
+    }
+    showModal();
+    modalWindow.setTimeout(() => document.getElementById('catalog-modal-name')?.focus(), 120);
+  };
 
   const dismissAndTrack = () => {
     markDismissed();
@@ -322,105 +307,129 @@
     });
   });
 
+  /* ── Un solo camino de envío ────────────────────────────────────────────
+     El cotizador del catálogo también manda leads. Sin esto tendría que
+     duplicar acá el POST al CRM y las credenciales de EmailJS, y una de las dos
+     copias iba a quedarse atrás. Se expone en `window` para que exista una
+     sola. */
+  async function enviarLeadCatalogo(datos) {
+    const nombre = String(datos.name || '').trim();
+    const correo = String(datos.email || '').trim();
+    if (!nombre || !correo) throw new Error('Faltan nombre o correo');
+
+    await fetch('https://api.fidelidapp.cl/api/mcp/clients/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MCP-API-Key': '1000782937f7872abdc0e4fadc467bbcea6b353420aed09c29f036f3b0fa2056',
+      },
+      body: JSON.stringify({
+        slug: 'ewaffle',
+        clientData: {
+          name: nombre,
+          email: correo,
+          /* Antes iba siempre vacío: el formulario no pedía teléfono. Ahora que
+             se pide, el WhatsApp llega al CRM en vez de perderse. */
+          phoneNumber: String(datos.phone || '').trim(),
+        },
+      }),
+    }).catch(() => null);
+
+    if (!emailJsInstance) {
+      throw new Error('EmailJS no está disponible');
+    }
+
+    await emailJsInstance.send('service_d08f3xv', 'template_b6dnfrh', {
+      firstName: nombre,
+      lastName: '',
+      email: correo,
+      phone: String(datos.phone || '').trim(),
+      company: String(datos.company || '').trim(),
+      role: datos.origen || 'catalog_modal',
+      services: 'catalogo_recursos',
+      message: String(datos.message || '').trim() || 'Quiero revisar con más detalle qué mezcla de recursos conviene para mi caso.',
+      to_email: 'alvaro@ewaffle.cl',
+      cc_email: 'johana@ewaffle.cl',
+      recaptchaToken: '',
+    });
+
+    if (modalWindow.dataLayer) {
+      modalWindow.dataLayer.push({
+        event: 'generate_lead',
+        form_name: datos.origen || 'catalog_modal',
+        destination_url: scheduleUrl,
+      });
+    }
+    if (typeof modalWindow.fbq === 'function') {
+      modalWindow.fbq('track', 'Lead');
+    }
+
+    markSubmitted();
+  }
+
+  modalWindow.ewaffleEnviarLeadCatalogo = enviarLeadCatalogo;
+
+  const errorBox = document.getElementById('catalog-modal-error');
+  /* `alert()` bloquea el navegador y en móvil se ve como un fallo del sitio,
+     no como un campo que falta. El aviso va dentro del formulario, al lado de
+     lo que hay que corregir. */
+  const mostrarError = (texto) => {
+    if (!errorBox) return;
+    errorBox.textContent = texto;
+    errorBox.classList.remove('hidden');
+  };
+  const limpiarError = () => errorBox?.classList.add('hidden');
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    limpiarError();
 
     if (!(form instanceof HTMLFormElement) || !(submitButton instanceof HTMLButtonElement)) {
       return;
     }
 
     const formData = new FormData(form);
-    const honeypot = String(formData.get('companyWebsite') || '').trim();
-    if (honeypot) {
+    if (String(formData.get('companyWebsite') || '').trim()) {
       return;
     }
 
     const name = String(formData.get('name') || '').trim();
     const email = String(formData.get('email') || '').trim();
     const company = String(formData.get('company') || '').trim();
+    const phone = String(formData.get('phone') || '').trim();
     const message = String(formData.get('message') || '').trim();
 
-    if (!name || !email) {
-      modalWindow.alert('Por favor completa al menos tu nombre y email corporativo.');
+    if (!name || !email || !company) {
+      mostrarError('Nos faltan tu nombre, tu organización y tu correo para poder escribirte.');
       return;
     }
 
-    const originalLabel = submitButton.querySelector('span')?.textContent || 'Quiero que lo revisemos';
-    submitButton.disabled = true;
     const labelNode = submitButton.querySelector('span');
-    if (labelNode) {
-      labelNode.textContent = 'Enviando...';
-    }
+    const originalLabel = labelNode?.textContent || 'Quiero que lo revisemos';
+    submitButton.disabled = true;
+    if (labelNode) labelNode.textContent = 'Enviando…';
 
     try {
-      const templateParams = {
-        firstName: name,
-        lastName: '',
-        email,
-        phone: '',
-        company,
-        role: 'catalog_modal',
-        services: 'catalogo_recursos',
-        message: message || 'Quiero revisar con más detalle qué mezcla de recursos conviene para mi caso.',
-        to_email: 'alvaro@ewaffle.cl',
-        cc_email: 'jose@ewaffle.cl',
-        recaptchaToken: '',
-      };
-
-      await fetch('https://api.fidelidapp.cl/api/mcp/clients/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-MCP-API-Key': '1000782937f7872abdc0e4fadc467bbcea6b353420aed09c29f036f3b0fa2056',
-        },
-        body: JSON.stringify({
-          slug: 'ewaffle',
-          clientData: {
-            name,
-            email,
-            phoneNumber: '',
-          },
-        }),
-      }).catch(() => null);
-
-      if (!emailJsInstance) {
-        throw new Error('EmailJS no está disponible');
-      }
-
-      await emailJsInstance.send('service_d08f3xv', 'template_b6dnfrh', templateParams);
-
-      if (modalWindow.dataLayer) {
-        modalWindow.dataLayer.push({
-          event: 'generate_lead',
-          form_name: 'catalog_modal',
-          destination_url: scheduleUrl,
-        });
-      }
-
-      if (typeof modalWindow.fbq === 'function') {
-        modalWindow.fbq('track', 'Lead');
-      }
+      await enviarLeadCatalogo({ name, email, company, phone, message, origen: 'catalog_modal' });
 
       catalogFormSubmitted = true;
       window.ewaffleAnalytics?.formSubmit('catalog_modal', {
         section: 'catalog_modal',
         has_company: !!company,
+        has_phone: !!phone,
         has_message: !!message,
       });
 
-      markSubmitted();
       formState?.classList.add('hidden');
       successState?.classList.remove('hidden');
       form.reset();
     } catch (error) {
       console.error('Catalog modal submit error', error);
       window.ewaffleAnalytics?.captureException(error);
-      modalWindow.alert('Hubo un problema al enviar tus datos. Si quieres, puedes agendar directo la reunión mientras lo revisamos.');
+      mostrarError('No pudimos enviar tus datos. Puedes reintentar o agendar directo la reunión mientras lo revisamos.');
     } finally {
       submitButton.disabled = false;
-      if (labelNode) {
-        labelNode.textContent = originalLabel;
-      }
+      if (labelNode) labelNode.textContent = originalLabel;
     }
   });
 </script>

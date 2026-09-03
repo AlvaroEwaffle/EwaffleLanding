@@ -1,0 +1,141 @@
+---
+// Banner que lleva a la página de simuladores. Foco de negocio 2026.
+//
+// Va a dos columnas y con una captura del simulador real, igual que
+// /simuladores. Antes eran tres tarjetas encabezadas por emoji sobre un
+// degradado: en la home compite con secciones que sí tienen imagen, y una
+// sección sobre simuladores 3D sin una sola imagen pierde esa comparación.
+//
+// La captura es la misma que usa la página de simuladores. Se reutiliza a
+// propósito: es un archivo más que el visitante ya tiene en caché si llegó
+// desde allá, y es el mismo producto — no hay razón para tener dos.
+
+const rubros = [
+  {
+    t: "Operaciones",
+    d: "Procesos con variables, plazos y costos donde una decisión temprana condiciona el resto.",
+    // gráfico de línea: variables que se mueven
+    icono: '<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>',
+  },
+  {
+    t: "Prevención de riesgos",
+    d: "Protocolos donde el orden importa y saltarse un paso tiene consecuencias.",
+    // escudo con alerta: protocolo y riesgo
+    icono: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 9v4M12 16h.01"/>',
+  },
+  {
+    t: "Cumplimiento normativo",
+    d: "Procedimientos reglados con plazos legales exactos, donde equivocarse expone.",
+    // documento con visto: procedimiento verificado
+    icono: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/>',
+  },
+];
+---
+
+<section class="py-20 lg:py-24 bg-primary relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/assets/patronblancobajaopacidad.png')] bg-repeat opacity-[0.06]" aria-hidden="true"></div>
+  <div class="absolute -top-24 -left-20 w-80 h-80 bg-accent/20 rounded-full blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -bottom-28 -right-16 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" aria-hidden="true"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <div data-revela-b>
+        <span class="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-accent/20 border border-accent/40 rounded-full text-yellow text-xs font-bold tracking-[0.14em] uppercase">
+          Nuevo
+        </span>
+        <h2 class="text-3xl md:text-4xl xl:text-5xl font-bold text-white leading-[1.12] text-balance mb-5">
+          Nadie aprende a decidir <span class="text-yellow">leyendo</span> sobre decisiones
+        </h2>
+        <p class="text-lg text-white/75 leading-relaxed mb-9 max-w-xl">
+          Construimos simuladores donde su equipo practica el trabajo real: elige, se equivoca, ve la consecuencia y vuelve a intentar. En el navegador, sin instalar nada.
+        </p>
+
+        <ul class="space-y-5 mb-10">
+          {rubros.map((r) => (
+            <li class="flex gap-4">
+              <span class="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 text-yellow ring-1 ring-white/15">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={r.icono} />
+              </span>
+              <div>
+                <div class="text-white font-semibold mb-0.5">{r.t}</div>
+                <div class="text-white/60 text-sm leading-relaxed">{r.d}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex flex-col sm:flex-row gap-5 sm:items-center">
+          <a
+            href="/simuladores"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap px-8 py-4 bg-accent text-white rounded-full font-semibold hover:bg-accent/90 transition-colors duration-200 shadow-xl shadow-accent/20"
+          >
+            Ver los simuladores
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <p class="flex items-center gap-2 text-sm text-white/60">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Experiencias cortas y autocontenidas, con evidencia de lo aprendido
+          </p>
+        </div>
+      </div>
+
+      <figure class="relative" data-revela-b data-revela-b-tarde>
+        <div class="rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-2xl shadow-black/50 bg-primary">
+          <div class="flex items-center gap-2 px-4 py-2.5 bg-white/[0.06] border-b border-white/10">
+            <span class="w-2.5 h-2.5 rounded-full bg-white/25"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white/25"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white/25"></span>
+            <span class="ml-3 text-[11px] text-white/40 font-mono tracking-tight">simulador · comercio exterior</span>
+          </div>
+          <img
+            src="/assets/simuladores/comex.jpg"
+            alt="Simulador de comercio exterior: vista 3D del puerto con contenedores y el expediente documental que el equipo completa entre varios"
+            width="1280" height="820" loading="lazy" decoding="async"
+            class="w-full h-auto"
+          />
+        </div>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Misma entrada que /simuladores. El estado oculto se aplica SOLO si el
+     script corrió: si el JS falla, la sección se ve completa en vez de quedar
+     en blanco en medio de la home. */
+  :global(html.js-revela-b) [data-revela-b] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  }
+  :global(html.js-revela-b) [data-revela-b][data-revela-b-tarde] { transition-delay: .12s; }
+  :global(html.js-revela-b) [data-revela-b].visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.js-revela-b) [data-revela-b] { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    if (!("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("js-revela-b");
+    const obs = new IntersectionObserver((es) => {
+      for (const e of es) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add("visible");
+        obs.unobserve(e.target);
+      }
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    const arrancar = () => {
+      for (const el of document.querySelectorAll("[data-revela-b]")) {
+        // lo que ya está en pantalla no espera al scroll
+        if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add("visible");
+        else obs.observe(el);
+      }
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", arrancar);
+    else arrancar();
+  })();
+</script>
