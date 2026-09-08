@@ -30,7 +30,7 @@ import CatalogLeadModal from '../../components/catalog/CatalogLeadModal.astro';
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const title = "Catálogo de productos Ewaffle | E-learning, multimedia y simuladores";
-const description = "Los siete formatos de aprendizaje digital de Ewaffle: videos formativos, guías interactivas, cápsulas interactivas, simuladores, recorridos 360, actividades lúdicas y producción en terreno. Cada uno con ejemplos reales que puedes probar acá mismo, y un cotizador para armar tu programa.";
+const description = "Los ocho formatos de aprendizaje digital de Ewaffle: videos formativos, guías interactivas, cápsulas interactivas, simuladores, recorridos 360, actividades lúdicas, producción en terreno y tutor IA. Cada uno con ejemplos reales, y un cotizador para armar tu programa.";
 const socialImage = "/assets/catalogo-og.png";
 
 /* Las cuatro entradas del recorrido. Son las preguntas del catálogo viejo,
@@ -240,6 +240,23 @@ const formatos = [
       { t: "Otro ejemplo (Drive)", modo: "externo", src: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view", nota: "Se abre en Google Drive" },
     ],
   },
+  {
+    id: "tutor-ia", n: "08", grupo: "Acompañamiento",
+    titulo: "Tutor IA",
+    resumen: "El único formato que no se entrega y se termina: sigue respondiendo mientras el alumno avanza.",
+    img: "/assets/catalogo/tutor-ia.webp",
+    alt: "Widget de chat del tutor IA abierto sobre un curso real de Ewaffle Academia, respondiendo qué le falta al alumno por completar",
+    para: ["explicar", "practicar"],
+    texto: "Vive dentro de tu curso —en tu LMS o en el nuestro— y responde dudas de contenido y de avance con datos reales, nunca inventados. No es un chatbot genérico de soporte: por diseño rechaza matrículas, calificación y soporte técnico, y deriva eso a tu equipo.",
+    bullets: [
+      "Ancla cada respuesta al contenido real del curso y al avance real del alumno.",
+      "Se instala como plugin en tu LMS (probado sobre Moodle) o vive nativo en nuestra plataforma.",
+      "Auditado adversarialmente: no se desvía con intentos de manipulación del prompt.",
+    ],
+    piezas: [
+      { t: "Solicitar demo por WhatsApp", modo: "externo", src: `https://wa.me/56920115198?text=${encodeURIComponent("Hola, me interesan los tutores IA")}`, nota: "Te respondemos directo, sin formulario" },
+    ],
+  },
 ];
 
 /* Cuántos de verdad corren adentro. Se calcula, no se escribe a mano: si mañana
@@ -376,10 +393,11 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
             Catálogo de productos<br /><em>Ewaffle</em>
           </h1>
           <p class="bajada" data-motion style="--retardo: 180ms;">
-            Hacemos que la capacitación de tu equipo se termine y se note en el puesto. Siete
+            Hacemos que la capacitación de tu equipo se termine y se note en el puesto. Ocho
             formatos: videos formativos, guías interactivas, cápsulas interactivas, simuladores,
-            recorridos 360, actividades lúdicas y producción en terreno. Cada uno con ejemplos que
-            puedes probar acá mismo, sin registro — y un cotizador al final.
+            recorridos 360, actividades lúdicas, producción en terreno y un tutor IA que sigue
+            acompañando después de la entrega. La mayoría con ejemplos que puedes probar acá mismo,
+            sin registro — y un cotizador al final.
           </p>
           <div class="acciones" data-motion style="--retardo: 260ms;">
             <a href="#brief" class="boton boton--primario" data-cta="empezar">
@@ -486,13 +504,14 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
       <section class="escena escena--ancha" id="proyeccion" data-escena="proyeccion">
         <p class="claqueta" data-motion>03 · Formatos</p>
         <h2 class="rubro" data-motion style="--retardo: 80ms;">
-          Siete formatos.<br /><em>Uno por tipo de problema.</em>
+          Ocho formatos.<br /><em>Uno por tipo de problema.</em>
         </h2>
         <p class="parrafo" data-motion style="--retardo: 140ms;">
-          Cada uno trae ejemplos reales —el mismo archivo que recibe un participante— y
+          Casi todos traen ejemplos reales —el mismo archivo que recibe un participante— y
           {piezasAdentro} de las {piezasTotales} pruebas se abren y funcionan sin que salgas de
           esta página. Las de Articulate y la de Drive van a otra pestaña porque sus visores no
-          permiten incrustarse en ningún sitio.
+          permiten incrustarse en ningún sitio; el tutor IA todavía no tiene una demo pública para
+          probar sin acompañamiento, así que te lo mostramos en vivo en la primera conversación.
         </p>
 
         <div class="filtro" data-filtro hidden>
@@ -511,9 +530,11 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
             >
               <div class="banda__pantalla">
                 <img src={r.img} alt={r.alt} width="1100" height="688" loading={i < 2 ? "eager" : "lazy"} decoding="async" />
-                <span class="banda__lupa" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                </span>
+                {r.piezas.some((p) => p.modo !== "externo") && (
+                  <span class="banda__lupa" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                  </span>
+                )}
                 <span class="banda__visto" data-visto-marca hidden>
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Visto
                 </span>
@@ -1231,6 +1252,7 @@ const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con
   /* La captura de la guía trae el menú lateral pegado al borde izquierdo:
      centrado (50%) lo recorta casi entero. Alineado a la izquierda se ve. */
   article.banda[data-reel="guias"] .banda__pantalla img { object-position: 0 0; }
+  article.banda[data-reel="tutor-ia"] .banda__pantalla img { object-position: 100% center; }
   .banda:hover .banda__pantalla img { transform: scale(1.035); opacity: 1; }
   .banda__pantalla::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
