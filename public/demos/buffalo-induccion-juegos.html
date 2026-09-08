@@ -1,5 +1,5 @@
 <!-- course-scorm: generado desde lab/buffalo-juegos.course.json
-     spec 2d94ffc8bec4 · 2026-09-03
+     spec 2d94ffc8bec4 · 2026-09-04
      NO EDITAR A MANO: se regenera con publicar.mjs y tus cambios se pierden.
      La marca vive en agents/engines/course-scorm/overlays/. -->
 <!doctype html>
@@ -63,7 +63,10 @@ ol.l-num li:before{content:counter(n);position:absolute;left:0;top:1px;width:21p
 .c-warn{border-left-color:var(--warn);background:#fffbf4}
 .c-key{border-left-color:var(--accent);background:#fff7fa}
 .c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-bottom:5px;color:var(--muted)}
-figure.vid video{width:100%;border-radius:12px;display:block;background:#000}
+/* max-height: un video vertical (9:16) a ancho completo de columna crecía a
+   ~1900px de alto en desktop — un cuadro negro gigante (feedback demo OXXO).
+   El tope respeta el viewport y el aspect ratio; el ancho se ajusta solo. */
+figure.vid video{width:auto;max-width:100%;max-height:min(70vh,640px);margin:0 auto;border-radius:12px;display:block;background:#000}
 figure.img img{width:100%;border-radius:12px;display:block}
 figcaption{font-size:13px;color:var(--muted);margin-top:8px}
 .ph{background:var(--paper);border:1.5px dashed var(--line);border-radius:12px;padding:44px 20px;text-align:center;color:var(--muted);font-size:14px}
@@ -111,6 +114,20 @@ ol.s-sc li:before{content:counter(s);position:absolute;left:0;top:1px;width:24px
 .btn{background:var(--primary);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:650;cursor:pointer;font-size:15px}
 .btn:disabled{opacity:.4;cursor:default}
 .btn.ghost{background:none;color:var(--muted);border:1px solid var(--line)}
+/* ── íconos (solo aparecen con course.icons / lesson.icon / tabs.icon) ── */
+.ic{width:1.1em;height:1.1em;flex:0 0 auto;vertical-align:-.18em}
+ul.l-check.has-ic li{padding-left:0;display:flex;gap:10px;align-items:flex-start}
+ul.l-check.has-ic li:before{content:none}
+ul.l-check.has-ic li .ic{color:var(--ok);margin-top:.28em;width:1.15em;height:1.15em}
+.callout.has-ic .c-lbl{display:flex;align-items:center;gap:7px}
+.callout.has-ic .c-lbl .ic{width:1.35em;height:1.35em}
+.c-info.has-ic .c-lbl .ic{color:var(--accent2)}
+.c-warn.has-ic .c-lbl .ic{color:var(--warn)}
+.c-key.has-ic .c-lbl .ic{color:var(--accent)}
+.tb .ic{margin-right:7px;width:1.2em;height:1.2em}
+.tb.on .ic{color:var(--accent)}
+.h-ic{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:12px;background:var(--paper);border:1px solid var(--line);color:var(--accent);margin-right:.35em;vertical-align:-.3em}
+.h-ic .ic{width:.85em;height:.85em}
 .done-msg{background:var(--ok);color:#fff;border-radius:12px;padding:20px 24px;margin-top:30px;display:none}
 .done-msg.on{display:block}
 .done-msg b{display:block;font-size:18px;margin-bottom:4px}
