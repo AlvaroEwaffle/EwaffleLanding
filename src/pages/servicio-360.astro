@@ -3,358 +3,1369 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/landing/Footer.astro';
 import Contact from '../components/landing/Contact.astro';
 
-const title = "Experiencias 360 para onboarding corporativo | Ewaffle";
-const description = "Diseñamos recorridos 360, videos inmersivos y producción multimedia en terreno para onboarding corporativo, seguridad, inducción operativa e instituciones privadas.";
-const canonicalUrl = "https://ewaffle.cl/servicio-360";
-const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
+/* ═══════════════════════════════════════════════════════════════════════════
+   SERVICIO 360 · el recorrido antes del lugar
+   ───────────────────────────────────────────────────────────────────────────
+   La versión anterior explicaba el servicio entera con texto: seis secciones
+   de prosa, cuatro tarjetas de "qué incluye" y un bloque de demostraciones
+   donde cada ejemplo era un botón que se iba a otra pestaña. El problema es el
+   mismo que tenía el catálogo antes de rehacerse: vendemos una experiencia que
+   se recorre y la página pedía que nos creyeran de palabra.
 
-const examples = [
+   Acá cambian tres cosas:
+
+   1. SE VE. La página muestra el recorrido en vez de describirlo — el video
+      360 de la planta va incrustado y se arrastra con el mouse en la misma
+      página, y el recorrido navegable se abre en un visor sin salir de acá.
+   2. RESPONDE LA PRIMERA PREGUNTA. "¿En qué se diferencia de un video?" era lo
+      único que el texto anterior no contestaba de frente. Ahora es la escena
+      01 y es una comparación fila por fila.
+   3. HEREDA EL LENGUAJE DEL CATÁLOGO. Misma sala oscura, mismo riel de avance,
+      mismo visor, misma tipografía. Es la página hermana de /catalogo, no una
+      página suelta con otro aire.
+
+   Honestidad de las referencias — esto no se toca sin verificar:
+     · El recorrido navegable es el TOUR DE MUESTRA DE 3DVISTA. Es la
+       tecnología con la que producimos, no un proyecto nuestro, y la página lo
+       dice en su propia tarjeta. El catálogo lo rotula igual.
+     · El video 360 de Planta Arauco (Logmeter) sí es un recorrido de
+       producción propia.
+     · La pieza a cámara es producción en terreno, no un 360. Va en la sección
+       de producción, nunca entre los ejemplos de recorrido.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const title = "Recorridos 360 para inducción y onboarding | Ewaffle";
+const description = "Recorridos 360, video inmersivo y producción en terreno para que tu equipo reconozca la planta, la sala o la faena antes de pisarla. Ejemplos navegables, entrega en navegador, visor o SCORM.";
+
+/* La cabecera de la página emitía su propio `canonical` y su propia `og:image`,
+   y BaseLayout ya emite las dos antes: los lectores de enlaces se quedan con la
+   primera, así que las de acá nunca llegaban a ninguna parte. Se fueron; queda
+   solo el JSON-LD, que sí es aporte propio de esta página. */
+const canonicalUrl = "https://www.ewaffle.cl/servicio-360";
+
+const escenas = [
+  { id: "apertura",   n: "00", t: "Inicio" },
+  { id: "diferencia", n: "01", t: "Qué es" },
+  { id: "usos",       n: "02", t: "Para qué sirve" },
+  { id: "ejemplos",   n: "03", t: "Ejemplos" },
+  { id: "produccion", n: "04", t: "Cómo se hace" },
+  { id: "entrega",    n: "05", t: "Cómo se entrega" },
+  { id: "cierre",     n: "06", t: "Conversemos" },
+];
+
+/* ── Escena 01 · La comparación ───────────────────────────────────────────
+   Cuatro ejes, ninguno sobre métricas: lo que un recorrido registra depende de
+   cómo se entregue, y prometer analítica en una tabla de venta es prometer algo
+   que después hay que sostener en la reunión. */
+const comparativa = [
   {
-    category: "Producción en terreno",
-    title: "Recorrido real con cámara en terreno",
-    description: "Ejemplo de captura real para mostrar espacios, flujo operativo y contexto de forma más cercana y creíble.",
-    href: "https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view?pli=1",
-    cta: "Abrir ejemplo",
+    eje: "Quién decide hacia dónde se mira",
+    video: "El montaje. Se ve lo que el editor eligió mostrar, en el orden que eligió.",
+    tour: "La persona. Gira, se acerca y vuelve a mirar la zona que le quedó dudosa.",
   },
   {
-    category: "Producción en terreno",
-    title: "Pieza audiovisual de referencia",
-    description: "Ejemplo audiovisual complementario para mostrar tono, ritmo y potencial narrativo de una producción presencial.",
-    href: "https://youtu.be/OCu-5fmS_mI",
-    cta: "Ver video",
+    eje: "Dónde queda la información",
+    video: "En la narración. Pasa una vez y hay que rebobinar para recuperarla.",
+    tour: "Anclada al punto donde ocurre: el aviso vive sobre el equipo, no en un anexo aparte.",
   },
   {
-    category: "360 interactivo",
-    title: "Recorrido 360 con navegación",
-    description: "Ejemplo de experiencia inmersiva donde la persona puede explorar el espacio y entender puntos clave antes de llegar presencialmente.",
-    href: "https://storage.net-fs.com/hosting/2727323/380/index.htm",
-    cta: "Explorar demo",
+    eje: "Qué pasa cuando cambia algo",
+    video: "Se rehace el tramo y se vuelve a exportar la pieza.",
+    tour: "Se corrige el punto afectado y el resto del recorrido queda como estaba.",
   },
   {
-    category: "360 video",
-    title: "Video 360 para inducción",
-    description: "Ejemplo de contenido inmersivo pensado para onboarding, contexto operacional y comprensión espacial.",
-    href: "https://www.youtube.com/watch?v=7iaJIuOoxzE",
-    cta: "Ver ejemplo",
+    eje: "Cómo se usa en la inducción",
+    video: "Se proyecta o se envía, y todos ven lo mismo en el mismo orden.",
+    tour: "Cada uno lo recorre a su ritmo antes de llegar, y vuelve a abrirlo cuando tiene una duda concreta.",
   },
 ];
 
-const includeCards = [
+/* ── Escena 02 · Los usos ─────────────────────────────────────────────────
+   Escritos como la situación con la que llega el cliente, no como la categoría
+   con la que la clasificamos nosotros. */
+const usos = [
   {
-    title: "Levantamiento y guión",
-    description: "Definimos el recorrido, los puntos críticos y el objetivo de aprendizaje para que la experiencia no sea solo visualmente llamativa, sino útil para aprender.",
+    n: "01",
+    t: "Inducción de planta y primer turno",
+    d: "Quien entra ya sabe dónde está el vestidor, por dónde se accede a producción y qué zona no se cruza sin autorización.",
+    detalle: "La inducción presencial deja de gastarse en ubicar gente y se usa en lo que solo se puede explicar parado en el lugar.",
   },
   {
-    title: "Captura y edición",
-    description: "Producimos el registro en terreno y lo convertimos en una experiencia clara, ordenada y lista para ser usada como parte de onboarding o capacitación.",
+    n: "02",
+    t: "Prevención de riesgos",
+    d: "El aviso queda pegado al punto donde está el riesgo: la máquina, el desnivel, el tablero, la zona de tránsito de grúas.",
+    detalle: "Deja de ser un anexo del reglamento que se lee lejos de donde importa.",
   },
   {
-    title: "Capas explicativas",
-    description: "Podemos integrar narración, textos, hotspots, placas y llamados de atención sobre zonas o momentos clave del recorrido.",
+    n: "03",
+    t: "Visitas de contratistas y proveedores",
+    d: "El que viene por dos días recorre la instalación antes de entrar, con las reglas puestas donde corresponde.",
+    detalle: "No hay que montarle un programa completo de inducción para una visita corta.",
   },
   {
-    title: "Integración con LMS",
-    description: "La experiencia puede convivir con rutas formativas, evaluaciones, SCORM, cápsulas multimedia y materiales de apoyo.",
+    n: "04",
+    t: "Una misma entrada en varias sedes",
+    d: "Con turnos, sucursales o faenas distintas, el recorrido fija el mismo estándar de ingreso para todas.",
+    detalle: "El estándar deja de depender de quién esté disponible ese día para hacer el tour a mano.",
   },
 ];
 
-const useCases = [
-  "Onboarding de nuevos ingresos antes del primer día presencial.",
-  "Inducción de contratistas, visitas o proveedores en espacios con protocolos críticos.",
-  "Recorridos de seguridad, rutas, equipos y puntos de control para plantas, bodegas, campus o clínicas.",
-  "Estandarización de la experiencia de ingreso entre sedes, turnos o geografías distintas.",
+/* ── Escena 04 · Producción ───────────────────────────────────────────── */
+const produccion = [
+  {
+    n: "01",
+    t: "Levantamiento y guión del recorrido",
+    d: "Vamos a la instalación, definimos por dónde entra la persona, qué puntos son críticos y qué tiene que quedar sabiendo al final. El orden del recorrido es una decisión de diseño instruccional, no de cámara.",
+  },
+  {
+    n: "02",
+    t: "Captura en terreno",
+    d: "Fotografía o video 360 en los puntos definidos, con la operación andando cuando es parte de lo que hay que mostrar. Una jornada bien planificada cubre más superficie de la que uno espera.",
+  },
+  {
+    n: "03",
+    t: "Capas explicativas",
+    d: "Sobre el recorrido montamos lo que lo convierte en aprendizaje: narración, textos, hotspots, placas de advertencia y saltos entre zonas. Sin esto un 360 es una postal navegable.",
+  },
+  {
+    n: "04",
+    t: "Armado y prueba",
+    d: "Se arma el recorrido completo, se prueba en celular y en escritorio, y se corrige lo que no se entiende antes de entregarlo. Cuando el recorrido acompaña a un curso, se amarra ahí.",
+  },
 ];
 
-const decisionCards = [
+/* ── Escena 05 · Entrega ──────────────────────────────────────────────── */
+const entregas = [
   {
-    title: "Cuándo conviene 360",
-    points: [
-      "Cuando el espacio físico es parte central del aprendizaje.",
-      "Cuando mostrar contexto real reduce dudas y acelera adaptación.",
-      "Cuando quieres una inducción más inmersiva y memorable.",
+    t: "En el navegador",
+    d: "Se abre con un enlace, sin instalar aplicación y sin crear cuenta. Es la vía por la que entra casi todo el mundo: computador de la oficina o el celular del trabajador.",
+  },
+  {
+    t: "Con visor",
+    d: "El mismo recorrido se puede ver con un visor cuando la inducción se hace en sala y se quiere el efecto inmersivo completo.",
+  },
+  {
+    t: "Dentro de tu LMS",
+    d: "Se empaqueta como SCORM para que viva junto al resto del programa y el LMS registre el avance, o queda como enlace directo si tu inducción no pasa por una plataforma.",
+  },
+];
+
+/* Cuándo conviene puro y cuándo mezclado. Se mantiene de la versión anterior
+   porque es la pregunta que llega en la primera reunión, pero deja de ser una
+   sección propia: vive en el cierre, que es donde se decide. */
+const decision = [
+  {
+    t: "Conviene un recorrido 360",
+    tono: "si",
+    puntos: [
+      "Cuando el espacio físico es parte de lo que hay que aprender.",
+      "Cuando reconocer el lugar antes de llegar reduce dudas y accidentes de novato.",
+      "Cuando la misma inducción se repite en varias sedes y hoy sale distinta en cada una.",
     ],
   },
   {
-    title: "Cuándo conviene mezclarlo",
-    points: [
-      "Cuando el recorrido necesita además una guía Rise o un recurso Storyline.",
-      "Cuando el 360 debe convivir con videos explicativos o materiales de consulta.",
-      "Cuando quieres una experiencia completa y no solo una pieza inmersiva aislada.",
+    t: "Conviene mezclarlo",
+    tono: "mezcla",
+    puntos: [
+      "Cuando además hay procedimiento que explicar: ahí entra el video o la guía interactiva.",
+      "Cuando hay que comprobar que entendieron, con una actividad de ubicación en plano o un chequeo corto.",
+      "Cuando el recorrido tiene que convivir con un programa formativo completo dentro del LMS.",
     ],
   },
 ];
+
+const agendaUrl = "https://capu.villelab.com/schedule/reunion-descubrimiento-con-alvaro/";
+const araucoId = "7iaJIuOoxzE";
 ---
 
 <BaseLayout {title} {description}>
   <Fragment slot="head">
-    <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalUrl} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={imageUrl} />
+    <meta name="theme-color" content="#0a0812" />
+    <!-- Sin `color-scheme: dark` acá, a diferencia del catálogo: esta página
+         termina en el formulario de contacto, que es claro y usa los controles
+         por defecto del navegador. Declarada oscura, el navegador le pintaba a
+         esos campos un fondo gris carbón sobre la tarjeta blanca. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Service",
-      "serviceType": "Recorridos 360 para onboarding e inducción",
+      "serviceType": "Recorridos 360 para inducción y onboarding",
       "provider": {
         "@type": "Organization",
         "name": "Ewaffle",
-        "url": "https://ewaffle.cl",
-        "logo": imageUrl
+        "url": "https://www.ewaffle.cl",
+        "logo": "https://www.ewaffle.cl/assets/logoewchico.png"
       },
-      "areaServed": {
-        "@type": "Place",
-        "name": "Chile y Latinoamérica"
-      },
+      "areaServed": { "@type": "Place", "name": "Chile y Latinoamérica" },
       "url": canonicalUrl,
       "description": description,
       "name": title
     })} />
   </Fragment>
 
-  <main class="min-h-screen bg-slate-50">
-    <section class="relative overflow-hidden bg-primary">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.18),transparent_24%),radial-gradient(circle_at_85%_18%,rgba(14,165,233,0.16),transparent_18%)]"></div>
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 md:pt-36 md:pb-28">
-        <div class="max-w-6xl mx-auto">
-          <div class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold tracking-[0.14em] text-white/90 uppercase">
-            Servicio dedicado · Onboarding inmersivo
+  <div class="sala" id="sala">
+
+    <!-- ══ Riel ══ El mismo índice-y-avance del catálogo. Fijo al costado en
+         escritorio; bajo 1180px queda como franja delgada arriba. -->
+    <aside class="riel" aria-label="Avance de la página">
+      <a href="/" class="riel__marca">EWAFFLE</a>
+      <ol class="riel__lista">
+        {escenas.map((e) => (
+          <li>
+            <a href={`#${e.id}`} class="riel__item" data-riel={e.id}>
+              <span class="riel__n">{e.n}</span>
+              <span class="riel__t">{e.t}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <p class="riel__cuenta">Servicio 360</p>
+      <div class="riel__barra" aria-hidden="true"><span data-barra></span></div>
+    </aside>
+
+    <main class="cinta">
+
+      <!-- ══ ESCENA 00 · Apertura ══════════════════════════════════════════ -->
+      <section class="escena escena--apertura" id="apertura">
+        <div class="apertura__fondo" aria-hidden="true">
+          <!-- Desenfocado a propósito: el fotograma trae el título del tour de
+               muestra quemado encima y nítido competiría con el titular — y,
+               peor, se leería como si el proyecto fuera nuestro. Lo que aporta
+               es la luz, no sus palabras. -->
+          <img src="/assets/catalogo/tour360.webp" alt="" width="1100" height="688" fetchpriority="high" decoding="async" />
+        </div>
+
+        <div class="apertura__reja">
+          <div class="apertura__cuerpo">
+            <p class="claqueta" data-motion>
+              <span class="claqueta__punto" aria-hidden="true"></span>
+              Servicio 360 · Inducción y onboarding en terreno
+            </p>
+            <h1 class="titular" data-motion style="--retardo: 90ms;">
+              Que reconozcan el lugar<br /><em>antes de pisarlo.</em>
+            </h1>
+            <p class="bajada" data-motion style="--retardo: 180ms;">
+              Producimos recorridos 360, video inmersivo y registro en terreno para que la
+              persona entienda la planta, la sala o la faena antes del primer turno. La
+              información queda puesta donde ocurre —sobre el equipo, en la zona de riesgo, en
+              el punto de encuentro— y no en un anexo que se lee lejos del lugar.
+            </p>
+            <div class="acciones" data-motion style="--retardo: 260ms;">
+              <a href="#ejemplos" class="boton boton--primario" data-cta="ejemplos">
+                Ver los ejemplos
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+              </a>
+              <a href="#contact" class="boton boton--fantasma" data-cta="contacto_hero">
+                Evaluarlo para mi operación
+              </a>
+            </div>
+            <dl class="datos" data-motion style="--retardo: 340ms;">
+              <div><dt>Se abre en</dt><dd>el navegador</dd></div>
+              <div><dt>Se entrega</dt><dd>SCORM o enlace</dd></div>
+              <div><dt>Ejemplos acá</dt><dd>3</dd></div>
+            </dl>
           </div>
 
-          <div class="mt-8 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-end">
-            <div>
-              <h1 class="text-white text-[clamp(3.2rem,8vw,6.8rem)] font-black leading-[0.92]">
-                Servicio 360
-              </h1>
-              <p class="mt-6 max-w-3xl text-xl md:text-2xl leading-relaxed text-white/90">
-                Diseñamos recorridos 360, videos inmersivos y producción multimedia en terreno para que tu equipo entienda el contexto real antes de operar.
+          <!-- Tres capturas montadas como pilas de proyeccionista. Son las tres
+               patas del servicio: el recorrido, el rodaje y la entrega. Bajo
+               1240px desaparecen: apiladas repetirían lo que viene abajo. -->
+          <div class="marquesina" aria-hidden="true">
+            <figure class="mq mq--1">
+              <div class="mq__barra"><i></i><i></i><i></i><em>Recorrido navegable</em></div>
+              <img src="/assets/catalogo/tour360.webp" alt="" width="1100" height="688" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="mq mq--2">
+              <div class="mq__barra"><i></i><i></i><i></i><em>Rodaje en terreno</em></div>
+              <img src="/assets/catalogo/terreno.webp" alt="" width="1100" height="619" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="mq mq--3">
+              <div class="mq__barra"><i></i><i></i><i></i><em>Entrega SCORM</em></div>
+              <img src="/assets/catalogo/lms.webp" alt="" width="1100" height="688" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ESCENA 01 · Qué es, y en qué se diferencia de un video ═════════
+           Era la única pregunta que la versión anterior no contestaba de
+           frente, y es la primera que llega en la reunión. -->
+      <section class="escena" id="diferencia">
+        <p class="claqueta" data-motion>01 · Qué es</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Un video se mira.<br /><em>Un recorrido se recorre.</em>
+        </h2>
+        <p class="parrafo" data-motion style="--retardo: 140ms;">
+          Un recorrido 360 es la instalación capturada desde adentro, en puntos conectados
+          entre sí, con la información montada encima. La persona se para en un punto, gira,
+          se acerca a lo que le llama la atención y salta a la zona siguiente. No hay una
+          línea de tiempo que la arrastre: la línea de tiempo la pone ella.
+        </p>
+
+        <div class="tabla" data-motion style="--retardo: 200ms;">
+          <div class="tabla__cabeza" aria-hidden="true">
+            <span></span>
+            <span class="tabla__col">Video lineal</span>
+            <span class="tabla__col tabla__col--viva">Recorrido 360</span>
+          </div>
+          {comparativa.map((f) => (
+            <div class="tabla__fila">
+              <p class="tabla__eje">{f.eje}</p>
+              <p class="tabla__celda"><span class="tabla__rotulo">Video lineal</span>{f.video}</p>
+              <p class="tabla__celda tabla__celda--viva"><span class="tabla__rotulo">Recorrido 360</span>{f.tour}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="nota" data-motion>
+          Ninguno reemplaza al otro. El video explica un procedimiento mejor que cualquier
+          recorrido; el recorrido ubica a la persona mejor que cualquier video. En la mayoría
+          de los programas que producimos conviven, y por eso este servicio casi siempre se
+          cotiza junto a producción en terreno.
+        </p>
+      </section>
+
+      <!-- ══ ESCENA 02 · Para qué sirve ════════════════════════════════════ -->
+      <section class="escena" id="usos">
+        <p class="claqueta" data-motion>02 · Para qué sirve</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Cuatro situaciones donde<br /><em>describir el lugar no alcanza.</em>
+        </h2>
+
+        <div class="usos" >
+          {usos.map((u, i) => (
+            <article class="uso" data-motion style={`--retardo: ${(i % 2) * 70}ms;`}>
+              <p class="uso__n">{u.n}</p>
+              <h3 class="uso__t">{u.t}</h3>
+              <p class="uso__d">{u.d}</p>
+              <p class="uso__detalle">{u.detalle}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ══ ESCENA 03 · Los ejemplos ══════════════════════════════════════
+           Tres referencias, cada una con su naturaleza declarada en su propia
+           tarjeta. La primera es tecnología de terceros y lo dice; la segunda
+           es producción nuestra y va incrustada; la tercera es rodaje en
+           terreno, que no es un 360 y también lo dice. -->
+      <section class="escena escena--ancha" id="ejemplos">
+        <p class="claqueta" data-motion>03 · Ejemplos</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Ábrelos acá mismo.<br /><em>Sin registro y sin descargar nada.</em>
+        </h2>
+        <p class="parrafo" data-motion style="--retardo: 140ms;">
+          Dos de los tres corren dentro de esta página. El tercero se abre en Google Drive
+          porque su visor no se deja incrustar en ningún sitio, y lo dice en su propio botón.
+        </p>
+
+        <div class="rollo">
+
+          <!-- ── Referencia 01 · el tour de muestra ───────────────────────── -->
+          <article class="banda" data-motion>
+            <div class="banda__pantalla">
+              <img
+                src="/assets/catalogo/tour360.webp"
+                alt="Portada de un recorrido virtual 360 de un centro de simulación médica, con el botón de inicio sobre la fachada del edificio"
+                width="1100" height="688" loading="lazy" decoding="async"
+              />
+              <span class="banda__lupa" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+            </div>
+            <div class="banda__cuerpo">
+              <p class="banda__meta">
+                <span class="banda__n">01</span>
+                <span class="banda__grupo">Recorrido interactivo</span>
               </p>
-
-              <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#contact"
-                  class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-accent/90 hover:shadow-2xl hover:shadow-accent/20"
-                >
-                  Quiero evaluarlo para mi empresa
-                </a>
-                <a
-                  href="#demostraciones"
-                  class="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-white/15"
-                >
-                  Ver demostraciones
-                </a>
-              </div>
-            </div>
-
-            <div class="grid gap-4">
-              <div class="rounded-[2rem] bg-white/10 p-6 backdrop-blur-sm border border-white/15">
-                <p class="text-sm uppercase tracking-[0.18em] text-yellow mb-3">Qué resuelve</p>
-                <p class="text-lg text-white/90">
-                  Menos dudas al ingresar, mejor comprensión de espacios, protocolos y recorridos, y una experiencia de inducción mucho más clara y consistente.
-                </p>
-              </div>
-              <div class="rounded-[2rem] bg-white p-6 shadow-2xl">
-                <p class="text-sm uppercase tracking-[0.18em] text-primary/60 mb-3">Ideal para</p>
-                <p class="text-2xl font-bold text-primary leading-tight">
-                  Plantas, retail, clínicas, campus, logística, faenas y operaciones distribuidas.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-4">Por qué funciona</p>
-              <h2 class="text-4xl md:text-5xl font-black text-primary leading-tight">
-                El contexto también enseña.
-              </h2>
-            </div>
-            <div class="space-y-5 text-lg leading-relaxed text-slate-600">
-              <p>
-                Cuando una persona necesita entender un espacio, una ruta, un equipo o un protocolo, un PDF o una charla muchas veces no bastan. El 360 permite ver el entorno real antes de estar ahí.
+              <h3 class="banda__titulo">Cómo se navega un recorrido por dentro</h3>
+              <p class="banda__resumen">Puntos conectados, hotspots de información y saltos entre zonas.</p>
+              <p class="banda__aviso">
+                <b>Ojo:</b> es el tour de muestra de 3DVista, la tecnología con la que
+                producimos — no un proyecto de Ewaffle. Lo dejamos acá porque es la forma más
+                rápida de entender cómo se mueve una persona dentro de un recorrido.
               </p>
-              <p>
-                Por eso este servicio funciona especialmente bien en onboarding, inducción operativa, seguridad y formación inicial: reduce incertidumbre, estandariza el mensaje y acelera la adaptación.
+              <p class="banda__texto">
+                Sirve para ver el mecanismo: cómo se pasa de una zona a otra, cómo aparece la
+                información al tocar un punto y cómo se comporta en el celular. Cuando
+                producimos el tuyo, lo que cambia es el contenido y el criterio con que se
+                ordena el recorrido, no la forma de navegarlo.
               </p>
-              <div class="rounded-3xl border border-primary/10 bg-slate-50 p-6">
-                <p class="text-primary font-semibold">
-                  La mejor versión de este servicio aparece cuando mezclamos recorrido inmersivo con recursos de apoyo como video, guías o cápsulas interactivas.
-                </p>
+              <div class="banda__acciones">
+                <button
+                  type="button" class="pieza"
+                  data-abrir="muestra" data-modo="iframe"
+                  data-src="https://storage.net-fs.com/hosting/2727323/380/index.htm"
+                  data-nota="Tour de muestra de 3DVista — la tecnología, no un proyecto nuestro"
+                  data-pieza-nombre="Recorrido interactivo"
+                  data-reel-titulo="Tour de muestra 3DVista"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                  Abrir el recorrido acá
+                </button>
+                <a
+                  class="pieza pieza--fuera"
+                  href="https://storage.net-fs.com/hosting/2727323/380/index.htm"
+                  target="_blank" rel="noopener noreferrer"
+                >
+                  Verlo a pantalla completa
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+                  <span class="visually-hidden">(se abre en otra pestaña)</span>
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </article>
 
-    <section class="bg-slate-50 py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <div class="max-w-3xl mb-12">
-            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-4">Qué incluye</p>
-            <h2 class="text-4xl md:text-5xl font-black text-primary leading-tight">
-              Diseñado para explicar mejor, no solo para verse mejor.
-            </h2>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {includeCards.map((card) => (
-              <article class="rounded-[1.75rem] border border-primary/10 bg-white p-7 shadow-sm">
-                <h3 class="text-2xl font-bold text-primary mb-3">{card.title}</h3>
-                <p class="text-slate-600 leading-relaxed">{card.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="demostraciones" class="bg-white py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <div class="max-w-3xl mb-12">
-            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-4">Demostraciones</p>
-            <h2 class="text-4xl md:text-5xl font-black text-primary leading-tight">
-              Referencias reales para ver el tipo de experiencia.
-            </h2>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {examples.map((example) => (
-              <article class="rounded-[1.75rem] border border-primary/10 bg-slate-50 p-7">
-                <div class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                  {example.category}
-                </div>
-                <h3 class="mt-5 text-2xl font-bold text-primary">{example.title}</h3>
-                <p class="mt-3 text-slate-600 leading-relaxed">{example.description}</p>
-                <a
-                  href={example.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-accent/90"
-                >
-                  {example.cta}
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-primary py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8">
-            <div class="rounded-[2rem] border border-white/20 bg-white/10 p-8 text-white backdrop-blur-sm">
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-yellow mb-4">Casos donde hace más sentido</p>
-              <ul class="space-y-4 text-lg text-white/90 leading-relaxed">
-                {useCases.map((item) => (
-                  <li class="flex gap-3">
-                    <span class="text-yellow">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
+          <!-- ── Referencia 02 · Planta Arauco ────────────────────────────
+               Va incrustado y no detrás de un botón: es el único ejemplo de
+               producción propia que se puede recorrer arrastrando, y esconderlo
+               tras un clic sería esconder justo lo que la página viene a
+               demostrar. `loading="lazy"` evita que el reproductor se cargue
+               antes de que alguien baje hasta acá. -->
+          <article class="banda banda--invertida" data-motion>
+            <div class="banda__marco">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${araucoId}?rel=0&modestbranding=1`}
+                title="Recorrido 360 · Logmeter Planta Arauco"
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; xr-spatial-tracking"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="banda__cuerpo">
+              <p class="banda__meta">
+                <span class="banda__n">02</span>
+                <span class="banda__grupo banda__grupo--propia">Producción propia</span>
+              </p>
+              <h3 class="banda__titulo">Planta Arauco · Logmeter</h3>
+              <p class="banda__resumen">Recorrido en video 360 de una instalación industrial en operación.</p>
+              <p class="banda__texto">
+                Dale play y arrastra dentro del video: la vista gira. Es la misma mecánica que
+                usa una persona en su inducción cuando quiere mirar hacia dónde va la línea o
+                qué hay detrás del equipo, salvo que acá el recorrido avanza solo. Este formato
+                conviene cuando el proceso está en movimiento y detenerlo para fotografiar cada
+                punto no es una opción.
+              </p>
+              <ul class="banda__lista">
+                <li>Se graba con la operación andando, sin parar la línea.</li>
+                <li>Funciona en el navegador y con visor, arrastrando o girando la cabeza.</li>
+                <li>Se puede acompañar con narración y con marcas sobre los puntos críticos.</li>
               </ul>
+              <div class="banda__acciones">
+                <a
+                  class="pieza pieza--fuera"
+                  href={`https://www.youtube.com/watch?v=${araucoId}`}
+                  target="_blank" rel="noopener noreferrer"
+                >
+                  Abrirlo en YouTube
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+                  <span class="visually-hidden">(se abre en otra pestaña)</span>
+                </a>
+              </div>
             </div>
+          </article>
 
-            <div class="grid gap-6">
-              {decisionCards.map((card) => (
-                <article class="rounded-[2rem] bg-white p-8 shadow-2xl">
-                  <h3 class="text-2xl font-bold text-primary mb-4">{card.title}</h3>
-                  <ul class="space-y-3 text-slate-600 leading-relaxed">
-                    {card.points.map((point) => (
-                      <li class="flex gap-3">
-                        <span class="text-accent">•</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
+          <!-- ── Referencia 03 · producción en terreno ────────────────────── -->
+          <article class="banda" data-motion>
+            <div class="banda__pantalla">
+              <img
+                src="/assets/catalogo/terreno.webp"
+                alt="Grabación en set: una persona hablando a cámara con iluminación de estudio"
+                width="1100" height="619" loading="lazy" decoding="async"
+              />
+              <span class="banda__lupa" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+            </div>
+            <div class="banda__cuerpo">
+              <p class="banda__meta">
+                <span class="banda__n">03</span>
+                <span class="banda__grupo banda__grupo--propia">Producción propia</span>
+              </p>
+              <h3 class="banda__titulo">El equipo que graba en tu instalación</h3>
+              <p class="banda__resumen">Esto no es un 360: es la producción en terreno que casi siempre lo acompaña.</p>
+              <p class="banda__texto">
+                Un recorrido rara vez viaja solo. La misma jornada que captura los puntos 360
+                deja grabado el procedimiento a cámara, el testimonio del supervisor o la
+                demostración del equipo — que es lo que después se monta encima del recorrido o
+                al lado, dentro del curso. Este ejemplo muestra el estándar de cámara,
+                iluminación y locución con el que trabajamos.
+              </p>
+              <div class="banda__acciones">
+                <button
+                  type="button" class="pieza"
+                  data-abrir="terreno" data-modo="youtube"
+                  data-src="OCu-5fmS_mI"
+                  data-nota="Pieza a cámara · producción propia"
+                  data-pieza-nombre="Pieza a cámara"
+                  data-reel-titulo="Producción en terreno"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                  Ver la pieza acá
+                </button>
+                <a
+                  class="pieza pieza--fuera"
+                  href="https://drive.google.com/file/d/1hKQp1twOOka8PY_hYZMCGAmktgcZ9p-b/view"
+                  target="_blank" rel="noopener noreferrer"
+                >
+                  Otro ejemplo (Google Drive)
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+                  <span class="visually-hidden">(se abre en otra pestaña)</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ══ ESCENA 04 · Cómo se produce ═══════════════════════════════════ -->
+      <section class="escena" id="produccion">
+        <p class="claqueta" data-motion>04 · Cómo se hace</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Cuatro etapas.<br /><em>La primera no es grabar.</em>
+        </h2>
+        <p class="parrafo" data-motion style="--retardo: 140ms;">
+          El error más caro en un 360 es capturar primero y decidir después qué se quería
+          enseñar: se vuelve a la instalación. Por eso el recorrido se diseña antes de que
+          la cámara salga de la caja.
+        </p>
+
+        <div class="pasos">
+          {produccion.map((p, i) => (
+            <article class="paso360" data-motion style={`--retardo: ${i * 60}ms;`}>
+              <p class="paso360__n">{p.n}</p>
+              <h3 class="paso360__t">{p.t}</h3>
+              <p class="paso360__d">{p.d}</p>
+            </article>
+          ))}
+        </div>
+
+        <figure class="lamina" data-motion>
+          <img
+            src="/assets/catalogo/video-induccion.webp"
+            alt="Fotograma del módulo de inducción de Buffalo Waffles: el título sobre una escena de local con clientes"
+            width="1100" height="619" loading="lazy" decoding="async"
+          />
+          <figcaption>
+            La misma jornada alimenta el resto del programa. Este es el módulo de inducción que
+            produjimos para Buffalo Waffles — no es un 360, es lo que sale de la misma visita y
+            termina conviviendo con el recorrido dentro del curso.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ══ ESCENA 05 · Cómo se entrega ═══════════════════════════════════ -->
+      <section class="escena escena--ancha" id="entrega">
+        <p class="claqueta" data-motion>05 · Cómo se entrega</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          Tiene que abrirse el primer día,<br /><em>sin pedirle nada a TI.</em>
+        </h2>
+
+        <div class="entrega">
+          <div class="entrega__texto">
+            <p class="parrafo">
+              Un recorrido que exige instalar algo, crear cuenta o pedir un permiso llega tarde
+              a la única inducción para la que se hizo. Por eso la entrega por defecto es un
+              enlace que se abre en el navegador del computador o del celular.
+            </p>
+            <ul class="entrega__lista">
+              {entregas.map((e) => (
+                <li>
+                  <b>{e.t}</b>
+                  <span>{e.d}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="bg-white py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto rounded-[2.25rem] border border-primary/10 bg-slate-50 p-8 md:p-12">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 1</p>
-              <h3 class="text-xl font-bold text-primary">Brief</h3>
-              <p class="mt-2 text-slate-600">Definimos objetivo, audiencia, espacio y tipo de experiencia.</p>
-            </div>
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 2</p>
-              <h3 class="text-xl font-bold text-primary">Guión y recorrido</h3>
-              <p class="mt-2 text-slate-600">Ordenamos qué debe verse, qué debe explicarse y qué momentos son críticos.</p>
-            </div>
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 3</p>
-              <h3 class="text-xl font-bold text-primary">Producción</h3>
-              <p class="mt-2 text-slate-600">Capturamos, editamos y preparamos la experiencia inmersiva con sus apoyos.</p>
-            </div>
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">Paso 4</p>
-              <h3 class="text-xl font-bold text-primary">Entrega</h3>
-              <p class="mt-2 text-slate-600">Lo dejamos listo para LMS, intranet o despliegue directo en onboarding.</p>
-            </div>
-          </div>
+          <figure class="lamina lamina--pegada" data-motion>
+            <img
+              src="/assets/catalogo/lms.webp"
+              alt="Curso abierto en el navegador junto a una consola que muestra las llamadas SCORM 1.2 que el recurso hace al LMS"
+              width="1100" height="688" loading="lazy" decoding="async"
+            />
+            <figcaption>
+              Cuando la entrega es SCORM, el recurso reporta al LMS igual que el resto del
+              programa: no queda como un enlace suelto fuera de la ruta formativa.
+            </figcaption>
+          </figure>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="bg-primary py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-yellow mb-4">Siguiente paso</p>
-          <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">
-            Si quieres, aterrizamos este servicio a tu realidad.
-          </h2>
-          <p class="mt-5 text-xl text-white/90 leading-relaxed">
-            Podemos recomendarte si conviene partir con un recorrido 360 puro, mezclarlo con video y guías, o construir un piloto acotado para validar el estándar.
-          </p>
-          <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="#contact"
-              class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-accent px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-accent/90"
-            >
-              Hablemos de tu caso
-            </a>
-            <a
-              href="/multimedia"
-              class="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:bg-white/15"
-            >
-              Ver multimedia general
-            </a>
-          </div>
+      <!-- ══ ESCENA 06 · Cierre ════════════════════════════════════════════ -->
+      <section class="escena escena--cierre" id="cierre">
+        <p class="claqueta" data-motion>06 · Conversemos</p>
+        <h2 class="rubro" data-motion style="--retardo: 80ms;">
+          ¿360 puro o mezclado?<br /><em>Casi siempre, mezclado.</em>
+        </h2>
+
+        <div class="decision">
+          {decision.map((d, i) => (
+            <article class={`dec dec--${d.tono}`} data-motion style={`--retardo: ${i * 70}ms;`}>
+              <h3 class="dec__t">{d.t}</h3>
+              <ul class="dec__lista">{d.puntos.map((p) => <li>{p}</li>)}</ul>
+            </article>
+          ))}
         </div>
-      </div>
-    </section>
 
-    <Contact />
-    <Footer />
-  </main>
+        <p class="parrafo parrafo--cierre" data-motion>
+          El recorrido ubica; el video explica; la actividad comprueba. En el catálogo está la
+          mezcla completa —ocho formatos con ejemplos abribles y un cotizador— por si quieres
+          ver el 360 dentro del programa entero antes de conversar.
+        </p>
+
+        <div class="acciones" data-motion>
+          <a href="#contact" class="boton boton--primario" data-cta="contacto_cierre">
+            Hablemos de tu caso
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+          </a>
+          <a href={agendaUrl} class="boton boton--fantasma" target="_blank" rel="noopener noreferrer" data-cta="agenda">
+            Agendar 20 minutos
+          </a>
+          <a href="/catalogo" class="boton boton--fantasma" data-cta="catalogo">
+            Ver el catálogo completo
+          </a>
+        </div>
+
+        <p class="nota nota--cierre">
+          <span>Producción propia en Chile</span>
+          <span>·</span>
+          <a href="/multimedia">Producción multimedia</a>
+          <span>·</span>
+          <a href="/plataforma">Plataforma LMS</a>
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ══ EL VISOR ════════════════════════════════════════════════════════════
+       Mismo visor del catálogo, y por la misma razón: todo su DOM vive en el
+       marcado y no se crea desde el script, porque los estilos de Astro llevan
+       un atributo de alcance que el JS no aplicaría y la tarjeta saldría sin
+       estilo. Acá solo se rellena y se muestra. -->
+  <div class="visor" id="visor" role="dialog" aria-modal="true" aria-labelledby="visor-titulo" hidden>
+    <div class="visor__fondo" data-visor-cerrar></div>
+    <div class="visor__marco">
+      <header class="visor__barra">
+        <p class="visor__meta">
+          <span class="visor__rec" aria-hidden="true"></span>
+          <span class="claqueta__mono">Proyectando</span>
+          <b id="visor-titulo"></b>
+          <span class="visor__nota" data-visor-nota></span>
+        </p>
+        <div class="visor__controles">
+          <a class="visor__fuera" data-visor-fuera href="#" target="_blank" rel="noopener noreferrer">
+            Abrir aparte
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+          </a>
+          <button type="button" class="visor__cerrar" data-visor-cerrar aria-label="Cerrar el visor">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+      </header>
+      <div class="visor__pantalla" data-visor-pantalla></div>
+      <footer class="visor__pie">
+        <span data-visor-pie></span>
+        <span class="visor__tecla">Esc para cerrar</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- El riel es `position: fixed` y ocupa 216px a la izquierda: sin este
+       desplazamiento el formulario queda centrado respecto de la ventana
+       completa y su borde izquierdo se mete debajo del riel. -->
+  <div class="pie">
+  <Contact
+    title="Conversemos sobre tu recorrido 360"
+    subtitle="Cuéntanos qué instalación hay que mostrar y para quién. Con eso te decimos si conviene un recorrido puro, mezclarlo con video y guías, o partir con un piloto acotado."
+    defaultService="videos_360_onboarding"
+    source="ewaffle_servicio_360"
+  />
+  <Footer />
+  </div>
 </BaseLayout>
 
 <style>
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  /* ═══ La sala ═══════════════════════════════════════════════════════════
+     Misma paleta y misma tipografía que /catalogo, a propósito: son la misma
+     familia de páginas y el visitante suele venir de una a la otra. El negro
+     lleva el violeta del primario de marca (#28244a) bajado, para que el ámbar
+     y el rosa se vean iluminados y no pegados encima. */
+  .sala {
+    --sala: #0a0812;
+    --sala-2: #14112b;
+    --haz: #ffb148;
+    --rosa: #fd5a93;
+    --tiza: #f4f2fb;
+    --niebla: #a9a3c4;
+    --linea: rgba(255, 255, 255, 0.09);
+    --linea-viva: rgba(255, 255, 255, 0.18);
+    --curva: cubic-bezier(0.22, 1, 0.36, 1);
+
+    background: var(--sala);
+    color: var(--tiza);
+    font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.62;
+    position: relative;
+  }
+  /* Sin `overflow-x: hidden` acá: en un elemento que no es la raíz obliga a
+     `overflow-y: auto`, la página pasa a ser su propio contenedor de scroll y
+     `scrollIntoView` deja de mover la ventana. Lo único que puede desbordar
+     —el fondo con zoom lento— ya está contenido por su propia sección. */
+
+  /* El `hidden` del navegador es display:none, pero cualquier clase que
+     declare display:grid le gana por especificidad y el elemento oculto
+     aparece igual. Pasa siempre y se lee como un bug de lógica. */
+  .sala [hidden], [hidden] { display: none !important; }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ═══ Riel ═════════════════════════════════════════════════════════════ */
+  .riel {
+    position: fixed; inset: 0 auto 0 0; width: 216px; z-index: 40;
+    display: none; flex-direction: column; gap: 26px;
+    padding: 34px 22px; border-right: 1px solid var(--linea);
+    background: linear-gradient(180deg, rgba(20, 17, 43, 0.9), rgba(10, 8, 18, 0.9));
+    backdrop-filter: blur(10px);
+  }
+  .riel__marca {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.34em;
+    color: var(--tiza); text-decoration: none;
+  }
+  .riel__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .riel__item {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 8px 10px; margin-left: -10px; border-radius: 8px;
+    text-decoration: none; color: var(--niebla);
+    transition: color 240ms var(--curva), background 240ms var(--curva);
+  }
+  .riel__item:hover { color: var(--tiza); background: rgba(255, 255, 255, 0.05); }
+  .riel__n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; opacity: 0.55;
+  }
+  .riel__t { font-size: 14.5px; font-weight: 500; }
+  .riel__item.es-actual { color: var(--haz); background: rgba(255, 177, 72, 0.08); }
+  .riel__item.es-actual .riel__n { opacity: 1; }
+  .riel__cuenta {
+    margin: auto 0 0; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--niebla);
+  }
+  .riel__barra { height: 2px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden; }
+  .riel__barra span {
+    display: block; height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--haz), var(--rosa));
+    transition: width 260ms var(--curva);
+  }
+  @media (min-width: 1180px) {
+    .riel { display: flex; }
+    .cinta, .pie { margin-left: 216px; }
+  }
+  /* Bajo 1180px el riel se vuelve franja: el índice se va y queda el avance,
+     que es lo único que no se puede deducir mirando la página. */
+  @media (max-width: 1179px) {
+    .riel {
+      display: flex;
+      inset: 0 0 auto 0; width: auto; height: auto; flex-direction: row;
+      align-items: center; justify-content: space-between; gap: 14px;
+      padding: 9px 16px; border-right: 0; border-bottom: 1px solid var(--linea);
+    }
+    .riel__lista { display: none; }
+    .riel__cuenta { margin: 0; font-size: 10.5px; }
+    .riel__barra { position: absolute; inset: auto 0 0 0; height: 2px; }
+    .cinta { padding-top: 42px; }
+  }
+
+  /* ═══ Escenas y tipografía compartida ══════════════════════════════════ */
+  .escena {
+    position: relative; max-width: 1180px; margin: 0 auto;
+    padding: clamp(72px, 11vw, 132px) clamp(20px, 5vw, 56px);
+    border-top: 1px solid var(--linea);
+  }
+  .escena--ancha { max-width: 1320px; }
+  .escena--apertura { max-width: 1340px; border-top: 0; }
+  .escena--cierre { padding-bottom: clamp(90px, 12vw, 150px); }
+
+  .claqueta {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; font-weight: 500; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--haz); margin: 0 0 20px;
+  }
+  .claqueta__mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--haz);
+  }
+  .claqueta__punto {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--rosa);
+    box-shadow: 0 0 0 4px rgba(253, 90, 147, 0.18);
+  }
+
+  .titular {
+    margin: 0 0 22px; font-size: clamp(2.5rem, 6.6vw, 4.6rem);
+    font-weight: 800; line-height: 0.97; letter-spacing: -0.042em; text-wrap: balance;
+  }
+  .titular em { font-style: normal; color: var(--haz); }
+  .rubro {
+    margin: 0 0 18px; font-size: clamp(1.9rem, 4.1vw, 3.1rem);
+    font-weight: 800; line-height: 1.06; letter-spacing: -0.035em; text-wrap: balance;
+  }
+  .rubro em { font-style: normal; color: var(--haz); }
+  .bajada { margin: 0 0 34px; max-width: 60ch; font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: var(--niebla); }
+  .parrafo { margin: 0 0 30px; max-width: 66ch; color: var(--niebla); }
+  .parrafo--cierre { margin-top: 40px; }
+  .nota { margin: 34px 0 0; max-width: 66ch; font-size: 14.5px; color: var(--niebla); }
+  .nota--cierre {
+    display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center;
+    margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--linea);
+    max-width: none; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .nota--cierre a { color: var(--haz); }
+
+  /* ═══ Botones ══════════════════════════════════════════════════════════ */
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .boton {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    min-height: 52px; padding: 0 26px; border-radius: 999px;
+    font: inherit; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+    text-decoration: none; cursor: pointer; border: 1px solid transparent;
+    transition: transform 220ms var(--curva), box-shadow 220ms var(--curva);
+  }
+  .boton svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+  .boton--primario { background: var(--rosa); color: #fff; box-shadow: 0 14px 40px -14px rgba(253, 90, 147, 0.85); }
+  .boton--primario:hover { transform: translateY(-2px); box-shadow: 0 20px 52px -14px rgba(253, 90, 147, 0.95); }
+  .boton--fantasma { border-color: var(--linea-viva); color: var(--tiza); background: rgba(255, 255, 255, 0.04); }
+  .boton--fantasma:hover { border-color: rgba(255, 255, 255, 0.36); transform: translateY(-2px); }
+  .boton:focus-visible, .pieza:focus-visible, .riel__item:focus-visible {
+    outline: 2px solid var(--haz); outline-offset: 3px;
+  }
+
+  /* ═══ Escena 00 · Apertura ═════════════════════════════════════════════ */
+  .escena--apertura {
+    min-height: min(100vh, 940px);
+    display: flex; flex-direction: column; justify-content: center;
+    isolation: isolate; overflow: hidden;
+  }
+  .apertura__fondo { position: absolute; inset: 0; z-index: -1; }
+  .apertura__fondo img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%;
+    opacity: 0.5; filter: blur(22px) saturate(1.15); transform: scale(1.14);
+    animation: respirar 40s var(--curva) infinite alternate;
+  }
+  /* El degradado no es decoración: el fotograma tiene cielo claro arriba, donde
+     el texto blanco desaparecería. */
+  .apertura__fondo::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 8, 18, 0.4) 0%, rgba(10, 8, 18, 0.74) 52%, var(--sala) 97%),
+      radial-gradient(115% 85% at 16% 74%, rgba(10, 8, 18, 0.88), transparent 64%);
+  }
+  @keyframes respirar {
+    from { transform: scale(1.14) translate3d(0, 0, 0); }
+    to   { transform: scale(1.22) translate3d(-1.2%, -1%, 0); }
+  }
+  .apertura__reja { position: relative; display: grid; gap: clamp(30px, 4vw, 54px); align-items: center; }
+  @media (min-width: 1240px) {
+    .apertura__reja { grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr); }
+    .apertura__cuerpo .titular { font-size: clamp(2.5rem, 3.6vw, 3.5rem); }
+  }
+  .apertura__cuerpo { position: relative; max-width: 940px; min-width: 0; }
+
+  .marquesina { display: none; position: relative; height: 400px; min-width: 0; }
+  @media (min-width: 1240px) { .marquesina { display: block; } }
+  .mq {
+    position: absolute; margin: 0; border-radius: 13px; overflow: hidden;
+    border: 1px solid var(--linea-viva); background: var(--sala-2);
+    box-shadow: 0 36px 90px -28px rgba(0, 0, 0, 0.95);
+  }
+  .mq img { display: block; width: 100%; height: auto; }
+  .mq__barra {
+    display: flex; align-items: center; gap: 5px;
+    padding: 7px 10px; background: rgba(255, 255, 255, 0.06); border-bottom: 1px solid var(--linea);
+  }
+  .mq__barra i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.24); }
+  .mq__barra em {
+    margin-left: 6px; font-style: normal;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--niebla);
+  }
+  .mq--1 { left: 2%; top: 16%; width: 76%; z-index: 3; animation: flotar 9s var(--curva) infinite alternate; }
+  .mq--2 { right: 0; top: 0; width: 52%; z-index: 2; rotate: 2.2deg; }
+  .mq--3 { right: 3%; bottom: 0; width: 55%; z-index: 1; rotate: -2.4deg; }
+  @keyframes flotar { from { translate: 0 0; } to { translate: 0 -12px; } }
+
+  .datos {
+    display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 40px 0 0;
+    padding-top: 22px; border-top: 1px solid var(--linea);
+  }
+  .datos div { display: flex; align-items: baseline; gap: 9px; }
+  .datos dt {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--niebla);
+  }
+  .datos dd { margin: 0; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; }
+
+  /* ═══ Escena 01 · La comparación ═══════════════════════════════════════
+     Es una tabla de contenido, pero no un `<table>`: en el teléfono las tres
+     columnas se apilan y cada celda necesita recuperar su rótulo, cosa que una
+     tabla real no deja hacer sin duplicar el marcado. */
+  .tabla { display: grid; gap: 10px; margin-top: 8px; }
+  .tabla__cabeza, .tabla__fila {
+    display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: clamp(12px, 2vw, 26px);
+  }
+  .tabla__cabeza { padding: 0 clamp(16px, 2vw, 24px); }
+  .tabla__col {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--niebla);
+  }
+  .tabla__col--viva { color: var(--haz); }
+  .tabla__fila {
+    align-items: start; padding: clamp(16px, 2vw, 22px) clamp(16px, 2vw, 24px);
+    border: 1px solid var(--linea); border-radius: 16px; background: var(--sala-2);
+  }
+  .tabla__eje { margin: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -0.018em; line-height: 1.35; }
+  .tabla__celda { margin: 0; font-size: 14.8px; color: var(--niebla); line-height: 1.55; }
+  .tabla__celda--viva { color: var(--tiza); }
+  /* El rótulo solo existe apilado: en escritorio lo dice la cabecera. */
+  .tabla__rotulo { display: none; }
+  @media (max-width: 860px) {
+    .tabla__cabeza { display: none; }
+    .tabla__fila { grid-template-columns: 1fr; gap: 12px; }
+    .tabla__eje { padding-bottom: 4px; border-bottom: 1px solid var(--linea); }
+    .tabla__rotulo {
+      display: block; margin-bottom: 3px;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 9.5px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--niebla);
+    }
+    .tabla__celda--viva .tabla__rotulo { color: var(--haz); }
+  }
+
+  /* ═══ Escena 02 · Los usos ═════════════════════════════════════════════
+     2×2 y no `auto-fit`: con cuatro tarjetas el ajuste automático deja tres
+     arriba y una suelta abajo, que se lee como un error de maquetación. */
+  .usos { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 10px; }
+  @media (min-width: 800px) { .usos { grid-template-columns: repeat(2, 1fr); } }
+  .uso {
+    display: grid; gap: 8px; align-content: start;
+    padding: clamp(22px, 2.4vw, 28px);
+    border: 1px solid var(--linea); border-radius: 18px; background: var(--sala-2);
+    transition: border-color 300ms var(--curva), transform 300ms var(--curva);
+  }
+  .uso:hover { border-color: var(--linea-viva); transform: translateY(-3px); }
+  .uso__n {
+    margin: 0; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 1.7rem; font-weight: 600; line-height: 1; color: var(--haz); opacity: 0.55;
+  }
+  .uso__t { margin: 4px 0 0; font-size: 1.28rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; }
+  .uso__d { margin: 0; color: var(--tiza); font-size: 15.5px; line-height: 1.55; }
+  .uso__detalle {
+    margin: 4px 0 0; padding-top: 12px; border-top: 1px solid var(--linea);
+    color: var(--niebla); font-size: 14.5px; line-height: 1.55;
+  }
+
+  /* ═══ Escena 03 · Las bandas ═══════════════════════════════════════════
+     Un ejemplo por banda, de ancho completo, alternando de qué lado va la
+     pantalla. Una grilla de tarjetas iguales aplanaría cosas que no son
+     equivalentes: un tour de terceros y una producción nuestra no pueden
+     ocupar el mismo rectángulo sin que el visitante los confunda. */
+  .rollo { display: grid; gap: clamp(20px, 3vw, 34px); }
+  .banda {
+    position: relative; display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(22px, 3vw, 44px); align-items: stretch;
+    padding: clamp(20px, 2.4vw, 30px);
+    border-radius: 22px; border: 1px solid var(--linea); background: var(--sala-2);
+    transition: border-color 380ms var(--curva);
+  }
+  .banda:hover { border-color: var(--linea-viva); }
+  /* La pantalla cambia de costado con una clase y no con `order`: con `order`
+     el foco del teclado seguiría el orden visual y saltaría de la imagen de una
+     banda al texto de la otra. */
+  .banda--invertida .banda__pantalla,
+  .banda--invertida .banda__marco { grid-column: 2; grid-row: 1; }
+  .banda--invertida .banda__cuerpo { grid-column: 1; grid-row: 1; }
+
+  .banda__pantalla {
+    position: relative; overflow: hidden; border-radius: 14px;
+    min-height: clamp(250px, 23vw, 340px); max-height: 470px;
+    background: #0f0d20; border: 1px solid var(--linea);
+  }
+  .banda__pantalla img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
+    opacity: 0.94; transition: transform 700ms var(--curva), opacity 400ms var(--curva);
+  }
+  .banda:hover .banda__pantalla img { transform: scale(1.035); opacity: 1; }
+  .banda__pantalla::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgba(20, 17, 43, 0.78) 100%);
+  }
+  .banda__lupa {
+    position: absolute; z-index: 2; right: 14px; bottom: 14px;
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(10, 8, 18, 0.72); border: 1px solid var(--linea-viva);
+    backdrop-filter: blur(6px); transition: transform 320ms var(--curva);
+  }
+  .banda__lupa svg { width: 15px; height: 15px; fill: var(--haz); margin-left: 2px; }
+  .banda:hover .banda__lupa { transform: scale(1.12); }
+
+  /* El marco del video incrustado. `aspect-ratio` y no alto fijo: el
+     reproductor de YouTube en 360 recorta feo si lo estiramos a la altura del
+     texto de al lado. */
+  .banda__marco {
+    position: relative; align-self: start; overflow: hidden; border-radius: 14px;
+    aspect-ratio: 16 / 9; border: 1px solid var(--linea); background: #000;
+  }
+  .banda__marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .banda__cuerpo { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .banda__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; }
+  .banda__n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 2.1rem; font-weight: 600; line-height: 1; color: var(--haz); opacity: 0.55;
+  }
+  .banda__grupo {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 9px; border-radius: 5px;
+    background: rgba(38, 146, 214, 0.15); color: #8ecbf2;
+  }
+  /* Lo que es nuestro se marca distinto de lo que es de terceros. El color solo
+     no comunica: la etiqueta lo dice con palabras. */
+  .banda__grupo--propia { background: rgba(255, 177, 72, 0.16); color: var(--haz); }
+  .banda__titulo { margin: 0; font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 800; letter-spacing: -0.032em; line-height: 1.12; }
+  .banda__resumen { margin: 0; font-size: clamp(1rem, 1.4vw, 1.1rem); font-weight: 600; color: var(--haz); line-height: 1.42; }
+  .banda__texto { margin: 0; color: var(--niebla); line-height: 1.62; max-width: 60ch; }
+  .banda__aviso {
+    margin: 0; padding: 12px 14px; border-radius: 12px;
+    border: 1px solid rgba(255, 177, 72, 0.28); background: rgba(255, 177, 72, 0.07);
+    font-size: 14.2px; line-height: 1.55; color: var(--tiza); max-width: 60ch;
+  }
+  .banda__aviso b { color: var(--haz); }
+  .banda__lista { margin: 2px 0 0; padding: 0 0 0 18px; display: grid; gap: 6px; list-style: disc; max-width: 62ch; }
+  .banda__lista li { font-size: 14.6px; color: var(--niebla); line-height: 1.52; }
+  .banda__lista li::marker { color: var(--haz); }
+  .banda__acciones { display: flex; flex-wrap: wrap; gap: 9px; margin-top: auto; padding-top: 6px; }
+
+  @media (max-width: 900px) {
+    .banda { grid-template-columns: 1fr; }
+    .banda__pantalla { aspect-ratio: 16 / 10; min-height: 0; }
+    .banda--invertida .banda__pantalla,
+    .banda--invertida .banda__marco,
+    .banda--invertida .banda__cuerpo { grid-column: 1; grid-row: auto; }
+  }
+
+  .pieza {
+    display: inline-flex; align-items: center; gap: 7px;
+    min-height: 44px; padding: 0 15px; border-radius: 10px;
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none;
+    border: 1px solid rgba(255, 177, 72, 0.34); background: rgba(255, 177, 72, 0.09); color: var(--haz);
+    transition: transform 200ms var(--curva), border-color 200ms var(--curva);
+  }
+  .pieza svg { width: 13px; height: 13px; fill: currentColor; }
+  .pieza:hover { transform: translateY(-2px); border-color: var(--haz); }
+  .pieza--fuera { border-color: var(--linea-viva); background: rgba(255, 255, 255, 0.04); color: var(--niebla); }
+  .pieza--fuera svg { fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+  .pieza--fuera:hover { border-color: rgba(255, 255, 255, 0.36); color: var(--tiza); }
+
+  /* ═══ Escena 04 · Producción ═══════════════════════════════════════════ */
+  .pasos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top: 10px; }
+  .paso360 {
+    display: grid; gap: 7px; align-content: start;
+    padding: 22px 20px; border-radius: 16px;
+    border: 1px solid var(--linea); background: var(--sala-2);
+  }
+  .paso360__n {
+    margin: 0; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: var(--rosa);
+  }
+  .paso360__t { margin: 0; font-size: 1.1rem; font-weight: 700; letter-spacing: -0.022em; line-height: 1.24; }
+  .paso360__d { margin: 0; font-size: 14.5px; color: var(--niebla); line-height: 1.55; }
+
+  .lamina {
+    margin: clamp(28px, 4vw, 44px) 0 0; padding: 0;
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--linea); background: var(--sala-2);
+  }
+  /* Tope de alto: sin él, una captura de 1100px de ancho se comía la pantalla
+     entera y la lámina dejaba de ser apoyo del texto para volverse la sección. */
+  .lamina img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: cover; object-position: 50% 40%; }
+  .lamina figcaption {
+    padding: 16px 20px; border-top: 1px solid var(--linea);
+    font-size: 14px; color: var(--niebla); line-height: 1.55;
+  }
+
+  /* ═══ Escena 05 · Entrega ══════════════════════════════════════════════ */
+  .entrega { display: grid; gap: clamp(22px, 3vw, 40px); align-items: start; }
+  @media (min-width: 1000px) { .entrega { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
+  .entrega__texto { min-width: 0; }
+  /* El preflight de Tailwind pone `list-style: none` en todo ul del sitio, así
+     que las listas que sí quieren viñeta tienen que pedirla de vuelta. Esta no
+     la quiere: cada ítem ya trae su propio título en negrita. */
+  .entrega__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .entrega__lista li {
+    display: grid; gap: 5px; padding: 18px 20px;
+    border-radius: 15px; border: 1px solid var(--linea); background: var(--sala-2);
+  }
+  .entrega__lista b { font-size: 1.05rem; letter-spacing: -0.018em; }
+  .entrega__lista span { font-size: 14.5px; color: var(--niebla); line-height: 1.55; }
+  .lamina--pegada { margin-top: 0; }
+  @media (min-width: 1000px) { .lamina--pegada { position: sticky; top: 34px; } }
+
+  /* ═══ Escena 06 · Cierre ═══════════════════════════════════════════════ */
+  .decision { display: grid; gap: 14px; grid-template-columns: 1fr; margin-top: 10px; }
+  @media (min-width: 860px) { .decision { grid-template-columns: repeat(2, 1fr); } }
+  .dec {
+    display: grid; gap: 12px; align-content: start;
+    padding: clamp(22px, 2.4vw, 28px); border-radius: 18px;
+    border: 1px solid var(--linea); background: var(--sala-2);
+  }
+  .dec--si { border-color: rgba(255, 177, 72, 0.4); background: rgba(255, 177, 72, 0.05); }
+  .dec__t { margin: 0; font-size: 1.24rem; font-weight: 700; letter-spacing: -0.025em; }
+  .dec__lista { margin: 0; padding: 0 0 0 18px; display: grid; gap: 8px; list-style: disc; }
+  .dec__lista li { font-size: 15px; color: var(--niebla); line-height: 1.55; }
+  .dec__lista li::marker { color: var(--haz); }
+
+  /* ═══ El visor ═════════════════════════════════════════════════════════ */
+  .visor {
+    position: fixed; inset: 0; z-index: 10050;
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(8px, 2.4vw, 26px);
+    font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --sala-2: #14112b; --haz: #ffb148; --rosa: #fd5a93;
+    --tiza: #f4f2fb; --niebla: #a9a3c4;
+    --linea: rgba(255, 255, 255, 0.09); --linea-viva: rgba(255, 255, 255, 0.18);
+    color: var(--tiza);
+  }
+  .visor__fondo { position: absolute; inset: 0; background: rgba(5, 4, 10, 0.9); backdrop-filter: blur(8px); }
+  .visor__marco {
+    position: relative; z-index: 1; display: flex; flex-direction: column;
+    width: min(1280px, 100%); height: min(88dvh, 900px);
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--linea-viva); background: var(--sala-2);
+    box-shadow: 0 50px 130px -30px rgba(0, 0, 0, 0.9);
+  }
+  .visor__barra {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 11px 14px; border-bottom: 1px solid var(--linea); background: rgba(10, 8, 18, 0.6);
+  }
+  .visor__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin: 0; min-width: 0; }
+  .visor__meta b { font-size: 14.5px; font-weight: 700; letter-spacing: -0.015em; }
+  .visor__rec { width: 8px; height: 8px; border-radius: 50%; background: var(--rosa); animation: latir 1.7s ease-in-out infinite; }
+  @keyframes latir { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .visor__nota { font-size: 13px; color: var(--niebla); }
+  .visor__controles { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .visor__fuera {
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 40px; padding: 0 13px; border-radius: 9px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--linea-viva); color: var(--niebla);
+  }
+  .visor__fuera:hover { color: var(--tiza); border-color: rgba(255, 255, 255, 0.36); }
+  .visor__fuera svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+  .visor__cerrar {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px;
+    border: 1px solid var(--linea-viva); background: rgba(255, 255, 255, 0.05);
+    color: var(--tiza); cursor: pointer;
+  }
+  .visor__cerrar:hover { background: rgba(255, 255, 255, 0.12); }
+  .visor__cerrar svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+  .visor__pantalla { flex: 1; min-height: 0; background: #08070f; position: relative; }
+  /* El iframe lo crea el script, y los estilos de Astro llevan un atributo de
+     alcance que el JS no aplica: sin `:global` estas dos reglas no lo alcanzan. */
+  .visor__pantalla :global(iframe) { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+  .visor__pie {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 14px; border-top: 1px solid var(--linea);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--niebla);
+  }
+  .visor__tecla { flex-shrink: 0; opacity: 0.7; }
+  @media (max-width: 640px) {
+    .visor__marco { height: 92dvh; }
+    .visor__pie { display: none; }
+  }
+
+  /* ═══ Entrada por scroll ═══════════════════════════════════════════════ */
+  [data-motion] {
+    opacity: 0; transform: translate3d(0, 24px, 0);
+    transition: opacity 700ms var(--curva), transform 700ms var(--curva);
+    transition-delay: var(--retardo, 0ms);
+  }
+  [data-motion].es-visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sala *, .sala *::before, .sala *::after,
+    .visor *, .visor *::before, .visor *::after {
+      animation: none !important;
+      transition-duration: 1ms !important;
+    }
+    [data-motion] { opacity: 1 !important; transform: none !important; }
+    .apertura__fondo img { animation: none !important; }
   }
 </style>
+
+<script is:inline>
+  /* ═══════════════════════════════════════════════════════════════════════
+     Tres cosas: marcar en qué escena vamos, animar la entrada de los bloques
+     y abrir el visor. Es el mismo comportamiento de /catalogo, recortado a lo
+     que esta página usa.
+     ═══════════════════════════════════════════════════════════════════════ */
+  (function () {
+    var quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function evento(nombre, extra) {
+      var carga = Object.assign({ event: nombre }, extra || {});
+      if (window.dataLayer) window.dataLayer.push(carga);
+      if (window.ewaffleAnalytics && window.ewaffleAnalytics.capture) {
+        window.ewaffleAnalytics.capture(nombre, extra || {});
+      }
+    }
+
+    /* ── Entrada por scroll ─────────────────────────────────────────────── */
+    var animables = Array.prototype.slice.call(document.querySelectorAll("[data-motion]"));
+    if (quieto || !("IntersectionObserver" in window)) {
+      animables.forEach(function (el) { el.classList.add("es-visible"); });
+    } else {
+      var ojo = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("es-visible");
+          ojo.unobserve(e.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+      animables.forEach(function (el) { ojo.observe(el); });
+    }
+
+    /* ── Riel: escena actual + avance ───────────────────────────────────── */
+    var secciones = Array.prototype.slice.call(document.querySelectorAll(".escena[id]"));
+    var itemsRiel = Array.prototype.slice.call(document.querySelectorAll("[data-riel]"));
+    var barra = document.querySelector("[data-barra]");
+
+    function pintarRiel() {
+      var alto = document.documentElement.scrollHeight - window.innerHeight;
+      var avance = alto <= 0 ? 0 : Math.min(window.scrollY / alto, 1);
+      if (barra) barra.style.width = (avance * 100).toFixed(1) + "%";
+
+      /* La escena "actual" es la última cuyo borde superior ya pasó el tercio
+         alto de la pantalla. Usar la más visible daría saltos hacia atrás en
+         las secciones cortas. */
+      var actual = secciones[0];
+      var corte = window.innerHeight * 0.34;
+      secciones.forEach(function (s) {
+        if (s.getBoundingClientRect().top <= corte) actual = s;
+      });
+      if (!actual) return;
+      itemsRiel.forEach(function (a) {
+        a.classList.toggle("es-actual", a.getAttribute("data-riel") === actual.id);
+      });
+    }
+    pintarRiel();
+    window.addEventListener("scroll", pintarRiel, { passive: true });
+    window.addEventListener("resize", pintarRiel);
+    /* Un salto por ancla no siempre dispara `scroll`: entrando con
+       `/servicio-360/#ejemplos` el riel se quedaba marcando la escena anterior. */
+    window.addEventListener("hashchange", function () { setTimeout(pintarRiel, 60); });
+    setTimeout(pintarRiel, 120);
+
+    /* ── El visor ───────────────────────────────────────────────────────── */
+    var visor = document.getElementById("visor");
+    if (!visor) return;
+
+    var pantalla = visor.querySelector("[data-visor-pantalla]");
+    var tituloVisor = document.getElementById("visor-titulo");
+    var notaVisor = visor.querySelector("[data-visor-nota]");
+    var pieVisor = visor.querySelector("[data-visor-pie]");
+    var salidaVisor = visor.querySelector("[data-visor-fuera]");
+    var focoPrevio = null;
+
+    var PIES = {
+      iframe: "Es el recurso real corriendo acá dentro, no una maqueta.",
+      youtube: "Alojado en YouTube, incrustado sin cookies de seguimiento."
+    };
+
+    function abrirVisor(boton) {
+      var modo = boton.getAttribute("data-modo");
+      var src = boton.getAttribute("data-src");
+      var nota = boton.getAttribute("data-nota");
+      var pieza = boton.getAttribute("data-pieza-nombre");
+
+      focoPrevio = document.activeElement;
+      tituloVisor.textContent = boton.getAttribute("data-reel-titulo") + " · " + pieza;
+      notaVisor.textContent = nota || "";
+      pieVisor.textContent = PIES[modo] || "";
+      salidaVisor.setAttribute(
+        "href",
+        modo === "youtube" ? "https://www.youtube.com/watch?v=" + src : src
+      );
+
+      pantalla.innerHTML = "";
+      var f = document.createElement("iframe");
+      f.setAttribute("title", tituloVisor.textContent);
+      f.setAttribute("loading", "lazy");
+      f.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; xr-spatial-tracking");
+      f.setAttribute("allowfullscreen", "");
+      f.src = modo === "youtube"
+        ? "https://www.youtube-nocookie.com/embed/" + src + "?rel=0&modestbranding=1"
+        : src;
+      pantalla.appendChild(f);
+
+      visor.removeAttribute("hidden");
+      document.body.style.overflow = "hidden";
+      visor.querySelector(".visor__cerrar").focus();
+      evento("servicio360_visor_abre", { pieza: pieza, modo: modo });
+    }
+
+    function cerrarVisor() {
+      if (visor.hasAttribute("hidden")) return;
+      visor.setAttribute("hidden", "");
+      /* Vaciar la pantalla es lo que detiene el recurso. Solo ocultar el visor
+         lo dejaría sonando detrás. */
+      pantalla.innerHTML = "";
+      document.body.style.overflow = "";
+      if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+    }
+
+    document.querySelectorAll("[data-abrir]").forEach(function (b) {
+      b.addEventListener("click", function () { abrirVisor(b); });
+    });
+    visor.querySelectorAll("[data-visor-cerrar]").forEach(function (b) {
+      b.addEventListener("click", cerrarVisor);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (visor.hasAttribute("hidden")) return;
+      if (e.key === "Escape") { cerrarVisor(); return; }
+      if (e.key !== "Tab") return;
+
+      /* Trampa de foco: sin esto el tabulador se va a la página de atrás, que
+         está tapada, y se navega a ciegas. */
+      var focos = visor.querySelectorAll("a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex='-1'])");
+      if (!focos.length) return;
+      var primero = focos[0];
+      var ultimo = focos[focos.length - 1];
+      if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+    });
+
+    document.querySelectorAll("[data-cta]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        evento("servicio360_cta", { destino: a.getAttribute("data-cta") });
+      });
+    });
+  })();
+</script>
