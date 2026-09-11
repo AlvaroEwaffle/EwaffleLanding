@@ -5,8 +5,8 @@ interface Props {
 }
 
 const { 
-  title = "Plataformas de aprendizaje para empresas e instituciones privadas", 
-  subtitle = "LMS marca blanca, journeys de onboarding, cursos gamificados, integraciones y recursos e-learning premium. Implementamos la experiencia completa sin que armes equipo interno." 
+  title = "Plataformas y experiencias de aprendizaje e-learning para universidades, empresas e instituciones", 
+  subtitle = "LMS marca blanca, Journeys de Onboarding Digital, cursos y cápsulas gamificadas: recursos e-learning premium." 
 } = Astro.props;
 ---
 
@@ -32,7 +32,8 @@ const {
   </div>
 </div>
 
-<section class="relative min-h-[100vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90 overflow-hidden">
+<!-- min-h menor a 100vh a proposito: deja asomar el CatalogBanner en la primera pantalla -->
+<section class="relative min-h-[78vh] lg:min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-b from-primary to-primary/90 overflow-hidden pt-14 pb-8">
   <!-- Enhanced Background Elements -->
   <div class="absolute inset-0 pointer-events-none">
     <!-- Floating Dots with different animations -->
@@ -86,7 +87,7 @@ const {
     </div>
 
     <!-- Main Title - H1 optimizado -->
-    <h1 class="text-white text-4xl md:text-5xl lg:text-6xl mb-6 drop-shadow-lg font-bold leading-tight">
+    <h1 class="text-white text-3xl md:text-4xl lg:text-5xl mb-5 drop-shadow-lg font-bold leading-tight max-w-5xl mx-auto">
       {title}
     </h1>
 
@@ -96,11 +97,11 @@ const {
     </p>
 
     <!-- CTA Principal - Botón contrastante -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-7">
       <a
         href="#contact"
         id="hero-cta-link"
-        class="inline-flex items-center justify-center px-10 py-5 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
+        class="inline-flex items-center justify-center px-9 py-4 bg-accent text-white rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 transform"
       >
         Conversemos sobre tu proyecto
       </a>
@@ -113,14 +114,43 @@ const {
       </p>
       
       <!-- Logos de clientes destacados -->
-      <div class="flex flex-wrap justify-center items-center gap-6 mb-6 opacity-90">
-        <img src="/assets/clientlogos/ACHS.svg" alt="ACHS" class="h-8 w-auto transition-all duration-300 hover:scale-110" />
-        <img src="/assets/clientlogos/AIEP.svg" alt="AIEP" class="h-8 w-auto transition-all duration-300 hover:scale-110" />
-        <img src="/assets/clientlogos/Duoc UC.svg" alt="Duoc UC" class="h-8 w-auto transition-all duration-300 hover:scale-110" />
+      <!-- Dos tipos de chip a proposito: los logos en color u oscuros (ACHS, AIEP, LATAM,
+           UNIACC, Coanil, Buffalo) van sobre chip claro; los que vienen en blanco
+           (Duoc UC, UST, Gabriela Mistral) sobre chip oscuro. Un solo fondo hace
+           desaparecer a la mitad de las marcas. -->
+      <div class="flex flex-wrap justify-center items-center gap-3 mb-6">
+        <div class="bg-white/95 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/ACHS.svg" alt="ACHS" class="h-6 w-auto" />
+        </div>
+        <div class="bg-white/95 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/AIEP.svg" alt="AIEP" class="h-6 w-auto" />
+        </div>
+        <div class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/Duoc UC.svg" alt="Duoc UC" class="h-6 w-auto" />
+        </div>
+        <div class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/UST.svg" alt="Universidad Santo Tomás" class="h-6 w-auto" />
+        </div>
+        <div class="bg-white/95 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/LATAM.svg" alt="LATAM Airlines" class="h-5 w-auto" />
+        </div>
+        <div class="bg-white/95 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/UNIACC.svg" alt="UNIACC" class="h-6 w-auto" />
+        </div>
+        <div class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/Universidad Gabriela Mistral.svg" alt="Universidad Gabriela Mistral" class="h-6 w-auto" />
+        </div>
+        <div class="bg-white/95 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/Coanil.png" alt="Coanil" class="h-7 w-auto" />
+        </div>
+        <div class="bg-white/95 rounded-lg px-4 py-2 flex items-center justify-center transition-all duration-300 hover:scale-105">
+          <img src="/assets/clientlogos/Buffalo.webp" alt="Buffalo Waffles" class="h-7 w-auto" />
+        </div>
+      </div>
       </div>
       
       <p class="text-white/80 text-base max-w-2xl mx-auto leading-relaxed">
-        Soluciones e-learning para grandes empresas, universidades privadas, colegios, institutos y organizaciones con programas internos de formación.
+        Implementamos la experiencia completa sin que armes equipo interno.
       </p>
     </div>
   </div>
