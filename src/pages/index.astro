@@ -20,37 +20,17 @@ import CTA from '../components/landing/CTA.astro';
 import Footer from '../components/landing/Footer.astro';
 
 // SEO Metadata for main landing page
-const title = "Ewaffle | Plataforma LMS, onboarding y cursos gamificados para empresas";
-const description = "Plataformas LMS marca blanca, journeys de onboarding, cursos gamificados, recursos e-learning, chatbots IA y producción multimedia para grandes empresas e instituciones privadas.";
+const title = "Ewaffle | Onboarding Digital, plataformas LMS y cursos gamificados";
+const description = "Onboarding Digital: la jornada de inducción presencial convertida en un módulo e-learning, con tres planes y precio cerrado. Además LMS marca blanca, cursos gamificados, simuladores y recursos e-learning para universidades, empresas e instituciones.";
 const canonicalUrl = "https://ewaffle.cl";
 const imageUrl = "https://ewaffle.cl/assets/logoprimario.png";
-const keywords = "plataforma LMS para empresas, LMS corporativo, onboarding corporativo, academia corporativa, cursos gamificados, cursos SCORM, recursos e-learning, integración LMS, marca blanca LMS, capacitación interna, instituciones privadas, grandes empresas, e-learning Chile, e-learning Latinoamérica";
+const keywords = "onboarding digital, inducción digital, inducción de personal, onboarding corporativo, curso de inducción e-learning, inducción a distancia, onboarding para empresas, plataforma LMS para empresas, LMS corporativo, academia corporativa, cursos gamificados, cursos SCORM, recursos e-learning, integración LMS, marca blanca LMS, capacitación interna, universidades, instituciones privadas, e-learning Chile, e-learning Latinoamérica";
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout {title} {description} {keywords}>
   <Fragment slot="head">
-    <link rel="canonical" href={canonicalUrl} />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Ewaffle" />
-    <meta property="og:locale" content="es_ES" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalUrl} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={imageUrl} />
     
     <!-- Additional SEO Meta Tags -->
-    <meta name="keywords" content={keywords} />
     <meta name="author" content="Ewaffle" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="es" />
@@ -108,8 +88,11 @@ const keywords = "plataforma LMS para empresas, LMS corporativo, onboarding corp
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Journeys de onboarding",
-              "url": "https://ewaffle.cl/plataforma"
+              "name": "Onboarding Digital",
+              "alternateName": ["Inducción digital", "Journeys de onboarding", "Curso de inducción e-learning"],
+              "description": "Servicio estándar que convierte la jornada de inducción presencial en un módulo e-learning: video de contenido, guía interactiva, cápsula de decisión, material descargable y evaluación certificadora. Entrega en SCORM o HTML en 10 semanas.",
+              "serviceType": "Onboarding Digital",
+              "url": "https://ewaffle.cl/#onboarding-digital"
             }
           },
           {
@@ -149,10 +132,16 @@ const keywords = "plataforma LMS para empresas, LMS corporativo, onboarding corp
     })} />
   </Fragment>
 	<!-- 1. Hero Section (Above the fold) -->
-	<Hero />
-	<CatalogBanner />
+	<!-- Hero + CatalogBanner ocupan exactamente la primera pantalla: el catalogo con
+	     cotizador es la via de conversion mas corta y tiene que verse sin scrollear,
+	     pero nada mas debe asomar por debajo. -->
+	<div class="min-h-[100svh] flex flex-col">
+		<Hero />
+		<CatalogBanner />
+	</div>
 	
 	<!-- 2. Sección "Cómo funciona" / Demostración -->
+	<div id="proceso"></div>
 	<Process />
 	
 	<!-- 3. Services Overview (New) -->
