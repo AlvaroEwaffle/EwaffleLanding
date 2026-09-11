@@ -5,6 +5,9 @@ import PostHog from '../components/posthog.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Keywords propias de la pagina. Si vienen, reemplazan las del layout en vez de
+   *  sumar un segundo <meta name="keywords">, que es lo que pasaba antes. */
+  keywords?: string;
   /** Portada para compartir, relativa al sitio. Las páginas que quieran la suya
       TIENEN que pasarla por acá y no emitir otra `og:image` en el slot de cabecera:
       cuando hay dos, los lectores de enlaces se quedan con la primera, que es esta,
@@ -18,7 +21,9 @@ const {
   image = "/assets/CoverEwaffle.png",
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, "https://www.ewaffle.cl");
+// Apex, no www: www.ewaffle.cl hace 301 al apex y un canonical nunca debe
+// apuntar a una URL que redirige.
+const canonicalURL = new URL(Astro.url.pathname, "https://ewaffle.cl");
 
 const socialImageURL = new URL(image, canonicalURL);
 
@@ -115,7 +120,7 @@ const keywords = [
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="keywords" content={Astro.props.keywords ?? keywords.join(", ")} />
     <meta name="author" content="Ewaffle" />
 
     <!-- Open Graph / Facebook -->
